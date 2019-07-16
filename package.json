@@ -1,0 +1,24 @@
+{
+    "name": "interfaces",
+    "version": "0.0.1",
+    "description": "",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc -b"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zimtsui/interfaces.git"
+    },
+    "author": "Zim",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/zimtsui/interfaces/issues"
+    },
+    "homepage": "https://github.com/zimtsui/interfaces#readme",
+    "devDependencies": {
+        "typescript": "^3.5.3"
+    }
+}
