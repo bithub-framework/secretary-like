@@ -14,10 +14,10 @@ interface Orderbook {
     bids: Order[];
     asks: Order[];
 }
-interface MsgFromAgent {
+interface QuoteDataFromAgentToCenter {
     exchange: string;
     pair: [string, string];
     trades?: Trade[];
     orderbook?: Orderbook;
 }
-export { Action, Order, Trade, Orderbook, MsgFromAgent, };
+export { Action, Order, Trade, Orderbook, QuoteDataFromAgentToCenter, };

@@ -18,7 +18,7 @@ interface Orderbook {
     asks: Order[],
 }
 
-interface MsgFromAgent {
+interface QuoteDataFromAgentToCenter {
     exchange: string,
     pair: [string, string],
     trades?: Trade[],
@@ -30,5 +30,5 @@ export {
     Order,
     Trade,
     Orderbook,
-    MsgFromAgent,
+    QuoteDataFromAgentToCenter,
 }
