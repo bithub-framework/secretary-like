@@ -11,6 +11,7 @@ interface Order {
 
 interface Trade extends Order {
     time: number;
+    id: number;
 }
 
 interface Orderbook {
