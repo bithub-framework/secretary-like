@@ -20,8 +20,6 @@ interface Orderbook {
 }
 
 interface QuoteDataFromAgentToCenter {
-    exchange: string,
-    pair: [string, string],
     trades?: Trade[],
     orderbook?: Orderbook,
 }
