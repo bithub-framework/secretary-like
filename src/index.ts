@@ -24,10 +24,25 @@ interface QuoteDataFromAgentToCenter {
     orderbook?: Orderbook,
 }
 
+type Assets = {
+    spot?: number;
+    long?: number;
+    short?: number;
+    cash?: number;
+    time?: number;
+};
+
+interface TradingDataFromSecretaryToCenter {
+    assets?: Assets;
+    trade?: Trade;
+};
+
 export {
     Action,
     Order,
     Trade,
     Orderbook,
     QuoteDataFromAgentToCenter,
+    TradingDataFromSecretaryToCenter,
+    Assets,
 }
