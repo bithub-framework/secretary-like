@@ -19,7 +19,7 @@ interface Orderbook {
     asks: Order[],
 }
 
-interface QuoteDataFromAgentToCenter {
+interface PublicDataFromAgentToCenter {
     trades?: Trade[],
     orderbook?: Orderbook,
 }
@@ -42,7 +42,7 @@ export {
     Order,
     Trade,
     Orderbook,
-    QuoteDataFromAgentToCenter,
+    PublicDataFromAgentToCenter,
     TradingDataFromSecretaryToCenter,
     Assets,
 }
