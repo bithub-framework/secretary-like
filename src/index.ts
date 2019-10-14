@@ -3,13 +3,21 @@ enum Action {
     ASK = 'ask',
 }
 
-interface Order {
+interface OrderBase {
     action: Action;
     price: number;
     amount: number;
 }
 
-interface Trade extends Order {
+// 有的交易所 orderId 大于 Number.MAX_SAFE_INTEGER
+type OrderId = string;
+
+interface Order extends OrderBase {
+    id?: OrderId;
+    time?: number;
+}
+
+interface Trade extends OrderBase {
     time: number;
     id: number;
 }

@@ -2,12 +2,17 @@ declare enum Action {
     BID = "bid",
     ASK = "ask"
 }
-interface Order {
+interface OrderBase {
     action: Action;
     price: number;
     amount: number;
 }
-interface Trade extends Order {
+declare type OrderId = string;
+interface Order extends OrderBase {
+    id?: OrderId;
+    time?: number;
+}
+interface Trade extends OrderBase {
     time: number;
     id: number;
 }
