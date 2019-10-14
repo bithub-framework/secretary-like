@@ -48,6 +48,7 @@ interface TradingDataFromSecretaryToCenter {
 export {
     Action,
     Order,
+    OrderId,
     Trade,
     Orderbook,
     PublicDataFromAgentToCenter,

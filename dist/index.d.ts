@@ -35,4 +35,4 @@ interface TradingDataFromSecretaryToCenter {
     assets?: Assets;
     trade?: Trade;
 }
-export { Action, Order, Trade, Orderbook, PublicDataFromAgentToCenter, TradingDataFromSecretaryToCenter, Assets, };
+export { Action, Order, OrderId, Trade, Orderbook, PublicDataFromAgentToCenter, TradingDataFromSecretaryToCenter, Assets, };
