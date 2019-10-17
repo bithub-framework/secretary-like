@@ -10,16 +10,18 @@ interface OrderBase {
 }
 
 // 有的交易所 orderId 大于 Number.MAX_SAFE_INTEGER
-type OrderId = string;
+type OrderId = unknown;
 
 interface Order extends OrderBase {
     id?: OrderId;
     time?: number;
 }
 
+type TradeId = unknown;
+
 interface Trade extends OrderBase {
     time: number;
-    id: number;
+    id: TradeId;
 }
 
 interface Orderbook {

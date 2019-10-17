@@ -7,14 +7,15 @@ interface OrderBase {
     price: number;
     amount: number;
 }
-declare type OrderId = string;
+declare type OrderId = unknown;
 interface Order extends OrderBase {
     id?: OrderId;
     time?: number;
 }
+declare type TradeId = unknown;
 interface Trade extends OrderBase {
     time: number;
-    id: number;
+    id: TradeId;
 }
 interface Orderbook {
     bids: Order[];
