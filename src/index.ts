@@ -43,7 +43,7 @@ type Assets = {
 };
 
 interface DataFromSecretaryToCenter {
-    value: string;
+    value: any;
     record: boolean;
 };
 
