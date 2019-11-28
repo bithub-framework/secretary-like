@@ -32,9 +32,8 @@ declare type Assets = {
     cash?: number;
     time?: number;
 };
-interface TradingDataFromSecretaryToCenter {
-    key: string;
+interface DataFromSecretaryToCenter {
     value: string;
     record: boolean;
 }
-export { Action, Order, OrderId, Trade, Orderbook, PublicDataFromAgentToCenter, TradingDataFromSecretaryToCenter, Assets, };
+export { Action, Order, OrderId, Trade, Orderbook, PublicDataFromAgentToCenter, DataFromSecretaryToCenter, Assets, };

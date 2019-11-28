@@ -42,8 +42,7 @@ type Assets = {
     time?: number;
 };
 
-interface TradingDataFromSecretaryToCenter {
-    key: string;
+interface DataFromSecretaryToCenter {
     value: string;
     record: boolean;
 };
@@ -55,6 +54,6 @@ export {
     Trade,
     Orderbook,
     PublicDataFromAgentToCenter,
-    TradingDataFromSecretaryToCenter,
+    DataFromSecretaryToCenter,
     Assets,
 }
