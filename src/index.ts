@@ -43,8 +43,8 @@ type Assets = {
 };
 
 interface TradingDataFromSecretaryToCenter {
-    assets?: Assets;
-    trade?: Trade;
+    key: string;
+    value: string;
 };
 
 export {

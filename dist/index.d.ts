@@ -33,7 +33,7 @@ declare type Assets = {
     time?: number;
 };
 interface TradingDataFromSecretaryToCenter {
-    assets?: Assets;
-    trade?: Trade;
+    key: string;
+    value: string;
 }
 export { Action, Order, OrderId, Trade, Orderbook, PublicDataFromAgentToCenter, TradingDataFromSecretaryToCenter, Assets, };
