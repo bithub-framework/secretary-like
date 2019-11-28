@@ -35,5 +35,6 @@ declare type Assets = {
 interface TradingDataFromSecretaryToCenter {
     key: string;
     value: string;
+    record: boolean;
 }
 export { Action, Order, OrderId, Trade, Orderbook, PublicDataFromAgentToCenter, TradingDataFromSecretaryToCenter, Assets, };
