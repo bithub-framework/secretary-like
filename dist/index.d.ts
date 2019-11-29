@@ -17,23 +17,17 @@ interface Trade extends OrderBase {
     time: number;
     id: TradeId;
 }
+declare type OrderbookItem = OrderBase;
 interface Orderbook {
-    bids: Order[];
-    asks: Order[];
+    bids: OrderbookItem[];
+    asks: OrderbookItem[];
 }
-interface PublicDataFromAgentToCenter {
+interface DataFromPublicAgentToCenter {
     trades?: Trade[];
     orderbook?: Orderbook;
 }
-declare type Assets = {
-    spot?: number;
-    long?: number;
-    short?: number;
-    cash?: number;
-    time?: number;
-};
 interface DataFromSecretaryToCenter {
     value: any;
     record: boolean;
 }
-export { Action, Order, OrderId, Trade, Orderbook, PublicDataFromAgentToCenter, DataFromSecretaryToCenter, Assets, };
+export { Action, Order, OrderId, Trade, Orderbook, DataFromPublicAgentToCenter, DataFromSecretaryToCenter, };
