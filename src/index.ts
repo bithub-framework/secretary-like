@@ -29,6 +29,7 @@ type OrderbookItem = OrderBase;
 interface Orderbook {
     bids: OrderbookItem[],
     asks: OrderbookItem[],
+    time: number;
 }
 
 interface DataFromPublicAgentToCenter {
