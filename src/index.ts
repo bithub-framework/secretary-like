@@ -1,53 +1,43 @@
-enum Action {
+export const enum Action {
     BID = 'bid',
     ASK = 'ask',
 }
 
-interface OrderBase {
+export interface OrderBase {
     action: Action;
     price: number;
     amount: number;
 }
 
 // 有的交易所 orderId 大于 Number.MAX_SAFE_INTEGER
-type OrderId = unknown;
+export type OrderId = unknown;
 
-interface Order extends OrderBase {
+export interface Order extends OrderBase {
     id?: OrderId;
     time?: number;
 }
 
-type TradeId = unknown;
+export type TradeId = unknown;
 
-interface Trade extends OrderBase {
+export interface Trade extends OrderBase {
     time: number;
     id: TradeId;
 }
 
-type OrderbookItem = OrderBase;
+export type OrderbookItem = OrderBase;
 
-interface Orderbook {
+export interface Orderbook {
     bids: OrderbookItem[],
     asks: OrderbookItem[],
     time: number;
 }
 
-interface DataFromPublicAgentToCenter {
+export interface DataFromPublicAgentToCenter {
     trades?: Trade[],
     orderbook?: Orderbook,
 }
 
-interface DataFromSecretaryToCenter {
+export interface DataFromSecretaryToCenter {
     value: any;
     record: boolean;
 };
-
-export {
-    Action,
-    Order,
-    OrderId,
-    Trade,
-    Orderbook,
-    DataFromPublicAgentToCenter,
-    DataFromSecretaryToCenter,
-}

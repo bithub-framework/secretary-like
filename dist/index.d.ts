@@ -1,34 +1,33 @@
-declare enum Action {
+export declare const enum Action {
     BID = "bid",
     ASK = "ask"
 }
-interface OrderBase {
+export interface OrderBase {
     action: Action;
     price: number;
     amount: number;
 }
-declare type OrderId = unknown;
-interface Order extends OrderBase {
+export declare type OrderId = unknown;
+export interface Order extends OrderBase {
     id?: OrderId;
     time?: number;
 }
-declare type TradeId = unknown;
-interface Trade extends OrderBase {
+export declare type TradeId = unknown;
+export interface Trade extends OrderBase {
     time: number;
     id: TradeId;
 }
-declare type OrderbookItem = OrderBase;
-interface Orderbook {
+export declare type OrderbookItem = OrderBase;
+export interface Orderbook {
     bids: OrderbookItem[];
     asks: OrderbookItem[];
     time: number;
 }
-interface DataFromPublicAgentToCenter {
+export interface DataFromPublicAgentToCenter {
     trades?: Trade[];
     orderbook?: Orderbook;
 }
-interface DataFromSecretaryToCenter {
+export interface DataFromSecretaryToCenter {
     value: any;
     record: boolean;
 }
-export { Action, Order, OrderId, Trade, Orderbook, DataFromPublicAgentToCenter, DataFromSecretaryToCenter, };
