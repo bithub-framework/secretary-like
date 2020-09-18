@@ -13,12 +13,9 @@
         "url": "git+https://github.com/zimtsui/interfaces.git"
     },
     "author": "Zim",
-    "license": "UNLICENSED",
+    "license": "SEE LICENSE IN ./LICENSE",
     "bugs": {
         "url": "https://github.com/zimtsui/interfaces/issues"
     },
-    "homepage": "https://github.com/zimtsui/interfaces#readme",
-    "devDependencies": {
-        "typescript": "^3.5.3"
-    }
+    "homepage": "https://github.com/zimtsui/interfaces#readme"
 }

@@ -3,41 +3,39 @@ export const enum Action {
     ASK = 'ask',
 }
 
-export interface OrderBase {
+export interface Order {
     action: Action;
     price: number;
     amount: number;
 }
 
-// 有的交易所 orderId 大于 Number.MAX_SAFE_INTEGER
-export type OrderId = unknown;
+// 有的交易所 orderId 大于 int53
+export type OrderId = number | string;
 
-export interface Order extends OrderBase {
-    id?: OrderId;
-    time?: number;
+export interface OpenOrder extends Order {
+    id: OrderId;
 }
 
-export type TradeId = unknown;
+export type TradeId = number | string;
 
-export interface Trade extends OrderBase {
+export interface Trade extends Order {
     time: number;
     id: TradeId;
 }
 
-export type OrderbookItem = OrderBase;
-
 export interface Orderbook {
-    bids: OrderbookItem[],
-    asks: OrderbookItem[],
+    bids: Order[],
+    asks: Order[],
     time: number;
-}
-
-export interface DataFromPublicAgentToCenter {
-    trades?: Trade[],
-    orderbook?: Orderbook,
 }
 
 export interface DataFromSecretaryToCenter {
     value: any;
     record: boolean;
 };
+
+export interface Account {
+    long: number;
+    short: number;
+    margin: number;
+}
