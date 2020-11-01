@@ -1,15 +1,12 @@
-export const enum Action {
-    BID = 'bid',
-    ASK = 'ask',
-}
+export type Side = 'buy' | 'sell';
 
 export interface Order {
-    action: Action;
-    price: number;
-    amount: number;
+    side: Side;
+    price: number; // in USD
+    quantity: number; // number of the traded instrument
 }
 
-// 有的交易所 orderId 大于 int53
+// 有的交易所 orderId 和 tradeId 大于 int53，甚至不一定是数字，更不一定有序。
 export type OrderId = number | string;
 
 export interface OpenOrder extends Order {
@@ -19,7 +16,7 @@ export interface OpenOrder extends Order {
 export type TradeId = number | string;
 
 export interface Trade extends Order {
-    time: number;
+    time: number; // Date 不能 JSON 序列化
     id: TradeId;
 }
 
@@ -29,13 +26,8 @@ export interface Orderbook {
     time: number;
 }
 
-export interface DataFromSecretaryToCenter {
-    value: any;
-    record: boolean;
-};
-
-export interface Account {
-    long: number;
+export interface Assets {
+    long: number; // number of the traded instrument
     short: number;
-    margin: number;
+    margin: number; // in the quote currency
 }

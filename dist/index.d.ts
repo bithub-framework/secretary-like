@@ -1,11 +1,8 @@
-export declare const enum Action {
-    BID = "bid",
-    ASK = "ask"
-}
+export declare type Side = 'buy' | 'sell';
 export interface Order {
-    action: Action;
+    side: Side;
     price: number;
-    amount: number;
+    quantity: number;
 }
 export declare type OrderId = number | string;
 export interface OpenOrder extends Order {
@@ -21,11 +18,7 @@ export interface Orderbook {
     asks: Order[];
     time: number;
 }
-export interface DataFromSecretaryToCenter {
-    value: any;
-    record: boolean;
-}
-export interface Account {
+export interface Assets {
     long: number;
     short: number;
     margin: number;
