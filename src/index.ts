@@ -1,29 +1,39 @@
 export type Side = 'buy' | 'sell';
 
-export interface Order {
-    side: Side;
-    price: number; // in USD
-    quantity: number; // number of the traded instrument
-}
-
-// 有的交易所 orderId 和 tradeId 大于 int53，甚至不一定是数字，更不一定有序。
 export type OrderId = number | string;
 
-export interface OpenOrder extends Order {
-    id: OrderId;
+export interface OpenOrder {
+    side: Side;
+    price: number;
+    quantity: number;
 }
 
 export type TradeId = number | string;
 
-export interface Trade extends Order {
-    time: number; // Date 不能 JSON 序列化
+export interface Trade {
+    side: Side;
+    price: number;
+    quantity: number;
+    time: number;
     id: TradeId;
 }
 
+interface OrderBookItem {
+    side: Side;
+    price: number;
+    quantity: number;
+}
+
 export interface Orderbook {
-    bids: Order[],
-    asks: Order[],
+    bids: OrderBookItem[],
+    asks: OrderBookItem[],
     time: number;
+}
+
+export interface LimitOrder {
+    side: Side;
+    price: number;
+    quantity: number;
 }
 
 export interface Assets {
