@@ -9,6 +9,7 @@ export interface OpenOrder {
     side: Side;
     price: number;
     quantity: number;
+    id: OrderId;
 }
 
 export type TradeId = number | string;

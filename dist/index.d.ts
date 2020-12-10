@@ -7,6 +7,7 @@ export interface OpenOrder {
     side: Side;
     price: number;
     quantity: number;
+    id: OrderId;
 }
 export declare type TradeId = number | string;
 export interface Trade {
