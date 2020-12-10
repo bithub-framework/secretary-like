@@ -16,12 +16,12 @@ export interface Trade {
     time: number;
     id: TradeId;
 }
-export interface OrderBookItem {
+export interface OrderbookItem {
     price: number;
     quantity: number;
 }
 export interface Orderbook {
-    [side: number]: OrderBookItem[];
+    [side: number]: OrderbookItem[];
     time: number;
 }
 export interface LimitOrder {
