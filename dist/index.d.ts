@@ -1,5 +1,8 @@
-export declare type Side = 'buy' | 'sell';
 export declare type OrderId = number | string;
+export declare const enum Side {
+    BID = 0,
+    ASK = 1
+}
 export interface OpenOrder {
     side: Side;
     price: number;
@@ -19,8 +22,7 @@ interface OrderBookItem {
     quantity: number;
 }
 export interface Orderbook {
-    bids: OrderBookItem[];
-    asks: OrderBookItem[];
+    [side: number]: OrderBookItem[];
     time: number;
 }
 export interface LimitOrder {
