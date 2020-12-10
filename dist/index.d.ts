@@ -16,8 +16,7 @@ export interface Trade {
     time: number;
     id: TradeId;
 }
-interface OrderBookItem {
-    side: Side;
+export interface OrderBookItem {
     price: number;
     quantity: number;
 }
@@ -35,4 +34,3 @@ export interface Assets {
     short: number;
     margin: number;
 }
-export {};

@@ -21,8 +21,7 @@ export interface Trade {
     id: TradeId;
 }
 
-interface OrderBookItem {
-    side: Side;
+export interface OrderBookItem {
     price: number;
     quantity: number;
 }
