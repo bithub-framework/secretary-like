@@ -22,13 +22,14 @@ export interface Trade {
     id: TradeId;
 }
 
-export interface OrderbookItem {
+export interface MakerOrder {
     price: number;
     quantity: number;
+    side: Side,
 }
 
 export interface Orderbook {
-    [side: number]: OrderbookItem[], // side: Side
+    [side: number]: MakerOrder[], // side: Side
     time: number;
 }
 
