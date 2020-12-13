@@ -30,6 +30,7 @@ export interface LimitOrder {
     side: Side;
     price: number;
     quantity: number;
+    open: boolean;
 }
 export interface Assets {
     long: number;

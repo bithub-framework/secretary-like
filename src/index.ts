@@ -37,10 +37,11 @@ export interface LimitOrder {
     side: Side;
     price: number;
     quantity: number;
+    open: boolean; // unavailable for spot
 }
 
 export interface Assets {
     long: number; // number of the traded instrument
-    short: number;
+    short: number; // 0 for spot
     margin: number; // in the quote currency
 }
