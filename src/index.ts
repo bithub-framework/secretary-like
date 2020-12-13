@@ -27,10 +27,6 @@ export interface OrderbookItem {
     quantity: number;
 }
 
-export interface MakerOrder extends OrderbookItem {
-    side: Side;
-}
-
 export interface Orderbook {
     [side: number]: OrderbookItem[], // side: Side
     time: number;
