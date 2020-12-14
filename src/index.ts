@@ -4,6 +4,8 @@ export const enum Side {
     BID = 0,
     ASK = 1,
 }
+export const BID = Side.BID;
+export const ASK = Side.ASK;
 
 export interface OpenOrder {
     side: Side;

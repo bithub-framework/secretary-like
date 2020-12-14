@@ -3,6 +3,8 @@ export declare const enum Side {
     BID = 0,
     ASK = 1
 }
+export declare const BID = Side.BID;
+export declare const ASK = Side.ASK;
 export interface OpenOrder {
     side: Side;
     price: number;
