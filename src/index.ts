@@ -52,11 +52,16 @@ export const SHORT = Length.SHORT;
 export interface Assets {
     position: {
         [length: number]: number;
-    }
+    };
     leverage: number;
-    margin: {
-        [length: number]: number;
-    }
     reserve: number;
+    cost: {
+        [length: number]: number;
+    };
+
+    // computed
+    margin: {
+        [length: number]: number; // = cost / leverage
+    };
     balance: number; // = margin + reserve
 }
