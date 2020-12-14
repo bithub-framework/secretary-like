@@ -33,13 +33,20 @@ export interface LimitOrder {
     price: number;
     quantity: number;
 }
-export declare const enum Position {
+export declare const enum Length {
     LONG = 1,
     SHORT = 0
 }
-export declare const LONG: Position;
-export declare const SHORT: Position;
+export declare const LONG: Length;
+export declare const SHORT: Length;
 export interface Assets {
-    [long: number]: number;
+    position: {
+        [length: number]: number;
+    };
+    leverage: number;
+    margin: {
+        [length: number]: number;
+    };
+    reserve: number;
     balance: number;
 }

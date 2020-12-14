@@ -32,7 +32,7 @@ export interface MakerOrder {
 }
 
 export interface Orderbook {
-    [side: number]: MakerOrder[], // side: Side
+    [side: number]: MakerOrder[],
     time: number;
 }
 
@@ -42,14 +42,21 @@ export interface LimitOrder {
     quantity: number;
 }
 
-export const enum Position {
+export const enum Length {
     LONG = Side.BID,
     SHORT = Side.ASK,
 }
-export const LONG = Position.LONG;
-export const SHORT = Position.SHORT;
+export const LONG = Length.LONG;
+export const SHORT = Length.SHORT;
 
 export interface Assets {
-    [long: number]: number;
-    balance: number; // in the quote currency
+    position: {
+        [length: number]: number;
+    }
+    leverage: number;
+    margin: {
+        [length: number]: number;
+    }
+    reserve: number;
+    balance: number; // = margin + reserve
 }
