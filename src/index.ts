@@ -42,8 +42,8 @@ export interface LimitOrder {
 }
 
 export const enum Long {
-    SHORT = 0,
-    LONG = 1,
+    LONG = Side.BID,
+    SHORT = Side.ASK,
 }
 export const LONG = Long.LONG;
 export const SHORT = Long.SHORT;

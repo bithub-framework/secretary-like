@@ -34,11 +34,11 @@ export interface LimitOrder {
     quantity: number;
 }
 export declare const enum Long {
-    SHORT = 0,
-    LONG = 1
+    LONG = 0,
+    SHORT = 1
 }
-export declare const LONG = Long.LONG;
-export declare const SHORT = Long.SHORT;
+export declare const LONG: Long;
+export declare const SHORT: Long;
 export interface Assets {
     [long: number]: number;
     balance: number;
