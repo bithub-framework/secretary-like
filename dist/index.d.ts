@@ -1,7 +1,7 @@
 export declare type OrderId = number | string;
 export declare const enum Side {
-    BID = 0,
-    ASK = 1
+    ASK = 0,
+    BID = 1
 }
 export declare const BID = Side.BID;
 export declare const ASK = Side.ASK;
@@ -33,12 +33,12 @@ export interface LimitOrder {
     price: number;
     quantity: number;
 }
-export declare const enum Long {
-    LONG = 0,
-    SHORT = 1
+export declare const enum Position {
+    LONG = 1,
+    SHORT = 0
 }
-export declare const LONG: Long;
-export declare const SHORT: Long;
+export declare const LONG: Position;
+export declare const SHORT: Position;
 export interface Assets {
     [long: number]: number;
     balance: number;

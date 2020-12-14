@@ -1,8 +1,9 @@
 export type OrderId = number | string;
 
+// 常数不是任意指定的，必须 ASK 为 0，BID 为 1。
 export const enum Side {
-    BID = 0,
-    ASK = 1,
+    ASK = 0,
+    BID = 1,
 }
 export const BID = Side.BID;
 export const ASK = Side.ASK;
@@ -41,12 +42,12 @@ export interface LimitOrder {
     quantity: number;
 }
 
-export const enum Long {
+export const enum Position {
     LONG = Side.BID,
     SHORT = Side.ASK,
 }
-export const LONG = Long.LONG;
-export const SHORT = Long.SHORT;
+export const LONG = Position.LONG;
+export const SHORT = Position.SHORT;
 
 export interface Assets {
     [long: number]: number;
