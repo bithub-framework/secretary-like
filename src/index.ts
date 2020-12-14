@@ -41,8 +41,14 @@ export interface LimitOrder {
     quantity: number;
 }
 
+export const enum Long {
+    SHORT = 0,
+    LONG = 1,
+}
+export const LONG = Long.LONG;
+export const SHORT = Long.SHORT;
+
 export interface Assets {
-    long: number; // number of the traded instrument
-    short: number; // 0 for spot
+    [long: number]: number;
     balance: number; // in the quote currency
 }
