@@ -54,7 +54,7 @@ export interface Assets {
         [length: number]: number;
     };
     leverage: number;
-    reserve: number;
+    balance: number;
     cost: {
         [length: number]: number;
     };
@@ -63,5 +63,5 @@ export interface Assets {
     margin: {
         [length: number]: number; // = cost / leverage
     };
-    balance: number; // = margin + reserve
+    reserve: number; // = balance - margin
 }

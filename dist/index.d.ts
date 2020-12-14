@@ -44,12 +44,12 @@ export interface Assets {
         [length: number]: number;
     };
     leverage: number;
-    reserve: number;
+    balance: number;
     cost: {
         [length: number]: number;
     };
     margin: {
         [length: number]: number;
     };
-    balance: number;
+    reserve: number;
 }
