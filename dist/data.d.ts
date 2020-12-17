@@ -32,6 +32,7 @@ export interface LimitOrder {
     side: Side;
     price: number;
     quantity: number;
+    open: boolean;
 }
 export declare const enum Length {
     LONG = 1,
