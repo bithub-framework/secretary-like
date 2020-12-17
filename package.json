@@ -18,5 +18,8 @@
     "bugs": {
         "url": "https://github.com/zimtsui/interfaces/issues"
     },
-    "homepage": "https://github.com/zimtsui/interfaces#readme"
+    "homepage": "https://github.com/zimtsui/interfaces#readme",
+    "dependencies": {
+        "queue": "https://gitee.com/zimtsui/queue.git"
+    }
 }
