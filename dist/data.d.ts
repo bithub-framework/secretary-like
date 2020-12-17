@@ -5,10 +5,13 @@ export declare const enum Side {
 }
 export declare const BID = Side.BID;
 export declare const ASK = Side.ASK;
-export interface OpenOrder {
+export interface LimitOrder {
     side: Side;
     price: number;
     quantity: number;
+    open: boolean;
+}
+export interface OpenOrder extends LimitOrder {
     id: OrderId;
 }
 export declare type TradeId = number | string;
@@ -27,12 +30,6 @@ export interface MakerOrder {
 export interface Orderbook {
     [side: number]: MakerOrder[];
     time: number;
-}
-export interface LimitOrder {
-    side: Side;
-    price: number;
-    quantity: number;
-    open: boolean;
 }
 export declare const enum Length {
     LONG = 1,
