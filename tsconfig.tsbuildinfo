@@ -201,29 +201,14 @@
         "signature": "cd6efb9467a8b6338ece2e2855e37765700f2cd061ca54b01b33878cf5c7677e",
         "affectsGlobalScope": true
       },
-      "./node_modules/@types/double-ended-queue/index.d.ts": {
-        "version": "9c4de90f5d5e2b09b05799d655f45515d83638c4d7bde9151be3c236caf8402b",
-        "signature": "9c4de90f5d5e2b09b05799d655f45515d83638c4d7bde9151be3c236caf8402b",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/queue/dist/queue.d.ts": {
-        "version": "a0a37131ff520b645e40fb93b9914523396aff5c5b43923f71c9a3a734ade01a",
-        "signature": "a0a37131ff520b645e40fb93b9914523396aff5c5b43923f71c9a3a734ade01a",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/queue/dist/index.d.ts": {
-        "version": "cc3e2dd66510aa2dcef07a7578af94b74bce86072cf0c7bb6e5600fceb4a56d4",
-        "signature": "cc3e2dd66510aa2dcef07a7578af94b74bce86072cf0c7bb6e5600fceb4a56d4",
-        "affectsGlobalScope": false
-      },
       "./src/data.ts": {
         "version": "305349a4e5cd6c50e57a42cbbd62d47f87fc4dbdc751a71923c530cf58116e41",
         "signature": "93b99ecef7c7ebb86ce60f3a6eaec0c2f1af21a7e77e0be885793fee0e814b9d",
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
-        "version": "c0b1b211a24056cd78604de8c9213cf1ef4f34564618e0ba0bb94bc7f9b4996b",
-        "signature": "5f67402d4bb9559f7474dc2d91c4b8345ce85470aeadd8a97cb7604ba185dec9",
+        "version": "b55ee27c9e5da4719b7a7bde23c3dc4e611a75b0d1305058a72ebfdea8f27dad",
+        "signature": "a0977e17dcd37615737d5f29dc0756ac11ec1299ec0b3b8e19e4ee44211a7bfe",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -796,15 +781,8 @@
         "../../../node_modules/@types/node/http.d.ts",
         "../../../node_modules/@types/node/index.d.ts"
       ],
-      "./node_modules/queue/dist/index.d.ts": [
-        "./node_modules/queue/dist/queue.d.ts"
-      ],
-      "./node_modules/queue/dist/queue.d.ts": [
-        "./node_modules/@types/double-ended-queue/index.d.ts"
-      ],
       "./src/context.ts": [
         "../../../node_modules/@types/node/events.d.ts",
-        "./node_modules/queue/dist/index.d.ts",
         "./src/data.ts"
       ],
       "./src/index.ts": [
@@ -1039,15 +1017,8 @@
         "../../../node_modules/@types/node/http.d.ts",
         "../../../node_modules/@types/node/index.d.ts"
       ],
-      "./node_modules/queue/dist/index.d.ts": [
-        "./node_modules/queue/dist/queue.d.ts"
-      ],
-      "./node_modules/queue/dist/queue.d.ts": [
-        "./node_modules/@types/double-ended-queue/index.d.ts"
-      ],
       "./src/context.ts": [
         "../../../node_modules/@types/node/events.d.ts",
-        "./node_modules/queue/dist/index.d.ts",
         "./src/data.ts"
       ],
       "./src/index.ts": [
@@ -1120,9 +1091,6 @@
       "../../../node_modules/@types/qs/index.d.ts",
       "../../../node_modules/@types/range-parser/index.d.ts",
       "../../../node_modules/@types/serve-static/index.d.ts",
-      "./node_modules/@types/double-ended-queue/index.d.ts",
-      "./node_modules/queue/dist/index.d.ts",
-      "./node_modules/queue/dist/queue.d.ts",
       "./src/context.ts",
       "./src/data.ts",
       "./src/index.ts",
