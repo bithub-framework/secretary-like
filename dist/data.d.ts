@@ -46,6 +46,7 @@ export interface Assets {
     cost: {
         [length: number]: number;
     };
+    frozen: number;
     margin: {
         [length: number]: number;
     };
