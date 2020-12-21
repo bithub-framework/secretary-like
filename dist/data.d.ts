@@ -13,6 +13,7 @@ export interface LimitOrder {
 }
 export interface OpenOrder extends LimitOrder {
     id: OrderId;
+    fee: number;
 }
 export declare type TradeId = number | string;
 export interface Trade {
