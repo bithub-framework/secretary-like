@@ -47,8 +47,6 @@ export interface Assets {
         [length: number]: number;
     };
     frozen: number;
-    margin: {
-        [length: number]: number;
-    };
+    margin: number;
     reserve: number;
 }

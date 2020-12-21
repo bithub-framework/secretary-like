@@ -59,8 +59,6 @@ export interface Assets {
     frozen: number;
 
     // computed
-    margin: {
-        [length: number]: number; // = cost / leverage
-    };
+    margin: number; // = cost / leverage
     reserve: number; // = balance - margin - frozen
 }
