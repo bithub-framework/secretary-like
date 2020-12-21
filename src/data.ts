@@ -17,6 +17,7 @@ export interface LimitOrder {
 
 export interface OpenOrder extends LimitOrder {
     id: OrderId;
+    frozen: number;
 }
 
 export type TradeId = number | string;
