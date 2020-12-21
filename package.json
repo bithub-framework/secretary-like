@@ -19,5 +19,8 @@
         "url": "https://github.com/zimtsui/interfaces/issues"
     },
     "homepage": "https://github.com/zimtsui/interfaces#readme",
-    "dependencies": {}
+    "dependencies": {
+        "@types/big.js": "^6.0.1",
+        "big.js": "^6.0.3"
+    }
 }

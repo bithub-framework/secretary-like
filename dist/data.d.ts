@@ -1,3 +1,4 @@
+import Big from 'big.js';
 export declare type OrderId = number | string;
 export declare const enum Side {
     ASK = 0,
@@ -7,25 +8,25 @@ export declare const BID = Side.BID;
 export declare const ASK = Side.ASK;
 export interface LimitOrder {
     side: Side;
-    price: number;
-    quantity: number;
+    price: Big;
+    quantity: Big;
     open: boolean;
 }
 export interface OpenOrder extends LimitOrder {
     id: OrderId;
-    frozen: number;
+    frozen: Big;
 }
 export declare type TradeId = number | string;
 export interface Trade {
     side: Side;
-    price: number;
-    quantity: number;
+    price: Big;
+    quantity: Big;
     time: number;
     id: TradeId;
 }
 export interface MakerOrder {
-    price: number;
-    quantity: number;
+    price: Big;
+    quantity: Big;
     side: Side;
 }
 export interface Orderbook {
@@ -40,14 +41,14 @@ export declare const LONG: Length;
 export declare const SHORT: Length;
 export interface Assets {
     position: {
-        [length: number]: number;
+        [length: number]: Big;
     };
     leverage: number;
-    balance: number;
+    balance: Big;
     cost: {
-        [length: number]: number;
+        [length: number]: Big;
     };
-    frozen: number;
-    margin: number;
-    reserve: number;
+    frozen: Big;
+    margin: Big;
+    reserve: Big;
 }
