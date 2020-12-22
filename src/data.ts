@@ -6,8 +6,8 @@ export type OrderId = number | string;
 
 // 常数不是任意指定的，必须一个是 0 另一个是 1
 export const enum Side {
-    BID = 0,
-    ASK = 1,
+    BID = 1,
+    ASK = -1,
 }
 export const BID = Side.BID;
 export const ASK = Side.ASK;

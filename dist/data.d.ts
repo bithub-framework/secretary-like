@@ -1,8 +1,8 @@
 import Big from 'big.js';
 export declare type OrderId = number | string;
 export declare const enum Side {
-    BID = 0,
-    ASK = 1
+    BID = 1,
+    ASK = -1
 }
 export declare const BID = Side.BID;
 export declare const ASK = Side.ASK;
@@ -34,8 +34,8 @@ export interface Orderbook {
     time: number;
 }
 export declare const enum Length {
-    LONG = 0,
-    SHORT = 1
+    LONG = 1,
+    SHORT = -1
 }
 export declare const LONG: Length;
 export declare const SHORT: Length;
