@@ -216,9 +216,14 @@
         "signature": "34496b45872ab6d8ec87074f114315460dd15a03e3c0db6ea902504ea719c6b6",
         "affectsGlobalScope": false
       },
+      "./src/reviver.ts": {
+        "version": "1419a96a8e3a9fb581295e500a38ba1e030fc734b86873770454b5f68bd7d65f",
+        "signature": "dc80d857e567720142a212e22f7381d16b787731d86f50fe0fb6f6e5d8730864",
+        "affectsGlobalScope": false
+      },
       "./src/index.ts": {
-        "version": "54b215a738551cbb94bfbe599a3101726924eb838ab5f2511962556b8ec39357",
-        "signature": "54b215a738551cbb94bfbe599a3101726924eb838ab5f2511962556b8ec39357",
+        "version": "67fcb51fb05a8d5581c0c999c058dc7576c45816f9e607768c02df91f82c7e8d",
+        "signature": "67fcb51fb05a8d5581c0c999c058dc7576c45816f9e607768c02df91f82c7e8d",
         "affectsGlobalScope": false
       },
       "../../../node_modules/@types/node/globals.d.ts": {
@@ -795,7 +800,11 @@
       ],
       "./src/index.ts": [
         "./src/context.ts",
-        "./src/data.ts"
+        "./src/data.ts",
+        "./src/reviver.ts"
+      ],
+      "./src/reviver.ts": [
+        "./node_modules/@types/big.js/index.d.ts"
       ]
     },
     "exportedModulesMap": {
@@ -1034,7 +1043,8 @@
       ],
       "./src/index.ts": [
         "./src/context.ts",
-        "./src/data.ts"
+        "./src/data.ts",
+        "./src/reviver.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -1106,6 +1116,7 @@
       "./src/context.ts",
       "./src/data.ts",
       "./src/index.ts",
+      "./src/reviver.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.core.d.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.d.ts",
