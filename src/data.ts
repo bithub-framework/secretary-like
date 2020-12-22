@@ -1,6 +1,4 @@
 import Big from 'big.js';
-// @ts-ignore
-Big.strict = true;
 
 export type OrderId = number | string;
 
