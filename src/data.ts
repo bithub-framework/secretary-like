@@ -4,10 +4,10 @@ Big.strict = true;
 
 export type OrderId = number | string;
 
-// 常数不是任意指定的，必须 ASK 为 0，BID 为 1。
+// 常数不是任意指定的，必须一个是 0 另一个是 1
 export const enum Side {
-    ASK = 0,
-    BID = 1,
+    BID = 0,
+    ASK = 1,
 }
 export const BID = Side.BID;
 export const ASK = Side.ASK;
