@@ -4,6 +4,7 @@ import { LimitOrder, OrderId, OpenOrder, Assets } from './data';
 export interface ContextLike {
     [marketId: number]: ContextMarketLike;
     sleep: (ms: number) => Promise<void>;
+    now: () => number;
 }
 export interface ContextMarketLike extends ContextMarketPublicApiLike {
     [accountId: number]: ContextAccountLike;
