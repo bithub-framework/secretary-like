@@ -49,6 +49,7 @@ export interface Assets {
         [length: number]: Big;
     };
     frozen: Big;
+    closing: Big;
     margin: Big;
     reserve: Big;
 }

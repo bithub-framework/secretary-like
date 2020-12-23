@@ -60,6 +60,7 @@ export interface Assets {
         [length: number]: Big;
     };
     frozen: Big;
+    closing: Big,
 
     // computed
     margin: Big; // = cost / leverage
