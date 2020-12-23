@@ -42,12 +42,10 @@ export interface Assets {
     position: {
         [length: number]: Big;
     };
-    leverage: number;
     balance: Big;
     cost: {
         [length: number]: Big;
     };
-    frozenFee: Big;
     frozenMargin: Big;
     frozenPosition: {
         [length: number]: Big;
