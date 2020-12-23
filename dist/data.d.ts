@@ -14,7 +14,6 @@ export interface LimitOrder {
 }
 export interface OpenOrder extends LimitOrder {
     id: OrderId;
-    frozen: Big;
 }
 export declare type TradeId = number | string;
 export interface Trade {
@@ -48,8 +47,9 @@ export interface Assets {
     cost: {
         [length: number]: Big;
     };
-    frozen: Big;
-    closing: Big;
+    frozenFee: Big;
+    frozenMargin: Big;
+    frozenPosition: Big;
     margin: Big;
     reserve: Big;
 }

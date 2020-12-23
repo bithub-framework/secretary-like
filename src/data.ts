@@ -19,7 +19,6 @@ export interface LimitOrder {
 
 export interface OpenOrder extends LimitOrder {
     id: OrderId;
-    frozen: Big;
 }
 
 export type TradeId = number | string;
@@ -59,8 +58,9 @@ export interface Assets {
     cost: {
         [length: number]: Big;
     };
-    frozen: Big;
-    closing: Big,
+    frozenFee: Big;
+    frozenMargin: Big;
+    frozenPosition: Big;
 
     // computed
     margin: Big; // = cost / leverage
