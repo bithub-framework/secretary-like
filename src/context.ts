@@ -4,6 +4,8 @@ import {
     OrderId,
     OpenOrder,
     Assets,
+    Orderbook,
+    Trade,
 } from './data';
 
 export interface ContextLike {
@@ -18,7 +20,11 @@ export interface ContextMarketLike extends ContextMarketPublicApiLike {
 
 export interface ContextAccountLike extends ContextAccountPrivateApiLike { }
 
-export interface ContextMarketPublicApiLike extends EventEmitter { }
+export interface ContextMarketPublicApiLike extends EventEmitter {
+    on(event: 'orderbook', orderbook: Orderbook): this;
+    on(event: 'trades', trades: Trade[]): this;
+    on(event: string | symbol, listener: (...args: any[]) => void): this;
+}
 
 export interface ContextAccountPrivateApiLike {
     makeLimitOrder(order: LimitOrder): Promise<OrderId>;
