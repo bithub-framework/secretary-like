@@ -49,7 +49,9 @@ export interface Assets {
     };
     frozenFee: Big;
     frozenMargin: Big;
-    frozenPosition: Big;
+    frozenPosition: {
+        [length: number]: Big;
+    };
     margin: Big;
     reserve: Big;
 }
