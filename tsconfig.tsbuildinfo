@@ -212,8 +212,8 @@
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
-        "version": "baca0beab7293e111b540b6d71f61a294e0a10434118d4b57feaa0abea793ba8",
-        "signature": "653114564613610fb0829ab2a47f4c578d1c2af4e58d6923111d2f7432007113",
+        "version": "2b3719fd5e9c04a0258df04866b8b72b0f73006a016204b7d2305f124e1970f5",
+        "signature": "2e815f8db365e16f760acdf71d0196bdb9b39c869a4ee740865e76cdf2d05ba0",
         "affectsGlobalScope": false
       },
       "./src/reviver.ts": {
