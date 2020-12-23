@@ -217,7 +217,7 @@
         "affectsGlobalScope": false
       },
       "./src/reviver.ts": {
-        "version": "1419a96a8e3a9fb581295e500a38ba1e030fc734b86873770454b5f68bd7d65f",
+        "version": "622bf50f809d63ed1626028cbb0ffc2f78c89f07a8922f9a67e647749db7a041",
         "signature": "dc80d857e567720142a212e22f7381d16b787731d86f50fe0fb6f6e5d8730864",
         "affectsGlobalScope": false
       },
