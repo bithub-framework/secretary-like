@@ -29,26 +29,30 @@ export interface MakerOrder {
     side: Side;
 }
 export interface Orderbook {
-    [side: number]: MakerOrder[];
+    [BID]: MakerOrder[];
+    [ASK]: MakerOrder[];
     time: number;
 }
 export declare const enum Length {
-    LONG = 1,
-    SHORT = -1
+    LONG = -1,
+    SHORT = 1
 }
-export declare const LONG: Length;
-export declare const SHORT: Length;
+export declare const LONG = Length.LONG;
+export declare const SHORT = Length.SHORT;
 export interface Assets {
     position: {
-        [length: number]: Big;
+        [LONG]: Big;
+        [SHORT]: Big;
     };
     balance: Big;
     cost: {
-        [length: number]: Big;
+        [LONG]: Big;
+        [SHORT]: Big;
     };
     frozenMargin: Big;
     frozenPosition: {
-        [length: number]: Big;
+        [LONG]: Big;
+        [SHORT]: Big;
     };
     margin: Big;
     reserve: Big;
