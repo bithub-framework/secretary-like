@@ -39,7 +39,7 @@ export declare const enum Length {
 }
 export declare const LONG = Length.LONG;
 export declare const SHORT = Length.SHORT;
-export declare function calcLength(open: boolean, side: Side): Length;
+export declare function calcLength(order: LimitOrder): Length;
 export interface Assets {
     position: {
         [LONG]: Big;
