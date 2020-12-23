@@ -50,6 +50,10 @@ export const enum Length {
 export const LONG = Length.LONG;
 export const SHORT = Length.SHORT;
 
+export function calcLength(open: boolean, side: Side): Length {
+    return open === (side === BID) ? LONG : SHORT;
+}
+
 export interface Assets {
     position: {
         [LONG]: Big;
