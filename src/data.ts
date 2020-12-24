@@ -24,33 +24,37 @@ export type TradeId = number | string;
 //     operation: Operation;
 // }
 
+export namespace LimitOrder {
+    export type Config = Omit<LimitOrder, 'length'>;
+}
+
 export class LimitOrder {
     public side: Side;
     public operation: Operation;
     public price: Big;
     public quantity: Big;
 
-    constructor(config: Omit<LimitOrder, 'length'>) {
+    constructor(config: LimitOrder.Config) {
         ({
             side: this.side,
             operation: this.operation,
             price: this.price,
             quantity: this.quantity,
         } = config);
+        // @ts-ignore
+        LimitOrder.prototype.toJSON = function () {
+            return {
+                side: this.side,
+                operation: this.operation,
+                length: this.length,
+                price: this.price,
+                quantity: this.quantity,
+            }
+        }
     }
 
     public get length() {
         return this.side * this.operation;
-    }
-
-    public toJSON() {
-        return {
-            side: this.side,
-            operation: this.operation,
-            length: this.length,
-            price: this.price,
-            quantity: this.quantity,
-        }
     }
 }
 
@@ -98,6 +102,13 @@ export interface Orderbook {
 //     };
 // }
 
+export namespace Assets {
+    export type Config = Omit<Assets, 'margin' | 'reserve'> & {
+        leverage: number;
+        CURRENCY_DP: number;
+    };
+}
+
 export class Assets {
     public position: {
         [length: number]: Big;
@@ -113,10 +124,7 @@ export class Assets {
     private leverage: number;
     private CURRENCY_DP: number;
 
-    constructor(config: Omit<Assets, 'margin' | 'reserve'> & {
-        leverage: number;
-        CURRENCY_DP: number;
-    }) {
+    constructor(config: Assets.Config) {
         ({
             position: this.position,
             balance: this.balance,
@@ -126,6 +134,20 @@ export class Assets {
             leverage: this.leverage,
             CURRENCY_DP: this.CURRENCY_DP,
         } = config);
+
+        // @ts-ignore
+        Assets.prototype.toJSON = function () {
+            return {
+                balance: this.balance,
+                cost: this.cost,
+                margin: this.margin,
+                position: this.position,
+                frozenMargin: this.frozenMargin,
+                frozenPosition: this.frozenPosition,
+                reserve: this.reserve,
+                closable: this.closable,
+            }
+        }
     }
 
     public get margin(): Big {
@@ -149,18 +171,5 @@ export class Assets {
             [SHORT]: this.position[SHORT]
                 .minus(this.frozenPosition[SHORT]),
         };
-    }
-
-    public toJSON() {
-        return {
-            balance: this.balance,
-            cost: this.cost,
-            margin: this.margin,
-            position: this.position,
-            frozenMargin: this.frozenMargin,
-            frozenPosition: this.frozenPosition,
-            reserve: this.reserve,
-            closable: this.closable,
-        }
     }
 }

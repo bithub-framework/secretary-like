@@ -5,13 +5,6 @@ export const OPEN = 1;
 export const CLOSE = -1;
 export const LONG = 1;
 export const SHORT = -1;
-// export interface LimitOrder {
-//     price: Big;
-//     quantity: Big;
-//     side: Side;
-//     length: Length;
-//     operation: Operation;
-// }
 export class LimitOrder {
     constructor(config) {
         ({
@@ -20,39 +13,21 @@ export class LimitOrder {
             price: this.price,
             quantity: this.quantity,
         } = config);
+        // @ts-ignore
+        LimitOrder.prototype.toJSON = function () {
+            return {
+                side: this.side,
+                operation: this.operation,
+                length: this.length,
+                price: this.price,
+                quantity: this.quantity,
+            };
+        };
     }
     get length() {
         return this.side * this.operation;
     }
-    toJSON() {
-        return {
-            side: this.side,
-            operation: this.operation,
-            length: this.length,
-            price: this.price,
-            quantity: this.quantity,
-        };
-    }
 }
-// export interface Assets {
-//     position: {
-//         [length: number]: Big;
-//     };
-//     balance: Big;
-//     cost: {
-//         [length: number]: Big;
-//     };
-//     frozenMargin: Big;
-//     frozenPosition: {
-//         [length: number]: Big;
-//     };
-//     // computed
-//     margin: Big;
-//     reserve: Big;
-//     closable: {
-//         [length: number]: Big;
-//     };
-// }
 export class Assets {
     constructor(config) {
         ({
@@ -64,6 +39,19 @@ export class Assets {
             leverage: this.leverage,
             CURRENCY_DP: this.CURRENCY_DP,
         } = config);
+        // @ts-ignore
+        Assets.prototype.toJSON = function () {
+            return {
+                balance: this.balance,
+                cost: this.cost,
+                margin: this.margin,
+                position: this.position,
+                frozenMargin: this.frozenMargin,
+                frozenPosition: this.frozenPosition,
+                reserve: this.reserve,
+                closable: this.closable,
+            };
+        };
     }
     get margin() {
         return new Big(0)
@@ -83,18 +71,6 @@ export class Assets {
                 .minus(this.frozenPosition[LONG]),
             [SHORT]: this.position[SHORT]
                 .minus(this.frozenPosition[SHORT]),
-        };
-    }
-    toJSON() {
-        return {
-            balance: this.balance,
-            cost: this.cost,
-            margin: this.margin,
-            position: this.position,
-            frozenMargin: this.frozenMargin,
-            frozenPosition: this.frozenPosition,
-            reserve: this.reserve,
-            closable: this.closable,
         };
     }
 }
