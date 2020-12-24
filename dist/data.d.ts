@@ -21,7 +21,7 @@ export interface LimitOrder {
     operation: Operation;
 }
 export declare namespace LimitOrder {
-    type Computed = 'length';
+    type Computed = 'side';
     type Statics = Omit<LimitOrder, Computed>;
     export function from(statics: Statics): LimitOrder;
     export {};

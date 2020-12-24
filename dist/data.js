@@ -9,9 +9,9 @@ export var LimitOrder;
 (function (LimitOrder) {
     function from(statics) {
         return {
-            side: statics.side,
+            side: statics.length * statics.operation,
             operation: statics.operation,
-            length: statics.side * statics.operation,
+            length: statics.length,
             price: statics.price,
             quantity: statics.quantity,
         };

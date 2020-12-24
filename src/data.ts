@@ -29,13 +29,13 @@ export interface LimitOrder {
 }
 
 export namespace LimitOrder {
-    type Computed = 'length';
+    type Computed = 'side';
     type Statics = Omit<LimitOrder, Computed>;
     export function from(statics: Statics): LimitOrder {
         return {
-            side: statics.side,
+            side: statics.length * statics.operation,
             operation: statics.operation,
-            length: statics.side * statics.operation,
+            length: statics.length,
             price: statics.price,
             quantity: statics.quantity,
         }
