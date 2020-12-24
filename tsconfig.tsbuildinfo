@@ -216,14 +216,29 @@
         "signature": "cee36f9bd937fc11efccc23a685a09116eba9c02f5a6683b190a3ac65a695415",
         "affectsGlobalScope": false
       },
-      "./src/reviver.ts": {
-        "version": "622bf50f809d63ed1626028cbb0ffc2f78c89f07a8922f9a67e647749db7a041",
-        "signature": "dc80d857e567720142a212e22f7381d16b787731d86f50fe0fb6f6e5d8730864",
+      "./node_modules/ts-toolbelt/out/index.d.ts": {
+        "version": "9df147746b0cbd11d022b564e6fdd43ac79b643dc579d2123317ee01cc4f0d70",
+        "signature": "9df147746b0cbd11d022b564e6fdd43ac79b643dc579d2123317ee01cc4f0d70",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/ramda/tools.d.ts": {
+        "version": "ffce841ff8b30e136ea9f045f8c3a6b0ebd986d6a670095826d179de13bf626a",
+        "signature": "ffce841ff8b30e136ea9f045f8c3a6b0ebd986d6a670095826d179de13bf626a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/ramda/index.d.ts": {
+        "version": "5cc20bb11d8d85c9d6826a8bee507ac072f94c5a5de90cd34f6495808de5601c",
+        "signature": "5cc20bb11d8d85c9d6826a8bee507ac072f94c5a5de90cd34f6495808de5601c",
+        "affectsGlobalScope": false
+      },
+      "./src/mapping.ts": {
+        "version": "f05ce518af5806d74d1c1693a3b1d87a5cb857c22216718921d5bbe0a8a92641",
+        "signature": "2b6e6541512a6e071c3e3f927844b30cd149bf519901c629a602aea71a74d7ce",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "67fcb51fb05a8d5581c0c999c058dc7576c45816f9e607768c02df91f82c7e8d",
-        "signature": "67fcb51fb05a8d5581c0c999c058dc7576c45816f9e607768c02df91f82c7e8d",
+        "version": "dbb3fc2b9a70fab45bdaa218238c850313920916f21ebc0f003930165f5b5529",
+        "signature": "dbb3fc2b9a70fab45bdaa218238c850313920916f21ebc0f003930165f5b5529",
         "affectsGlobalScope": false
       },
       "../../../node_modules/@types/node/globals.d.ts": {
@@ -791,6 +806,16 @@
         "../../../node_modules/@types/node/http.d.ts",
         "../../../node_modules/@types/node/index.d.ts"
       ],
+      "./node_modules/@types/ramda/index.d.ts": [
+        "./node_modules/@types/ramda/tools.d.ts",
+        "./node_modules/ts-toolbelt/out/index.d.ts"
+      ],
+      "./node_modules/@types/ramda/tools.d.ts": [
+        "./node_modules/ts-toolbelt/out/index.d.ts"
+      ],
+      "./node_modules/ts-toolbelt/out/index.d.ts": [
+        "./node_modules/ts-toolbelt/out/index.d.ts"
+      ],
       "./src/context.ts": [
         "../../../node_modules/@types/node/events.d.ts",
         "./src/data.ts"
@@ -801,10 +826,12 @@
       "./src/index.ts": [
         "./src/context.ts",
         "./src/data.ts",
-        "./src/reviver.ts"
+        "./src/mapping.ts"
       ],
-      "./src/reviver.ts": [
-        "./node_modules/@types/big.js/index.d.ts"
+      "./src/mapping.ts": [
+        "./node_modules/@types/big.js/index.d.ts",
+        "./node_modules/@types/ramda/index.d.ts",
+        "./src/data.ts"
       ]
     },
     "exportedModulesMap": {
@@ -1034,6 +1061,16 @@
         "../../../node_modules/@types/node/http.d.ts",
         "../../../node_modules/@types/node/index.d.ts"
       ],
+      "./node_modules/@types/ramda/index.d.ts": [
+        "./node_modules/@types/ramda/tools.d.ts",
+        "./node_modules/ts-toolbelt/out/index.d.ts"
+      ],
+      "./node_modules/@types/ramda/tools.d.ts": [
+        "./node_modules/ts-toolbelt/out/index.d.ts"
+      ],
+      "./node_modules/ts-toolbelt/out/index.d.ts": [
+        "./node_modules/ts-toolbelt/out/index.d.ts"
+      ],
       "./src/context.ts": [
         "../../../node_modules/@types/node/events.d.ts",
         "./src/data.ts"
@@ -1044,7 +1081,7 @@
       "./src/index.ts": [
         "./src/context.ts",
         "./src/data.ts",
-        "./src/reviver.ts"
+        "./src/mapping.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -1113,10 +1150,13 @@
       "../../../node_modules/@types/range-parser/index.d.ts",
       "../../../node_modules/@types/serve-static/index.d.ts",
       "./node_modules/@types/big.js/index.d.ts",
+      "./node_modules/@types/ramda/index.d.ts",
+      "./node_modules/@types/ramda/tools.d.ts",
+      "./node_modules/ts-toolbelt/out/index.d.ts",
       "./src/context.ts",
       "./src/data.ts",
       "./src/index.ts",
-      "./src/reviver.ts",
+      "./src/mapping.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.core.d.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.d.ts",

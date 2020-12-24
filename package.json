@@ -21,6 +21,8 @@
     "homepage": "https://github.com/zimtsui/interfaces#readme",
     "dependencies": {
         "@types/big.js": "^6.0.1",
-        "big.js": "^6.0.3"
+        "@types/ramda": "^0.27.34",
+        "big.js": "^6.0.3",
+        "ramda": "^0.27.1"
     }
 }
