@@ -1,4 +1,7 @@
 import Big from 'big.js';
+export declare type Mutable<T> = {
+    -readonly [P in keyof T]: T[P];
+};
 export declare type Side = number;
 export declare const BID: Side;
 export declare const ASK: Side;
@@ -11,7 +14,9 @@ export declare const SHORT: Length;
 export declare type OrderId = number | string;
 export declare type TradeId = number | string;
 export declare namespace LimitOrder {
-    type Static = Omit<LimitOrder, 'length'>;
+    type Computed = 'length';
+    type Static = Omit<LimitOrder, Computed>;
+    type Public = Mutable<LimitOrder>;
 }
 export declare class LimitOrder implements LimitOrder.Static {
     side: Side;
@@ -47,10 +52,13 @@ export interface Orderbook {
     time: number;
 }
 export declare namespace Assets {
-    type Config = Omit<Assets, 'margin' | 'reserve' | 'closable'> & {
+    type Computed = 'margin' | 'reserve' | 'closable';
+    type Private = {
         leverage: number;
         CURRENCY_DP: number;
     };
+    type Static = Omit<Assets, Computed> & Private;
+    type Public = Mutable<Assets>;
 }
 export declare class Assets {
     position: {
@@ -66,7 +74,7 @@ export declare class Assets {
     };
     private leverage;
     private CURRENCY_DP;
-    constructor(config: Assets.Config);
+    constructor(config: Assets.Static);
     get margin(): Big;
     get reserve(): Big;
     get closable(): {

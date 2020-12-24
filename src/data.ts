@@ -1,6 +1,10 @@
 import Big from 'big.js';
 import { RoundingMode } from 'big.js';
 
+export type Mutable<T> = {
+    -readonly [P in keyof T]: T[P];
+};
+
 export type Side = number;
 export const BID: Side = 1;
 export const ASK: Side = -1;
@@ -25,7 +29,9 @@ export type TradeId = number | string;
 // }
 
 export namespace LimitOrder {
-    export type Static = Omit<LimitOrder, 'length'>;
+    export type Computed = 'length';
+    export type Static = Omit<LimitOrder, Computed>;
+    export type Public = Mutable<LimitOrder>;
 }
 
 export class LimitOrder implements LimitOrder.Static {
@@ -42,7 +48,7 @@ export class LimitOrder implements LimitOrder.Static {
             quantity: this.quantity,
         } = config);
         // @ts-ignore
-        LimitOrder.prototype.toJSON = function () {
+        LimitOrder.prototype.toJSON = function (): LimitOrder.Public {
             return {
                 side: this.side,
                 operation: this.operation,
@@ -120,12 +126,13 @@ export interface Orderbook {
 // }
 
 export namespace Assets {
-    export type Config = Omit<Assets,
-        'margin' | 'reserve' | 'closable'
-    > & {
+    export type Computed = 'margin' | 'reserve' | 'closable';
+    export type Private = {
         leverage: number;
         CURRENCY_DP: number;
     };
+    export type Static = Omit<Assets, Computed> & Private;
+    export type Public = Mutable<Assets>;
 }
 
 export class Assets {
@@ -143,7 +150,7 @@ export class Assets {
     private leverage: number;
     private CURRENCY_DP: number;
 
-    constructor(config: Assets.Config) {
+    constructor(config: Assets.Static) {
         ({
             position: this.position,
             balance: this.balance,
@@ -153,9 +160,8 @@ export class Assets {
             leverage: this.leverage,
             CURRENCY_DP: this.CURRENCY_DP,
         } = config);
-
         // @ts-ignore
-        Assets.prototype.toJSON = function () {
+        Assets.prototype.toJSON = function (): Assets.Public {
             return {
                 balance: this.balance,
                 cost: this.cost,
