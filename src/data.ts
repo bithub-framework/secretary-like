@@ -1,4 +1,5 @@
 import Big from 'big.js';
+import { RoundingMode } from 'big.js';
 
 export type Side = number;
 export const BID: Side = 1;
@@ -15,11 +16,42 @@ export const SHORT: Length = -1;
 export type OrderId = number | string;
 export type TradeId = number | string;
 
-export interface LimitOrder {
-    side: Side;
-    operation: Operation;
-    price: Big;
-    quantity: Big;
+// export interface LimitOrder {
+//     price: Big;
+//     quantity: Big;
+//     side: Side;
+//     length: Length;
+//     operation: Operation;
+// }
+
+export class LimitOrder {
+    public side: Side;
+    public operation: Operation;
+    public price: Big;
+    public quantity: Big;
+
+    constructor(config: Omit<LimitOrder, 'length'>) {
+        ({
+            side: this.side,
+            operation: this.operation,
+            price: this.price,
+            quantity: this.quantity,
+        } = config);
+    }
+
+    public get length() {
+        return this.side * this.operation;
+    }
+
+    public toJSON() {
+        return {
+            side: this.side,
+            operation: this.operation,
+            length: this.length,
+            price: this.price,
+            quantity: this.quantity,
+        }
+    }
 }
 
 export interface OpenOrder extends LimitOrder {
@@ -45,20 +77,90 @@ export interface Orderbook {
     time: number;
 }
 
-export interface Assets {
-    position: {
-        [length: number]: Big;
-    };
-    balance: Big;
-    cost: {
-        [length: number]: Big;
-    };
-    frozenMargin: Big;
-    frozenPosition: {
-        [length: number]: Big;
-    };
+// export interface Assets {
+//     position: {
+//         [length: number]: Big;
+//     };
+//     balance: Big;
+//     cost: {
+//         [length: number]: Big;
+//     };
+//     frozenMargin: Big;
+//     frozenPosition: {
+//         [length: number]: Big;
+//     };
 
-    // computed
-    margin: Big; // = cost / leverage
-    reserve: Big; // = balance - margin - frozen
+//     // computed
+//     margin: Big;
+//     reserve: Big;
+//     closable: {
+//         [length: number]: Big;
+//     };
+// }
+
+export class Assets {
+    public position: {
+        [length: number]: Big;
+    };
+    public balance: Big;
+    public cost: {
+        [length: number]: Big;
+    };
+    public frozenMargin: Big;
+    public frozenPosition: {
+        [length: number]: Big;
+    };
+    private leverage: number;
+    private CURRENCY_DP: number;
+
+    constructor(config: Omit<Assets, 'margin' | 'reserve'> & {
+        leverage: number;
+        CURRENCY_DP: number;
+    }) {
+        ({
+            position: this.position,
+            balance: this.balance,
+            cost: this.cost,
+            frozenMargin: this.frozenMargin,
+            frozenPosition: this.frozenPosition,
+            leverage: this.leverage,
+            CURRENCY_DP: this.CURRENCY_DP,
+        } = config);
+    }
+
+    public get margin(): Big {
+        return new Big(0)
+            .plus(this.cost[LONG])
+            .plus(this.cost[SHORT])
+            .div(this.leverage)
+            .round(this.CURRENCY_DP, RoundingMode.RoundUp);
+    }
+
+    public get reserve(): Big {
+        return this.balance
+            .minus(this.margin)
+            .minus(this.frozenMargin);
+    }
+
+    public get closable() {
+        return {
+            [LONG]: this.position[LONG]
+                .minus(this.frozenPosition[LONG]),
+            [SHORT]: this.position[SHORT]
+                .minus(this.frozenPosition[SHORT]),
+        };
+    }
+
+    public toJSON() {
+        return {
+            balance: this.balance,
+            cost: this.cost,
+            margin: this.margin,
+            position: this.position,
+            frozenMargin: this.frozenMargin,
+            frozenPosition: this.frozenPosition,
+            reserve: this.reserve,
+            closable: this.closable,
+        }
+    }
 }
