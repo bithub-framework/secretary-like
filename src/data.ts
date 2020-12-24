@@ -103,7 +103,9 @@ export interface Orderbook {
 // }
 
 export namespace Assets {
-    export type Config = Omit<Assets, 'margin' | 'reserve'> & {
+    export type Config = Omit<Assets,
+        'margin' | 'reserve' | 'closable'
+    > & {
         leverage: number;
         CURRENCY_DP: number;
     };
