@@ -1,21 +1,24 @@
 import Big from 'big.js';
+export declare type Side = number;
+export declare const BID: Side;
+export declare const ASK: Side;
+export declare type Operation = number;
+export declare const OPEN: Operation;
+export declare const CLOSE: Operation;
+export declare type Length = number;
+export declare const LONG: Length;
+export declare const SHORT: Length;
 export declare type OrderId = number | string;
-export declare const enum Side {
-    BID = 1,
-    ASK = -1
-}
-export declare const BID = Side.BID;
-export declare const ASK = Side.ASK;
+export declare type TradeId = number | string;
 export interface LimitOrder {
     side: Side;
+    operation: Operation;
     price: Big;
     quantity: Big;
-    open: boolean;
 }
 export interface OpenOrder extends LimitOrder {
     id: OrderId;
 }
-export declare type TradeId = number | string;
 export interface Trade {
     side: Side;
     price: Big;
@@ -29,31 +32,20 @@ export interface MakerOrder {
     side: Side;
 }
 export interface Orderbook {
-    [BID]: MakerOrder[];
-    [ASK]: MakerOrder[];
+    [side: number]: MakerOrder[];
     time: number;
 }
-export declare const enum Length {
-    LONG = -1,
-    SHORT = 1
-}
-export declare const LONG = Length.LONG;
-export declare const SHORT = Length.SHORT;
-export declare function calcLength(order: LimitOrder): Length;
 export interface Assets {
     position: {
-        [LONG]: Big;
-        [SHORT]: Big;
+        [length: number]: Big;
     };
     balance: Big;
     cost: {
-        [LONG]: Big;
-        [SHORT]: Big;
+        [length: number]: Big;
     };
     frozenMargin: Big;
     frozenPosition: {
-        [LONG]: Big;
-        [SHORT]: Big;
+        [length: number]: Big;
     };
     margin: Big;
     reserve: Big;

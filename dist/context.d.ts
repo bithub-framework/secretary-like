@@ -14,6 +14,10 @@ export interface ContextAccountLike extends ContextAccountPrivateApiLike {
 export interface ContextMarketPublicApiLike extends EventEmitter {
     on(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
     on(event: 'trades', listener: (trades: Trade[]) => void): this;
+    off(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
+    off(event: 'trades', listener: (trades: Trade[]) => void): this;
+    once(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
+    once(event: 'trades', listener: (trades: Trade[]) => void): this;
 }
 export interface ContextAccountPrivateApiLike {
     makeLimitOrder(order: LimitOrder): Promise<OrderId>;

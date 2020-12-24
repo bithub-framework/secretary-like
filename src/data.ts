@@ -1,27 +1,30 @@
 import Big from 'big.js';
 
-export type OrderId = number | string;
+export type Side = number;
+export const BID: Side = 1;
+export const ASK: Side = -1;
 
-// 常数不是任意指定的，必须一个是 0 另一个是 1
-export const enum Side {
-    BID = 1,
-    ASK = -1,
-}
-export const BID = Side.BID;
-export const ASK = Side.ASK;
+export type Operation = number;
+export const OPEN: Operation = 1;
+export const CLOSE: Operation = -1;
+
+export type Length = number;
+export const LONG: Length = 1;
+export const SHORT: Length = -1;
+
+export type OrderId = number | string;
+export type TradeId = number | string;
 
 export interface LimitOrder {
     side: Side;
+    operation: Operation;
     price: Big;
     quantity: Big;
-    open: boolean;
 }
 
 export interface OpenOrder extends LimitOrder {
     id: OrderId;
 }
-
-export type TradeId = number | string;
 
 export interface Trade {
     side: Side;
@@ -38,36 +41,21 @@ export interface MakerOrder {
 }
 
 export interface Orderbook {
-    [BID]: MakerOrder[],
-    [ASK]: MakerOrder[],
+    [side: number]: MakerOrder[],
     time: number;
-}
-
-export const enum Length {
-    LONG = -1,
-    SHORT = 1,
-}
-export const LONG = Length.LONG;
-export const SHORT = Length.SHORT;
-
-export function calcLength(order: LimitOrder): Length {
-    return order.open === (order.side === BID) ? LONG : SHORT;
 }
 
 export interface Assets {
     position: {
-        [LONG]: Big;
-        [SHORT]: Big;
+        [length: number]: Big;
     };
     balance: Big;
     cost: {
-        [LONG]: Big;
-        [SHORT]: Big;
+        [length: number]: Big;
     };
     frozenMargin: Big;
     frozenPosition: {
-        [LONG]: Big;
-        [SHORT]: Big;
+        [length: number]: Big;
     };
 
     // computed
