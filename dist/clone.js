@@ -1,9 +1,11 @@
-import { Assets } from './data';
-import { clone as copy } from 'ramda';
-import { reviver } from './reviver';
+import Big from 'big.js';
+export function reviver(k, v) {
+    if (k !== 'id' && typeof v === 'string')
+        return new Big(v);
+    else
+        return v;
+}
 export function clone(x) {
-    if (x instanceof Assets.AutoAssets)
-        return JSON.parse(JSON.stringify(x), reviver);
-    return copy(x);
+    return JSON.parse(JSON.stringify(x), reviver);
 }
 //# sourceMappingURL=clone.js.map
