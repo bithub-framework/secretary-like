@@ -226,19 +226,19 @@
         "signature": "5cc20bb11d8d85c9d6826a8bee507ac072f94c5a5de90cd34f6495808de5601c",
         "affectsGlobalScope": false
       },
+      "./src/reviver.ts": {
+        "version": "fe409a71b74d1a0c42b313c33645d568c7eafcd52f675f44669667e8a355a048",
+        "signature": "dc80d857e567720142a212e22f7381d16b787731d86f50fe0fb6f6e5d8730864",
+        "affectsGlobalScope": false
+      },
       "./src/clone.ts": {
-        "version": "aa098c44966605c0705659b4f110d6aa888ef992ba3b14b8071a7f02256e7293",
+        "version": "b5b90bc59926313f9905202809e7b002106e935dce340886a772164a9103f5cd",
         "signature": "c4b33dfeabfc14f61377e6c643c543bcce4fae4c8c7ad8e092d9290d9bed3e61",
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
         "version": "7ef0c8911b2f555f1333aca73e715fdcf7230c02e190d5f3103acb2ccba58c46",
         "signature": "cee36f9bd937fc11efccc23a685a09116eba9c02f5a6683b190a3ac65a695415",
-        "affectsGlobalScope": false
-      },
-      "./src/reviver.ts": {
-        "version": "fe409a71b74d1a0c42b313c33645d568c7eafcd52f675f44669667e8a355a048",
-        "signature": "dc80d857e567720142a212e22f7381d16b787731d86f50fe0fb6f6e5d8730864",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -823,7 +823,8 @@
       ],
       "./src/clone.ts": [
         "./node_modules/@types/ramda/index.d.ts",
-        "./src/data.ts"
+        "./src/data.ts",
+        "./src/reviver.ts"
       ],
       "./src/context.ts": [
         "../../../node_modules/@types/node/events.d.ts",
