@@ -21,8 +21,14 @@ export declare class LimitOrder {
     constructor(config: LimitOrder.Config);
     get length(): number;
 }
-export interface OpenOrder extends LimitOrder {
+export declare namespace OpenOrder {
+    type Config = LimitOrder.Config & {
+        id: number;
+    };
+}
+export declare class OpenOrder extends LimitOrder {
     id: OrderId;
+    constructor(config: OpenOrder.Config);
 }
 export interface Trade {
     side: Side;

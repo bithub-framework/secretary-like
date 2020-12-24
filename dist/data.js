@@ -28,6 +28,14 @@ export class LimitOrder {
         return this.side * this.operation;
     }
 }
+export class OpenOrder extends LimitOrder {
+    constructor(config) {
+        super(config);
+        ({
+            id: this.id,
+        } = config);
+    }
+}
 export class Assets {
     constructor(config) {
         ({

@@ -58,8 +58,25 @@ export class LimitOrder {
     }
 }
 
-export interface OpenOrder extends LimitOrder {
-    id: OrderId;
+// export interface OpenOrder extends LimitOrder {
+//     id: OrderId;
+// }
+
+export namespace OpenOrder {
+    export type Config = LimitOrder.Config & {
+        id: number;
+    };
+}
+
+export class OpenOrder extends LimitOrder {
+    public id: OrderId;
+
+    constructor(config: OpenOrder.Config) {
+        super(config);
+        ({
+            id: this.id,
+        } = config);
+    }
 }
 
 export interface Trade {
