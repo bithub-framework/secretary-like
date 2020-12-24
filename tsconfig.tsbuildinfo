@@ -211,11 +211,6 @@
         "signature": "2dffbe59da71dcb02ce88fb15f90a44e5a11ff2a225979cc092c121f8ec3d8be",
         "affectsGlobalScope": false
       },
-      "./src/context.ts": {
-        "version": "7ef0c8911b2f555f1333aca73e715fdcf7230c02e190d5f3103acb2ccba58c46",
-        "signature": "cee36f9bd937fc11efccc23a685a09116eba9c02f5a6683b190a3ac65a695415",
-        "affectsGlobalScope": false
-      },
       "./node_modules/ts-toolbelt/out/index.d.ts": {
         "version": "9df147746b0cbd11d022b564e6fdd43ac79b643dc579d2123317ee01cc4f0d70",
         "signature": "9df147746b0cbd11d022b564e6fdd43ac79b643dc579d2123317ee01cc4f0d70",
@@ -231,14 +226,24 @@
         "signature": "5cc20bb11d8d85c9d6826a8bee507ac072f94c5a5de90cd34f6495808de5601c",
         "affectsGlobalScope": false
       },
-      "./src/mapping.ts": {
-        "version": "f05ce518af5806d74d1c1693a3b1d87a5cb857c22216718921d5bbe0a8a92641",
-        "signature": "2b6e6541512a6e071c3e3f927844b30cd149bf519901c629a602aea71a74d7ce",
+      "./src/clone.ts": {
+        "version": "aa098c44966605c0705659b4f110d6aa888ef992ba3b14b8071a7f02256e7293",
+        "signature": "c4b33dfeabfc14f61377e6c643c543bcce4fae4c8c7ad8e092d9290d9bed3e61",
+        "affectsGlobalScope": false
+      },
+      "./src/context.ts": {
+        "version": "7ef0c8911b2f555f1333aca73e715fdcf7230c02e190d5f3103acb2ccba58c46",
+        "signature": "cee36f9bd937fc11efccc23a685a09116eba9c02f5a6683b190a3ac65a695415",
+        "affectsGlobalScope": false
+      },
+      "./src/reviver.ts": {
+        "version": "fe409a71b74d1a0c42b313c33645d568c7eafcd52f675f44669667e8a355a048",
+        "signature": "dc80d857e567720142a212e22f7381d16b787731d86f50fe0fb6f6e5d8730864",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "dbb3fc2b9a70fab45bdaa218238c850313920916f21ebc0f003930165f5b5529",
-        "signature": "dbb3fc2b9a70fab45bdaa218238c850313920916f21ebc0f003930165f5b5529",
+        "version": "051897a28064b742a0f7b321ef0d6e52bba56dab56f49b1f42233a97bf4eea22",
+        "signature": "051897a28064b742a0f7b321ef0d6e52bba56dab56f49b1f42233a97bf4eea22",
         "affectsGlobalScope": false
       },
       "../../../node_modules/@types/node/globals.d.ts": {
@@ -816,6 +821,10 @@
       "./node_modules/ts-toolbelt/out/index.d.ts": [
         "./node_modules/ts-toolbelt/out/index.d.ts"
       ],
+      "./src/clone.ts": [
+        "./node_modules/@types/ramda/index.d.ts",
+        "./src/data.ts"
+      ],
       "./src/context.ts": [
         "../../../node_modules/@types/node/events.d.ts",
         "./src/data.ts"
@@ -824,14 +833,13 @@
         "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/index.ts": [
+        "./src/clone.ts",
         "./src/context.ts",
         "./src/data.ts",
-        "./src/mapping.ts"
+        "./src/reviver.ts"
       ],
-      "./src/mapping.ts": [
-        "./node_modules/@types/big.js/index.d.ts",
-        "./node_modules/@types/ramda/index.d.ts",
-        "./src/data.ts"
+      "./src/reviver.ts": [
+        "./node_modules/@types/big.js/index.d.ts"
       ]
     },
     "exportedModulesMap": {
@@ -1079,9 +1087,10 @@
         "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/index.ts": [
+        "./src/clone.ts",
         "./src/context.ts",
         "./src/data.ts",
-        "./src/mapping.ts"
+        "./src/reviver.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -1153,10 +1162,11 @@
       "./node_modules/@types/ramda/index.d.ts",
       "./node_modules/@types/ramda/tools.d.ts",
       "./node_modules/ts-toolbelt/out/index.d.ts",
+      "./src/clone.ts",
       "./src/context.ts",
       "./src/data.ts",
       "./src/index.ts",
-      "./src/mapping.ts",
+      "./src/reviver.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.core.d.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.d.ts",
