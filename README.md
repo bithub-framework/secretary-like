@@ -6,4 +6,6 @@
 
 quantity 单位是被交易的 instrument，而不是 underlying BTC。
 
+Side Operation Length 把自己负一下就是对面。
+
 Side Operation Length 用其中两个相乘得另一个。由于乘法后类型自动转换为 number，所以这三个类型也直接设为 number 而不是 union type 或 const enum。
