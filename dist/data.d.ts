@@ -11,24 +11,24 @@ export declare const SHORT: Length;
 export declare type OrderId = number | string;
 export declare type TradeId = number | string;
 export declare namespace LimitOrder {
-    type Config = Omit<LimitOrder, 'length'>;
+    type Static = Omit<LimitOrder, 'length'>;
 }
-export declare class LimitOrder {
+export declare class LimitOrder implements LimitOrder.Static {
     side: Side;
     operation: Operation;
     price: Big;
     quantity: Big;
-    constructor(config: LimitOrder.Config);
+    constructor(config: LimitOrder.Static);
     get length(): number;
 }
 export declare namespace OpenOrder {
-    type Config = LimitOrder.Config & {
-        id: number;
+    type Static = LimitOrder.Static & {
+        id: OrderId;
     };
 }
-export declare class OpenOrder extends LimitOrder {
+export declare class OpenOrder extends LimitOrder implements OpenOrder.Static {
     id: OrderId;
-    constructor(config: OpenOrder.Config);
+    constructor(config: OpenOrder.Static);
 }
 export interface Trade {
     side: Side;

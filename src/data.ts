@@ -25,16 +25,16 @@ export type TradeId = number | string;
 // }
 
 export namespace LimitOrder {
-    export type Config = Omit<LimitOrder, 'length'>;
+    export type Static = Omit<LimitOrder, 'length'>;
 }
 
-export class LimitOrder {
+export class LimitOrder implements LimitOrder.Static {
     public side: Side;
     public operation: Operation;
     public price: Big;
     public quantity: Big;
 
-    constructor(config: LimitOrder.Config) {
+    constructor(config: LimitOrder.Static) {
         ({
             side: this.side,
             operation: this.operation,
@@ -63,15 +63,15 @@ export class LimitOrder {
 // }
 
 export namespace OpenOrder {
-    export type Config = LimitOrder.Config & {
-        id: number;
+    export type Static = LimitOrder.Static & {
+        id: OrderId;
     };
 }
 
-export class OpenOrder extends LimitOrder {
+export class OpenOrder extends LimitOrder implements OpenOrder.Static {
     public id: OrderId;
 
-    constructor(config: OpenOrder.Config) {
+    constructor(config: OpenOrder.Static) {
         super(config);
         ({
             id: this.id,
