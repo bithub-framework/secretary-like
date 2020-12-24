@@ -5,50 +5,78 @@ export const OPEN = 1;
 export const CLOSE = -1;
 export const LONG = 1;
 export const SHORT = -1;
-export class LimitOrder {
-    constructor(config) {
-        ({
-            side: this.side,
-            operation: this.operation,
-            price: this.price,
-            quantity: this.quantity,
-        } = config);
-        // @ts-ignore
-        LimitOrder.prototype.toJSON = function () {
-            return {
-                side: this.side,
-                operation: this.operation,
-                length: this.length,
-                price: this.price,
-                quantity: this.quantity,
-            };
+export var LimitOrder;
+(function (LimitOrder) {
+    function from(statics) {
+        return {
+            side: statics.side,
+            operation: statics.operation,
+            length: statics.side * statics.operation,
+            price: statics.price,
+            quantity: statics.quantity,
         };
     }
-    get length() {
-        return this.side * this.operation;
-    }
-}
-export class OpenOrder extends LimitOrder {
-    constructor(config) {
-        super(config);
-        ({
-            id: this.id,
-        } = config);
-    }
-}
-export class Assets {
-    constructor(config) {
-        ({
-            position: this.position,
-            balance: this.balance,
-            cost: this.cost,
-            frozenMargin: this.frozenMargin,
-            frozenPosition: this.frozenPosition,
-            leverage: this.leverage,
-            CURRENCY_DP: this.CURRENCY_DP,
-        } = config);
-        // @ts-ignore
-        Assets.prototype.toJSON = function () {
+    LimitOrder.from = from;
+})(LimitOrder || (LimitOrder = {}));
+export var Assets;
+(function (Assets) {
+    // type Computed = 'margin' | 'reserve' | 'closable';
+    // type Privates = {
+    //     leverage: number;
+    //     CURRENCY_DP: number;
+    // };
+    // type Statics = Omit<Assets, Computed> & Privates;
+    class AutoAssets {
+        // constructor(config: Statics) {
+        //     ({
+        //         position: this.position,
+        //         balance: this.balance,
+        //         cost: this.cost,
+        //         frozenMargin: this.frozenMargin,
+        //         frozenPosition: this.frozenPosition,
+        //         leverage: this.leverage,
+        //         CURRENCY_DP: this.CURRENCY_DP,
+        //     } = config);
+        // }
+        constructor(initialBalance, leverage, CURRENCY_DP) {
+            this.balance = initialBalance,
+                this.position = {
+                    [LONG]: new Big(0),
+                    [SHORT]: new Big(0),
+                };
+            this.cost = {
+                [LONG]: new Big(0),
+                [SHORT]: new Big(0),
+            };
+            this.frozenMargin = new Big(0),
+                this.frozenPosition = {
+                    [LONG]: new Big(0),
+                    [SHORT]: new Big(0),
+                };
+            this.leverage = leverage;
+            this.CURRENCY_DP = CURRENCY_DP;
+        }
+        get margin() {
+            return new Big(0)
+                .plus(this.cost[LONG])
+                .plus(this.cost[SHORT])
+                .div(this.leverage)
+                .round(this.CURRENCY_DP, 3 /* RoundUp */);
+        }
+        get reserve() {
+            return this.balance
+                .minus(this.margin)
+                .minus(this.frozenMargin);
+        }
+        get closable() {
+            return {
+                [LONG]: this.position[LONG]
+                    .minus(this.frozenPosition[LONG]),
+                [SHORT]: this.position[SHORT]
+                    .minus(this.frozenPosition[SHORT]),
+            };
+        }
+        toJSON() {
             return {
                 balance: this.balance,
                 cost: this.cost,
@@ -59,27 +87,8 @@ export class Assets {
                 reserve: this.reserve,
                 closable: this.closable,
             };
-        };
+        }
     }
-    get margin() {
-        return new Big(0)
-            .plus(this.cost[LONG])
-            .plus(this.cost[SHORT])
-            .div(this.leverage)
-            .round(this.CURRENCY_DP, 3 /* RoundUp */);
-    }
-    get reserve() {
-        return this.balance
-            .minus(this.margin)
-            .minus(this.frozenMargin);
-    }
-    get closable() {
-        return {
-            [LONG]: this.position[LONG]
-                .minus(this.frozenPosition[LONG]),
-            [SHORT]: this.position[SHORT]
-                .minus(this.frozenPosition[SHORT]),
-        };
-    }
-}
+    Assets.AutoAssets = AutoAssets;
+})(Assets || (Assets = {}));
 //# sourceMappingURL=data.js.map

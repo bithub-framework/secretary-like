@@ -13,27 +13,21 @@ export declare const LONG: Length;
 export declare const SHORT: Length;
 export declare type OrderId = number | string;
 export declare type TradeId = number | string;
-export declare namespace LimitOrder {
-    type Computed = 'length';
-    type Static = Omit<LimitOrder, Computed>;
-    type Public = Mutable<LimitOrder>;
-}
-export declare class LimitOrder implements LimitOrder.Static {
-    side: Side;
-    operation: Operation;
+export interface LimitOrder {
     price: Big;
     quantity: Big;
-    constructor(config: LimitOrder.Static);
-    get length(): number;
+    side: Side;
+    length: Length;
+    operation: Operation;
 }
-export declare namespace OpenOrder {
-    type Static = LimitOrder.Static & {
-        id: OrderId;
-    };
+export declare namespace LimitOrder {
+    type Computed = 'length';
+    type Statics = Omit<LimitOrder, Computed>;
+    export function from(statics: Statics): LimitOrder;
+    export {};
 }
-export declare class OpenOrder extends LimitOrder implements OpenOrder.Static {
+export interface OpenOrder extends LimitOrder {
     id: OrderId;
-    constructor(config: OpenOrder.Static);
 }
 export interface Trade {
     side: Side;
@@ -51,16 +45,7 @@ export interface Orderbook {
     [side: number]: MakerOrder[];
     time: number;
 }
-export declare namespace Assets {
-    type Computed = 'margin' | 'reserve' | 'closable';
-    type Private = {
-        leverage: number;
-        CURRENCY_DP: number;
-    };
-    type Static = Omit<Assets, Computed> & Private;
-    type Public = Mutable<Assets>;
-}
-export declare class Assets {
+export interface Assets {
     position: {
         [length: number]: Big;
     };
@@ -72,12 +57,33 @@ export declare class Assets {
     frozenPosition: {
         [length: number]: Big;
     };
-    private leverage;
-    private CURRENCY_DP;
-    constructor(config: Assets.Static);
-    get margin(): Big;
-    get reserve(): Big;
-    get closable(): {
-        [x: number]: Big;
+    margin: Big;
+    reserve: Big;
+    closable: {
+        [length: number]: Big;
     };
+}
+export declare namespace Assets {
+    class AutoAssets implements Assets {
+        position: {
+            [length: number]: Big;
+        };
+        balance: Big;
+        cost: {
+            [length: number]: Big;
+        };
+        frozenMargin: Big;
+        frozenPosition: {
+            [length: number]: Big;
+        };
+        private leverage;
+        private CURRENCY_DP;
+        constructor(initialBalance: Big, leverage: number, CURRENCY_DP: number);
+        get margin(): Big;
+        get reserve(): Big;
+        get closable(): {
+            [x: number]: Big;
+        };
+        toJSON(): Assets;
+    }
 }
