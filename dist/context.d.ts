@@ -5,6 +5,7 @@ export interface ContextLike {
     [marketId: number]: ContextMarketLike;
     sleep: (ms: number) => Promise<void>;
     now: () => number;
+    escape: <T>(v: T) => Promise<T>;
 }
 export interface ContextMarketLike extends ContextMarketPublicApiLike {
     [accountId: number]: ContextAccountLike;
