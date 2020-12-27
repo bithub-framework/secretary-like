@@ -77,6 +77,7 @@ export interface Assets {
     frozenPosition: {
         [length: number]: Big;
     };
+    time: number;
 
     // computed
     margin: Big;
@@ -87,13 +88,6 @@ export interface Assets {
 }
 
 export namespace Assets {
-    // type Computed = 'margin' | 'reserve' | 'closable';
-    // type Privates = {
-    //     leverage: number;
-    //     CURRENCY_DP: number;
-    // };
-    // type Statics = Omit<Assets, Computed> & Privates;
-
     export class AutoAssets implements Assets {
         public position: {
             [length: number]: Big;
@@ -106,25 +100,15 @@ export namespace Assets {
         public frozenPosition: {
             [length: number]: Big;
         };
+        public time: number;
         private leverage: number;
         private CURRENCY_DP: number;
-
-        // constructor(config: Statics) {
-        //     ({
-        //         position: this.position,
-        //         balance: this.balance,
-        //         cost: this.cost,
-        //         frozenMargin: this.frozenMargin,
-        //         frozenPosition: this.frozenPosition,
-        //         leverage: this.leverage,
-        //         CURRENCY_DP: this.CURRENCY_DP,
-        //     } = config);
-        // }
 
         constructor(
             initialBalance: Big,
             leverage: number,
             CURRENCY_DP: number,
+            initialTime: number,
         ) {
             this.balance = initialBalance,
                 this.position = {
@@ -142,6 +126,7 @@ export namespace Assets {
                 };
             this.leverage = leverage;
             this.CURRENCY_DP = CURRENCY_DP;
+            this.time = initialTime;
         }
 
         public get margin(): Big {
@@ -177,6 +162,7 @@ export namespace Assets {
                 frozenPosition: this.frozenPosition,
                 reserve: this.reserve,
                 closable: this.closable,
+                time: this.time,
             }
         }
     }

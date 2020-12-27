@@ -57,6 +57,7 @@ export interface Assets {
     frozenPosition: {
         [length: number]: Big;
     };
+    time: number;
     margin: Big;
     reserve: Big;
     closable: {
@@ -76,9 +77,10 @@ export declare namespace Assets {
         frozenPosition: {
             [length: number]: Big;
         };
+        time: number;
         private leverage;
         private CURRENCY_DP;
-        constructor(initialBalance: Big, leverage: number, CURRENCY_DP: number);
+        constructor(initialBalance: Big, leverage: number, CURRENCY_DP: number, initialTime: number);
         get margin(): Big;
         get reserve(): Big;
         get closable(): {

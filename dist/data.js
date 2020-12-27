@@ -20,25 +20,8 @@ export var LimitOrder;
 })(LimitOrder || (LimitOrder = {}));
 export var Assets;
 (function (Assets) {
-    // type Computed = 'margin' | 'reserve' | 'closable';
-    // type Privates = {
-    //     leverage: number;
-    //     CURRENCY_DP: number;
-    // };
-    // type Statics = Omit<Assets, Computed> & Privates;
     class AutoAssets {
-        // constructor(config: Statics) {
-        //     ({
-        //         position: this.position,
-        //         balance: this.balance,
-        //         cost: this.cost,
-        //         frozenMargin: this.frozenMargin,
-        //         frozenPosition: this.frozenPosition,
-        //         leverage: this.leverage,
-        //         CURRENCY_DP: this.CURRENCY_DP,
-        //     } = config);
-        // }
-        constructor(initialBalance, leverage, CURRENCY_DP) {
+        constructor(initialBalance, leverage, CURRENCY_DP, initialTime) {
             this.balance = initialBalance,
                 this.position = {
                     [LONG]: new Big(0),
@@ -55,6 +38,7 @@ export var Assets;
                 };
             this.leverage = leverage;
             this.CURRENCY_DP = CURRENCY_DP;
+            this.time = initialTime;
         }
         get margin() {
             return new Big(0)
@@ -86,6 +70,7 @@ export var Assets;
                 frozenPosition: this.frozenPosition,
                 reserve: this.reserve,
                 closable: this.closable,
+                time: this.time,
             };
         }
     }
