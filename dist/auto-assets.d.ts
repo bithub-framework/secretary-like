@@ -1,5 +1,6 @@
 import { Assets } from './data';
 import Big from 'big.js';
+declare type InitialAssets = Pick<Assets, 'balance' | 'cost' | 'position' | 'time'>;
 declare class AutoAssets implements Assets {
     position: {
         [length: number]: Big;
@@ -15,7 +16,7 @@ declare class AutoAssets implements Assets {
     time: number;
     private leverage;
     private CURRENCY_DP;
-    constructor(initialAssets: Assets, leverage: number, CURRENCY_DP: number);
+    constructor(initialAssets: InitialAssets, leverage: number, CURRENCY_DP: number);
     get margin(): Big;
     get reserve(): Big;
     get closable(): {
@@ -23,4 +24,4 @@ declare class AutoAssets implements Assets {
     };
     toJSON(): Assets;
 }
-export { AutoAssets as default, AutoAssets, };
+export { AutoAssets as default, AutoAssets, InitialAssets, };

@@ -5,6 +5,8 @@ import {
 import Big from 'big.js';
 import { RoundingMode } from 'big.js';
 
+type InitialAssets = Pick<Assets, 'balance' | 'cost' | 'position' | 'time'>;
+
 class AutoAssets implements Assets {
     public position: {
         [length: number]: Big;
@@ -22,7 +24,7 @@ class AutoAssets implements Assets {
     private CURRENCY_DP: number;
 
     constructor(
-        initialAssets: Assets,
+        initialAssets: InitialAssets,
         leverage: number,
         CURRENCY_DP: number,
     ) {
@@ -82,4 +84,5 @@ class AutoAssets implements Assets {
 export {
     AutoAssets as default,
     AutoAssets,
+    InitialAssets,
 }
