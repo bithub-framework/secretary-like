@@ -226,9 +226,14 @@
         "signature": "2804a1a3251bcbf1484beb259c3bcbcc688c3afd2fce8bb4e417a4cd306fe671",
         "affectsGlobalScope": false
       },
+      "./src/serialization.ts": {
+        "version": "138c3dbf042c5c3b47023e6c85051d7d4fdab05998e8c400af03786b0bf40739",
+        "signature": "a828d2d685410366b83e3b636fadb971c2def2eb6ec590608c408f05e572b7b2",
+        "affectsGlobalScope": false
+      },
       "./src/index.ts": {
-        "version": "bd67529aaa15b57e746e056ad85fc53a654ca43884c1a3b2d174c67fa44ab936",
-        "signature": "bd67529aaa15b57e746e056ad85fc53a654ca43884c1a3b2d174c67fa44ab936",
+        "version": "45972ababd12f0af6b1329444bcecc0cedb7c7831c6b8a1788ebc2ff1babcaa3",
+        "signature": "45972ababd12f0af6b1329444bcecc0cedb7c7831c6b8a1788ebc2ff1babcaa3",
         "affectsGlobalScope": false
       },
       "../../../node_modules/@types/node/globals.d.ts": {
@@ -814,6 +819,10 @@
         "./src/auto-assets.ts",
         "./src/clone.ts",
         "./src/context.ts",
+        "./src/data.ts",
+        "./src/serialization.ts"
+      ],
+      "./src/serialization.ts": [
         "./src/data.ts"
       ]
     },
@@ -1059,6 +1068,10 @@
         "./src/auto-assets.ts",
         "./src/clone.ts",
         "./src/context.ts",
+        "./src/data.ts",
+        "./src/serialization.ts"
+      ],
+      "./src/serialization.ts": [
         "./src/data.ts"
       ]
     },
@@ -1133,6 +1146,7 @@
       "./src/context.ts",
       "./src/data.ts",
       "./src/index.ts",
+      "./src/serialization.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.core.d.ts",
       "../../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.d.ts",
