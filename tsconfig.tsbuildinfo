@@ -212,8 +212,8 @@
         "affectsGlobalScope": false
       },
       "./src/auto-assets.ts": {
-        "version": "264a28d4ab603edb11662f18ecd78e1804e192554a06458b70966fe1cd0ec643",
-        "signature": "5d77b52c3d476555b156232f446619c8f4b9eee5c8231fab6d8a80030c69ee54",
+        "version": "ca843a247e664fc18ba129b117e7581e827bb0c888d4c9486ed8f671543e7ebb",
+        "signature": "44b2bc89571468ea205fd7aa6343f2be28f62b82449cfa4ec94ec927ff8f2614",
         "affectsGlobalScope": false
       },
       "./src/clone.ts": {

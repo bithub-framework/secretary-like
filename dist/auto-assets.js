@@ -1,11 +1,12 @@
 import { LONG, SHORT, } from './data';
 import Big from 'big.js';
 class AutoAssets {
-    constructor(initialAssets, leverage, CURRENCY_DP, initialTime) {
+    constructor(initialAssets, leverage, CURRENCY_DP) {
         ({
             balance: this.balance,
             position: this.position,
             cost: this.cost,
+            time: this.time,
         } = initialAssets);
         this.frozenMargin = new Big(0);
         this.frozenPosition = {
@@ -14,7 +15,6 @@ class AutoAssets {
         };
         this.leverage = leverage;
         this.CURRENCY_DP = CURRENCY_DP;
-        this.time = initialTime;
     }
     get margin() {
         return new Big(0)

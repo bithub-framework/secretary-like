@@ -25,12 +25,12 @@ class AutoAssets implements Assets {
         initialAssets: Assets,
         leverage: number,
         CURRENCY_DP: number,
-        initialTime: number,
     ) {
         ({
             balance: this.balance,
             position: this.position,
             cost: this.cost,
+            time: this.time,
         } = initialAssets);
         this.frozenMargin = new Big(0);
         this.frozenPosition = {
@@ -39,7 +39,6 @@ class AutoAssets implements Assets {
         };
         this.leverage = leverage;
         this.CURRENCY_DP = CURRENCY_DP;
-        this.time = initialTime;
     }
 
     public get margin(): Big {

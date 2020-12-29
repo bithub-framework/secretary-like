@@ -15,7 +15,7 @@ declare class AutoAssets implements Assets {
     time: number;
     private leverage;
     private CURRENCY_DP;
-    constructor(initialAssets: Assets, leverage: number, CURRENCY_DP: number, initialTime: number);
+    constructor(initialAssets: Assets, leverage: number, CURRENCY_DP: number);
     get margin(): Big;
     get reserve(): Big;
     get closable(): {
