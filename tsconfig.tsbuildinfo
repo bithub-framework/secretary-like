@@ -206,14 +206,19 @@
         "signature": "90589e3f3eed0a07917117760dc77abb1c6c672eb7d1d3b4ca76b8cb48f73917",
         "affectsGlobalScope": true
       },
+      "./src/data.ts": {
+        "version": "2246ac5319fa2b1606be93a25c5b2cdae99dc1aeb5eedee76f1951602a5c0fc7",
+        "signature": "e9771f6e530bb919bd782b7a87195ed5bb28f63cffd588dd846c9713ac3afe19",
+        "affectsGlobalScope": false
+      },
+      "./src/auto-assets.ts": {
+        "version": "264a28d4ab603edb11662f18ecd78e1804e192554a06458b70966fe1cd0ec643",
+        "signature": "5d77b52c3d476555b156232f446619c8f4b9eee5c8231fab6d8a80030c69ee54",
+        "affectsGlobalScope": false
+      },
       "./src/clone.ts": {
         "version": "3fc606577c794948ade5acf4acd36de7881069084b13d8388fdfb71794e01bf8",
         "signature": "2b6e6541512a6e071c3e3f927844b30cd149bf519901c629a602aea71a74d7ce",
-        "affectsGlobalScope": false
-      },
-      "./src/data.ts": {
-        "version": "e5318182541dbe71f16e02a52ce8e5295c0bc5fa10123161ebb1fb25ff318341",
-        "signature": "a499aa3b538f70dcf39b8a6499a2f5d6ac239a71cc530d2b6efef807618ca1f9",
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
@@ -222,8 +227,8 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "9aac9da5a883d974c400e3d703e64ea7eda42f08862e476f2d48deb0ee425357",
-        "signature": "9aac9da5a883d974c400e3d703e64ea7eda42f08862e476f2d48deb0ee425357",
+        "version": "bd67529aaa15b57e746e056ad85fc53a654ca43884c1a3b2d174c67fa44ab936",
+        "signature": "bd67529aaa15b57e746e056ad85fc53a654ca43884c1a3b2d174c67fa44ab936",
         "affectsGlobalScope": false
       },
       "../../../node_modules/@types/node/globals.d.ts": {
@@ -791,6 +796,10 @@
         "../../../node_modules/@types/node/http.d.ts",
         "../../../node_modules/@types/node/index.d.ts"
       ],
+      "./src/auto-assets.ts": [
+        "./node_modules/@types/big.js/index.d.ts",
+        "./src/data.ts"
+      ],
       "./src/clone.ts": [
         "./node_modules/@types/big.js/index.d.ts"
       ],
@@ -802,6 +811,7 @@
         "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/index.ts": [
+        "./src/auto-assets.ts",
         "./src/clone.ts",
         "./src/context.ts",
         "./src/data.ts"
@@ -1034,6 +1044,10 @@
         "../../../node_modules/@types/node/http.d.ts",
         "../../../node_modules/@types/node/index.d.ts"
       ],
+      "./src/auto-assets.ts": [
+        "./node_modules/@types/big.js/index.d.ts",
+        "./src/data.ts"
+      ],
       "./src/context.ts": [
         "../../../node_modules/@types/node/events.d.ts",
         "./src/data.ts"
@@ -1042,6 +1056,7 @@
         "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/index.ts": [
+        "./src/auto-assets.ts",
         "./src/clone.ts",
         "./src/context.ts",
         "./src/data.ts"
@@ -1113,6 +1128,7 @@
       "../../../node_modules/@types/range-parser/index.d.ts",
       "../../../node_modules/@types/serve-static/index.d.ts",
       "./node_modules/@types/big.js/index.d.ts",
+      "./src/auto-assets.ts",
       "./src/clone.ts",
       "./src/context.ts",
       "./src/data.ts",
