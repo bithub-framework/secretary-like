@@ -1,16 +1,17 @@
 /// <reference types="node" />
 import { EventEmitter } from 'events';
 import { LimitOrder, OrderId, OpenOrder, Assets, Orderbook, Trade } from './data';
+import { MarketConfig, AccountConfig } from './config';
 export interface ContextLike {
     [marketId: number]: ContextMarketLike;
     sleep: (ms: number) => Promise<void>;
     now: () => number;
     escape: <T>(v: T) => Promise<T>;
 }
-export interface ContextMarketLike extends ContextMarketPublicApiLike {
+export interface ContextMarketLike extends ContextMarketPublicApiLike, MarketConfig {
     [accountId: number]: ContextAccountLike;
 }
-export interface ContextAccountLike extends ContextAccountPrivateApiLike {
+export interface ContextAccountLike extends ContextAccountPrivateApiLike, AccountConfig {
 }
 export interface ContextMarketPublicApiLike extends EventEmitter {
     on(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
