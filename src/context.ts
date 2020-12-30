@@ -15,6 +15,8 @@ import {
 export interface ContextLike {
     [marketId: number]: ContextMarketLike;
     sleep: (ms: number) => Promise<void>;
+    setTimeout: (cb: () => void, ms: number) => any,
+    clearTimeout: (timerId: any) => void,
     now: () => number;
     escape: <T>(v: T) => Promise<T>;
     submitAssets(assets: Assets): Promise<void>;
