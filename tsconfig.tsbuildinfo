@@ -211,6 +211,11 @@
         "signature": "2b6e6541512a6e071c3e3f927844b30cd149bf519901c629a602aea71a74d7ce",
         "affectsGlobalScope": false
       },
+      "./src/config.ts": {
+        "version": "538dff7b2aa6d3bf131bc3ad600bff03bd22392c0f01789f37917d111f165f55",
+        "signature": "922ee130bde6053afca27daac6aa17ce34f107d4678efee0b28d94c0a578c0bf",
+        "affectsGlobalScope": false
+      },
       "./src/data.ts": {
         "version": "8ada949861c91da268c205a6a3fd37013339c5df476c0d5564b848594759962b",
         "signature": "e9771f6e530bb919bd782b7a87195ed5bb28f63cffd588dd846c9713ac3afe19",
@@ -227,8 +232,8 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "4c9c0015a9b037901cbfd1bcaf46496fadc0ead2e62a4524a8e9c7bbacbc7634",
-        "signature": "4c9c0015a9b037901cbfd1bcaf46496fadc0ead2e62a4524a8e9c7bbacbc7634",
+        "version": "c6957ed8477a5de5fdce474c21370b9f88675980aec27f219261a4f398572180",
+        "signature": "c6957ed8477a5de5fdce474c21370b9f88675980aec27f219261a4f398572180",
         "affectsGlobalScope": false
       },
       "../../../node_modules/@types/node/globals.d.ts": {
@@ -799,6 +804,9 @@
       "./src/clone.ts": [
         "./node_modules/@types/big.js/index.d.ts"
       ],
+      "./src/config.ts": [
+        "./node_modules/@types/big.js/index.d.ts"
+      ],
       "./src/context.ts": [
         "../../../node_modules/@types/node/events.d.ts",
         "./src/data.ts"
@@ -808,6 +816,7 @@
       ],
       "./src/index.ts": [
         "./src/clone.ts",
+        "./src/config.ts",
         "./src/context.ts",
         "./src/data.ts",
         "./src/serialization.ts"
@@ -1044,6 +1053,9 @@
         "../../../node_modules/@types/node/http.d.ts",
         "../../../node_modules/@types/node/index.d.ts"
       ],
+      "./src/config.ts": [
+        "./node_modules/@types/big.js/index.d.ts"
+      ],
       "./src/context.ts": [
         "../../../node_modules/@types/node/events.d.ts",
         "./src/data.ts"
@@ -1053,6 +1065,7 @@
       ],
       "./src/index.ts": [
         "./src/clone.ts",
+        "./src/config.ts",
         "./src/context.ts",
         "./src/data.ts",
         "./src/serialization.ts"
@@ -1129,6 +1142,7 @@
       "../../../node_modules/@types/serve-static/index.d.ts",
       "./node_modules/@types/big.js/index.d.ts",
       "./src/clone.ts",
+      "./src/config.ts",
       "./src/context.ts",
       "./src/data.ts",
       "./src/index.ts",
