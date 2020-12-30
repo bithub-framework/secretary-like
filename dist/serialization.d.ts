@@ -1,42 +1,6 @@
 import { Assets } from './data';
-export declare type UnknownTypedAssets = {
-    [K in keyof Assets]: unknown;
+import Big from 'big.js';
+export declare type ConvertPropertyTypeRecursively<Object, Original, Type> = {
+    [K in keyof Object]: Object[K] extends Original ? Type : (Object[K] extends {} ? ConvertPropertyTypeRecursively<Object[K], Original, Type> : Object[K]);
 };
-export interface StringifiedAssets extends UnknownTypedAssets {
-    position: {
-        [length: number]: string;
-    };
-    balance: string;
-    cost: {
-        [length: number]: string;
-    };
-    frozenMargin: string;
-    frozenPosition: {
-        [length: number]: string;
-    };
-    margin: string;
-    reserve: string;
-    closable: {
-        [length: number]: string;
-    };
-    time: number;
-}
-export interface NumberizedAssets extends UnknownTypedAssets {
-    position: {
-        [length: number]: number;
-    };
-    balance: number;
-    cost: {
-        [length: number]: number;
-    };
-    frozenMargin: number;
-    frozenPosition: {
-        [length: number]: number;
-    };
-    margin: number;
-    reserve: number;
-    closable: {
-        [length: number]: number;
-    };
-    time: number;
-}
+export declare type StringifiedAssets = ConvertPropertyTypeRecursively<Assets, Big, string>;

@@ -222,8 +222,8 @@
         "affectsGlobalScope": false
       },
       "./src/serialization.ts": {
-        "version": "138c3dbf042c5c3b47023e6c85051d7d4fdab05998e8c400af03786b0bf40739",
-        "signature": "a828d2d685410366b83e3b636fadb971c2def2eb6ec590608c408f05e572b7b2",
+        "version": "e402190f130c107b294deb15ad4bcbcca6abd7f9880df59530ba61cdcc77e2b4",
+        "signature": "e5b01ffb793e947ae5e3bb993292a8e3d8d31daac3dd6a1bc3041aa54f8d236d",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -813,6 +813,7 @@
         "./src/serialization.ts"
       ],
       "./src/serialization.ts": [
+        "./node_modules/@types/big.js/index.d.ts",
         "./src/data.ts"
       ]
     },
@@ -1057,6 +1058,7 @@
         "./src/serialization.ts"
       ],
       "./src/serialization.ts": [
+        "./node_modules/@types/big.js/index.d.ts",
         "./src/data.ts"
       ]
     },
