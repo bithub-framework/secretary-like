@@ -22,9 +22,4 @@ export interface MarketConfig {
         price: Big,
         dollarVolume: Big,
     ) => Big,
-    calcMargin: (
-        price: Big,
-        assets: Assets,
-        settlementPrice: Big,
-    ) => Big,
 }

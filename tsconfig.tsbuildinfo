@@ -217,8 +217,8 @@
         "affectsGlobalScope": false
       },
       "./src/config.ts": {
-        "version": "b83d0400bb71e730ad01400be8643ce43f4794d9167a3fe20841ae36ec9314a0",
-        "signature": "fda4ac191f27832a320f61ffea19fbb77556a58b28de7a956ba050b99aa92fdc",
+        "version": "d8ea3a24d004ef5863461994722fc7f44e79eb15bd4605120151c3ef5c557cd7",
+        "signature": "d62edc18ff835d1784d5fe218fc5ff99e9d0e5b84f454c7dbf807c7884366388",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/events/index.d.ts": {
@@ -289,8 +289,7 @@
     },
     "exportedModulesMap": {
       "./src/config.ts": [
-        "./node_modules/@types/big.js/index.d.ts",
-        "./src/data.ts"
+        "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/context.ts": [
         "./node_modules/@types/events/index.d.ts",
