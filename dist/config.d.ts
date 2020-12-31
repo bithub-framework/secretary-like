@@ -1,4 +1,5 @@
 import Big from 'big.js';
+import { Assets } from './data';
 export interface AccountConfig {
     leverage: number;
     MAKER_FEE_RATE: number;
@@ -10,4 +11,5 @@ export interface MarketConfig {
     CURRENCY_DP: number;
     calcDollarVolume: (price: Big, quantity: Big) => Big;
     calcQuantity: (price: Big, dollarVolume: Big) => Big;
+    calcMargin: (price: Big, assets: Assets, settlementPrice: Big) => Big;
 }

@@ -1,4 +1,7 @@
 import Big from 'big.js';
+import {
+    Assets,
+} from './data';
 
 export interface AccountConfig {
     leverage: number;
@@ -18,5 +21,10 @@ export interface MarketConfig {
     calcQuantity: (
         price: Big,
         dollarVolume: Big,
+    ) => Big,
+    calcMargin: (
+        price: Big,
+        assets: Assets,
+        settlementPrice: Big,
     ) => Big,
 }

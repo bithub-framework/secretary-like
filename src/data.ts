@@ -65,23 +65,13 @@ export interface Orderbook {
 }
 
 export interface Assets {
+    balance: Big;
     position: {
         [length: number]: Big;
     };
-    balance: Big;
-    cost: {
-        [length: number]: Big;
-    };
-    frozenMargin: Big;
-    frozenPosition: {
-        [length: number]: Big;
-    };
-    time: number;
-
-    // computed
-    margin: Big;
     reserve: Big;
     closable: {
         [length: number]: Big;
     };
+    time: number;
 }
