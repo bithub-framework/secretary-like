@@ -15,4 +15,8 @@ export interface MarketConfig {
         price: Big,
         quantity: Big,
     ) => Big,
+    calcQuantity: (
+        price: Big,
+        dollarVolume: Big,
+    ) => Big,
 }

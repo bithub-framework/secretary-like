@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { EventEmitter } from 'events';
 import { LimitOrder, OrderId, OpenOrder, Assets, Orderbook, Trade } from './data';
 import { MarketConfig, AccountConfig } from './config';

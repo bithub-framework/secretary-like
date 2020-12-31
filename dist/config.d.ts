@@ -9,4 +9,5 @@ export interface MarketConfig {
     QUANTITY_DP: number;
     CURRENCY_DP: number;
     calcDollarVolume: (price: Big, quantity: Big) => Big;
+    calcQuantity: (price: Big, dollarVolume: Big) => Big;
 }
