@@ -211,19 +211,19 @@
         "signature": "2b6e6541512a6e071c3e3f927844b30cd149bf519901c629a602aea71a74d7ce",
         "affectsGlobalScope": false
       },
-      "./src/data.ts": {
-        "version": "ee895941b35780aea8b735277b392890229e36b4f53a37e7a6d7b3f7a1ae9a28",
-        "signature": "7e9d52832f8bc89e007fbbad0e0101fb9d2150d625046549cb1e86f5cb02c692",
-        "affectsGlobalScope": false
-      },
       "./src/config.ts": {
-        "version": "d8ea3a24d004ef5863461994722fc7f44e79eb15bd4605120151c3ef5c557cd7",
+        "version": "2368bc9e9c22db50f32f65bc120bef11dbd6cb761f530e1e26dfd5c709f254d7",
         "signature": "d62edc18ff835d1784d5fe218fc5ff99e9d0e5b84f454c7dbf807c7884366388",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/events/index.d.ts": {
         "version": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935",
         "signature": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935",
+        "affectsGlobalScope": false
+      },
+      "./src/data.ts": {
+        "version": "ee895941b35780aea8b735277b392890229e36b4f53a37e7a6d7b3f7a1ae9a28",
+        "signature": "7e9d52832f8bc89e007fbbad0e0101fb9d2150d625046549cb1e86f5cb02c692",
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
@@ -264,8 +264,7 @@
         "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/config.ts": [
-        "./node_modules/@types/big.js/index.d.ts",
-        "./src/data.ts"
+        "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/context.ts": [
         "./node_modules/@types/events/index.d.ts",

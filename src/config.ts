@@ -1,7 +1,4 @@
 import Big from 'big.js';
-import {
-    Assets,
-} from './data';
 
 export interface AccountConfig {
     leverage: number;
