@@ -206,14 +206,9 @@
         "signature": "90589e3f3eed0a07917117760dc77abb1c6c672eb7d1d3b4ca76b8cb48f73917",
         "affectsGlobalScope": true
       },
-      "./src/clone.ts": {
-        "version": "3fc606577c794948ade5acf4acd36de7881069084b13d8388fdfb71794e01bf8",
-        "signature": "2b6e6541512a6e071c3e3f927844b30cd149bf519901c629a602aea71a74d7ce",
-        "affectsGlobalScope": false
-      },
       "./src/config.ts": {
-        "version": "2368bc9e9c22db50f32f65bc120bef11dbd6cb761f530e1e26dfd5c709f254d7",
-        "signature": "d62edc18ff835d1784d5fe218fc5ff99e9d0e5b84f454c7dbf807c7884366388",
+        "version": "849bd319a9faba2b0f9b3b58e141de7f90c8d66c8f429e70a11b35b6569fa9b3",
+        "signature": "f2955985f72eff1e1e5954ef116176d9db3a6f1668fd2f31addcde3cb5132bde",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/events/index.d.ts": {
@@ -232,13 +227,13 @@
         "affectsGlobalScope": false
       },
       "./src/serialization.ts": {
-        "version": "e402190f130c107b294deb15ad4bcbcca6abd7f9880df59530ba61cdcc77e2b4",
-        "signature": "e5b01ffb793e947ae5e3bb993292a8e3d8d31daac3dd6a1bc3041aa54f8d236d",
+        "version": "117b0f2d1253eba32c4adcf042e9ee491be2f633a6deac7f49edc3f8a5b22dab",
+        "signature": "9010779de5f4beba2f4fadfa9e5f8b346e6be70a741d4d432d2a206cfe9c0fa0",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "c6957ed8477a5de5fdce474c21370b9f88675980aec27f219261a4f398572180",
-        "signature": "c6957ed8477a5de5fdce474c21370b9f88675980aec27f219261a4f398572180",
+        "version": "4062b915bfff3de063bfd9f32d450872d644cc071f40f615b87bdf54a8687542",
+        "signature": "4062b915bfff3de063bfd9f32d450872d644cc071f40f615b87bdf54a8687542",
         "affectsGlobalScope": false
       }
     },
@@ -260,9 +255,6 @@
       "configFilePath": "./tsconfig.json"
     },
     "referencedMap": {
-      "./src/clone.ts": [
-        "./node_modules/@types/big.js/index.d.ts"
-      ],
       "./src/config.ts": [
         "./node_modules/@types/big.js/index.d.ts"
       ],
@@ -275,7 +267,6 @@
         "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/index.ts": [
-        "./src/clone.ts",
         "./src/config.ts",
         "./src/context.ts",
         "./src/data.ts",
@@ -299,7 +290,6 @@
         "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/index.ts": [
-        "./src/clone.ts",
         "./src/config.ts",
         "./src/context.ts",
         "./src/data.ts",
@@ -313,7 +303,6 @@
     "semanticDiagnosticsPerFile": [
       "./node_modules/@types/big.js/index.d.ts",
       "./node_modules/@types/events/index.d.ts",
-      "./src/clone.ts",
       "./src/config.ts",
       "./src/context.ts",
       "./src/data.ts",

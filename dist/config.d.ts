@@ -8,6 +8,5 @@ export interface MarketConfig {
     PRICE_DP: number;
     QUANTITY_DP: number;
     CURRENCY_DP: number;
-    calcDollarVolume: (price: Big, quantity: Big) => Big;
-    calcQuantity: (price: Big, dollarVolume: Big) => Big;
+    MINIMUM_PRICE_INC: Big;
 }
