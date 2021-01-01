@@ -1,9 +1,5 @@
 import Big from 'big.js';
 
-export type Mutable<T> = {
-    -readonly [P in keyof T]: T[P];
-};
-
 export type Side = number;
 export const BID: Side = 1;
 export const ASK: Side = -1;
@@ -27,20 +23,6 @@ export interface LimitOrder {
     operation: Operation;
 }
 
-export namespace LimitOrder {
-    type Computed = 'side';
-    type Statics = Omit<LimitOrder, Computed>;
-    export function from(statics: Statics): LimitOrder {
-        return {
-            side: statics.length * statics.operation,
-            operation: statics.operation,
-            length: statics.length,
-            price: statics.price,
-            quantity: statics.quantity,
-        }
-    }
-}
-
 export interface OpenOrder extends LimitOrder {
     id: OrderId;
 }
@@ -53,14 +35,14 @@ export interface Trade {
     id: TradeId;
 }
 
-export interface MakerOrder {
+export interface BookOrder {
     price: Big;
     quantity: Big;
     side: Side,
 }
 
 export interface Orderbook {
-    [side: number]: MakerOrder[],
+    [side: number]: BookOrder[],
     time: number;
 }
 

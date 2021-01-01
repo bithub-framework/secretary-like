@@ -1,7 +1,4 @@
 import Big from 'big.js';
-export declare type Mutable<T> = {
-    -readonly [P in keyof T]: T[P];
-};
 export declare type Side = number;
 export declare const BID: Side;
 export declare const ASK: Side;
@@ -20,12 +17,6 @@ export interface LimitOrder {
     length: Length;
     operation: Operation;
 }
-export declare namespace LimitOrder {
-    type Computed = 'side';
-    type Statics = Omit<LimitOrder, Computed>;
-    export function from(statics: Statics): LimitOrder;
-    export {};
-}
 export interface OpenOrder extends LimitOrder {
     id: OrderId;
 }
@@ -36,13 +27,13 @@ export interface Trade {
     time: number;
     id: TradeId;
 }
-export interface MakerOrder {
+export interface BookOrder {
     price: Big;
     quantity: Big;
     side: Side;
 }
 export interface Orderbook {
-    [side: number]: MakerOrder[];
+    [side: number]: BookOrder[];
     time: number;
 }
 export interface Assets {
