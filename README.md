@@ -43,6 +43,18 @@
 
 `./src/config.ts` 中定义了市场与账户的配置。
 
+- `calcDollarVolume`
+
+    已知订单价格和数量计算成交额的函数。例如 underlying assets 为 100 USD 的 BTC 币本位合约，这个函数可以这么定义
+
+    ```ts
+    function calcDollarVolume(price: Big, quantity: Big): Big {
+        return quantity.times(100).div(price);
+    }
+    ```
+
+- `calcQuantity` 是 `calcDollarVolume` 的反函数，已知价格和成交额计算数量。
+
 ## Context
 
 `./src/context.ts` 中定义了与 [SecretaryJS](https://github.com/bithub-framework/secretary-js) 中的上下文对象有关的接口。
