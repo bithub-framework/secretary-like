@@ -21,11 +21,10 @@ export interface LimitOrder {
     side: Side;
     length: Length;
     operation: Operation;
-}
-
-export interface OpenOrder extends LimitOrder {
     id: OrderId;
 }
+
+export interface OpenOrder extends LimitOrder { }
 
 export interface Trade {
     side: Side;
