@@ -49,7 +49,7 @@ export interface ContextAccountPrivateApiLike {
     cancelOrder(orderId: OrderId): Promise<OpenOrder | null>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    amendLimitOrder(order: LimitOrder): Promise<void>;
+    amendLimitOrder(oid: OrderId, order: LimitOrder): Promise<void>;
 
     on(event: 'positions', listener: (positions: Positions) => void): this;
     on(event: 'balances', listener: (balances: Balances) => void): this;
