@@ -13,6 +13,7 @@ export declare type TradeId = number | string;
 export interface LimitOrder {
     price: Big;
     quantity: Big;
+    filled: Big;
     side: Side;
     length: Length;
     operation: Operation;
@@ -36,14 +37,19 @@ export interface Orderbook {
     [side: number]: BookOrder[];
     time: number;
 }
-export interface Assets {
-    balance: Big;
+export interface Positions {
     position: {
         [length: number]: Big;
     };
-    reserve: Big;
     closable: {
         [length: number]: Big;
     };
     time: number;
+}
+export interface Balances {
+    balance: Big;
+    reserve: Big;
+    time: number;
+}
+export interface Assets extends Positions, Balances {
 }

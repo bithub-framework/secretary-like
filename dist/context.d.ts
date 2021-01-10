@@ -1,5 +1,6 @@
+/// <reference types="node" />
 import { EventEmitter } from 'events';
-import { LimitOrder, OrderId, OpenOrder, Assets, Orderbook, Trade } from './data';
+import { LimitOrder, OrderId, OpenOrder, Assets, Orderbook, Trade, Positions, Balances } from './data';
 import { MarketConfig, AccountConfig } from './config';
 export interface ContextLike {
     [marketId: number]: ContextMarketLike;
@@ -26,6 +27,13 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
 export interface ContextAccountPrivateApiLike {
     makeLimitOrder(order: LimitOrder): Promise<OrderId>;
     getOpenOrders(): Promise<OpenOrder[]>;
-    cancelOrder(orderId: OrderId): Promise<void>;
-    getAssets(): Promise<Assets>;
+    cancelOrder(orderId: OrderId): Promise<OpenOrder>;
+    getPositions(): Promise<Positions>;
+    getBalances(): Promise<Balances>;
+    on(event: 'positions', listener: (positions: Positions) => void): this;
+    on(event: 'balances', listener: (balances: Balances) => void): this;
+    off(event: 'positions', listener: (positions: Positions) => void): this;
+    off(event: 'balances', listener: (balances: Balances) => void): this;
+    once(event: 'positions', listener: (positions: Positions) => void): this;
+    once(event: 'balances', listener: (balances: Balances) => void): this;
 }

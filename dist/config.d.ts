@@ -1,8 +1,9 @@
 import Big from 'big.js';
 export interface AccountConfig {
-    leverage: number;
+    LEVERAGE: number;
     MAKER_FEE_RATE: number;
     TAKER_FEE_RATE: number;
+    UNIDIRECTIONAL: boolean;
 }
 export interface MarketConfig {
     PRICE_DP: number;
