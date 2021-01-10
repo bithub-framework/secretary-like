@@ -18,7 +18,6 @@ export type TradeId = number | string;
 export interface LimitOrder {
     price: Big;
     quantity: Big;
-    originalQuantity: Big;
     side: Side;
     length: Length;
     operation: Operation;

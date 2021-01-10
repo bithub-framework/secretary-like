@@ -212,13 +212,13 @@
         "affectsGlobalScope": false
       },
       "./src/data.ts": {
-        "version": "030b3d9711ee622d38ceaefe6869a93242614f13bed1c9367793e82e275aee65",
-        "signature": "beb4672eb17d0600ebcef162676af0de4b816d1b6cdfc43f198b86369bcb5b61",
+        "version": "509d712c393c7ce15175331bcb0c416b7a62b26840213779fed544a47b9a0950",
+        "signature": "1e3ba52fbc573d63810364620150f684b623ab66012f7f8145b1db6df70f7f8b",
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
-        "version": "097394fa596c6111bca37f03f8a7a555b24c3fed06959f4e1b7953f2e8a3e066",
-        "signature": "74249ce7204559e07d0be16771126ce08e1cb4e44e3ad9395f9a982e09c2d797",
+        "version": "b6b621ab6ac0089b96b4fa979f36cdc2e01625e6b7a8dc61a8655123702434dc",
+        "signature": "192060bec0c74e71c079491313d2731d032c27520af6d6b6d7f4c2e45b0f0fb6",
         "affectsGlobalScope": false
       },
       "./src/serialization.ts": {
