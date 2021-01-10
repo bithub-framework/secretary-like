@@ -43,7 +43,7 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
     once(event: 'trades', listener: (trades: Trade[]) => void): this;
 }
 
-export interface ContextAccountPrivateApiLike {
+export interface ContextAccountPrivateApiLike extends EventEmitter {
     makeLimitOrder(order: LimitOrder): Promise<OrderId>;
     getOpenOrders(): Promise<OpenOrder[]>;
     cancelOrder(orderId: OrderId): Promise<OpenOrder | null>;
