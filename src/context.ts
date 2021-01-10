@@ -49,7 +49,9 @@ export interface ContextAccountPrivateApiLike {
     cancelOrder(orderId: OrderId): Promise<OpenOrder | null>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    remakeLimitOrder(oid: OrderId, order: Pick<LimitOrder, 'price' | 'quantity'>): Promise<void>;
+    remakeLimitOrder(
+        oid: OrderId, order: Pick<LimitOrder, 'price' | 'quantity'>
+    ): Promise<OrderId>;
 
     on(event: 'positions', listener: (positions: Positions) => void): this;
     on(event: 'balances', listener: (balances: Balances) => void): this;
