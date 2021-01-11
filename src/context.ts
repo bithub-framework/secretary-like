@@ -45,12 +45,12 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
 }
 
 export interface ContextAccountPrivateApiLike extends EventEmitter {
-    makeLimitOrders(orders: LimitOrder[]): Promise<void>;
+    makeLimitOrders(orders: LimitOrder[]): Promise<Big>;
     getOpenOrders(): Promise<OpenOrder[]>;
     cancelOrders(orderIds: OrderId[]): Promise<(Big | null)[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    remakeLimitOrders(orders: LimitOrder[]): Promise<(Big | null)[]>;
+    remakeLimitOrders(orders: LimitOrder[]): Promise<[Big | null, Big][]>;
 
     on(event: 'positions', listener: (positions: Positions) => void): this;
     on(event: 'balances', listener: (balances: Balances) => void): this;
