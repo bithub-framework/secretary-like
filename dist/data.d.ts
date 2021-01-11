@@ -21,7 +21,7 @@ export interface LimitOrder {
 export interface OpenOrder extends LimitOrder {
     filled: Big;
 }
-export interface OpenMaker extends LimitOrder {
+export interface OpenMaker extends OpenOrder {
     behind: Big;
 }
 export interface Trade {
