@@ -13,6 +13,7 @@ import {
     MarketConfig,
     AccountConfig,
 } from './config';
+import Big from 'big.js';
 
 export interface ContextLike {
     [marketId: number]: ContextMarketLike;
@@ -44,12 +45,12 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
 }
 
 export interface ContextAccountPrivateApiLike extends EventEmitter {
-    makeLimitOrder(order: LimitOrder): Promise<OrderId>;
+    makeLimitOrders(orders: LimitOrder[]): Promise<void>;
     getOpenOrders(): Promise<OpenOrder[]>;
-    cancelOrder(orderId: OrderId): Promise<OpenOrder | null>;
+    cancelOrders(orderIds: OrderId[]): Promise<(Big | null)[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    remakeLimitOrder(oid: OrderId, order: LimitOrder): Promise<OrderId>;
+    remakeLimitOrders(orders: LimitOrder[]): Promise<(Big | null)[]>;
 
     on(event: 'positions', listener: (positions: Positions) => void): this;
     on(event: 'balances', listener: (balances: Balances) => void): this;

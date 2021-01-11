@@ -2,6 +2,7 @@
 import { EventEmitter } from 'events';
 import { LimitOrder, OrderId, OpenOrder, Assets, Orderbook, Trade, Positions, Balances } from './data';
 import { MarketConfig, AccountConfig } from './config';
+import Big from 'big.js';
 export interface ContextLike {
     [marketId: number]: ContextMarketLike;
     sleep: (ms: number) => Promise<void>;
@@ -25,12 +26,12 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
     once(event: 'trades', listener: (trades: Trade[]) => void): this;
 }
 export interface ContextAccountPrivateApiLike extends EventEmitter {
-    makeLimitOrder(order: LimitOrder): Promise<OrderId>;
+    makeLimitOrders(orders: LimitOrder[]): Promise<void>;
     getOpenOrders(): Promise<OpenOrder[]>;
-    cancelOrder(orderId: OrderId): Promise<OpenOrder | null>;
+    cancelOrders(orderIds: OrderId[]): Promise<(Big | null)[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    remakeLimitOrder(oid: OrderId, order: LimitOrder): Promise<OrderId>;
+    remakeLimitOrders(orders: LimitOrder[]): Promise<(Big | null)[]>;
     on(event: 'positions', listener: (positions: Positions) => void): this;
     on(event: 'balances', listener: (balances: Balances) => void): this;
     off(event: 'positions', listener: (positions: Positions) => void): this;
