@@ -28,6 +28,10 @@ export interface OpenOrder extends LimitOrder {
     filled: Big;
 }
 
+export interface OpenMaker extends LimitOrder {
+    behind: Big;
+}
+
 export interface Trade {
     side: Side;
     price: Big;
