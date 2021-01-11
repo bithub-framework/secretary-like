@@ -24,7 +24,9 @@ export interface LimitOrder {
     id: OrderId;
 }
 
-export interface OpenOrder extends LimitOrder { }
+export interface OpenOrder extends LimitOrder {
+    filled: Big;
+}
 
 export interface Trade {
     side: Side;
