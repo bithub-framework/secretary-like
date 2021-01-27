@@ -5,4 +5,4 @@ export declare function clone<T>(x: T): T;
 export declare type ConvertPropertyTypeRecursively<Object, Original, Type> = {
     [K in keyof Object]: Object[K] extends Original ? Type : (Object[K] extends {} ? ConvertPropertyTypeRecursively<Object[K], Original, Type> : Object[K]);
 };
-export declare type StringifiedAssets = ConvertPropertyTypeRecursively<Assets, Big, string>;
+export declare type Big2StringAssets = ConvertPropertyTypeRecursively<Assets, Big, string>;

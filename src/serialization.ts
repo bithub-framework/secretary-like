@@ -21,4 +21,4 @@ export type ConvertPropertyTypeRecursively<Object, Original, Type> = {
         : Object[K]);
 };
 
-export type StringifiedAssets = ConvertPropertyTypeRecursively<Assets, Big, string>;
+export type Big2StringAssets = ConvertPropertyTypeRecursively<Assets, Big, string>;
