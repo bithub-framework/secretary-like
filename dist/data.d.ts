@@ -22,13 +22,9 @@ export interface OpenOrder extends LimitOrder {
     unfilled: Big;
     id: OrderId;
 }
-export interface LimitOrderCancellation {
-    id: OrderId;
-    originalQuantity: Big;
-}
-export interface LimitOrderAmendment extends LimitOrderCancellation {
-    price: Big;
-    unfilled: Big;
+export interface LimitOrderAmendment extends OpenOrder {
+    newUnfilled: Big;
+    newPrice: Big;
 }
 export interface OpenMaker extends OpenOrder {
     behind: Big;

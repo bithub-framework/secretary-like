@@ -2,13 +2,11 @@ import { EventEmitter } from 'events';
 import {
     LimitOrder,
     OpenOrder,
-    OrderId,
     Orderbook,
     Trade,
     Positions,
     Balances,
     LimitOrderAmendment,
-    LimitOrderCancellation,
 } from './data';
 import {
     MarketConfig,
@@ -49,10 +47,10 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
 }
 
 export interface ContextAccountPrivateApiLike extends EventEmitter {
-    makeLimitOrders(orders: LimitOrder[]): Promise<OrderId[]>;
+    makeLimitOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
     /** @returns Filled quantities */
-    cancelOrders(cancellations: LimitOrderCancellation[]): Promise<Big[]>;
+    cancelOrders(orders: OpenOrder[]): Promise<OpenOrder[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
     /** 

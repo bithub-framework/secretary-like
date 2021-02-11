@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { EventEmitter } from 'events';
-import { LimitOrder, OpenOrder, OrderId, Orderbook, Trade, Positions, Balances, LimitOrderAmendment, LimitOrderCancellation } from './data';
+import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, LimitOrderAmendment } from './data';
 import { MarketConfig, AccountConfig } from './config';
 import Big from 'big.js';
 export interface ContextLike {
@@ -29,10 +29,10 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
     emit(event: 'trades', trades: Trade[]): boolean;
 }
 export interface ContextAccountPrivateApiLike extends EventEmitter {
-    makeLimitOrders(orders: LimitOrder[]): Promise<OrderId[]>;
+    makeLimitOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
     /** @returns Filled quantities */
-    cancelOrders(cancellations: LimitOrderCancellation[]): Promise<Big[]>;
+    cancelOrders(orders: OpenOrder[]): Promise<OpenOrder[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
     /**
