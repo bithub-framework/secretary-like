@@ -8,6 +8,7 @@ import {
     Positions,
     Balances,
     LimitOrderAmendment,
+    LimitOrderCancellation,
 } from './data';
 import {
     MarketConfig,
@@ -51,11 +52,11 @@ export interface ContextAccountPrivateApiLike extends EventEmitter {
     makeLimitOrders(orders: LimitOrder[]): Promise<OrderId[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
     /** @returns Filled quantities */
-    cancelOrders(orders: LimitOrder[]): Promise<Big[]>;
+    cancelOrders(cancellations: LimitOrderCancellation[]): Promise<Big[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
     /** 
-     * @returns Filled quantities immediately after amendments.
+     * @returns Filled quantities
      * It's not sure whether they include quantities the new orders took.
      */
     amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<Big[]>;
