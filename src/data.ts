@@ -15,25 +15,19 @@ export const SHORT: Length = -1;
 export type TradeId = number | string;
 export type OrderId = number | string;
 
-export interface LimitOrderAmendment {
-    price: Big;
-    side: Side;
-    length: Length;
-    operation: Operation;
-    unfilled: Big;
-    id: OrderId;
-}
-
 export interface LimitOrder {
     price: Big;
-    quantity: Big;
+    quantity: Big; // unfilled
     side: Side;
     length: Length;
     operation: Operation;
 }
 
 export interface OpenOrder extends LimitOrder {
-    unfilled: Big;
+    id: OrderId;
+}
+
+export interface LimitOrderAmendment extends LimitOrder {
     id: OrderId;
 }
 
