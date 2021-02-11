@@ -17,6 +17,9 @@ export type OrderId = number | string;
 
 export interface LimitOrderAmendment {
     price: Big;
+    side: Side;
+    length: Length;
+    operation: Operation;
     unfilled: Big;
     id: OrderId;
 }
