@@ -51,7 +51,7 @@ export interface ContextAccountPrivateApiLike extends EventEmitter {
     makeLimitOrders(orders: LimitOrder[]): Promise<OrderId[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
     /** @returns Filled quantities */
-    cancelOrders(openOrders: OpenOrder[]): Promise<Big[]>;
+    cancelOrders(orders: LimitOrder[]): Promise<Big[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
     /** 
