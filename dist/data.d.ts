@@ -18,9 +18,16 @@ export interface LimitOrder {
     operation: Operation;
 }
 export interface OpenOrder extends LimitOrder {
+    filled: Big;
+    unfilled: Big;
     id: OrderId;
 }
 export interface LimitOrderAmendment extends LimitOrder {
+    price: Big;
+    unfilled: Big;
+    side: Side;
+    length: Length;
+    operation: Operation;
     id: OrderId;
 }
 export interface OpenMaker extends OpenOrder {

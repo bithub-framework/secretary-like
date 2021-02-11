@@ -21,10 +21,8 @@ export interface ContextLike {
     setTimeout: (cb: () => void, ms: number) => any,
     clearTimeout: (timerId: any) => void,
     now: () => number;
-    escape: <T>(v: Promise<T>) => Promise<T>;
-    /**
-     * @param value Serializable into JSON
-     */
+    escape: <T>(promise: Promise<T>) => Promise<T>;
+    /** @param value Serializable into JSON */
     submit(key: string, value: unknown): Promise<void>;
 }
 
@@ -45,19 +43,20 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
     off(event: 'trades', listener: (trades: Trade[]) => void): this;
     once(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
     once(event: 'trades', listener: (trades: Trade[]) => void): this;
+    emit(event: 'orderbook', orderbook: Orderbook): boolean;
+    emit(event: 'trades', trades: Trade[]): boolean;
 }
 
 export interface ContextAccountPrivateApiLike extends EventEmitter {
     makeLimitOrders(orders: LimitOrder[]): Promise<OrderId[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
-    /**
-     * @returns Unfilled quantity
-     */
-    cancelOrders(orderIds: OrderId[]): Promise<Big[]>;
+    /** @returns Filled quantities */
+    cancelOrders(openOrders: OpenOrder[]): Promise<Big[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    /**
-     * @returns Unfilled quantities before amendments
+    /** 
+     * @returns Filled quantities immediately after amendments.
+     * It's not sure whether they include quantities the new orders took.
      */
     amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<Big[]>;
 
@@ -67,4 +66,6 @@ export interface ContextAccountPrivateApiLike extends EventEmitter {
     off(event: 'balances', listener: (balances: Balances) => void): this;
     once(event: 'positions', listener: (positions: Positions) => void): this;
     once(event: 'balances', listener: (balances: Balances) => void): this;
+    emit(event: 'positions', positions: Positions): boolean;
+    emit(event: 'balances', balances: Balances): boolean;
 }

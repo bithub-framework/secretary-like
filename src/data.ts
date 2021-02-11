@@ -17,17 +17,24 @@ export type OrderId = number | string;
 
 export interface LimitOrder {
     price: Big;
-    quantity: Big; // unfilled
+    quantity: Big;
     side: Side;
     length: Length;
     operation: Operation;
 }
 
 export interface OpenOrder extends LimitOrder {
+    filled: Big;
+    unfilled: Big;
     id: OrderId;
 }
 
 export interface LimitOrderAmendment extends LimitOrder {
+    price: Big;
+    unfilled: Big;
+    side: Side;
+    length: Length;
+    operation: Operation;
     id: OrderId;
 }
 
