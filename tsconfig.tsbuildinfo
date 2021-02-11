@@ -217,8 +217,8 @@
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
-        "version": "1d97f979b027283463b5049bfd486968d51c8440a8e4b06ae8220378d9650e4d",
-        "signature": "77b45f32c084d64f5efe1e6c0226b6388b276790749d0cead2dd09c6d80bb782",
+        "version": "e2fbb424d2f6dafeb1e92c70e1de82013000e92f88ffeb18630d386dfdf244c6",
+        "signature": "e9d6c28084c918d9a42147ddc328d4d68db1fa443a4889a42827fe037ea1c73a",
         "affectsGlobalScope": false
       },
       "./src/serialization.ts": {
@@ -846,6 +846,7 @@
         "./node_modules/@types/big.js/index.d.ts"
       ],
       "./src/context.ts": [
+        "./node_modules/@types/big.js/index.d.ts",
         "./node_modules/@types/node/events.d.ts",
         "./src/config.ts",
         "./src/data.ts"
