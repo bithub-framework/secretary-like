@@ -21,7 +21,7 @@ export interface ContextLike {
     setTimeout: (cb: () => void, ms: number) => any,
     clearTimeout: (timerId: any) => void,
     now: () => number;
-    escape: <T>(v: T) => Promise<T>;
+    escape: <T>(v: Promise<T>) => Promise<T>;
     /**
      * @param value Serializable into JSON
      */
