@@ -1,6 +1,3 @@
-import {
-    Assets,
-} from './data';
 import Big from 'big.js';
 
 export function reviver(k: string, v: unknown) {
@@ -20,5 +17,3 @@ export type ConvertPropertyTypeRecursively<Object, Original, Type> = {
         ? ConvertPropertyTypeRecursively<Object[K], Original, Type>
         : Object[K]);
 };
-
-export type Big2StringAssets = ConvertPropertyTypeRecursively<Assets, Big, string>;

@@ -1,13 +1,13 @@
 import { EventEmitter } from 'events';
 import {
     LimitOrder,
-    OrderId,
     OpenOrder,
-    Assets,
+    OrderId,
     Orderbook,
     Trade,
     Positions,
     Balances,
+    LimitOrderAmendment,
 } from './data';
 import {
     MarketConfig,
@@ -22,7 +22,10 @@ export interface ContextLike {
     clearTimeout: (timerId: any) => void,
     now: () => number;
     escape: <T>(v: T) => Promise<T>;
-    submitAssets(assets: Assets): Promise<void>;
+    /**
+     * @param value Serializable into JSON
+     */
+    submit(key: string, value: unknown): Promise<void>;
 }
 
 export interface ContextMarketLike extends
@@ -45,23 +48,18 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
 }
 
 export interface ContextAccountPrivateApiLike extends EventEmitter {
-    makeLimitOrders(orders: LimitOrder[]): Promise<void>;
+    makeLimitOrders(orders: LimitOrder[]): Promise<OrderId[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
-    cancelOrders(orderIds: OrderId[]): Promise<(Big | null)[]>;
+    /**
+     * @returns Unfilled quantity
+     */
+    cancelOrders(orderIds: OrderId[]): Promise<Big[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-
-    /* 
-        返回数组的第一个值可能为
-            订单修改之前瞬间的 filled 值
-            订单修改之前瞬间的 filled 值 + 订单修改后吃单量
-        返回数组的第二个值可能为
-            订单修改之后瞬间的 filled 值
-            订单修改之后瞬间的 filled 值 + 订单修改后吃单量
-        具体是哪个因交易所而不同，因此通用策略务必只在能确保订单修改后
-        不会吃单的情况下才使用这两个值
-    */
-    remakeLimitOrders(orders: LimitOrder[]): Promise<[Big | null, Big][]>;
+    /**
+     * @returns Unfilled quantities before amendments
+     */
+    amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<Big[]>;
 
     on(event: 'positions', listener: (positions: Positions) => void): this;
     on(event: 'balances', listener: (balances: Balances) => void): this;

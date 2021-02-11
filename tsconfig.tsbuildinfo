@@ -212,18 +212,18 @@
         "affectsGlobalScope": false
       },
       "./src/data.ts": {
-        "version": "6ab57c2187e07524570affcb102513653ac36231a23186e7c75781352f06c2ca",
-        "signature": "6ab884c62664310d79bdb4a8dce0c2d028a77114110ce4e28a14ebe48f23dd5d",
+        "version": "cf9051754800ddf8f815d3487394606a3a6e436708662d269aaff69f358af422",
+        "signature": "0170364a35ce20041c21f1cb652af7592e80f2fb9433594c27a9c83d6610af5b",
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
-        "version": "48ae5660766e8b0e14b4e46e74334bb75cd29d1376226e55e34c6066c1423fe1",
-        "signature": "c4b234371ed4ba09190730ffd0ff48f6c6793f12b56912e9d231402604e3049a",
+        "version": "7a76ee95dc3cafc331f0bb6cb361733149cfe7e151c219d1df4d4b3c8c803bd5",
+        "signature": "efedfe0c7c82b3c13608a0b7b281144b5d4fb91125e4079557ce6df102862eba",
         "affectsGlobalScope": false
       },
       "./src/serialization.ts": {
-        "version": "58fbf287151de3b5fbfba84019e4574b8b3fa569ddee4c5f80fc3fbf8fc961a9",
-        "signature": "c63c5839c8fe530830151852d08025aa8e4bf47f118866f3316e58c8395b3abc",
+        "version": "ad03986445afac233e47e0da184012334c5f85722d71ed989f152997bcf42435",
+        "signature": "5dae53cd24e95625da2841af1ec1fc366ead2bfd11274962df675c6fe67070ae",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -671,8 +671,7 @@
         "./src/serialization.ts"
       ],
       "./src/serialization.ts": [
-        "./node_modules/@types/big.js/index.d.ts",
-        "./src/data.ts"
+        "./node_modules/@types/big.js/index.d.ts"
       ]
     },
     "exportedModulesMap": {
@@ -860,10 +859,6 @@
         "./src/context.ts",
         "./src/data.ts",
         "./src/serialization.ts"
-      ],
-      "./src/serialization.ts": [
-        "./node_modules/@types/big.js/index.d.ts",
-        "./src/data.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [

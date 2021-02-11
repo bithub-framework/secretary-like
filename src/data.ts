@@ -12,8 +12,14 @@ export type Length = number;
 export const LONG: Length = 1;
 export const SHORT: Length = -1;
 
-export type OrderId = number | string;
 export type TradeId = number | string;
+export type OrderId = number | string;
+
+export interface LimitOrderAmendment {
+    price: Big;
+    unfilled: Big;
+    id: OrderId;
+}
 
 export interface LimitOrder {
     price: Big;
@@ -21,11 +27,11 @@ export interface LimitOrder {
     side: Side;
     length: Length;
     operation: Operation;
-    id: OrderId;
 }
 
 export interface OpenOrder extends LimitOrder {
-    filled: Big;
+    unfilled: Big;
+    id: OrderId;
 }
 
 export interface OpenMaker extends OpenOrder {
@@ -63,12 +69,6 @@ export interface Positions {
 
 export interface Balances {
     balance: Big;
-
     reserve: Big;
-
     time: number;
 }
-
-export interface Assets extends
-    Positions,
-    Balances { }

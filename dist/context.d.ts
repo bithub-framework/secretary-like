@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { EventEmitter } from 'events';
-import { LimitOrder, OrderId, OpenOrder, Assets, Orderbook, Trade, Positions, Balances } from './data';
+import { LimitOrder, OpenOrder, OrderId, Orderbook, Trade, Positions, Balances, LimitOrderAmendment } from './data';
 import { MarketConfig, AccountConfig } from './config';
 import Big from 'big.js';
 export interface ContextLike {
@@ -10,7 +10,10 @@ export interface ContextLike {
     clearTimeout: (timerId: any) => void;
     now: () => number;
     escape: <T>(v: T) => Promise<T>;
-    submitAssets(assets: Assets): Promise<void>;
+    /**
+     * @param value Serializable into JSON
+     */
+    submit(key: string, value: unknown): Promise<void>;
 }
 export interface ContextMarketLike extends ContextMarketPublicApiLike, MarketConfig {
     [accountId: number]: ContextAccountLike;
@@ -26,12 +29,18 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
     once(event: 'trades', listener: (trades: Trade[]) => void): this;
 }
 export interface ContextAccountPrivateApiLike extends EventEmitter {
-    makeLimitOrders(orders: LimitOrder[]): Promise<void>;
+    makeLimitOrders(orders: LimitOrder[]): Promise<OrderId[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
-    cancelOrders(orderIds: OrderId[]): Promise<(Big | null)[]>;
+    /**
+     * @returns Unfilled quantity
+     */
+    cancelOrders(orderIds: OrderId[]): Promise<Big[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    remakeLimitOrders(orders: LimitOrder[]): Promise<[Big | null, Big][]>;
+    /**
+     * @returns Unfilled quantities before amendments
+     */
+    amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<Big[]>;
     on(event: 'positions', listener: (positions: Positions) => void): this;
     on(event: 'balances', listener: (balances: Balances) => void): this;
     off(event: 'positions', listener: (positions: Positions) => void): this;
