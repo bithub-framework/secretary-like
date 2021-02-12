@@ -49,15 +49,10 @@ export interface ContextMarketPublicApiLike extends EventEmitter {
 export interface ContextAccountPrivateApiLike extends EventEmitter {
     makeLimitOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
-    /** @returns Filled quantities */
     cancelOrders(orders: OpenOrder[]): Promise<OpenOrder[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    /** 
-     * @returns Filled quantities
-     * It's not sure whether they include quantities the new orders took.
-     */
-    amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<Big[]>;
+    amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<OpenOrder[]>;
 
     on(event: 'positions', listener: (positions: Positions) => void): this;
     on(event: 'balances', listener: (balances: Balances) => void): this;
