@@ -211,14 +211,19 @@
         "signature": "61f1814d1eaebee09c7b27bef2eeffc522d85f2bf467bbf59d7ac4f107900278",
         "affectsGlobalScope": false
       },
+      "./src/const-events.ts": {
+        "version": "b47a676610c6d96429b4047d25a997e30e379e9bf7b1130b8966a37a12daf0b1",
+        "signature": "b9f61c2bf3946e87d7662fff41355e4e8eb49e3feafe20b57f5f44a8e98f182e",
+        "affectsGlobalScope": false
+      },
       "./src/data.ts": {
         "version": "e425055c56e5e4b637220dd55f697164a7feeb75fff1d9dfa24c20ef9ccc09b6",
         "signature": "687c6e917456f97075ca981bc44413db549cbdd4f43c42b0539451632e5a3ba1",
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
-        "version": "69f9b5ddc0106436231c0d25d2e15035deae037c167f16812569f17bc915d9fa",
-        "signature": "8d0952c4012de32c9c1d5e9e3ece605e53716803e4932e3e58ac1d38d9055d8c",
+        "version": "3cda3757b6c23bcad763916a8a03d5a8c846760b32b38045fffb42958d58ae92",
+        "signature": "154aae4d94a6c5eb14d95585a830bfde455d60f60e888f8aa158c83bd1af01c5",
         "affectsGlobalScope": false
       },
       "./src/serialization.ts": {
@@ -655,10 +660,12 @@
       "./src/config.ts": [
         "./node_modules/@types/big.js/index.d.ts"
       ],
+      "./src/const-events.ts": [
+        "./node_modules/@types/node/events.d.ts"
+      ],
       "./src/context.ts": [
-        "./node_modules/@types/big.js/index.d.ts",
-        "./node_modules/@types/node/events.d.ts",
         "./src/config.ts",
+        "./src/const-events.ts",
         "./src/data.ts"
       ],
       "./src/data.ts": [
@@ -845,9 +852,12 @@
       "./src/config.ts": [
         "./node_modules/@types/big.js/index.d.ts"
       ],
+      "./src/const-events.ts": [
+        "./node_modules/@types/node/events.d.ts"
+      ],
       "./src/context.ts": [
-        "./node_modules/@types/node/events.d.ts",
         "./src/config.ts",
+        "./src/const-events.ts",
         "./src/data.ts"
       ],
       "./src/data.ts": [
@@ -910,6 +920,7 @@
       "./node_modules/@types/node/worker_threads.d.ts",
       "./node_modules/@types/node/zlib.d.ts",
       "./src/config.ts",
+      "./src/const-events.ts",
       "./src/context.ts",
       "./src/data.ts",
       "./src/index.ts",
