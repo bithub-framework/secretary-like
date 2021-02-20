@@ -232,8 +232,8 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "4062b915bfff3de063bfd9f32d450872d644cc071f40f615b87bdf54a8687542",
-        "signature": "4062b915bfff3de063bfd9f32d450872d644cc071f40f615b87bdf54a8687542",
+        "version": "fb2157ccd9be38985e36cc419ca7f6487ec16365a51bdfeda61846be6a7200ee",
+        "signature": "fb2157ccd9be38985e36cc419ca7f6487ec16365a51bdfeda61846be6a7200ee",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/node/globals.d.ts": {
@@ -673,6 +673,7 @@
       ],
       "./src/index.ts": [
         "./src/config.ts",
+        "./src/const-events.ts",
         "./src/context.ts",
         "./src/data.ts",
         "./src/serialization.ts"
@@ -865,6 +866,7 @@
       ],
       "./src/index.ts": [
         "./src/config.ts",
+        "./src/const-events.ts",
         "./src/context.ts",
         "./src/data.ts",
         "./src/serialization.ts"
