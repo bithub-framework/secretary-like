@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 
 interface ConstEvents<Events extends {
-    [event in string | symbol]: unknown[];
+    [event in string]: unknown[];
 }> extends EventEmitter {
     on<Event extends keyof Events>(
         event: Event, listener: (...args: Events[Event]) => void,
