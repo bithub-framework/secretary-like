@@ -17,10 +17,6 @@ interface ConstEvents<Events extends {
     ): boolean;
 }
 
-class ConstEvents<Events extends {
-    [event in string | symbol]: unknown[];
-}> extends EventEmitter { }
-
 export {
     ConstEvents as default,
     ConstEvents,

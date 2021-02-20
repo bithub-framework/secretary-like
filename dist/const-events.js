@@ -1,5 +1,2 @@
-import { EventEmitter } from 'events';
-class ConstEvents extends EventEmitter {
-}
-export { ConstEvents as default, ConstEvents, };
+export {};
 //# sourceMappingURL=const-events.js.map

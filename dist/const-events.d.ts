@@ -8,8 +8,4 @@ interface ConstEvents<Events extends {
     off<Event extends keyof Events>(event: Event, listener: (...args: Events[Event]) => void): this;
     emit<Event extends keyof Events>(event: Event, ...args: Events[Event]): boolean;
 }
-declare class ConstEvents<Events extends {
-    [event in string | symbol]: unknown[];
-}> extends EventEmitter {
-}
 export { ConstEvents as default, ConstEvents, };
