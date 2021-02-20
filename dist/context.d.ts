@@ -1,6 +1,7 @@
+/// <reference types="node" />
 import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, LimitOrderAmendment } from './data';
 import { MarketConfig, AccountConfig } from './config';
-import { ConstEvents } from './const-events';
+import { EventEmitter } from 'events';
 export interface ContextLike {
     [marketId: number]: ContextMarketLike;
     sleep: (ms: number) => Promise<void>;
@@ -16,19 +17,29 @@ export interface ContextMarketLike extends ContextMarketPublicApiLike, MarketCon
 }
 export interface ContextAccountLike extends ContextAccountPrivateApiLike, AccountConfig {
 }
-export interface ContextMarketPublicApiLike extends ConstEvents<{
-    orderbook: [Orderbook];
-    trades: [Trade[]];
-}> {
+export interface ContextMarketPublicApiLike extends EventEmitter {
+    on(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
+    on(event: 'trades', listener: (trades: Trade[]) => void): this;
+    off(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
+    off(event: 'trades', listener: (trades: Trade[]) => void): this;
+    once(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
+    once(event: 'trades', listener: (trades: Trade[]) => void): this;
+    emit(event: 'orderbook', orderbook: Orderbook): boolean;
+    emit(event: 'trades', trades: Trade[]): boolean;
 }
-export interface ContextAccountPrivateApiLike extends ConstEvents<{
-    positions: [Positions];
-    balances: [Balances];
-}> {
+export interface ContextAccountPrivateApiLike extends EventEmitter {
     makeLimitOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
     cancelOrders(orders: OpenOrder[]): Promise<OpenOrder[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
     amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<OpenOrder[]>;
+    on(event: 'positions', listener: (positions: Positions) => void): this;
+    on(event: 'balances', listener: (balances: Balances) => void): this;
+    off(event: 'positions', listener: (positions: Positions) => void): this;
+    off(event: 'balances', listener: (balances: Balances) => void): this;
+    once(event: 'positions', listener: (positions: Positions) => void): this;
+    once(event: 'balances', listener: (balances: Balances) => void): this;
+    emit(event: 'positions', positions: Positions): boolean;
+    emit(event: 'balances', balances: Balances): boolean;
 }

@@ -1,16 +1,22 @@
 import Big from 'big.js';
 
 export type Side = number;
-export const BID: Side = 1;
-export const ASK: Side = -1;
+export namespace Side {
+    export const BID: Side = 1;
+    export const ASK: Side = -1;
+}
 
 export type Operation = number;
-export const OPEN: Operation = 1;
-export const CLOSE: Operation = -1;
+export namespace Operation {
+    export const OPEN: Operation = 1;
+    export const CLOSE: Operation = -1;
+}
 
 export type Length = number;
-export const LONG: Length = 1;
-export const SHORT: Length = -1;
+export namespace Length {
+    export const LONG: Length = 1;
+    export const SHORT: Length = -1;
+}
 
 export type TradeId = number | string;
 export type OrderId = number | string;

@@ -1,13 +1,19 @@
 import Big from 'big.js';
 export declare type Side = number;
-export declare const BID: Side;
-export declare const ASK: Side;
+export declare namespace Side {
+    const BID: Side;
+    const ASK: Side;
+}
 export declare type Operation = number;
-export declare const OPEN: Operation;
-export declare const CLOSE: Operation;
+export declare namespace Operation {
+    const OPEN: Operation;
+    const CLOSE: Operation;
+}
 export declare type Length = number;
-export declare const LONG: Length;
-export declare const SHORT: Length;
+export declare namespace Length {
+    const LONG: Length;
+    const SHORT: Length;
+}
 export declare type TradeId = number | string;
 export declare type OrderId = number | string;
 export interface LimitOrder {

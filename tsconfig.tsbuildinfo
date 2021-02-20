@@ -211,19 +211,14 @@
         "signature": "61f1814d1eaebee09c7b27bef2eeffc522d85f2bf467bbf59d7ac4f107900278",
         "affectsGlobalScope": false
       },
-      "./src/const-events.ts": {
-        "version": "80016a74e2d838ba0c1a063f788f1ce81be70170bb3c163b130bc8a180ff4f85",
-        "signature": "615ccc52a1f0b88ff972b0f898a3c2f545b994dc34bb598800111219e7a8802e",
-        "affectsGlobalScope": false
-      },
       "./src/data.ts": {
-        "version": "e425055c56e5e4b637220dd55f697164a7feeb75fff1d9dfa24c20ef9ccc09b6",
-        "signature": "687c6e917456f97075ca981bc44413db549cbdd4f43c42b0539451632e5a3ba1",
+        "version": "2d2ee6881e0e758868ab47b19fff4b7b621d906663e8e32df412b5f09b1af758",
+        "signature": "6328fac30639cbd3890c138ec7197fb5bf9fbfbdd1a4001950c8787af0a27b7c",
         "affectsGlobalScope": false
       },
       "./src/context.ts": {
-        "version": "3cda3757b6c23bcad763916a8a03d5a8c846760b32b38045fffb42958d58ae92",
-        "signature": "154aae4d94a6c5eb14d95585a830bfde455d60f60e888f8aa158c83bd1af01c5",
+        "version": "a386d1831e88022a709e8992d566318c094e1b7cca97a86e2ab2ee060ce3b668",
+        "signature": "8041c6e63a5d1387f91dfa44fa282614ea4673f55645700b987ae8ccab91ec85",
         "affectsGlobalScope": false
       },
       "./src/serialization.ts": {
@@ -232,8 +227,8 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "fb2157ccd9be38985e36cc419ca7f6487ec16365a51bdfeda61846be6a7200ee",
-        "signature": "fb2157ccd9be38985e36cc419ca7f6487ec16365a51bdfeda61846be6a7200ee",
+        "version": "4062b915bfff3de063bfd9f32d450872d644cc071f40f615b87bdf54a8687542",
+        "signature": "4062b915bfff3de063bfd9f32d450872d644cc071f40f615b87bdf54a8687542",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/node/globals.d.ts": {
@@ -660,12 +655,9 @@
       "./src/config.ts": [
         "./node_modules/@types/big.js/index.d.ts"
       ],
-      "./src/const-events.ts": [
-        "./node_modules/@types/node/events.d.ts"
-      ],
       "./src/context.ts": [
+        "./node_modules/@types/node/events.d.ts",
         "./src/config.ts",
-        "./src/const-events.ts",
         "./src/data.ts"
       ],
       "./src/data.ts": [
@@ -673,7 +665,6 @@
       ],
       "./src/index.ts": [
         "./src/config.ts",
-        "./src/const-events.ts",
         "./src/context.ts",
         "./src/data.ts",
         "./src/serialization.ts"
@@ -853,12 +844,9 @@
       "./src/config.ts": [
         "./node_modules/@types/big.js/index.d.ts"
       ],
-      "./src/const-events.ts": [
-        "./node_modules/@types/node/events.d.ts"
-      ],
       "./src/context.ts": [
+        "./node_modules/@types/node/events.d.ts",
         "./src/config.ts",
-        "./src/const-events.ts",
         "./src/data.ts"
       ],
       "./src/data.ts": [
@@ -866,7 +854,6 @@
       ],
       "./src/index.ts": [
         "./src/config.ts",
-        "./src/const-events.ts",
         "./src/context.ts",
         "./src/data.ts",
         "./src/serialization.ts"
@@ -922,7 +909,6 @@
       "./node_modules/@types/node/worker_threads.d.ts",
       "./node_modules/@types/node/zlib.d.ts",
       "./src/config.ts",
-      "./src/const-events.ts",
       "./src/context.ts",
       "./src/data.ts",
       "./src/index.ts",
