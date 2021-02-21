@@ -12,34 +12,34 @@ export interface ContextLike {
     /** @param value Serializable into JSON */
     submit(key: string, value: unknown): Promise<void>;
 }
-export interface ContextMarketLike extends ContextMarketPublicApiLike, MarketConfig {
+export interface ContextMarketLike extends ContextMarketApiLike, MarketConfig {
     [accountId: number]: ContextAccountLike;
 }
-export interface ContextAccountLike extends ContextAccountPrivateApiLike, AccountConfig {
+export interface ContextAccountLike extends ContextAccountApiLike, AccountConfig {
 }
-export interface ContextMarketPublicApiLike extends EventEmitter {
-    on(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
-    on(event: 'trades', listener: (trades: Trade[]) => void): this;
-    off(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
-    off(event: 'trades', listener: (trades: Trade[]) => void): this;
-    once(event: 'orderbook', listener: (orderbook: Orderbook) => void): this;
-    once(event: 'trades', listener: (trades: Trade[]) => void): this;
-    emit(event: 'orderbook', orderbook: Orderbook): boolean;
-    emit(event: 'trades', trades: Trade[]): boolean;
+export declare type MarketEvents = {
+    orderbook: Orderbook;
+    trades: Trade[];
+};
+export interface ContextMarketApiLike extends EventEmitter {
+    on<Event extends keyof MarketEvents>(event: Event, listener: (arg: MarketEvents[Event]) => void): this;
+    once<Event extends keyof MarketEvents>(event: Event, listener: (arg: MarketEvents[Event]) => void): this;
+    off<Event extends keyof MarketEvents>(event: Event, listener: (arg: MarketEvents[Event]) => void): this;
+    emit<Event extends keyof MarketEvents>(event: Event, arg: MarketEvents[Event]): boolean;
 }
-export interface ContextAccountPrivateApiLike extends EventEmitter {
+export declare type AccountEvents = {
+    positions: Positions;
+    balances: Balances;
+};
+export interface ContextAccountApiLike extends EventEmitter {
     makeLimitOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
     cancelOrders(orders: OpenOrder[]): Promise<OpenOrder[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
     amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<OpenOrder[]>;
-    on(event: 'positions', listener: (positions: Positions) => void): this;
-    on(event: 'balances', listener: (balances: Balances) => void): this;
-    off(event: 'positions', listener: (positions: Positions) => void): this;
-    off(event: 'balances', listener: (balances: Balances) => void): this;
-    once(event: 'positions', listener: (positions: Positions) => void): this;
-    once(event: 'balances', listener: (balances: Balances) => void): this;
-    emit(event: 'positions', positions: Positions): boolean;
-    emit(event: 'balances', balances: Balances): boolean;
+    on<Event extends keyof MarketEvents>(event: Event, listener: (arg: MarketEvents[Event]) => void): this;
+    once<Event extends keyof MarketEvents>(event: Event, listener: (arg: MarketEvents[Event]) => void): this;
+    off<Event extends keyof MarketEvents>(event: Event, listener: (arg: MarketEvents[Event]) => void): this;
+    emit<Event extends keyof MarketEvents>(event: Event, arg: MarketEvents[Event]): boolean;
 }
