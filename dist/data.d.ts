@@ -1,18 +1,27 @@
 import Big from 'big.js';
-export declare type Side = number;
+export declare function Side(side: Side): Side;
+export declare function Side(operation: Operation, Length: Length): Side;
+export declare function Side(Length: Length, operation: Operation): Side;
 export declare namespace Side {
-    const BID: Side;
-    const ASK: Side;
+    const BID: "BID";
+    const ASK: "ASK";
 }
-export declare type Operation = number;
+export declare type Side = typeof Side.BID | typeof Side.ASK;
+export declare function Operation(operation: Operation): Operation;
+export declare function Operation(side: Side, length: Length): Operation;
+export declare function Operation(length: Length, side: Side): Operation;
 export declare namespace Operation {
-    const OPEN: Operation;
-    const CLOSE: Operation;
+    const OPEN: "OPEN";
+    const CLOSE: "CLOSE";
 }
-export declare type Length = number;
+export declare type Operation = typeof Operation.OPEN | typeof Operation.CLOSE;
+export declare type Length = typeof Length.LONG | typeof Length.SHORT;
+export declare function Length(length: Length): Length;
+export declare function Length(side: Side, operation: Operation): Length;
+export declare function Length(operation: Operation, side: Side): Length;
 export declare namespace Length {
-    const LONG: Length;
-    const SHORT: Length;
+    const LONG = "LONG";
+    const SHORT = "SHORT";
 }
 export declare type TradeId = number | string;
 export declare type OrderId = number | string;
@@ -48,7 +57,8 @@ export interface BookOrder {
     side: Side;
 }
 export interface Orderbook {
-    [side: number]: BookOrder[];
+    [Side.BID]: BookOrder[];
+    [Side.ASK]: BookOrder[];
     time: number;
 }
 export interface Positions {
