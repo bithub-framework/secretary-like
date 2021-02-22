@@ -98,8 +98,6 @@ export interface BookOrder {
     side: Side,
 }
 
-type X = typeof Side.BID;
-
 export interface Orderbook {
     [Side.BID]: BookOrder[];
     [Side.ASK]: BookOrder[];
@@ -108,10 +106,12 @@ export interface Orderbook {
 
 export interface Positions {
     position: {
-        [length: number]: Big;
+        [Length.LONG]: Big;
+        [Length.SHORT]: Big;
     };
     closable: {
-        [length: number]: Big;
+        [Length.LONG]: Big;
+        [Length.SHORT]: Big;
     };
     time: number;
 }

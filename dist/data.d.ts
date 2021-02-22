@@ -63,10 +63,12 @@ export interface Orderbook {
 }
 export interface Positions {
     position: {
-        [length: number]: Big;
+        [Length.LONG]: Big;
+        [Length.SHORT]: Big;
     };
     closable: {
-        [length: number]: Big;
+        [Length.LONG]: Big;
+        [Length.SHORT]: Big;
     };
     time: number;
 }
