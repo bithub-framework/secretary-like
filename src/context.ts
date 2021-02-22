@@ -5,7 +5,7 @@ import {
     Trade,
     Positions,
     Balances,
-    LimitOrderAmendment,
+    Amendment,
 } from './data';
 import {
     MarketConfig,
@@ -56,12 +56,12 @@ export type AccountEvents = {
 }
 
 export interface ContextAccountApiLike extends EventEmitter {
-    makeLimitOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
+    makeOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
     cancelOrders(orders: OpenOrder[]): Promise<OpenOrder[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<OpenOrder[]>;
+    amendOrders(amendments: Amendment[]): Promise<OpenOrder[]>;
 
     on<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
     once<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;

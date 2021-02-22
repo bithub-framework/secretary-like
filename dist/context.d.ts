@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, LimitOrderAmendment } from './data';
+import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, Amendment } from './data';
 import { MarketConfig, AccountConfig } from './config';
 import { EventEmitter } from 'events';
 export interface ContextLike {
@@ -36,12 +36,12 @@ export declare type AccountEvents = {
     balances: Balances;
 };
 export interface ContextAccountApiLike extends EventEmitter {
-    makeLimitOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
+    makeOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
     cancelOrders(orders: OpenOrder[]): Promise<OpenOrder[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    amendLimitOrders(amendments: LimitOrderAmendment[]): Promise<OpenOrder[]>;
+    amendOrders(amendments: Amendment[]): Promise<OpenOrder[]>;
     on<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
     once<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
     off<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;

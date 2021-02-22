@@ -34,7 +34,7 @@ export interface OpenOrder extends LimitOrder {
     id: OrderId;
 }
 
-export interface LimitOrderAmendment extends OpenOrder {
+export interface Amendment extends OpenOrder {
     newUnfilled: Big;
     newPrice: Big;
 }
