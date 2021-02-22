@@ -3,7 +3,7 @@ import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, LimitOrde
 import { MarketConfig, AccountConfig } from './config';
 import { EventEmitter } from 'events';
 export interface ContextLike {
-    [marketId: number]: ContextMarketLike;
+    [marketIndex: number]: ContextMarketLike;
     sleep: (ms: number) => Promise<void>;
     setTimeout: (cb: () => void, ms: number) => any;
     clearTimeout: (timerId: any) => void;
@@ -13,7 +13,7 @@ export interface ContextLike {
     submit(key: string, value: unknown): Promise<void>;
 }
 export interface ContextMarketLike extends ContextMarketApiLike, MarketConfig {
-    [accountId: number]: ContextAccountLike;
+    [accountIndex: number]: ContextAccountLike;
 }
 export interface ContextAccountLike extends ContextAccountApiLike, AccountConfig {
 }

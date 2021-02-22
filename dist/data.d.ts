@@ -1,27 +1,18 @@
 import Big from 'big.js';
-export declare function Side(side: Side): Side;
-export declare function Side(operation: Operation, Length: Length): Side;
-export declare function Side(Length: Length, operation: Operation): Side;
+export declare type Side = number;
+export declare type Operation = number;
+export declare type Length = number;
 export declare namespace Side {
-    const BID: "BID";
-    const ASK: "ASK";
+    const BID: Side;
+    const ASK: Side;
 }
-export declare type Side = typeof Side.BID | typeof Side.ASK;
-export declare function Operation(operation: Operation): Operation;
-export declare function Operation(side: Side, length: Length): Operation;
-export declare function Operation(length: Length, side: Side): Operation;
 export declare namespace Operation {
-    const OPEN: "OPEN";
-    const CLOSE: "CLOSE";
+    const OPEN: Operation;
+    const CLOSE: Operation;
 }
-export declare type Operation = typeof Operation.OPEN | typeof Operation.CLOSE;
-export declare type Length = typeof Length.LONG | typeof Length.SHORT;
-export declare function Length(length: Length): Length;
-export declare function Length(side: Side, operation: Operation): Length;
-export declare function Length(operation: Operation, side: Side): Length;
 export declare namespace Length {
-    const LONG = "LONG";
-    const SHORT = "SHORT";
+    const LONG: Length;
+    const SHORT: Length;
 }
 export declare type TradeId = number | string;
 export declare type OrderId = number | string;
@@ -57,18 +48,15 @@ export interface BookOrder {
     side: Side;
 }
 export interface Orderbook {
-    [Side.BID]: BookOrder[];
-    [Side.ASK]: BookOrder[];
+    [side: number]: BookOrder[];
     time: number;
 }
 export interface Positions {
     position: {
-        [Length.LONG]: Big;
-        [Length.SHORT]: Big;
+        [length: number]: Big;
     };
     closable: {
-        [Length.LONG]: Big;
-        [Length.SHORT]: Big;
+        [length: number]: Big;
     };
     time: number;
 }
