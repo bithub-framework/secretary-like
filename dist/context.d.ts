@@ -20,20 +20,18 @@ export interface ContextAccountLike extends ContextAccountApiLike, AccountConfig
 export declare type MarketEvents = {
     orderbook: [Orderbook];
     trades: [Trade[]];
+    error: [Error];
 };
 export interface ContextMarketApiLike extends EventEmitter {
     on<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
     once<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
     off<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
     emit<Event extends keyof MarketEvents>(event: Event, ...args: MarketEvents[Event]): boolean;
-    on(event: string | symbol, listener: (...args: any[]) => void): this;
-    once(event: string | symbol, listener: (...args: any[]) => void): this;
-    off(event: string | symbol, listener: (...args: any[]) => void): this;
-    emit(event: string | symbol, ...args: any[]): boolean;
 }
 export declare type AccountEvents = {
-    positions: Positions;
-    balances: Balances;
+    positions: [Positions];
+    balances: [Balances];
+    error: [Error];
 };
 export interface ContextAccountApiLike extends EventEmitter {
     makeOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
@@ -42,12 +40,8 @@ export interface ContextAccountApiLike extends EventEmitter {
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
     amendOrders(amendments: Amendment[]): Promise<OpenOrder[]>;
-    on<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
-    once<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
-    off<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
-    emit<Event extends keyof MarketEvents>(event: Event, ...args: MarketEvents[Event]): boolean;
-    on(event: string | symbol, listener: (...args: any[]) => void): this;
-    once(event: string | symbol, listener: (...args: any[]) => void): this;
-    off(event: string | symbol, listener: (...args: any[]) => void): this;
-    emit(event: string | symbol, ...args: any[]): boolean;
+    on<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
+    once<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
+    off<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
+    emit<Event extends keyof AccountEvents>(event: Event, ...args: AccountEvents[Event]): boolean;
 }
