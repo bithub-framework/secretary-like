@@ -62,6 +62,6 @@ export interface Positions {
 }
 export interface Balances {
     balance: Big;
-    reserve: Big;
+    available: Big;
     time: number;
 }
