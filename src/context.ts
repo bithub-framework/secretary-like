@@ -58,12 +58,12 @@ export type AccountEvents = {
 }
 
 export interface ContextAccountApiLike extends EventEmitter {
-    makeOrders(orders: LimitOrder[]): Promise<OpenOrder[]>;
+    makeOrders(orders: LimitOrder[]): Promise<(OpenOrder | Error)[]>;
+    amendOrders(amendments: Amendment[]): Promise<(OpenOrder | Error)[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
     cancelOrders(orders: OpenOrder[]): Promise<OpenOrder[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
-    amendOrders(amendments: Amendment[]): Promise<OpenOrder[]>;
 
     on<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
     once<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
