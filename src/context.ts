@@ -8,8 +8,8 @@ import {
     Amendment,
 } from './data';
 import {
-    MarketConfig,
-    AccountConfig,
+    MarketSpec,
+    AccountSpec,
 } from './config';
 import { EventEmitter } from 'events';
 
@@ -26,13 +26,13 @@ export interface ContextLike {
 
 export interface ContextMarketLike extends
     ContextMarketApiLike,
-    MarketConfig {
+    MarketSpec {
     [accountIndex: number]: ContextAccountLike;
 }
 
 export interface ContextAccountLike extends
     ContextAccountApiLike,
-    AccountConfig { }
+    AccountSpec { }
 
 export type MarketEvents = {
     orderbook: [Orderbook];
@@ -69,8 +69,4 @@ export interface ContextAccountApiLike extends EventEmitter {
     once<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
     off<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
     emit<Event extends keyof AccountEvents>(event: Event, ...args: AccountEvents[Event]): boolean;
-    // on(event: string | symbol, listener: (...args: any[]) => void): this;
-    // once(event: string | symbol, listener: (...args: any[]) => void): this;
-    // off(event: string | symbol, listener: (...args: any[]) => void): this;
-    // emit(event: string | symbol, ...args: any[]): boolean;
 }

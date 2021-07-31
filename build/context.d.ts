@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, Amendment } from './data';
-import { MarketConfig, AccountConfig } from './config';
+import { MarketSpec, AccountSpec } from './config';
 import { EventEmitter } from 'events';
 export interface ContextLike {
     [marketIndex: number]: ContextMarketLike;
@@ -12,10 +12,10 @@ export interface ContextLike {
     /** @param value Serializable into JSON */
     submit(key: string, value: unknown): Promise<void>;
 }
-export interface ContextMarketLike extends ContextMarketApiLike, MarketConfig {
+export interface ContextMarketLike extends ContextMarketApiLike, MarketSpec {
     [accountIndex: number]: ContextAccountLike;
 }
-export interface ContextAccountLike extends ContextAccountApiLike, AccountConfig {
+export interface ContextAccountLike extends ContextAccountApiLike, AccountSpec {
 }
 export declare type MarketEvents = {
     orderbook: [Orderbook];
