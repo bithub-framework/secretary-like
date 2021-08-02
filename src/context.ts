@@ -10,7 +10,7 @@ import {
 import {
     MarketSpec,
     AccountSpec,
-} from './config';
+} from './spec';
 import { EventEmitter } from 'events';
 
 export interface ContextLike {
@@ -45,10 +45,6 @@ export interface ContextMarketApiLike extends EventEmitter {
     once<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
     off<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
     emit<Event extends keyof MarketEvents>(event: Event, ...args: MarketEvents[Event]): boolean;
-    // on(event: string | symbol, listener: (...args: any[]) => void): this;
-    // once(event: string | symbol, listener: (...args: any[]) => void): this;
-    // off(event: string | symbol, listener: (...args: any[]) => void): this;
-    // emit(event: string | symbol, ...args: any[]): boolean;
 }
 
 export type AccountEvents = {

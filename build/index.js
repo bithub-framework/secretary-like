@@ -13,5 +13,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./data"), exports);
 __exportStar(require("./serialization"), exports);
 __exportStar(require("./context"), exports);
-__exportStar(require("./config"), exports);
+__exportStar(require("./spec"), exports);
 //# sourceMappingURL=index.js.map

@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, Amendment } from './data';
-import { MarketSpec, AccountSpec } from './config';
+import { MarketSpec, AccountSpec } from './spec';
 import { EventEmitter } from 'events';
 export interface ContextLike {
     [marketIndex: number]: ContextMarketLike;
