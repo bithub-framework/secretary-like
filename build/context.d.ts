@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, Amendment } from './data';
 import { MarketSpec, AccountSpec } from './spec';
 import { EventEmitter } from 'events';
