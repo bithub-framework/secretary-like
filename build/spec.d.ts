@@ -4,6 +4,7 @@ export interface AccountSpec {
     MAKER_FEE_RATE: number;
     TAKER_FEE_RATE: number;
     ONE_WAY_POSITION: boolean;
+    CROSS_MARGIN: boolean;
 }
 export interface MarketSpec {
     PRICE_DP: number;
