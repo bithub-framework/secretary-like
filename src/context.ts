@@ -10,29 +10,27 @@ import {
 import {
     MarketSpec,
     AccountSpec,
-} from './spec';
+    MarketCalc,
+} from './specification';
+import { Timeline } from './timeline';
 import { EventEmitter } from 'events';
 
 export interface ContextLike {
     [marketIndex: number]: ContextMarketLike;
-    sleep: (ms: number) => Promise<void>;
-    setTimeout: (cb: () => void, ms: number) => any,
-    clearTimeout: (timerId: any) => void,
-    now: () => number;
-    escape: <T>(promise: Promise<T>) => Promise<T>;
+    timeline: Timeline<any>;
     /** @param value Serializable into JSON */
-    submit(key: string, value: unknown): Promise<void>;
+    submit(key: string, value: any): Promise<void>;
 }
 
-export interface ContextMarketLike extends
-    ContextMarketApiLike,
-    MarketSpec {
+export interface ContextMarketLike extends ContextMarketApiLike {
     [accountIndex: number]: ContextAccountLike;
+    spec: MarketSpec;
+    calc: MarketCalc;
 }
 
-export interface ContextAccountLike extends
-    ContextAccountApiLike,
-    AccountSpec { }
+export interface ContextAccountLike extends ContextAccountApiLike {
+    spec: AccountSpec;
+}
 
 export type MarketEvents = {
     orderbook: [Orderbook];
