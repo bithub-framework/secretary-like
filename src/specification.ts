@@ -14,11 +14,11 @@ export interface MarketSpec {
 }
 
 export interface MarketCalc {
-    calcDollarVolume: (
+    dollarVolume: (
         price: Big,
         quantity: Big,
     ) => Big,
-    calcQuantity: (
+    quantity: (
         price: Big,
         dollarVolume: Big,
     ) => Big,

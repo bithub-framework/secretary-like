@@ -11,6 +11,6 @@ export interface MarketSpec {
     TICK_SIZE: Big;
 }
 export interface MarketCalc {
-    calcDollarVolume: (price: Big, quantity: Big) => Big;
-    calcQuantity: (price: Big, dollarVolume: Big) => Big;
+    dollarVolume: (price: Big, quantity: Big) => Big;
+    quantity: (price: Big, dollarVolume: Big) => Big;
 }
