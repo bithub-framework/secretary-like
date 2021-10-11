@@ -14,4 +14,5 @@ __exportStar(require("./data"), exports);
 __exportStar(require("./serialization"), exports);
 __exportStar(require("./context"), exports);
 __exportStar(require("./specification"), exports);
+__exportStar(require("./timeline"), exports);
 //# sourceMappingURL=index.js.map
