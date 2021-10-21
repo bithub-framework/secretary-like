@@ -51,7 +51,7 @@ export interface Orderbook {
     [side: number]: BookOrder[];
     time: number;
 }
-export interface Closeable {
+export interface Closable {
     [length: number]: Big;
 }
 export interface Position {
@@ -59,7 +59,7 @@ export interface Position {
 }
 export interface Positions {
     position: Position;
-    closable: Closeable;
+    closable: Closable;
     time: number;
 }
 export interface Balances {
