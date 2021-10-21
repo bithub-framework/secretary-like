@@ -62,13 +62,17 @@ export interface Orderbook {
     time: number;
 }
 
+export interface Closeable {
+    [length: number]: Big;
+}
+
+export interface Position {
+    [length: number]: Big;
+}
+
 export interface Positions {
-    position: {
-        [length: number]: Big;
-    };
-    closable: {
-        [length: number]: Big;
-    };
+    position: Position;
+    closable: Closeable;
     time: number;
 }
 
