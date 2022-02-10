@@ -11,10 +11,9 @@
     "author": "Zim",
     "license": "SEE LICENSE IN ./LICENSE",
     "peerDependencies": {
-        "@types/big.js": "^6.0.1",
-        "@types/events": "^3.0.0"
+        "@types/big.js": "^6.0.1"
     },
     "dependencies": {
-        "typed-event-emitter": "github:zimtsui/typed-event-emitter"
+        "@types/node": "^17.0.17"
     }
 }
