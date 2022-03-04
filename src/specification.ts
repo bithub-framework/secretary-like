@@ -10,7 +10,7 @@ export interface MarketSpec {
     readonly PRICE_DP: number;
     readonly QUANTITY_DP: number;
     readonly CURRENCY_DP: number;
-    readonlyTICK_SIZE: Big,
+    readonly TICK_SIZE: Big,
 }
 
 export interface MarketCalc {
