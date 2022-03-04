@@ -35,6 +35,9 @@ export interface Amendment extends OpenOrder {
 export interface OpenMaker extends OpenOrder {
     behind: Big;
 }
+export declare namespace OpenMaker {
+    function jsonCompatiblize(order: OpenMaker): JsonCompatible<OpenMaker>;
+}
 export interface Trade {
     side: Side;
     price: Big;
@@ -70,3 +73,8 @@ export interface Balances {
 export declare type ReadonlyRecur<T> = T extends {} ? Readonly<{
     [K in keyof T]: ReadonlyRecur<T[K]>;
 }> : T;
+export declare type JsonCompatible<T> = TypeMappedRecur<T, Big, string>;
+declare type TypeMappedRecur<Type, Old, New> = Type extends Old ? New : (Type extends {} ? {
+    [K in keyof Type]: TypeMappedRecur<Type[K], Old, New>;
+} : Type);
+export {};

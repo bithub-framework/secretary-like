@@ -43,6 +43,22 @@ export interface OpenMaker extends OpenOrder {
     behind: Big;
 }
 
+export namespace OpenMaker {
+    export function jsonCompatiblize(order: OpenMaker): JsonCompatible<OpenMaker> {
+        return {
+            price: order.price.toString(),
+            quantity: order.quantity.toString(),
+            side: order.side,
+            length: order.length,
+            operation: order.operation,
+            filled: order.filled.toString(),
+            unfilled: order.unfilled.toString(),
+            id: order.id,
+            behind: order.behind.toString(),
+        }
+    }
+}
+
 export interface Trade {
     side: Side;
     price: Big;
@@ -88,3 +104,14 @@ export type ReadonlyRecur<T> =
         [K in keyof T]: ReadonlyRecur<T[K]>;
     }>
     : T;
+
+export type JsonCompatible<T> = TypeMappedRecur<T, Big, string>;
+
+type TypeMappedRecur<Type, Old, New> =
+    Type extends Old
+    ? New
+    : (
+        Type extends {}
+        ? { [K in keyof Type]: TypeMappedRecur<Type[K], Old, New>; }
+        : Type
+    );
