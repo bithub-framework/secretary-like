@@ -1,21 +1,21 @@
 /// <reference types="node" />
-import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, Amendment } from './data';
+import { LimitOrder, OpenOrder, Orderbook, Trade, Positions, Balances, Amendment, ReadonlyRecur } from './data';
 import { MarketSpec, AccountSpec, MarketCalc } from './specification';
 import { Timeline } from './timeline';
 import { EventEmitter } from 'events';
 export interface ContextLike {
-    [marketIndex: number]: ContextMarketLike;
-    timeline: Timeline;
+    readonly [marketIndex: number]: ContextMarketLike;
+    readonly timeline: Timeline;
     /** @param value Serializable into JSON */
     submit(key: string, value: any): Promise<void>;
 }
 export interface ContextMarketLike extends ContextMarketApiLike {
-    [accountIndex: number]: ContextAccountLike;
-    spec: MarketSpec;
-    calc: MarketCalc;
+    readonly [accountIndex: number]: ContextAccountLike;
+    readonly spec: MarketSpec;
+    readonly calc: MarketCalc;
 }
 export interface ContextAccountLike extends ContextAccountApiLike {
-    spec: AccountSpec;
+    readonly spec: AccountSpec;
 }
 export interface MarketEvents {
     orderbook: [Orderbook];
@@ -34,10 +34,10 @@ export interface AccountEvents {
     error: [Error];
 }
 export interface ContextAccountApiLike extends EventEmitter {
-    makeOrders(orders: LimitOrder[]): Promise<(OpenOrder | Error)[]>;
-    amendOrders(amendments: Amendment[]): Promise<(OpenOrder | Error)[]>;
+    makeOrders(orders: ReadonlyRecur<LimitOrder[]>): Promise<(OpenOrder | Error)[]>;
+    amendOrders(amendments: ReadonlyRecur<Amendment[]>): Promise<(OpenOrder | Error)[]>;
     getOpenOrders(): Promise<OpenOrder[]>;
-    cancelOrders(orders: OpenOrder[]): Promise<OpenOrder[]>;
+    cancelOrders(orders: ReadonlyRecur<OpenOrder[]>): Promise<OpenOrder[]>;
     getPositions(): Promise<Positions>;
     getBalances(): Promise<Balances>;
     on<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;

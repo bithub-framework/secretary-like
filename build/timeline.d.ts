@@ -1,5 +1,5 @@
 export interface Timeline {
-    sleep: (ms: number) => Promise<void>;
-    now: () => number;
-    escape: <T>(promise: Promise<T>) => Promise<T>;
+    readonly sleep: (ms: number) => Promise<void>;
+    readonly now: () => number;
+    readonly escape: <T>(promise: Promise<T>) => Promise<T>;
 }

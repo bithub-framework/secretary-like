@@ -81,3 +81,10 @@ export interface Balances {
     available: Big;
     time: number;
 }
+
+export type ReadonlyRecur<T> =
+    T extends {}
+    ? Readonly<{
+        [K in keyof T]: ReadonlyRecur<T[K]>;
+    }>
+    : T;
