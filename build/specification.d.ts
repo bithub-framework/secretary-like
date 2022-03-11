@@ -9,6 +9,7 @@ export interface MarketSpec {
     readonly QUANTITY_DP: number;
     readonly CURRENCY_DP: number;
     readonly TICK_SIZE: Big;
+    readonly MARKET_NAME: string;
 }
 export interface MarketCalc {
     readonly dollarVolume: (price: Big, quantity: Big) => Big;
