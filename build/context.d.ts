@@ -18,8 +18,8 @@ export interface ContextAccountLike extends ContextAccountApiLike {
     readonly spec: AccountSpec;
 }
 export interface MarketEvents {
-    orderbook: [Orderbook.Mutable];
-    trades: [Trade.Mutable[]];
+    orderbook: [Orderbook.MutablePlain];
+    trades: [Trade.MutablePlain[]];
     error: [Error];
 }
 export interface ContextMarketApiLike extends EventEmitter {
@@ -29,17 +29,17 @@ export interface ContextMarketApiLike extends EventEmitter {
     emit<Event extends keyof MarketEvents>(event: Event, ...args: MarketEvents[Event]): boolean;
 }
 export interface AccountEvents {
-    positions: [Positions.Mutable];
-    balances: [Balances.Mutable];
+    positions: [Positions.MutablePlain];
+    balances: [Balances.MutablePlain];
     error: [Error];
 }
 export interface ContextAccountApiLike extends EventEmitter {
-    makeOrders(orders: readonly LimitOrder[]): Promise<(OpenOrder.Mutable | Error)[]>;
-    amendOrders(amendments: readonly Amendment[]): Promise<(OpenOrder.Mutable | Error)[]>;
-    getOpenOrders(): Promise<OpenOrder.Mutable[]>;
-    cancelOrders(orders: readonly OpenOrder[]): Promise<OpenOrder.Mutable[]>;
-    getPositions(): Promise<Positions.Mutable>;
-    getBalances(): Promise<Balances.Mutable>;
+    makeOrders(orders: readonly LimitOrder[]): Promise<(OpenOrder.MutablePlain | Error)[]>;
+    amendOrders(amendments: readonly Amendment[]): Promise<(OpenOrder.MutablePlain | Error)[]>;
+    getOpenOrders(): Promise<OpenOrder.MutablePlain[]>;
+    cancelOrders(orders: readonly OpenOrder[]): Promise<OpenOrder.MutablePlain[]>;
+    getPositions(): Promise<Positions.MutablePlain>;
+    getBalances(): Promise<Balances.MutablePlain>;
     on<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
     once<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
     off<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;

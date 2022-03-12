@@ -29,7 +29,7 @@ export interface LimitOrder {
     readonly operation: Operation;
 }
 export namespace LimitOrder {
-    export interface Mutable {
+    export interface MutablePlain {
         price: Big;
         quantity: Big;
         side: Side;
@@ -45,7 +45,7 @@ export interface OpenOrder extends LimitOrder {
     readonly id: OrderId;
 }
 export namespace OpenOrder {
-    export interface Mutable extends LimitOrder.Mutable {
+    export interface MutablePlain extends LimitOrder.MutablePlain {
         filled: Big;
         unfilled: Big;
         id: OrderId;
@@ -58,7 +58,7 @@ export interface Amendment extends OpenOrder {
     readonly newPrice: Big;
 }
 export namespace Amendment {
-    export interface Mutable extends OpenOrder.Mutable {
+    export interface MutablePlain extends OpenOrder.MutablePlain {
         newUnfilled: Big;
         newPrice: Big;
     }
@@ -69,7 +69,7 @@ export interface OpenMaker extends OpenOrder {
     readonly behind: Big;
 }
 export namespace OpenMaker {
-    export interface Mutable extends OpenOrder.Mutable {
+    export interface MutablePlain extends OpenOrder.MutablePlain {
         behind: Big;
     }
 }
@@ -83,7 +83,7 @@ export interface Trade {
     readonly id: TradeId;
 }
 export namespace Trade {
-    export interface Mutable {
+    export interface MutablePlain {
         side: Side;
         price: Big;
         quantity: Big;
@@ -99,7 +99,7 @@ export interface BookOrder {
     readonly side: Side,
 }
 export namespace BookOrder {
-    export interface Mutable {
+    export interface MutablePlain {
         price: Big;
         quantity: Big;
         side: Side,
@@ -112,8 +112,8 @@ export interface Orderbook {
     readonly time: number;
 }
 export namespace Orderbook {
-    export interface Mutable {
-        [side: number]: BookOrder.Mutable[];
+    export interface MutablePlain {
+        [side: number]: BookOrder.MutablePlain[];
         time: number;
     }
 }
@@ -123,7 +123,7 @@ export interface Closable {
     readonly [length: number]: Big;
 }
 export namespace Closable {
-    export interface Mutable {
+    export interface MutablePlain {
         [length: number]: Big;
     }
 }
@@ -133,7 +133,7 @@ export interface Position {
     readonly [length: number]: Big;
 }
 export namespace Position {
-    export interface Mutable {
+    export interface MutablePlain {
         [length: number]: Big;
     }
 }
@@ -145,9 +145,9 @@ export interface Positions {
     readonly time: number;
 }
 export namespace Positions {
-    export interface Mutable {
-        position: Position.Mutable;
-        closable: Closable.Mutable;
+    export interface MutablePlain {
+        position: Position.MutablePlain;
+        closable: Closable.MutablePlain;
         time: number;
     }
 }
@@ -159,7 +159,7 @@ export interface Balances {
     readonly time: number;
 }
 export namespace Balances {
-    export interface Mutable {
+    export interface MutablePlain {
         balance: Big;
         available: Big;
         time: number;
