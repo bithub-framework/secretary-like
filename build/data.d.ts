@@ -17,64 +17,126 @@ export declare namespace Length {
 export declare type TradeId = number | string;
 export declare type OrderId = number | string;
 export interface LimitOrder {
-    price: Big;
-    quantity: Big;
-    side: Side;
-    length: Length;
-    operation: Operation;
+    readonly price: Big;
+    readonly quantity: Big;
+    readonly side: Side;
+    readonly length: Length;
+    readonly operation: Operation;
+}
+export declare namespace LimitOrder {
+    interface Mutable {
+        price: Big;
+        quantity: Big;
+        side: Side;
+        length: Length;
+        operation: Operation;
+    }
 }
 export interface OpenOrder extends LimitOrder {
-    filled: Big;
-    unfilled: Big;
-    id: OrderId;
+    readonly filled: Big;
+    readonly unfilled: Big;
+    readonly id: OrderId;
+}
+export declare namespace OpenOrder {
+    interface Mutable extends LimitOrder.Mutable {
+        filled: Big;
+        unfilled: Big;
+        id: OrderId;
+    }
 }
 export interface Amendment extends OpenOrder {
-    newUnfilled: Big;
-    newPrice: Big;
+    readonly newUnfilled: Big;
+    readonly newPrice: Big;
+}
+export declare namespace Amendment {
+    interface Mutable extends OpenOrder.Mutable {
+        newUnfilled: Big;
+        newPrice: Big;
+    }
 }
 export interface OpenMaker extends OpenOrder {
-    behind: Big;
+    readonly behind: Big;
 }
 export declare namespace OpenMaker {
-    function jsonCompatiblize(order: OpenMaker): JsonCompatible<OpenMaker>;
+    interface Mutable extends OpenOrder.Mutable {
+        behind: Big;
+    }
 }
 export interface Trade {
-    side: Side;
-    price: Big;
-    quantity: Big;
-    time: number;
-    id: TradeId;
+    readonly side: Side;
+    readonly price: Big;
+    readonly quantity: Big;
+    readonly time: number;
+    readonly id: TradeId;
+}
+export declare namespace Trade {
+    interface Mutable {
+        side: Side;
+        price: Big;
+        quantity: Big;
+        time: number;
+        id: TradeId;
+    }
 }
 export interface BookOrder {
-    price: Big;
-    quantity: Big;
-    side: Side;
+    readonly price: Big;
+    readonly quantity: Big;
+    readonly side: Side;
+}
+export declare namespace BookOrder {
+    interface Mutable {
+        price: Big;
+        quantity: Big;
+        side: Side;
+    }
 }
 export interface Orderbook {
-    [side: number]: BookOrder[];
-    time: number;
+    readonly [side: number]: readonly BookOrder[];
+    readonly time: number;
+}
+export declare namespace Orderbook {
+    interface Mutable {
+        [side: number]: BookOrder.Mutable[];
+        time: number;
+    }
 }
 export interface Closable {
-    [length: number]: Big;
+    readonly [length: number]: Big;
+}
+export declare namespace Closable {
+    interface Mutable {
+        [length: number]: Big;
+    }
 }
 export interface Position {
-    [length: number]: Big;
+    readonly [length: number]: Big;
+}
+export declare namespace Position {
+    interface Mutable {
+        [length: number]: Big;
+    }
 }
 export interface Positions {
-    position: Position;
-    closable: Closable;
-    time: number;
+    readonly position: Position;
+    readonly closable: Closable;
+    readonly time: number;
+}
+export declare namespace Positions {
+    interface Mutable {
+        position: Position.Mutable;
+        closable: Closable.Mutable;
+        time: number;
+    }
 }
 export interface Balances {
-    balance: Big;
-    available: Big;
-    time: number;
+    readonly balance: Big;
+    readonly available: Big;
+    readonly time: number;
 }
-export declare type ReadonlyRecur<T> = T extends {} ? Readonly<{
-    [K in keyof T]: ReadonlyRecur<T[K]>;
-}> : T;
-export declare type JsonCompatible<T> = TypeMappedRecur<T, Big, string>;
-declare type TypeMappedRecur<Type, Old, New> = Type extends Old ? New : (Type extends {} ? {
-    [K in keyof Type]: TypeMappedRecur<Type[K], Old, New>;
-} : Type);
-export {};
+export declare namespace Balances {
+    interface Mutable {
+        balance: Big;
+        available: Big;
+        time: number;
+    }
+}

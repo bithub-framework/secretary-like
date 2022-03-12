@@ -20,98 +20,148 @@ export namespace Length {
 export type TradeId = number | string;
 export type OrderId = number | string;
 
+
 export interface LimitOrder {
-    price: Big;
-    quantity: Big;
-    side: Side;
-    length: Length;
-    operation: Operation;
+    readonly price: Big;
+    readonly quantity: Big;
+    readonly side: Side;
+    readonly length: Length;
+    readonly operation: Operation;
 }
-
-export interface OpenOrder extends LimitOrder {
-    filled: Big;
-    unfilled: Big;
-    id: OrderId;
-}
-
-export interface Amendment extends OpenOrder {
-    newUnfilled: Big;
-    newPrice: Big;
-}
-
-export interface OpenMaker extends OpenOrder {
-    behind: Big;
-}
-
-export namespace OpenMaker {
-    export function jsonCompatiblize(order: OpenMaker): JsonCompatible<OpenMaker> {
-        return {
-            price: order.price.toString(),
-            quantity: order.quantity.toString(),
-            side: order.side,
-            length: order.length,
-            operation: order.operation,
-            filled: order.filled.toString(),
-            unfilled: order.unfilled.toString(),
-            id: order.id,
-            behind: order.behind.toString(),
-        }
+export namespace LimitOrder {
+    export interface Mutable {
+        price: Big;
+        quantity: Big;
+        side: Side;
+        length: Length;
+        operation: Operation;
     }
 }
 
-export interface Trade {
-    side: Side;
-    price: Big;
-    quantity: Big;
-    time: number;
-    id: TradeId;
+
+export interface OpenOrder extends LimitOrder {
+    readonly filled: Big;
+    readonly unfilled: Big;
+    readonly id: OrderId;
 }
+export namespace OpenOrder {
+    export interface Mutable extends LimitOrder.Mutable {
+        filled: Big;
+        unfilled: Big;
+        id: OrderId;
+    }
+}
+
+
+export interface Amendment extends OpenOrder {
+    readonly newUnfilled: Big;
+    readonly newPrice: Big;
+}
+export namespace Amendment {
+    export interface Mutable extends OpenOrder.Mutable {
+        newUnfilled: Big;
+        newPrice: Big;
+    }
+}
+
+
+export interface OpenMaker extends OpenOrder {
+    readonly behind: Big;
+}
+export namespace OpenMaker {
+    export interface Mutable extends OpenOrder.Mutable {
+        behind: Big;
+    }
+}
+
+
+export interface Trade {
+    readonly side: Side;
+    readonly price: Big;
+    readonly quantity: Big;
+    readonly time: number;
+    readonly id: TradeId;
+}
+export namespace Trade {
+    export interface Mutable {
+        side: Side;
+        price: Big;
+        quantity: Big;
+        time: number;
+        id: TradeId;
+    }
+}
+
 
 export interface BookOrder {
-    price: Big;
-    quantity: Big;
-    side: Side,
+    readonly price: Big;
+    readonly quantity: Big;
+    readonly side: Side,
 }
+export namespace BookOrder {
+    export interface Mutable {
+        price: Big;
+        quantity: Big;
+        side: Side,
+    }
+}
+
 
 export interface Orderbook {
-    [side: number]: BookOrder[];
-    time: number;
+    readonly [side: number]: readonly BookOrder[];
+    readonly time: number;
 }
+export namespace Orderbook {
+    export interface Mutable {
+        [side: number]: BookOrder.Mutable[];
+        time: number;
+    }
+}
+
 
 export interface Closable {
-    [length: number]: Big;
+    readonly [length: number]: Big;
 }
+export namespace Closable {
+    export interface Mutable {
+        [length: number]: Big;
+    }
+}
+
 
 export interface Position {
-    [length: number]: Big;
+    readonly [length: number]: Big;
 }
+export namespace Position {
+    export interface Mutable {
+        [length: number]: Big;
+    }
+}
+
 
 export interface Positions {
-    position: Position;
-    closable: Closable;
-    time: number;
+    readonly position: Position;
+    readonly closable: Closable;
+    readonly time: number;
 }
+export namespace Positions {
+    export interface Mutable {
+        position: Position.Mutable;
+        closable: Closable.Mutable;
+        time: number;
+    }
+}
+
 
 export interface Balances {
-    balance: Big;
-    available: Big;
-    time: number;
+    readonly balance: Big;
+    readonly available: Big;
+    readonly time: number;
 }
-
-export type ReadonlyRecur<T> =
-    T extends {}
-    ? Readonly<{
-        [K in keyof T]: ReadonlyRecur<T[K]>;
-    }>
-    : T;
-
-export type JsonCompatible<T> = TypeMappedRecur<T, Big, string>;
-
-type TypeMappedRecur<Type, Old, New> =
-    Type extends Old
-    ? New
-    : (
-        Type extends {}
-        ? { [K in keyof Type]: TypeMappedRecur<Type[K], Old, New>; }
-        : Type
-    );
+export namespace Balances {
+    export interface Mutable {
+        balance: Big;
+        available: Big;
+        time: number;
+    }
+}

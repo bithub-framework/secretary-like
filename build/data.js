@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OpenMaker = exports.Length = exports.Operation = exports.Side = void 0;
+exports.Length = exports.Operation = exports.Side = void 0;
 var Side;
 (function (Side) {
     Side.BID = 1;
@@ -16,21 +16,4 @@ var Length;
     Length.LONG = 1;
     Length.SHORT = -1;
 })(Length = exports.Length || (exports.Length = {}));
-var OpenMaker;
-(function (OpenMaker) {
-    function jsonCompatiblize(order) {
-        return {
-            price: order.price.toString(),
-            quantity: order.quantity.toString(),
-            side: order.side,
-            length: order.length,
-            operation: order.operation,
-            filled: order.filled.toString(),
-            unfilled: order.unfilled.toString(),
-            id: order.id,
-            behind: order.behind.toString(),
-        };
-    }
-    OpenMaker.jsonCompatiblize = jsonCompatiblize;
-})(OpenMaker = exports.OpenMaker || (exports.OpenMaker = {}));
 //# sourceMappingURL=data.js.map

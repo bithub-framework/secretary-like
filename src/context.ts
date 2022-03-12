@@ -6,7 +6,6 @@ import {
     Positions,
     Balances,
     Amendment,
-    ReadonlyRecur,
 } from './data';
 import {
     MarketSpec,
@@ -15,6 +14,7 @@ import {
 } from './specification';
 import { Timeline } from './timeline';
 import { EventEmitter } from 'events';
+
 
 export interface ContextLike {
     readonly [marketIndex: number]: ContextMarketLike;
@@ -34,8 +34,8 @@ export interface ContextAccountLike extends ContextAccountApiLike {
 }
 
 export interface MarketEvents {
-    orderbook: [Orderbook];
-    trades: [Trade[]];
+    orderbook: [Orderbook.Mutable];
+    trades: [Trade.Mutable[]];
     error: [Error];
 }
 
@@ -47,18 +47,18 @@ export interface ContextMarketApiLike extends EventEmitter {
 }
 
 export interface AccountEvents {
-    positions: [Positions];
-    balances: [Balances];
+    positions: [Positions.Mutable];
+    balances: [Balances.Mutable];
     error: [Error];
 }
 
 export interface ContextAccountApiLike extends EventEmitter {
-    makeOrders(orders: ReadonlyRecur<LimitOrder[]>): Promise<(OpenOrder | Error)[]>;
-    amendOrders(amendments: ReadonlyRecur<Amendment[]>): Promise<(OpenOrder | Error)[]>;
-    getOpenOrders(): Promise<OpenOrder[]>;
-    cancelOrders(orders: ReadonlyRecur<OpenOrder[]>): Promise<OpenOrder[]>;
-    getPositions(): Promise<Positions>;
-    getBalances(): Promise<Balances>;
+    makeOrders(orders: readonly LimitOrder[]): Promise<(OpenOrder.Mutable | Error)[]>;
+    amendOrders(amendments: readonly Amendment[]): Promise<(OpenOrder.Mutable | Error)[]>;
+    getOpenOrders(): Promise<OpenOrder.Mutable[]>;
+    cancelOrders(orders: readonly OpenOrder[]): Promise<OpenOrder.Mutable[]>;
+    getPositions(): Promise<Positions.Mutable>;
+    getBalances(): Promise<Balances.Mutable>;
 
     on<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
     once<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
