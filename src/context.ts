@@ -17,79 +17,79 @@ import { EventEmitter } from 'events';
 
 
 export interface ContextLike<
-    ConcreteH extends HLike<ConcreteH>,
-    ConcreteOrderId,
-    ConcreteTradeId,
+    H extends HLike<H>,
+    OrderId,
+    TradeId,
     > {
-    readonly [marketIndex: number]: ContextMarketLike<ConcreteH, ConcreteOrderId, ConcreteTradeId>;
+    readonly [marketIndex: number]: ContextMarketLike<H, OrderId, TradeId>;
     readonly timeline: Timeline;
     /** @param value Serializable into JSON */
     submit(key: string, value: any): Promise<void>;
 }
 
 export interface ContextMarketLike<
-    ConcreteH extends HLike<ConcreteH>,
-    ConcreteOrderId,
-    ConcreteTradeId,
+    H extends HLike<H>,
+    OrderId,
+    TradeId,
     > extends ContextMarketApiLike<
-    ConcreteH,
-    ConcreteTradeId
+    H,
+    TradeId
     > {
-    readonly [accountIndex: number]: ContextAccountLike<ConcreteH, ConcreteOrderId>;
-    readonly spec: MarketSpec;
-    readonly calc: MarketCalc;
+    readonly [accountIndex: number]: ContextAccountLike<H, OrderId>;
+    readonly spec: MarketSpec<H>;
+    readonly calc: MarketCalc<H>;
 }
 
 export interface ContextAccountLike<
-    ConcreteH extends HLike<ConcreteH>,
-    ConcreteOrderId,
+    H extends HLike<H>,
+    OrderId,
     > extends ContextAccountApiLike<
-    ConcreteH,
-    ConcreteOrderId
+    H,
+    OrderId
     > {
     readonly spec: AccountSpec;
 }
 
 export interface MarketEvents<
-    ConcreteH extends HLike<ConcreteH>,
-    ConcreteTradeId,
+    H extends HLike<H>,
+    TradeId,
     > {
-    orderbook: [Orderbook.MutablePlain<ConcreteH>];
-    trades: [Trade.MutablePlain<ConcreteH, ConcreteTradeId>[]];
+    orderbook: [Orderbook.MutablePlain<H>];
+    trades: [Trade.MutablePlain<H, TradeId>[]];
     error: [Error];
 }
 
 export interface ContextMarketApiLike<
-    ConcreteH extends HLike<ConcreteH>,
-    ConcreteTradeId,
+    H extends HLike<H>,
+    TradeId,
     > extends EventEmitter {
-    on<Event extends keyof MarketEvents<ConcreteH, ConcreteTradeId>>(event: Event, listener: (...args: MarketEvents<ConcreteH, ConcreteTradeId>[Event]) => void): this;
-    once<Event extends keyof MarketEvents<ConcreteH, ConcreteTradeId>>(event: Event, listener: (...args: MarketEvents<ConcreteH, ConcreteTradeId>[Event]) => void): this;
-    off<Event extends keyof MarketEvents<ConcreteH, ConcreteTradeId>>(event: Event, listener: (...args: MarketEvents<ConcreteH, ConcreteTradeId>[Event]) => void): this;
-    emit<Event extends keyof MarketEvents<ConcreteH, ConcreteTradeId>>(event: Event, ...args: MarketEvents<ConcreteH, ConcreteTradeId>[Event]): boolean;
+    on<Event extends keyof MarketEvents<H, TradeId>>(event: Event, listener: (...args: MarketEvents<H, TradeId>[Event]) => void): this;
+    once<Event extends keyof MarketEvents<H, TradeId>>(event: Event, listener: (...args: MarketEvents<H, TradeId>[Event]) => void): this;
+    off<Event extends keyof MarketEvents<H, TradeId>>(event: Event, listener: (...args: MarketEvents<H, TradeId>[Event]) => void): this;
+    emit<Event extends keyof MarketEvents<H, TradeId>>(event: Event, ...args: MarketEvents<H, TradeId>[Event]): boolean;
 }
 
 export interface AccountEvents<
-    ConcreteH extends HLike<ConcreteH>,
+    H extends HLike<H>,
     > {
-    positions: [Positions.MutablePlain<ConcreteH>];
-    balances: [Balances.MutablePlain<ConcreteH>];
+    positions: [Positions.MutablePlain<H>];
+    balances: [Balances.MutablePlain<H>];
     error: [Error];
 }
 
 export interface ContextAccountApiLike<
-    ConcreteH extends HLike<ConcreteH>,
-    ConcreteOrderId,
+    H extends HLike<H>,
+    OrderId,
     > extends EventEmitter {
-    makeOrders(orders: readonly LimitOrder<ConcreteH>[]): Promise<(OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId> | Error)[]>;
-    amendOrders(amendments: readonly Amendment<ConcreteH, ConcreteOrderId>[]): Promise<(OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId> | Error)[]>;
-    getOpenOrders(): Promise<OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId>[]>;
-    cancelOrders(orders: readonly OpenOrder<ConcreteH, ConcreteOrderId>[]): Promise<OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId>[]>;
-    getPositions(): Promise<Positions.MutablePlain<ConcreteH>>;
-    getBalances(): Promise<Balances.MutablePlain<ConcreteH>>;
+    makeOrders(orders: readonly LimitOrder<H>[]): Promise<(OpenOrder.MutablePlain<H, OrderId> | Error)[]>;
+    amendOrders(amendments: readonly Amendment<H, OrderId>[]): Promise<(OpenOrder.MutablePlain<H, OrderId> | Error)[]>;
+    getOpenOrders(): Promise<OpenOrder.MutablePlain<H, OrderId>[]>;
+    cancelOrders(orders: readonly OpenOrder<H, OrderId>[]): Promise<OpenOrder.MutablePlain<H, OrderId>[]>;
+    getPositions(): Promise<Positions.MutablePlain<H>>;
+    getBalances(): Promise<Balances.MutablePlain<H>>;
 
-    on<Event extends keyof AccountEvents<ConcreteH>>(event: Event, listener: (...args: AccountEvents<ConcreteH>[Event]) => void): this;
-    once<Event extends keyof AccountEvents<ConcreteH>>(event: Event, listener: (...args: AccountEvents<ConcreteH>[Event]) => void): this;
-    off<Event extends keyof AccountEvents<ConcreteH>>(event: Event, listener: (...args: AccountEvents<ConcreteH>[Event]) => void): this;
-    emit<Event extends keyof AccountEvents<ConcreteH>>(event: Event, ...args: AccountEvents<ConcreteH>[Event]): boolean;
+    on<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;
+    once<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;
+    off<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;
+    emit<Event extends keyof AccountEvents<H>>(event: Event, ...args: AccountEvents<H>[Event]): boolean;
 }

@@ -1,17 +1,17 @@
-import Big from 'big.js';
+import { HLike } from './secretaries';
 export interface AccountSpec {
     readonly LEVERAGE: number;
     readonly MAKER_FEE_RATE: number;
     readonly TAKER_FEE_RATE: number;
 }
-export interface MarketSpec {
+export interface MarketSpec<H extends HLike<H>> {
     readonly PRICE_DP: number;
     readonly QUANTITY_DP: number;
     readonly CURRENCY_DP: number;
-    readonly TICK_SIZE: Big;
+    readonly TICK_SIZE: H;
     readonly MARKET_NAME: string;
 }
-export interface MarketCalc {
-    readonly dollarVolume: (price: Big, quantity: Big) => Big;
-    readonly quantity: (price: Big, dollarVolume: Big) => Big;
+export interface MarketCalc<H extends HLike<H>> {
+    readonly dollarVolume: (price: H, quantity: H) => H;
+    readonly quantity: (price: H, dollarVolume: H) => H;
 }
