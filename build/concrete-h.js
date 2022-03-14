@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConcreteH = void 0;
+const h_1 = require("./secretaries/h");
 const big_js_1 = require("big.js");
 class ConcreteH {
     constructor(big) {
@@ -18,17 +19,45 @@ class ConcreteH {
     div(x) {
         return new ConcreteH(this.value.div(x.value));
     }
+    lt(x) {
+        return this.value.lt(x.value);
+    }
+    lte(x) {
+        return this.value.lte(x.value);
+    }
+    gt(x) {
+        return this.value.gt(x.value);
+    }
+    gte(x) {
+        return this.value.gte(x.value);
+    }
+    round(decimalPoint = 0, roundingMode = h_1.H.RoundingMode.HALF_AWAY_FROM_ZERO) {
+        return new ConcreteH(new big_js_1.Big(this.value).round(decimalPoint, roundingMode === h_1.H.RoundingMode.AWAY_FROM_ZERO
+            ? 3 /* RoundUp */
+            : roundingMode === h_1.H.RoundingMode.TOWARDS_ZERO
+                ? 0 /* RoundDown */
+                : 1 /* RoundHalfUp */));
+    }
+    toJSON() {
+        throw new Error('Use .capture() instead.');
+    }
+    toString() {
+        return this.value.toString();
+    }
+    toFixed(decimalPoint = 0) {
+        return this.value.toFixed(decimalPoint, 0 /* RoundDown */);
+    }
     capture() {
         return this.value.toString();
     }
     static from(source) {
-        return new ConcreteH(new big_js_1.default(source));
+        return new ConcreteH(new big_js_1.Big(source));
     }
     static capture(x) {
         return x.capture();
     }
     static restore(s) {
-        return new ConcreteH(new big_js_1.default(s));
+        return new ConcreteH(new big_js_1.Big(s));
     }
 }
 exports.ConcreteH = ConcreteH;
