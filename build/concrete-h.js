@@ -8,27 +8,59 @@ class ConcreteH {
         this.value = big;
     }
     plus(x) {
+        if (typeof x === 'number')
+            return new ConcreteH(this.value.plus(x));
+        if (typeof x === 'string')
+            return new ConcreteH(this.value.plus(x));
         return new ConcreteH(this.value.plus(x.value));
     }
     minus(x) {
+        if (typeof x === 'number')
+            return new ConcreteH(this.value.minus(x));
+        if (typeof x === 'string')
+            return new ConcreteH(this.value.minus(x));
         return new ConcreteH(this.value.minus(x.value));
     }
     times(x) {
+        if (typeof x === 'number')
+            return new ConcreteH(this.value.times(x));
+        if (typeof x === 'string')
+            return new ConcreteH(this.value.times(x));
         return new ConcreteH(this.value.times(x.value));
     }
     div(x) {
+        if (typeof x === 'number')
+            return new ConcreteH(this.value.div(x));
+        if (typeof x === 'string')
+            return new ConcreteH(this.value.div(x));
         return new ConcreteH(this.value.div(x.value));
     }
     lt(x) {
+        if (typeof x === 'number')
+            return this.value.lt(x);
+        if (typeof x === 'string')
+            return this.value.lt(x);
         return this.value.lt(x.value);
     }
     lte(x) {
+        if (typeof x === 'number')
+            return this.value.lte(x);
+        if (typeof x === 'string')
+            return this.value.lte(x);
         return this.value.lte(x.value);
     }
     gt(x) {
+        if (typeof x === 'number')
+            return this.value.gt(x);
+        if (typeof x === 'string')
+            return this.value.gt(x);
         return this.value.gt(x.value);
     }
     gte(x) {
+        if (typeof x === 'number')
+            return this.value.gte(x);
+        if (typeof x === 'string')
+            return this.value.gte(x);
         return this.value.gte(x.value);
     }
     round(decimalPoint = 0, roundingMode = h_1.H.RoundingMode.HALF_AWAY_FROM_ZERO) {

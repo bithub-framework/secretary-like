@@ -1,12 +1,12 @@
 export interface HLike<ConcreteH extends HLike<ConcreteH>> {
-    plus(x: ConcreteH): ConcreteH;
-    minus(x: ConcreteH): ConcreteH;
-    times(x: ConcreteH): ConcreteH;
-    div(x: ConcreteH): ConcreteH;
-    lt(x: ConcreteH): boolean;
-    lte(x: ConcreteH): boolean;
-    gt(x: ConcreteH): boolean;
-    gte(x: ConcreteH): boolean;
+    plus(x: H.Source<ConcreteH>): ConcreteH;
+    minus(x: H.Source<ConcreteH>): ConcreteH;
+    times(x: H.Source<ConcreteH>): ConcreteH;
+    div(x: H.Source<ConcreteH>): ConcreteH;
+    lt(x: H.Source<ConcreteH>): boolean;
+    lte(x: H.Source<ConcreteH>): boolean;
+    gt(x: H.Source<ConcreteH>): boolean;
+    gte(x: H.Source<ConcreteH>): boolean;
     round(decimalPoint?: number, roundingMode?: H.RoundingMode): ConcreteH;
     toJSON(): never;
     toString(): string;
@@ -14,7 +14,7 @@ export interface HLike<ConcreteH extends HLike<ConcreteH>> {
 }
 export declare namespace H {
     type Snapshot = string;
-    type Source = number | string;
+    type Source<ConcreteH extends HLike<ConcreteH>> = ConcreteH | number | string;
     enum RoundingMode {
         TOWARDS_ZERO = 0,
         AWAY_FROM_ZERO = 1,
@@ -22,7 +22,7 @@ export declare namespace H {
     }
 }
 export interface HStatic<ConcreteH extends HLike<ConcreteH>> {
-    from(source: H.Source): ConcreteH;
+    from(source: H.Source<ConcreteH>): ConcreteH;
     capture(x: ConcreteH): H.Snapshot;
     restore(s: H.Snapshot): ConcreteH;
 }

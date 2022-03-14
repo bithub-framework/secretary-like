@@ -9,35 +9,51 @@ export class ConcreteH implements HLike<ConcreteH> {
 		this.value = big;
 	}
 
-	public plus(x: ConcreteH): ConcreteH {
+	public plus(x: H.Source<ConcreteH>): ConcreteH {
+		if (typeof x === 'number') return new ConcreteH(this.value.plus(x));
+		if (typeof x === 'string') return new ConcreteH(this.value.plus(x));
 		return new ConcreteH(this.value.plus(x.value));
 	}
 
-	public minus(x: ConcreteH): ConcreteH {
+	public minus(x: H.Source<ConcreteH>): ConcreteH {
+		if (typeof x === 'number') return new ConcreteH(this.value.minus(x));
+		if (typeof x === 'string') return new ConcreteH(this.value.minus(x));
 		return new ConcreteH(this.value.minus(x.value));
 	}
 
-	public times(x: ConcreteH): ConcreteH {
+	public times(x: H.Source<ConcreteH>): ConcreteH {
+		if (typeof x === 'number') return new ConcreteH(this.value.times(x));
+		if (typeof x === 'string') return new ConcreteH(this.value.times(x));
 		return new ConcreteH(this.value.times(x.value));
 	}
 
-	public div(x: ConcreteH): ConcreteH {
+	public div(x: H.Source<ConcreteH>): ConcreteH {
+		if (typeof x === 'number') return new ConcreteH(this.value.div(x));
+		if (typeof x === 'string') return new ConcreteH(this.value.div(x));
 		return new ConcreteH(this.value.div(x.value));
 	}
 
-	public lt(x: ConcreteH): boolean {
+	public lt(x: H.Source<ConcreteH>): boolean {
+		if (typeof x === 'number') return this.value.lt(x);
+		if (typeof x === 'string') return this.value.lt(x);
 		return this.value.lt(x.value);
 	}
 
-	public lte(x: ConcreteH): boolean {
+	public lte(x: H.Source<ConcreteH>): boolean {
+		if (typeof x === 'number') return this.value.lte(x);
+		if (typeof x === 'string') return this.value.lte(x);
 		return this.value.lte(x.value);
 	}
 
-	public gt(x: ConcreteH): boolean {
+	public gt(x: H.Source<ConcreteH>): boolean {
+		if (typeof x === 'number') return this.value.gt(x);
+		if (typeof x === 'string') return this.value.gt(x);
 		return this.value.gt(x.value);
 	}
 
-	public gte(x: ConcreteH): boolean {
+	public gte(x: H.Source<ConcreteH>): boolean {
+		if (typeof x === 'number') return this.value.gte(x);
+		if (typeof x === 'string') return this.value.gte(x);
 		return this.value.gte(x.value);
 	}
 
