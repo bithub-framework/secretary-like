@@ -1,12 +1,11 @@
-import {
-    LimitOrder,
-    OpenOrder,
-    Orderbook,
-    Trade,
-    Positions,
-    Balances,
-    Amendment,
-} from './data';
+import { LimitOrder } from './context/limit-order';
+import { OpenOrder } from './context/open-order';
+import { Amendment } from './context/amendment';
+import { Positions } from './context/positions';
+import { Balances } from './context/balances';
+import { Orderbook } from './context/orderbook';
+import { Trade } from './context/trade';
+import { HLike } from './context/h';
 import {
     MarketSpec,
     AccountSpec,
@@ -16,52 +15,81 @@ import { Timeline } from './timeline';
 import { EventEmitter } from 'events';
 
 
-export interface ContextLike {
-    readonly [marketIndex: number]: ContextMarketLike;
+
+export interface ContextLike<
+    ConcreteH extends HLike<ConcreteH>,
+    ConcreteOrderId,
+    ConcreteTradeId,
+    > {
+    readonly [marketIndex: number]: ContextMarketLike<ConcreteH, ConcreteOrderId, ConcreteTradeId>;
     readonly timeline: Timeline;
     /** @param value Serializable into JSON */
     submit(key: string, value: any): Promise<void>;
 }
 
-export interface ContextMarketLike extends ContextMarketApiLike {
-    readonly [accountIndex: number]: ContextAccountLike;
+export interface ContextMarketLike<
+    ConcreteH extends HLike<ConcreteH>,
+    ConcreteOrderId,
+    ConcreteTradeId,
+    > extends ContextMarketApiLike<
+    ConcreteH,
+    ConcreteTradeId
+    > {
+    readonly [accountIndex: number]: ContextAccountLike<ConcreteH, ConcreteOrderId>;
     readonly spec: MarketSpec;
     readonly calc: MarketCalc;
 }
 
-export interface ContextAccountLike extends ContextAccountApiLike {
+export interface ContextAccountLike<
+    ConcreteH extends HLike<ConcreteH>,
+    ConcreteOrderId,
+    > extends ContextAccountApiLike<
+    ConcreteH,
+    ConcreteOrderId
+    > {
     readonly spec: AccountSpec;
 }
 
-export interface MarketEvents {
-    orderbook: [Orderbook.MutablePlain];
-    trades: [Trade.MutablePlain[]];
+export interface MarketEvents<
+    ConcreteH extends HLike<ConcreteH>,
+    ConcreteTradeId,
+    > {
+    orderbook: [Orderbook.MutablePlain<ConcreteH>];
+    trades: [Trade.MutablePlain<ConcreteH, ConcreteTradeId>[]];
     error: [Error];
 }
 
-export interface ContextMarketApiLike extends EventEmitter {
-    on<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
-    once<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
-    off<Event extends keyof MarketEvents>(event: Event, listener: (...args: MarketEvents[Event]) => void): this;
-    emit<Event extends keyof MarketEvents>(event: Event, ...args: MarketEvents[Event]): boolean;
+export interface ContextMarketApiLike<
+    ConcreteH extends HLike<ConcreteH>,
+    ConcreteTradeId,
+    > extends EventEmitter {
+    on<Event extends keyof MarketEvents<ConcreteH, ConcreteTradeId>>(event: Event, listener: (...args: MarketEvents<ConcreteH, ConcreteTradeId>[Event]) => void): this;
+    once<Event extends keyof MarketEvents<ConcreteH, ConcreteTradeId>>(event: Event, listener: (...args: MarketEvents<ConcreteH, ConcreteTradeId>[Event]) => void): this;
+    off<Event extends keyof MarketEvents<ConcreteH, ConcreteTradeId>>(event: Event, listener: (...args: MarketEvents<ConcreteH, ConcreteTradeId>[Event]) => void): this;
+    emit<Event extends keyof MarketEvents<ConcreteH, ConcreteTradeId>>(event: Event, ...args: MarketEvents<ConcreteH, ConcreteTradeId>[Event]): boolean;
 }
 
-export interface AccountEvents {
-    positions: [Positions.MutablePlain];
-    balances: [Balances.MutablePlain];
+export interface AccountEvents<
+    ConcreteH extends HLike<ConcreteH>,
+    > {
+    positions: [Positions.MutablePlain<ConcreteH>];
+    balances: [Balances.MutablePlain<ConcreteH>];
     error: [Error];
 }
 
-export interface ContextAccountApiLike extends EventEmitter {
-    makeOrders(orders: readonly LimitOrder[]): Promise<(OpenOrder.MutablePlain | Error)[]>;
-    amendOrders(amendments: readonly Amendment[]): Promise<(OpenOrder.MutablePlain | Error)[]>;
-    getOpenOrders(): Promise<OpenOrder.MutablePlain[]>;
-    cancelOrders(orders: readonly OpenOrder[]): Promise<OpenOrder.MutablePlain[]>;
-    getPositions(): Promise<Positions.MutablePlain>;
-    getBalances(): Promise<Balances.MutablePlain>;
+export interface ContextAccountApiLike<
+    ConcreteH extends HLike<ConcreteH>,
+    ConcreteOrderId,
+    > extends EventEmitter {
+    makeOrders(orders: readonly LimitOrder<ConcreteH>[]): Promise<(OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId> | Error)[]>;
+    amendOrders(amendments: readonly Amendment<ConcreteH, ConcreteOrderId>[]): Promise<(OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId> | Error)[]>;
+    getOpenOrders(): Promise<OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId>[]>;
+    cancelOrders(orders: readonly OpenOrder<ConcreteH, ConcreteOrderId>[]): Promise<OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId>[]>;
+    getPositions(): Promise<Positions.MutablePlain<ConcreteH>>;
+    getBalances(): Promise<Balances.MutablePlain<ConcreteH>>;
 
-    on<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
-    once<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
-    off<Event extends keyof AccountEvents>(event: Event, listener: (...args: AccountEvents[Event]) => void): this;
-    emit<Event extends keyof AccountEvents>(event: Event, ...args: AccountEvents[Event]): boolean;
+    on<Event extends keyof AccountEvents<ConcreteH>>(event: Event, listener: (...args: AccountEvents<ConcreteH>[Event]) => void): this;
+    once<Event extends keyof AccountEvents<ConcreteH>>(event: Event, listener: (...args: AccountEvents<ConcreteH>[Event]) => void): this;
+    off<Event extends keyof AccountEvents<ConcreteH>>(event: Event, listener: (...args: AccountEvents<ConcreteH>[Event]) => void): this;
+    emit<Event extends keyof AccountEvents<ConcreteH>>(event: Event, ...args: AccountEvents<ConcreteH>[Event]): boolean;
 }

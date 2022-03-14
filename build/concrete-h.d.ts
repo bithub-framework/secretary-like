@@ -1,18 +1,13 @@
-import Big from 'big.js';
-import { H, HStatic, HFriendly } from './h';
-export declare class ConcreteH extends HFriendly {
+import { HLike, H } from './context/h';
+export declare class ConcreteH implements HLike<ConcreteH> {
     private readonly value;
-    constructor(big: Big);
-    plus(x: this): H;
-    minus(x: this): H;
-    times(x: this): H;
-    div(x: this): H;
-    capture(): H.Snapshot;
+    private constructor();
+    plus(x: ConcreteH): ConcreteH;
+    minus(x: ConcreteH): ConcreteH;
+    times(x: ConcreteH): ConcreteH;
+    div(x: ConcreteH): ConcreteH;
+    private capture;
+    static from(source: H.Snapshot): ConcreteH;
+    static capture(x: ConcreteH): H.Snapshot;
+    static restore(s: H.Snapshot): ConcreteH;
 }
-export declare class ConcreteHStatic implements HStatic<ConcreteH> {
-    from(source: H.Snapshot): ConcreteH;
-    capture(x: ConcreteH): H.Snapshot;
-    restore(s: H.Snapshot): ConcreteH;
-}
-declare const H: HStatic<ConcreteH>;
-export { H };

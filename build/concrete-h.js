@@ -1,11 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.H = exports.ConcreteHStatic = exports.ConcreteH = void 0;
+exports.ConcreteH = void 0;
 const big_js_1 = require("big.js");
-const h_1 = require("./h");
-class ConcreteH extends h_1.HFriendly {
+class ConcreteH {
     constructor(big) {
-        super();
         this.value = big;
     }
     plus(x) {
@@ -23,20 +21,16 @@ class ConcreteH extends h_1.HFriendly {
     capture() {
         return this.value.toString();
     }
-}
-exports.ConcreteH = ConcreteH;
-class ConcreteHStatic {
-    from(source) {
+    static from(source) {
         return new ConcreteH(new big_js_1.default(source));
     }
-    capture(x) {
+    static capture(x) {
         return x.capture();
     }
-    restore(s) {
+    static restore(s) {
         return new ConcreteH(new big_js_1.default(s));
     }
 }
-exports.ConcreteHStatic = ConcreteHStatic;
-const H = new ConcreteHStatic();
-exports.H = H;
+exports.ConcreteH = ConcreteH;
+const hStatic = ConcreteH;
 //# sourceMappingURL=concrete-h.js.map
