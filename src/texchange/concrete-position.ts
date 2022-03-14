@@ -1,6 +1,6 @@
-import { HLike, HStatic } from '../context/h';
-import { Position, PositionStatic } from '../context/position';
-import { Length } from '../context/length';
+import { HLike, HStatic } from '../secretaries/h';
+import { Position, PositionStatic } from '../secretaries/position';
+import { Length } from '../secretaries/length';
 
 
 

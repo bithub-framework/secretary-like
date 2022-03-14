@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConcretePositionStatic = void 0;
-const length_1 = require("../context/length");
+const length_1 = require("../secretaries/length");
 class ConcretePositionStatic {
     constructor(ConcreteH) {
         this.ConcreteH = ConcreteH;

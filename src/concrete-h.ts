@@ -1,4 +1,4 @@
-import { HLike, H, HStatic } from './context/h';
+import { HLike, H, HStatic } from './secretaries/h';
 import Big from 'big.js';
 
 

@@ -1,6 +1,6 @@
-import { HLike, HStatic } from '../context/h';
-import { Closable, ClosableStatic } from '../context/closable';
-import { Length } from '../context/length';
+import { HLike, HStatic } from '../secretaries/h';
+import { Closable, ClosableStatic } from '../secretaries/closable';
+import { Length } from '../secretaries/length';
 
 
 

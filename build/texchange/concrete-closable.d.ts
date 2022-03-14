@@ -1,5 +1,5 @@
-import { HLike, HStatic } from '../context/h';
-import { Closable, ClosableStatic } from '../context/closable';
+import { HLike, HStatic } from '../secretaries/h';
+import { Closable, ClosableStatic } from '../secretaries/closable';
 export interface ConcreteClosable<ConcreteH extends HLike<ConcreteH>> extends Closable<ConcreteH> {
 }
 export declare namespace ConcreteClosable {

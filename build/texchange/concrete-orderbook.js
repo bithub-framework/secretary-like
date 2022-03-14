@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConcreteOrderbookStatic = void 0;
-const side_1 = require("../context/side");
+const side_1 = require("../secretaries/side");
 class ConcreteOrderbookStatic {
     constructor(ConcreteBookOrder) {
         this.ConcreteBookOrder = ConcreteBookOrder;

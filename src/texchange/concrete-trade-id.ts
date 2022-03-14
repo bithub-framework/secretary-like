@@ -1,4 +1,4 @@
-import { TradeId, TradeIdStatic } from '../context/trade-id';
+import { TradeId, TradeIdStatic } from '../secretaries/trade-id';
 
 
 export type ConcreteTradeId = number | string;

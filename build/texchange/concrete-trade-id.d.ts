@@ -1,4 +1,4 @@
-import { TradeId, TradeIdStatic } from '../context/trade-id';
+import { TradeId, TradeIdStatic } from '../secretaries/trade-id';
 export declare type ConcreteTradeId = number | string;
 export declare class ConcreteTradeIdStatic implements TradeIdStatic<ConcreteTradeId> {
     capture(id: ConcreteTradeId): TradeId.Snapshot;

@@ -1,11 +1,11 @@
-import { LimitOrder } from './context/limit-order';
-import { OpenOrder } from './context/open-order';
-import { Amendment } from './context/amendment';
-import { Positions } from './context/positions';
-import { Balances } from './context/balances';
-import { Orderbook } from './context/orderbook';
-import { Trade } from './context/trade';
-import { HLike } from './context/h';
+import { LimitOrder } from './secretaries/limit-order';
+import { OpenOrder } from './secretaries/open-order';
+import { Amendment } from './secretaries/amendment';
+import { Positions } from './secretaries/positions';
+import { Balances } from './secretaries/balances';
+import { Orderbook } from './secretaries/orderbook';
+import { Trade } from './secretaries/trade';
+import { HLike } from './secretaries/h';
 import {
     MarketSpec,
     AccountSpec,

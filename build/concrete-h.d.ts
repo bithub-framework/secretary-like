@@ -1,4 +1,4 @@
-import { HLike, H } from './context/h';
+import { HLike, H } from './secretaries/h';
 export declare class ConcreteH implements HLike<ConcreteH> {
     private readonly value;
     private constructor();

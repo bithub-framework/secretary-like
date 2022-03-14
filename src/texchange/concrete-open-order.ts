@@ -1,5 +1,5 @@
-import { HLike, HStatic } from '../context/h';
-import { OpenOrder, OpenOrderStatic } from '../context/open-order';
+import { HLike, HStatic } from '../secretaries/h';
+import { OpenOrder, OpenOrderStatic } from '../secretaries/open-order';
 import { ConcreteOrderId, ConcreteOrderIdStatic } from './concrete-order-id';
 import { ConcreteLimitOrder, ConcreteLimitOrderStatic } from './concrete-limit-order';
 

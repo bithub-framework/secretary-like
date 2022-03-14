@@ -1,6 +1,6 @@
-import { HLike, HStatic } from '../context/h';
+import { HLike, HStatic } from '../secretaries/h';
 import { ConcreteTradeId, ConcreteTradeIdStatic } from './concrete-trade-id';
-import { Trade, TradeStatic } from '../context/trade';
+import { Trade, TradeStatic } from '../secretaries/trade';
 export interface ConcreteTrade<ConcreteH extends HLike<ConcreteH>> extends Trade<ConcreteH, ConcreteTradeId> {
 }
 export declare namespace ConcreteTrade {

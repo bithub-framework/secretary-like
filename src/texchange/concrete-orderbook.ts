@@ -1,7 +1,7 @@
-import { HLike } from '../context/h';
-import { Orderbook, OrderbookStatic } from '../context/orderbook';
+import { HLike } from '../secretaries/h';
+import { Orderbook, OrderbookStatic } from '../secretaries/orderbook';
 import { ConcreteBookOrderStatic } from './concrete-book-order';
-import { Side } from '../context/side';
+import { Side } from '../secretaries/side';
 
 
 

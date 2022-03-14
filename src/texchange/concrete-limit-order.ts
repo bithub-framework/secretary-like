@@ -1,5 +1,5 @@
-import { HLike, HStatic } from '../context/h';
-import { LimitOrder, LimitOrderStatic } from '../context/limit-order';
+import { HLike, HStatic } from '../secretaries/h';
+import { LimitOrder, LimitOrderStatic } from '../secretaries/limit-order';
 
 
 

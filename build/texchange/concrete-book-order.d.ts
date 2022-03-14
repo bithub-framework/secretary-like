@@ -1,5 +1,5 @@
-import { HLike, HStatic } from '../context/h';
-import { BookOrder, BookOrderStatic } from '../context/book-order';
+import { HLike, HStatic } from '../secretaries/h';
+import { BookOrder, BookOrderStatic } from '../secretaries/book-order';
 export interface ConcreteBookOrder<ConcreteH extends HLike<ConcreteH>> extends BookOrder<ConcreteH> {
 }
 export declare namespace ConcreteBookOrder {

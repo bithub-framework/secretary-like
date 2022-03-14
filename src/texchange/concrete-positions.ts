@@ -1,5 +1,5 @@
-import { HLike, HStatic } from '../context/h';
-import { Positions, PositionsStatic } from '../context/positions';
+import { HLike, HStatic } from '../secretaries/h';
+import { Positions, PositionsStatic } from '../secretaries/positions';
 import { ConcretePositionStatic } from './concrete-position';
 import { ConcreteClosableStatic } from './concrete-closable';
 

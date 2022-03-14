@@ -1,4 +1,4 @@
-import { OrderId, OrderIdStatic } from '../context/order-id';
+import { OrderId, OrderIdStatic } from '../secretaries/order-id';
 
 
 export type ConcreteOrderId = number | string;

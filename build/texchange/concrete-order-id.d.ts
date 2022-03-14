@@ -1,4 +1,4 @@
-import { OrderId, OrderIdStatic } from '../context/order-id';
+import { OrderId, OrderIdStatic } from '../secretaries/order-id';
 export declare type ConcreteOrderId = number | string;
 export declare class ConcreteOrderIdStatic implements OrderIdStatic<ConcreteOrderId> {
     capture(id: ConcreteOrderId): OrderId.Snapshot;

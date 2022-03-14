@@ -1,5 +1,5 @@
-import { HLike, HStatic } from '../context/h';
-import { Amendment, AmendmentStatic } from '../context/amendment';
+import { HLike, HStatic } from '../secretaries/h';
+import { Amendment, AmendmentStatic } from '../secretaries/amendment';
 import { ConcreteOpenOrder, ConcreteOpenOrderStatic } from './concrete-open-order';
 import { ConcreteOrderId } from './concrete-order-id';
 export interface ConcreteAmendment<ConcreteH extends HLike<ConcreteH>> extends Amendment<ConcreteH, ConcreteOrderId>, ConcreteOpenOrder<ConcreteH> {

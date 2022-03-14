@@ -1,6 +1,6 @@
-import { HLike, HStatic } from '../context/h';
+import { HLike, HStatic } from '../secretaries/h';
 import { ConcreteOpenOrder, ConcreteOpenOrderStatic } from './concrete-open-order';
-import { OpenMaker, OpenMakerStatic } from '../context/open-maker';
+import { OpenMaker, OpenMakerStatic } from '../secretaries/open-maker';
 import { ConcreteOrderId } from './concrete-order-id';
 
 

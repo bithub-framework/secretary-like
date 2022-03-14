@@ -1,5 +1,5 @@
-import { HLike, HStatic } from '../context/h';
-import { Position, PositionStatic } from '../context/position';
+import { HLike, HStatic } from '../secretaries/h';
+import { Position, PositionStatic } from '../secretaries/position';
 export interface ConcretePosition<ConcreteH extends HLike<ConcreteH>> extends Position<ConcreteH> {
 }
 export declare namespace ConcretePosition {

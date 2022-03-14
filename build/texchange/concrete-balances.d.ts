@@ -1,5 +1,5 @@
-import { HLike, HStatic } from '../context/h';
-import { Balances, BalancesStatic } from '../context/balances';
+import { HLike, HStatic } from '../secretaries/h';
+import { Balances, BalancesStatic } from '../secretaries/balances';
 export interface ConcreteBalances<ConcreteH extends HLike<ConcreteH>> extends Balances<ConcreteH> {
 }
 export declare namespace ConcreteBalances {

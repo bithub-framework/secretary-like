@@ -1,3 +1,4 @@
+export * from './secretaries';
 export * from './context';
 export * from './texchange';
 export * from './specification';
