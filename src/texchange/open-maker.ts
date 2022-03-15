@@ -1,5 +1,5 @@
 import { HLike } from '../secretaries/h';
-import { OpenMaker } from '../secretaries/open-maker';
+import { OpenMaker, OpenMakerStatic } from '../secretaries/open-maker';
 import { TexchangeOrderId } from './order-id';
 
 
@@ -12,3 +12,6 @@ export namespace TexchangeOpenMaker {
 	export interface MutablePlain<H extends HLike<H>>
 		extends OpenMaker.MutablePlain<H, TexchangeOrderId> { }
 }
+
+export class TexchangeOpenMakerStatic<H extends HLike<H>>
+	extends OpenMakerStatic<H, TexchangeOrderId>{ }

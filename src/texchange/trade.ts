@@ -1,6 +1,6 @@
 import { HLike } from '../secretaries/h';
 import { TexchangeTradeId } from './trade-id';
-import { Trade } from '../secretaries/trade';
+import { Trade, TradeStatic } from '../secretaries/trade';
 
 
 
@@ -12,3 +12,6 @@ export namespace TexchangeTrade {
 	export interface MutablePlain<H extends HLike<H>>
 		extends Trade.MutablePlain<H, TexchangeTradeId> { }
 }
+
+export class TexchangeTradeStatic<H extends HLike<H>>
+	extends TradeStatic<H, TexchangeTradeId>{ }
