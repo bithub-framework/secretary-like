@@ -1,4 +1,4 @@
-import { HLike } from '../secretaries/h';
+import { HLike, HStatic } from '../secretaries/h';
 import { Orderbook, OrderbookStatic } from '../secretaries/orderbook';
 import { ConcreteBookOrderStatic } from './concrete-book-order';
 import { Side } from '../secretaries/side';
@@ -23,9 +23,13 @@ export class ConcreteOrderbookStatic<
 	> implements OrderbookStatic<
 	ConcreteH
 	>{
+	private ConcreteBookOrder: ConcreteBookOrderStatic<ConcreteH>;
+
 	public constructor(
-		private ConcreteBookOrder: ConcreteBookOrderStatic<ConcreteH>,
-	) { }
+		private ConcreteH: HStatic<ConcreteH>,
+	) {
+		this.ConcreteBookOrder = new ConcreteBookOrderStatic(this.ConcreteH);
+	}
 
 	capture(orderbook: ConcreteOrderbook<ConcreteH>): Orderbook.Snapshot {
 		return {

@@ -36,6 +36,7 @@ export class ConcreteTradeStatic<
 			id: this.ConcreteTradeId.capture(trade.id),
 		}
 	}
+
 	restore(snapshot: Trade.Snapshot): ConcreteTrade.MutablePlain<ConcreteH> {
 		return {
 			side: snapshot.side,

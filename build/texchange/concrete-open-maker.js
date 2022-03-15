@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConcreteOpenMakerStatic = void 0;
+const concrete_open_order_1 = require("./concrete-open-order");
 class ConcreteOpenMakerStatic {
-    constructor(ConcreteH, ConcreteOpenOrder) {
+    constructor(ConcreteH, ConcreteOrderId) {
         this.ConcreteH = ConcreteH;
-        this.ConcreteOpenOrder = ConcreteOpenOrder;
+        this.ConcreteOrderId = ConcreteOrderId;
+        this.ConcreteOpenOrder = new concrete_open_order_1.ConcreteOpenOrderStatic(this.ConcreteH, this.ConcreteOrderId);
     }
     capture(order) {
         return {

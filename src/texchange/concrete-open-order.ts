@@ -27,11 +27,15 @@ export class ConcreteOpenOrderStatic<
 	ConcreteH,
 	ConcreteOrderId
 	>{
+
+	private ConcreteLimitOrder: ConcreteLimitOrderStatic<ConcreteH>;
+
 	public constructor(
 		private ConcreteH: HStatic<ConcreteH>,
-		private ConcreteLimitOrder: ConcreteLimitOrderStatic<ConcreteH>,
 		private ConcreteOrderId: ConcreteOrderIdStatic,
-	) { }
+	) {
+		this.ConcreteLimitOrder = new ConcreteLimitOrderStatic(this.ConcreteH);
+	}
 
 	capture(order: ConcreteOpenOrder<ConcreteH>): OpenOrder.Snapshot {
 		return {

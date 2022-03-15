@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConcreteOpenOrderStatic = void 0;
+const concrete_limit_order_1 = require("./concrete-limit-order");
 class ConcreteOpenOrderStatic {
-    constructor(ConcreteH, ConcreteLimitOrder, ConcreteOrderId) {
+    constructor(ConcreteH, ConcreteOrderId) {
         this.ConcreteH = ConcreteH;
-        this.ConcreteLimitOrder = ConcreteLimitOrder;
         this.ConcreteOrderId = ConcreteOrderId;
+        this.ConcreteLimitOrder = new concrete_limit_order_1.ConcreteLimitOrderStatic(this.ConcreteH);
     }
     capture(order) {
         return {

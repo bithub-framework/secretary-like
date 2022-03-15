@@ -1,6 +1,5 @@
-import { HLike } from '../secretaries/h';
+import { HLike, HStatic } from '../secretaries/h';
 import { Orderbook, OrderbookStatic } from '../secretaries/orderbook';
-import { ConcreteBookOrderStatic } from './concrete-book-order';
 export interface ConcreteOrderbook<ConcreteH extends HLike<ConcreteH>> extends Orderbook<ConcreteH> {
 }
 export declare namespace ConcreteOrderbook {
@@ -8,8 +7,9 @@ export declare namespace ConcreteOrderbook {
     }
 }
 export declare class ConcreteOrderbookStatic<ConcreteH extends HLike<ConcreteH>> implements OrderbookStatic<ConcreteH> {
+    private ConcreteH;
     private ConcreteBookOrder;
-    constructor(ConcreteBookOrder: ConcreteBookOrderStatic<ConcreteH>);
+    constructor(ConcreteH: HStatic<ConcreteH>);
     capture(orderbook: ConcreteOrderbook<ConcreteH>): Orderbook.Snapshot;
     restore(snapshot: Orderbook.Snapshot): ConcreteOrderbook.MutablePlain<ConcreteH>;
 }

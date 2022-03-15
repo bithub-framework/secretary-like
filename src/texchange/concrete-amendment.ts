@@ -1,7 +1,7 @@
 import { HLike, HStatic } from '../secretaries/h';
 import { Amendment, AmendmentStatic } from '../secretaries/amendment';
 import { ConcreteOpenOrder, ConcreteOpenOrderStatic } from './concrete-open-order';
-import { ConcreteOrderId } from './concrete-order-id';
+import { ConcreteOrderId, ConcreteOrderIdStatic } from './concrete-order-id';
 
 
 export interface ConcreteAmendment<
@@ -26,10 +26,17 @@ export class ConcreteAmendmentStatic<
 	ConcreteH,
 	ConcreteOrderId
 	>{
+
+	private ConcreteOpenOrder: ConcreteOpenOrderStatic<ConcreteH>;
+
 	public constructor(
 		private ConcreteH: HStatic<ConcreteH>,
-		private ConcreteOpenOrder: ConcreteOpenOrderStatic<ConcreteH>,
-	) { }
+		private ConcreteOrderId: ConcreteOrderIdStatic,
+	) {
+		this.ConcreteOpenOrder = new ConcreteOpenOrderStatic(
+			this.ConcreteH, this.ConcreteOrderId,
+		);
+	}
 
 	capture(amendment: ConcreteAmendment<ConcreteH>): Amendment.Snapshot {
 		return {

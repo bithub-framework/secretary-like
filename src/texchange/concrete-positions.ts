@@ -22,10 +22,16 @@ export class ConcretePositionsStatic<
 	> implements PositionsStatic<
 	ConcreteH
 	>{
+
+	private Position: ConcretePositionStatic<ConcreteH>;
+	private Closable: ConcreteClosableStatic<ConcreteH>;
+
 	public constructor(
-		private Position: ConcretePositionStatic<ConcreteH>,
-		private Closable: ConcreteClosableStatic<ConcreteH>,
-	) { }
+		private ConcreteH: HStatic<ConcreteH>,
+	) {
+		this.Position = new ConcretePositionStatic(this.ConcreteH);
+		this.Closable = new ConcreteClosableStatic(this.ConcreteH);
+	}
 
 	capture(positions: ConcretePositions<ConcreteH>): Positions.Snapshot {
 		return {

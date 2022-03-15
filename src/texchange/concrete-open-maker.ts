@@ -1,7 +1,7 @@
 import { HLike, HStatic } from '../secretaries/h';
 import { ConcreteOpenOrder, ConcreteOpenOrderStatic } from './concrete-open-order';
 import { OpenMaker, OpenMakerStatic } from '../secretaries/open-maker';
-import { ConcreteOrderId } from './concrete-order-id';
+import { ConcreteOrderId, ConcreteOrderIdStatic } from './concrete-order-id';
 
 
 
@@ -27,10 +27,17 @@ export class ConcreteOpenMakerStatic<
 	ConcreteH,
 	ConcreteOrderId
 	>{
+
+	private ConcreteOpenOrder: ConcreteOpenOrderStatic<ConcreteH>;
+
 	public constructor(
 		private ConcreteH: HStatic<ConcreteH>,
-		private ConcreteOpenOrder: ConcreteOpenOrderStatic<ConcreteH>,
-	) { }
+		private ConcreteOrderId: ConcreteOrderIdStatic,
+	) {
+		this.ConcreteOpenOrder = new ConcreteOpenOrderStatic(
+			this.ConcreteH, this.ConcreteOrderId,
+		);
+	}
 
 	capture(order: ConcreteOpenMaker<ConcreteH>): OpenMaker.Snapshot {
 		return {

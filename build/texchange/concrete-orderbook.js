@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConcreteOrderbookStatic = void 0;
+const concrete_book_order_1 = require("./concrete-book-order");
 const side_1 = require("../secretaries/side");
 class ConcreteOrderbookStatic {
-    constructor(ConcreteBookOrder) {
-        this.ConcreteBookOrder = ConcreteBookOrder;
+    constructor(ConcreteH) {
+        this.ConcreteH = ConcreteH;
+        this.ConcreteBookOrder = new concrete_book_order_1.ConcreteBookOrderStatic(this.ConcreteH);
     }
     capture(orderbook) {
         return {
