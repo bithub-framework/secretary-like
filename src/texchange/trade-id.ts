@@ -1,14 +1,14 @@
 import { TradeId, TradeIdStatic } from '../secretaries/trade-id';
 
 
-export type TechangeTradeId = number | string;
+export type TexchangeTradeId = number | string;
 
-export class TexchangeTradeIdStatic implements TradeIdStatic<TechangeTradeId> {
-	public capture(id: TechangeTradeId): TradeId.Snapshot {
+export class TexchangeTradeIdStatic implements TradeIdStatic<TexchangeTradeId> {
+	public capture(id: TexchangeTradeId): TradeId.Snapshot {
 		return id;
 	}
 
-	public restore(snapshot: TradeId.Snapshot): TechangeTradeId {
+	public restore(snapshot: TradeId.Snapshot): TexchangeTradeId {
 		return snapshot;
 	}
 }
