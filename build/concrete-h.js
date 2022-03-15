@@ -35,6 +35,13 @@ class ConcreteH {
             return new ConcreteH(this.value.div(x));
         return new ConcreteH(this.value.div(x.value));
     }
+    mod(x) {
+        if (typeof x === 'number')
+            return new ConcreteH(this.value.mod(x));
+        if (typeof x === 'string')
+            return new ConcreteH(this.value.mod(x));
+        return new ConcreteH(this.value.mod(x.value));
+    }
     lt(x) {
         if (typeof x === 'number')
             return this.value.lt(x);

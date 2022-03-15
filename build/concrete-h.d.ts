@@ -6,6 +6,7 @@ export declare class ConcreteH implements HLike<ConcreteH> {
     minus(x: H.Source<ConcreteH>): ConcreteH;
     times(x: H.Source<ConcreteH>): ConcreteH;
     div(x: H.Source<ConcreteH>): ConcreteH;
+    mod(x: H.Source<ConcreteH>): ConcreteH;
     lt(x: H.Source<ConcreteH>): boolean;
     lte(x: H.Source<ConcreteH>): boolean;
     gt(x: H.Source<ConcreteH>): boolean;

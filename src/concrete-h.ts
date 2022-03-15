@@ -33,6 +33,12 @@ export class ConcreteH implements HLike<ConcreteH> {
 		return new ConcreteH(this.value.div(x.value));
 	}
 
+	public mod(x: H.Source<ConcreteH>): ConcreteH {
+		if (typeof x === 'number') return new ConcreteH(this.value.mod(x));
+		if (typeof x === 'string') return new ConcreteH(this.value.mod(x));
+		return new ConcreteH(this.value.mod(x.value));
+	}
+
 	public lt(x: H.Source<ConcreteH>): boolean {
 		if (typeof x === 'number') return this.value.lt(x);
 		if (typeof x === 'string') return this.value.lt(x);
