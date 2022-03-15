@@ -31,7 +31,7 @@ export class ConcreteOrderbookStatic<
 		return {
 			[Side.ASK]: orderbook[Side.ASK].map(this.ConcreteBookOrder.capture),
 			[Side.BID]: orderbook[Side.BID].map(this.ConcreteBookOrder.capture),
-			time: orderbook.time,
+			time: Number.isFinite(orderbook.time) ? orderbook.time : null,
 		};
 	}
 
@@ -39,7 +39,7 @@ export class ConcreteOrderbookStatic<
 		return {
 			[Side.ASK]: snapshot[Side.ASK].map(this.ConcreteBookOrder.restore),
 			[Side.BID]: snapshot[Side.BID].map(this.ConcreteBookOrder.restore),
-			time: snapshot.time,
+			time: snapshot.time !== null ? snapshot.time : Number.NEGATIVE_INFINITY,
 		}
 	}
 }

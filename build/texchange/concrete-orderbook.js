@@ -10,14 +10,14 @@ class ConcreteOrderbookStatic {
         return {
             [side_1.Side.ASK]: orderbook[side_1.Side.ASK].map(this.ConcreteBookOrder.capture),
             [side_1.Side.BID]: orderbook[side_1.Side.BID].map(this.ConcreteBookOrder.capture),
-            time: orderbook.time,
+            time: Number.isFinite(orderbook.time) ? orderbook.time : null,
         };
     }
     restore(snapshot) {
         return {
             [side_1.Side.ASK]: snapshot[side_1.Side.ASK].map(this.ConcreteBookOrder.restore),
             [side_1.Side.BID]: snapshot[side_1.Side.BID].map(this.ConcreteBookOrder.restore),
-            time: snapshot.time,
+            time: snapshot.time !== null ? snapshot.time : Number.NEGATIVE_INFINITY,
         };
     }
 }

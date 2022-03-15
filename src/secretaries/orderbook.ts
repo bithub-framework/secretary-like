@@ -19,7 +19,7 @@ export namespace Orderbook {
 	}
 	export interface Snapshot {
 		readonly [side: Side]: readonly BookOrder.Snapshot[];
-		readonly time: number;
+		readonly time: number | null;
 	}
 }
 

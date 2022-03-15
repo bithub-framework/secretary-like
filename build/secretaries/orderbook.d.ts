@@ -12,7 +12,7 @@ export declare namespace Orderbook {
     }
     interface Snapshot {
         readonly [side: Side]: readonly BookOrder.Snapshot[];
-        readonly time: number;
+        readonly time: number | null;
     }
 }
 export interface OrderbookStatic<ConcreteH extends HLike<ConcreteH>> {
