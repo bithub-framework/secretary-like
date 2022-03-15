@@ -7,8 +7,8 @@ export declare namespace ConcreteBalances {
     }
 }
 export declare class ConcreteBalancesStatic<ConcreteH extends HLike<ConcreteH>> implements BalancesStatic<ConcreteH> {
-    private ConcreteH;
-    constructor(ConcreteH: HStatic<ConcreteH>);
+    private readonly H;
+    constructor(H: HStatic<ConcreteH>);
     capture(balances: ConcreteBalances<ConcreteH>): Balances.Snapshot;
     restore(snapshot: Balances.Snapshot): ConcreteBalances.MutablePlain<ConcreteH>;
 }

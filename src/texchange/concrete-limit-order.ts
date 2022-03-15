@@ -22,7 +22,7 @@ export class ConcreteLimitOrderStatic<
 	ConcreteH
 	> {
 	public constructor(
-		private H: HStatic<ConcreteH>,
+		private readonly H: HStatic<ConcreteH>,
 	) { }
 
 	capture(order: ConcreteLimitOrder<ConcreteH>): LimitOrder.Snapshot {

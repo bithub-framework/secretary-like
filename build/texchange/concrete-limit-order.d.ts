@@ -9,7 +9,7 @@ export declare namespace ConcreteLimitOrder {
     }
 }
 export declare class ConcreteLimitOrderStatic<ConcreteH extends HLike<ConcreteH>> implements LimitOrderStatic<ConcreteH> {
-    private H;
+    private readonly H;
     constructor(H: HStatic<ConcreteH>);
     capture(order: ConcreteLimitOrder<ConcreteH>): LimitOrder.Snapshot;
     restore(snapshot: LimitOrder.Snapshot): ConcreteLimitOrder.MutablePlain<ConcreteH>;

@@ -7,8 +7,8 @@ export declare namespace ConcreteBookOrder {
     }
 }
 export declare class ConcreteBookOrderStatic<ConcreteH extends HLike<ConcreteH>> implements BookOrderStatic<ConcreteH> {
-    private ConcreteH;
-    constructor(ConcreteH: HStatic<ConcreteH>);
+    private readonly H;
+    constructor(H: HStatic<ConcreteH>);
     capture(order: ConcreteBookOrder<ConcreteH>): BookOrder.Snapshot;
     restore(snapshot: BookOrder.Snapshot): ConcreteBookOrder.MutablePlain<ConcreteH>;
 }

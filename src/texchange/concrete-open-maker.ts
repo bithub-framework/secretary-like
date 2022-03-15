@@ -28,27 +28,27 @@ export class ConcreteOpenMakerStatic<
 	ConcreteOrderId
 	>{
 
-	private ConcreteOpenOrder: ConcreteOpenOrderStatic<ConcreteH>;
+	private readonly OpenOrder: ConcreteOpenOrderStatic<ConcreteH>;
 
 	public constructor(
-		private ConcreteH: HStatic<ConcreteH>,
-		private ConcreteOrderId: ConcreteOrderIdStatic,
+		private readonly H: HStatic<ConcreteH>,
+		private readonly OrderId: ConcreteOrderIdStatic,
 	) {
-		this.ConcreteOpenOrder = new ConcreteOpenOrderStatic(
-			this.ConcreteH, this.ConcreteOrderId,
+		this.OpenOrder = new ConcreteOpenOrderStatic(
+			this.H, this.OrderId,
 		);
 	}
 
 	capture(order: ConcreteOpenMaker<ConcreteH>): OpenMaker.Snapshot {
 		return {
-			...this.ConcreteOpenOrder.capture(order),
-			behind: this.ConcreteH.capture(order.behind),
+			...this.OpenOrder.capture(order),
+			behind: this.H.capture(order.behind),
 		}
 	}
 	restore(snapshot: OpenMaker.Snapshot): ConcreteOpenMaker.MutablePlain<ConcreteH> {
 		return {
-			...this.ConcreteOpenOrder.restore(snapshot),
-			behind: this.ConcreteH.restore(snapshot.behind),
+			...this.OpenOrder.restore(snapshot),
+			behind: this.H.restore(snapshot.behind),
 		}
 	}
 }

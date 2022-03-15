@@ -21,20 +21,20 @@ export class ConcreteBalancesStatic<
 	ConcreteH
 	>{
 	public constructor(
-		private ConcreteH: HStatic<ConcreteH>,
+		private readonly H: HStatic<ConcreteH>,
 	) { }
 
 	capture(balances: ConcreteBalances<ConcreteH>): Balances.Snapshot {
 		return {
-			balance: this.ConcreteH.capture(balances.balance),
-			available: this.ConcreteH.capture(balances.available),
+			balance: this.H.capture(balances.balance),
+			available: this.H.capture(balances.available),
 			time: balances.time,
 		}
 	}
 	restore(snapshot: Balances.Snapshot): ConcreteBalances.MutablePlain<ConcreteH> {
 		return {
-			balance: this.ConcreteH.restore(snapshot.balance),
-			available: this.ConcreteH.restore(snapshot.available),
+			balance: this.H.restore(snapshot.balance),
+			available: this.H.restore(snapshot.available),
 			time: snapshot.time,
 		};
 	}

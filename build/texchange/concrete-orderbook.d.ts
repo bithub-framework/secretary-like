@@ -7,9 +7,9 @@ export declare namespace ConcreteOrderbook {
     }
 }
 export declare class ConcreteOrderbookStatic<ConcreteH extends HLike<ConcreteH>> implements OrderbookStatic<ConcreteH> {
-    private ConcreteH;
-    private ConcreteBookOrder;
-    constructor(ConcreteH: HStatic<ConcreteH>);
+    private readonly H;
+    private readonly BookOrder;
+    constructor(H: HStatic<ConcreteH>);
     capture(orderbook: ConcreteOrderbook<ConcreteH>): Orderbook.Snapshot;
     restore(snapshot: Orderbook.Snapshot): ConcreteOrderbook.MutablePlain<ConcreteH>;
 }

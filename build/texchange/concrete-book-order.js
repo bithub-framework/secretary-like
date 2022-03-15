@@ -2,20 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConcreteBookOrderStatic = void 0;
 class ConcreteBookOrderStatic {
-    constructor(ConcreteH) {
-        this.ConcreteH = ConcreteH;
+    constructor(H) {
+        this.H = H;
     }
     capture(order) {
         return {
-            price: this.ConcreteH.capture(order.price),
-            quantity: this.ConcreteH.capture(order.quantity),
+            price: this.H.capture(order.price),
+            quantity: this.H.capture(order.quantity),
             side: order.side,
         };
     }
     restore(snapshot) {
         return {
-            price: this.ConcreteH.restore(snapshot.price),
-            quantity: this.ConcreteH.restore(snapshot.quantity),
+            price: this.H.restore(snapshot.price),
+            quantity: this.H.restore(snapshot.quantity),
             side: snapshot.side,
         };
     }

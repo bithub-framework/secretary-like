@@ -23,27 +23,27 @@ export class ConcreteTradeStatic<
 	ConcreteTradeId
 	>{
 	public constructor(
-		private ConcreteH: HStatic<ConcreteH>,
-		private ConcreteTradeId: ConcreteTradeIdStatic,
+		private readonly H: HStatic<ConcreteH>,
+		private readonly TradeId: ConcreteTradeIdStatic,
 	) { }
 
 	capture(trade: ConcreteTrade<ConcreteH>): Trade.Snapshot {
 		return {
 			side: trade.side,
-			price: this.ConcreteH.capture(trade.price),
-			quantity: this.ConcreteH.capture(trade.quantity),
+			price: this.H.capture(trade.price),
+			quantity: this.H.capture(trade.quantity),
 			time: trade.time,
-			id: this.ConcreteTradeId.capture(trade.id),
+			id: this.TradeId.capture(trade.id),
 		}
 	}
 
 	restore(snapshot: Trade.Snapshot): ConcreteTrade.MutablePlain<ConcreteH> {
 		return {
 			side: snapshot.side,
-			price: this.ConcreteH.restore(snapshot.price),
-			quantity: this.ConcreteH.restore(snapshot.quantity),
+			price: this.H.restore(snapshot.price),
+			quantity: this.H.restore(snapshot.quantity),
 			time: snapshot.time,
-			id: this.ConcreteTradeId.restore(snapshot.id),
+			id: this.TradeId.restore(snapshot.id),
 		}
 	}
 }

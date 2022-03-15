@@ -7,8 +7,8 @@ export declare namespace ConcreteClosable {
     }
 }
 export declare class ConcreteClosableStatic<ConcreteH extends HLike<ConcreteH>> implements ClosableStatic<ConcreteH> {
-    private ConcreteH;
-    constructor(ConcreteH: HStatic<ConcreteH>);
+    private readonly H;
+    constructor(H: HStatic<ConcreteH>);
     capture(closable: ConcreteClosable<ConcreteH>): Closable.Snapshot;
     restore(snapshot: Closable.Snapshot): ConcreteClosable.MutablePlain<ConcreteH>;
 }

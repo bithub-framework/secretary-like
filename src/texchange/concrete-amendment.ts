@@ -27,30 +27,30 @@ export class ConcreteAmendmentStatic<
 	ConcreteOrderId
 	>{
 
-	private ConcreteOpenOrder: ConcreteOpenOrderStatic<ConcreteH>;
+	private readonly OpenOrder: ConcreteOpenOrderStatic<ConcreteH>;
 
 	public constructor(
-		private ConcreteH: HStatic<ConcreteH>,
-		private ConcreteOrderId: ConcreteOrderIdStatic,
+		private readonly H: HStatic<ConcreteH>,
+		private readonly OrderId: ConcreteOrderIdStatic,
 	) {
-		this.ConcreteOpenOrder = new ConcreteOpenOrderStatic(
-			this.ConcreteH, this.ConcreteOrderId,
+		this.OpenOrder = new ConcreteOpenOrderStatic(
+			this.H, this.OrderId,
 		);
 	}
 
 	capture(amendment: ConcreteAmendment<ConcreteH>): Amendment.Snapshot {
 		return {
-			...this.ConcreteOpenOrder.capture(amendment),
-			newUnfilled: this.ConcreteH.capture(amendment.newUnfilled),
-			newPrice: this.ConcreteH.capture(amendment.newPrice),
+			...this.OpenOrder.capture(amendment),
+			newUnfilled: this.H.capture(amendment.newUnfilled),
+			newPrice: this.H.capture(amendment.newPrice),
 		}
 	}
 
 	restore(snapshot: Amendment.Snapshot): ConcreteAmendment.MutablePlain<ConcreteH> {
 		return {
-			...this.ConcreteOpenOrder.restore(snapshot),
-			newUnfilled: this.ConcreteH.restore(snapshot.newUnfilled),
-			newPrice: this.ConcreteH.restore(snapshot.newPrice),
+			...this.OpenOrder.restore(snapshot),
+			newUnfilled: this.H.restore(snapshot.newUnfilled),
+			newPrice: this.H.restore(snapshot.newPrice),
 		};
 	}
 }

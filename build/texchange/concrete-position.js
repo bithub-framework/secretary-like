@@ -3,19 +3,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConcretePositionStatic = void 0;
 const length_1 = require("../secretaries/length");
 class ConcretePositionStatic {
-    constructor(ConcreteH) {
-        this.ConcreteH = ConcreteH;
+    constructor(H) {
+        this.H = H;
     }
     capture(position) {
         return {
-            [length_1.Length.LONG]: this.ConcreteH.capture(position[length_1.Length.LONG]),
-            [length_1.Length.SHORT]: this.ConcreteH.capture(position[length_1.Length.SHORT]),
+            [length_1.Length.LONG]: this.H.capture(position[length_1.Length.LONG]),
+            [length_1.Length.SHORT]: this.H.capture(position[length_1.Length.SHORT]),
         };
     }
     restore(snapshot) {
         return {
-            [length_1.Length.LONG]: this.ConcreteH.restore(snapshot[length_1.Length.LONG]),
-            [length_1.Length.SHORT]: this.ConcreteH.restore(snapshot[length_1.Length.SHORT]),
+            [length_1.Length.LONG]: this.H.restore(snapshot[length_1.Length.LONG]),
+            [length_1.Length.SHORT]: this.H.restore(snapshot[length_1.Length.SHORT]),
         };
     }
 }

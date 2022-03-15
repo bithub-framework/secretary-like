@@ -23,26 +23,26 @@ export class ConcreteOrderbookStatic<
 	> implements OrderbookStatic<
 	ConcreteH
 	>{
-	private ConcreteBookOrder: ConcreteBookOrderStatic<ConcreteH>;
+	private readonly BookOrder: ConcreteBookOrderStatic<ConcreteH>;
 
 	public constructor(
-		private ConcreteH: HStatic<ConcreteH>,
+		private readonly H: HStatic<ConcreteH>,
 	) {
-		this.ConcreteBookOrder = new ConcreteBookOrderStatic(this.ConcreteH);
+		this.BookOrder = new ConcreteBookOrderStatic(this.H);
 	}
 
 	capture(orderbook: ConcreteOrderbook<ConcreteH>): Orderbook.Snapshot {
 		return {
-			[Side.ASK]: orderbook[Side.ASK].map(this.ConcreteBookOrder.capture),
-			[Side.BID]: orderbook[Side.BID].map(this.ConcreteBookOrder.capture),
+			[Side.ASK]: orderbook[Side.ASK].map(this.BookOrder.capture),
+			[Side.BID]: orderbook[Side.BID].map(this.BookOrder.capture),
 			time: Number.isFinite(orderbook.time) ? orderbook.time : null,
 		};
 	}
 
 	restore(snapshot: Orderbook.Snapshot): ConcreteOrderbook.MutablePlain<ConcreteH> {
 		return {
-			[Side.ASK]: snapshot[Side.ASK].map(this.ConcreteBookOrder.restore),
-			[Side.BID]: snapshot[Side.BID].map(this.ConcreteBookOrder.restore),
+			[Side.ASK]: snapshot[Side.ASK].map(this.BookOrder.restore),
+			[Side.BID]: snapshot[Side.BID].map(this.BookOrder.restore),
 			time: snapshot.time !== null ? snapshot.time : Number.NEGATIVE_INFINITY,
 		}
 	}

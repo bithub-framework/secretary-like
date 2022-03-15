@@ -28,29 +28,29 @@ export class ConcreteOpenOrderStatic<
 	ConcreteOrderId
 	>{
 
-	private ConcreteLimitOrder: ConcreteLimitOrderStatic<ConcreteH>;
+	private readonly LimitOrder: ConcreteLimitOrderStatic<ConcreteH>;
 
 	public constructor(
-		private ConcreteH: HStatic<ConcreteH>,
-		private ConcreteOrderId: ConcreteOrderIdStatic,
+		private readonly H: HStatic<ConcreteH>,
+		private readonly OrderId: ConcreteOrderIdStatic,
 	) {
-		this.ConcreteLimitOrder = new ConcreteLimitOrderStatic(this.ConcreteH);
+		this.LimitOrder = new ConcreteLimitOrderStatic(this.H);
 	}
 
 	capture(order: ConcreteOpenOrder<ConcreteH>): OpenOrder.Snapshot {
 		return {
-			...this.ConcreteLimitOrder.capture(order),
-			filled: this.ConcreteH.capture(order.filled),
-			unfilled: this.ConcreteH.capture(order.unfilled),
-			id: this.ConcreteOrderId.capture(order.id),
+			...this.LimitOrder.capture(order),
+			filled: this.H.capture(order.filled),
+			unfilled: this.H.capture(order.unfilled),
+			id: this.OrderId.capture(order.id),
 		}
 	}
 
 	restore(snapshot: OpenOrder.Snapshot): ConcreteOpenOrder.MutablePlain<ConcreteH> {
 		return {
-			...this.ConcreteLimitOrder.restore(snapshot),
-			filled: this.ConcreteH.restore(snapshot.filled),
-			unfilled: this.ConcreteH.restore(snapshot.unfilled),
+			...this.LimitOrder.restore(snapshot),
+			filled: this.H.restore(snapshot.filled),
+			unfilled: this.H.restore(snapshot.unfilled),
 			id: snapshot.id,
 		};
 	}

@@ -4,10 +4,10 @@ exports.ConcretePositionsStatic = void 0;
 const concrete_position_1 = require("./concrete-position");
 const concrete_closable_1 = require("./concrete-closable");
 class ConcretePositionsStatic {
-    constructor(ConcreteH) {
-        this.ConcreteH = ConcreteH;
-        this.Position = new concrete_position_1.ConcretePositionStatic(this.ConcreteH);
-        this.Closable = new concrete_closable_1.ConcreteClosableStatic(this.ConcreteH);
+    constructor(H) {
+        this.H = H;
+        this.Position = new concrete_position_1.ConcretePositionStatic(this.H);
+        this.Closable = new concrete_closable_1.ConcreteClosableStatic(this.H);
     }
     capture(positions) {
         return {

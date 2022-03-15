@@ -7,8 +7,8 @@ export declare namespace ConcretePosition {
     }
 }
 export declare class ConcretePositionStatic<ConcreteH extends HLike<ConcreteH>> implements PositionStatic<ConcreteH> {
-    private ConcreteH;
-    constructor(ConcreteH: HStatic<ConcreteH>);
+    private readonly H;
+    constructor(H: HStatic<ConcreteH>);
     capture(position: ConcretePosition<ConcreteH>): Position.Snapshot;
     restore(snapshot: Position.Snapshot): ConcretePosition.MutablePlain<ConcreteH>;
 }

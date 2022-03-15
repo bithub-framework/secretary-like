@@ -23,14 +23,14 @@ export class ConcretePositionsStatic<
 	ConcreteH
 	>{
 
-	private Position: ConcretePositionStatic<ConcreteH>;
-	private Closable: ConcreteClosableStatic<ConcreteH>;
+	private readonly Position: ConcretePositionStatic<ConcreteH>;
+	private readonly Closable: ConcreteClosableStatic<ConcreteH>;
 
 	public constructor(
-		private ConcreteH: HStatic<ConcreteH>,
+		private readonly H: HStatic<ConcreteH>,
 	) {
-		this.Position = new ConcretePositionStatic(this.ConcreteH);
-		this.Closable = new ConcreteClosableStatic(this.ConcreteH);
+		this.Position = new ConcretePositionStatic(this.H);
+		this.Closable = new ConcreteClosableStatic(this.H);
 	}
 
 	capture(positions: ConcretePositions<ConcreteH>): Positions.Snapshot {

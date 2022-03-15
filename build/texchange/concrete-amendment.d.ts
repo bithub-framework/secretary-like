@@ -9,10 +9,10 @@ export declare namespace ConcreteAmendment {
     }
 }
 export declare class ConcreteAmendmentStatic<ConcreteH extends HLike<ConcreteH>> implements AmendmentStatic<ConcreteH, ConcreteOrderId> {
-    private ConcreteH;
-    private ConcreteOrderId;
-    private ConcreteOpenOrder;
-    constructor(ConcreteH: HStatic<ConcreteH>, ConcreteOrderId: ConcreteOrderIdStatic);
+    private readonly H;
+    private readonly OrderId;
+    private readonly OpenOrder;
+    constructor(H: HStatic<ConcreteH>, OrderId: ConcreteOrderIdStatic);
     capture(amendment: ConcreteAmendment<ConcreteH>): Amendment.Snapshot;
     restore(snapshot: Amendment.Snapshot): ConcreteAmendment.MutablePlain<ConcreteH>;
 }

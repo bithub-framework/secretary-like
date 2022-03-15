@@ -8,9 +8,9 @@ export declare namespace ConcreteTrade {
     }
 }
 export declare class ConcreteTradeStatic<ConcreteH extends HLike<ConcreteH>> implements TradeStatic<ConcreteH, ConcreteTradeId> {
-    private ConcreteH;
-    private ConcreteTradeId;
-    constructor(ConcreteH: HStatic<ConcreteH>, ConcreteTradeId: ConcreteTradeIdStatic);
+    private readonly H;
+    private readonly TradeId;
+    constructor(H: HStatic<ConcreteH>, TradeId: ConcreteTradeIdStatic);
     capture(trade: ConcreteTrade<ConcreteH>): Trade.Snapshot;
     restore(snapshot: Trade.Snapshot): ConcreteTrade.MutablePlain<ConcreteH>;
 }

@@ -9,10 +9,10 @@ export declare namespace ConcreteOpenMaker {
     }
 }
 export declare class ConcreteOpenMakerStatic<ConcreteH extends HLike<ConcreteH>> implements OpenMakerStatic<ConcreteH, ConcreteOrderId> {
-    private ConcreteH;
-    private ConcreteOrderId;
-    private ConcreteOpenOrder;
-    constructor(ConcreteH: HStatic<ConcreteH>, ConcreteOrderId: ConcreteOrderIdStatic);
+    private readonly H;
+    private readonly OrderId;
+    private readonly OpenOrder;
+    constructor(H: HStatic<ConcreteH>, OrderId: ConcreteOrderIdStatic);
     capture(order: ConcreteOpenMaker<ConcreteH>): OpenMaker.Snapshot;
     restore(snapshot: OpenMaker.Snapshot): ConcreteOpenMaker.MutablePlain<ConcreteH>;
 }

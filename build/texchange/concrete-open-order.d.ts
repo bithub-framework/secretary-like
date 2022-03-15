@@ -9,10 +9,10 @@ export declare namespace ConcreteOpenOrder {
     }
 }
 export declare class ConcreteOpenOrderStatic<ConcreteH extends HLike<ConcreteH>> implements OpenOrderStatic<ConcreteH, ConcreteOrderId> {
-    private ConcreteH;
-    private ConcreteOrderId;
-    private ConcreteLimitOrder;
-    constructor(ConcreteH: HStatic<ConcreteH>, ConcreteOrderId: ConcreteOrderIdStatic);
+    private readonly H;
+    private readonly OrderId;
+    private readonly LimitOrder;
+    constructor(H: HStatic<ConcreteH>, OrderId: ConcreteOrderIdStatic);
     capture(order: ConcreteOpenOrder<ConcreteH>): OpenOrder.Snapshot;
     restore(snapshot: OpenOrder.Snapshot): ConcreteOpenOrder.MutablePlain<ConcreteH>;
 }
