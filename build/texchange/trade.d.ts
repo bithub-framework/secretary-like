@@ -1,9 +1,9 @@
 import { HLike } from '../secretaries/h';
 import { TexchangeTradeId } from './trade-id';
 import { Trade } from '../secretaries/trade';
-export interface ConcreteTrade<H extends HLike<H>> extends Trade<H, TexchangeTradeId> {
+export interface TexchangeTrade<H extends HLike<H>> extends Trade<H, TexchangeTradeId> {
 }
-export declare namespace ConcreteTrade {
+export declare namespace TexchangeTrade {
     interface MutablePlain<H extends HLike<H>> extends Trade.MutablePlain<H, TexchangeTradeId> {
     }
 }
