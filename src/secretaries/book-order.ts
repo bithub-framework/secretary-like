@@ -1,32 +1,45 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { Side } from './side';
 
 
-export interface BookOrder<
-	ConcreteH extends HLike<ConcreteH>,
-	> {
-	readonly price: ConcreteH;
-	readonly quantity: ConcreteH;
+export interface BookOrder<H extends HLike<H>> {
+	readonly price: H;
+	readonly quantity: H;
 	readonly side: Side,
 }
 
 export namespace BookOrder {
-	export interface MutablePlain<
-		ConcreteH extends HLike<ConcreteH>,
-		> {
-		price: ConcreteH;
-		quantity: ConcreteH;
+	export interface MutablePlain<H extends HLike<H>> {
+		price: H;
+		quantity: H;
 		side: Side,
 	}
+
 	export interface Snapshot {
 		readonly price: H.Snapshot;
 		readonly quantity: H.Snapshot;
 		readonly side: Side;
 	}
 }
-export interface BookOrderStatic<
-	ConcreteH extends HLike<ConcreteH>,
-	> {
-	capture(order: BookOrder<ConcreteH>): BookOrder.Snapshot;
-	restore(snapshot: BookOrder.Snapshot): BookOrder.MutablePlain<ConcreteH>;
+
+export class BookOrderStatic<H extends HLike<H>> {
+	public constructor(
+		private readonly H: HStatic<H>,
+	) { }
+
+	public capture(order: BookOrder<H>): BookOrder.Snapshot {
+		return {
+			price: this.H.capture(order.price),
+			quantity: this.H.capture(order.quantity),
+			side: order.side,
+		}
+	}
+
+	public restore(snapshot: BookOrder.Snapshot): BookOrder.MutablePlain<H> {
+		return {
+			price: this.H.restore(snapshot.price),
+			quantity: this.H.restore(snapshot.quantity),
+			side: snapshot.side,
+		}
+	}
 }

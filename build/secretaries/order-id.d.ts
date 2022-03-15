@@ -1,7 +1,7 @@
 export declare namespace OrderId {
     type Snapshot = number | string;
 }
-export interface OrderIdStatic<ConcreteOrderId> {
-    capture(id: ConcreteOrderId): OrderId.Snapshot;
-    restore(snapshot: OrderId.Snapshot): ConcreteOrderId;
+export interface OrderIdStatic<OrderId> {
+    capture(id: OrderId): OrderId.Snapshot;
+    restore(snapshot: OrderId.Snapshot): OrderId;
 }

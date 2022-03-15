@@ -1,18 +1,14 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { Length } from './length';
 
 
-export interface Closable<
-	ConcreteH extends HLike<ConcreteH>,
-	> {
-	readonly [length: Length]: ConcreteH;
+export interface Closable<H extends HLike<H>> {
+	readonly [length: Length]: H;
 }
 
 export namespace Closable {
-	export interface MutablePlain<
-		ConcreteH extends HLike<ConcreteH>,
-		> {
-		[length: Length]: ConcreteH;
+	export interface MutablePlain<H extends HLike<H>> {
+		[length: Length]: H;
 	}
 
 	export interface Snapshot {
@@ -20,9 +16,23 @@ export namespace Closable {
 	}
 }
 
-export interface ClosableStatic<
-	ConcreteH extends HLike<ConcreteH>,
-	> {
-	capture(closable: Closable<ConcreteH>): Closable.Snapshot;
-	restore(snapshot: Closable.Snapshot): Closable.MutablePlain<ConcreteH>;
+
+export class ClosableStatic<H extends HLike<H>> {
+	public constructor(
+		private readonly H: HStatic<H>,
+	) { }
+
+	public capture(closable: Closable<H>): Closable.Snapshot {
+		return {
+			[Length.LONG]: this.H.capture(closable[Length.LONG]),
+			[Length.SHORT]: this.H.capture(closable[Length.SHORT]),
+		};
+	}
+
+	public restore(snapshot: Closable.Snapshot): Closable.MutablePlain<H> {
+		return {
+			[Length.LONG]: this.H.restore(snapshot[Length.LONG]),
+			[Length.SHORT]: this.H.restore(snapshot[Length.SHORT]),
+		}
+	}
 }

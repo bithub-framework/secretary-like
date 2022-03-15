@@ -1,17 +1,22 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { OpenOrder } from './open-order';
-export interface OpenMaker<ConcreteH extends HLike<ConcreteH>, ConcreteOrderId> extends OpenOrder<ConcreteH, ConcreteOrderId> {
-    readonly behind: ConcreteH;
+import { OrderIdStatic } from './order-id';
+export interface OpenMaker<H extends HLike<H>, OrderId> extends OpenOrder<H, OrderId> {
+    readonly behind: H;
 }
 export declare namespace OpenMaker {
-    interface MutablePlain<ConcreteH extends HLike<ConcreteH>, ConcreteOrderId> extends OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId> {
-        behind: ConcreteH;
+    interface MutablePlain<H extends HLike<H>, OrderId> extends OpenOrder.MutablePlain<H, OrderId> {
+        behind: H;
     }
     interface Snapshot extends OpenOrder.Snapshot {
         readonly behind: H.Snapshot;
     }
 }
-export interface OpenMakerStatic<ConcreteH extends HLike<ConcreteH>, ConcreteOrderId> {
-    capture(order: OpenMaker<ConcreteH, ConcreteOrderId>): OpenMaker.Snapshot;
-    restore(snapshot: OpenMaker.Snapshot): OpenMaker.MutablePlain<ConcreteH, ConcreteOrderId>;
+export declare class OpenMakerStatic<H extends HLike<H>, OrderId> {
+    private readonly H;
+    private readonly OrderId;
+    private readonly OpenOrder;
+    constructor(H: HStatic<H>, OrderId: OrderIdStatic<OrderId>);
+    capture(order: OpenMaker<H, OrderId>): OpenMaker.Snapshot;
+    restore(snapshot: OpenMaker.Snapshot): OpenMaker.MutablePlain<H, OrderId>;
 }

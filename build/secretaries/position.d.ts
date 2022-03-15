@@ -1,17 +1,19 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { Length } from './length';
-export interface Position<ConcreteH extends HLike<ConcreteH>> {
-    readonly [length: Length]: ConcreteH;
+export interface Position<H extends HLike<H>> {
+    readonly [length: Length]: H;
 }
 export declare namespace Position {
-    interface MutablePlain<ConcreteH extends HLike<ConcreteH>> {
-        [length: Length]: ConcreteH;
+    interface MutablePlain<H extends HLike<H>> {
+        [length: Length]: H;
     }
     interface Snapshot {
         readonly [length: Length]: H.Snapshot;
     }
 }
-export interface PositionStatic<ConcreteH extends HLike<ConcreteH>> {
-    capture(position: Position<ConcreteH>): Position.Snapshot;
-    restore(snapshot: Position.Snapshot): Position.MutablePlain<ConcreteH>;
+export declare class PositionStatic<H extends HLike<H>> {
+    private readonly H;
+    constructor(H: HStatic<H>);
+    capture(position: Position<H>): Position.Snapshot;
+    restore(snapshot: Position.Snapshot): Position.MutablePlain<H>;
 }

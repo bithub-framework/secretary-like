@@ -1,30 +1,25 @@
 import { Side } from './side';
-import { HLike, H } from './h';
-import { TradeId } from './trade-id';
+import { HLike, H, HStatic } from './h';
+import { TradeId, TradeIdStatic } from './trade-id';
 
 
-
-export interface Trade<
-	ConcreteH extends HLike<ConcreteH>,
-	ConcreteTradeId,
-	> {
+export interface Trade<H extends HLike<H>, TradeId> {
 	readonly side: Side;
-	readonly price: ConcreteH;
-	readonly quantity: ConcreteH;
+	readonly price: H;
+	readonly quantity: H;
 	readonly time: number;
-	readonly id: ConcreteTradeId;
+	readonly id: TradeId;
 }
+
 export namespace Trade {
-	export interface MutablePlain<
-		ConcreteH extends HLike<ConcreteH>,
-		ConcreteTradeId,
-		> {
+	export interface MutablePlain<H extends HLike<H>, TradeId> {
 		side: Side;
-		price: ConcreteH;
-		quantity: ConcreteH;
+		price: H;
+		quantity: H;
 		time: number;
-		id: ConcreteTradeId;
+		id: TradeId;
 	}
+
 	export interface Snapshot {
 		readonly side: Side;
 		readonly price: H.Snapshot;
@@ -33,10 +28,31 @@ export namespace Trade {
 		readonly id: TradeId.Snapshot;
 	}
 }
-export interface TradeStatic<
-	ConcreteH extends HLike<ConcreteH>,
-	ConcreteTradeId,
-	> {
-	capture(trade: Trade<ConcreteH, ConcreteTradeId>): Trade.Snapshot;
-	restore(snapshot: Trade.Snapshot): Trade.MutablePlain<ConcreteH, ConcreteTradeId>;
+
+
+export class TradeStatic<H extends HLike<H>, TradeId> {
+	public constructor(
+		private readonly H: HStatic<H>,
+		private readonly TradeId: TradeIdStatic<TradeId>,
+	) { }
+
+	public capture(trade: Trade<H, TradeId>): Trade.Snapshot {
+		return {
+			side: trade.side,
+			price: this.H.capture(trade.price),
+			quantity: this.H.capture(trade.quantity),
+			time: trade.time,
+			id: this.TradeId.capture(trade.id),
+		}
+	}
+
+	public restore(snapshot: Trade.Snapshot): Trade.MutablePlain<H, TradeId> {
+		return {
+			side: snapshot.side,
+			price: this.H.restore(snapshot.price),
+			quantity: this.H.restore(snapshot.quantity),
+			time: snapshot.time,
+			id: this.TradeId.restore(snapshot.id),
+		}
+	}
 }

@@ -1,22 +1,19 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 
 
-export interface Balances<
-	ConcreteH extends HLike<ConcreteH>,
-	> {
-	readonly balance: ConcreteH;
-	readonly available: ConcreteH;
+export interface Balances<H extends HLike<H>> {
+	readonly balance: H;
+	readonly available: H;
 	readonly time: number;
 }
 
 export namespace Balances {
-	export interface MutablePlain<
-		ConcreteH extends HLike<ConcreteH>,
-		> {
-		balance: ConcreteH;
-		available: ConcreteH;
+	export interface MutablePlain<H extends HLike<H>> {
+		balance: H;
+		available: H;
 		time: number;
 	}
+
 	export interface Snapshot {
 		readonly balance: H.Snapshot;
 		readonly available: H.Snapshot;
@@ -24,9 +21,25 @@ export namespace Balances {
 	}
 }
 
-export interface BalancesStatic<
-	ConcreteH extends HLike<ConcreteH>,
-	> {
-	capture(balances: Balances<ConcreteH>): Balances.Snapshot;
-	restore(snapshot: Balances.Snapshot): Balances.MutablePlain<ConcreteH>;
+
+export class BalancesStatic<H extends HLike<H>> {
+	public constructor(
+		private readonly H: HStatic<H>,
+	) { }
+
+	public capture(balances: Balances<H>): Balances.Snapshot {
+		return {
+			balance: this.H.capture(balances.balance),
+			available: this.H.capture(balances.available),
+			time: balances.time,
+		}
+	}
+
+	public restore(snapshot: Balances.Snapshot): Balances.MutablePlain<H> {
+		return {
+			balance: this.H.restore(snapshot.balance),
+			available: this.H.restore(snapshot.available),
+			time: snapshot.time,
+		};
+	}
 }

@@ -1,15 +1,15 @@
-import { HLike } from './h';
+import { HLike, HStatic } from './h';
 import { Position } from './position';
 import { Closable } from './closable';
-export interface Positions<ConcreteH extends HLike<ConcreteH>> {
-    readonly position: Position<ConcreteH>;
-    readonly closable: Closable<ConcreteH>;
+export interface Positions<H extends HLike<H>> {
+    readonly position: Position<H>;
+    readonly closable: Closable<H>;
     readonly time: number;
 }
 export declare namespace Positions {
-    interface MutablePlain<ConcreteH extends HLike<ConcreteH>> {
-        position: Position.MutablePlain<ConcreteH>;
-        closable: Closable.MutablePlain<ConcreteH>;
+    interface MutablePlain<H extends HLike<H>> {
+        position: Position.MutablePlain<H>;
+        closable: Closable.MutablePlain<H>;
         time: number;
     }
     interface Snapshot {
@@ -18,7 +18,11 @@ export declare namespace Positions {
         readonly time: number;
     }
 }
-export interface PositionsStatic<ConcreteH extends HLike<ConcreteH>> {
-    capture(positions: Positions<ConcreteH>): Positions.Snapshot;
-    restore(snapshot: Positions.Snapshot): Positions.MutablePlain<ConcreteH>;
+export declare class PositionsStatic<H extends HLike<H>> {
+    private readonly H;
+    private readonly Position;
+    private readonly Closable;
+    constructor(H: HStatic<H>);
+    capture(positions: Positions<H>): Positions.Snapshot;
+    restore(snapshot: Positions.Snapshot): Positions.MutablePlain<H>;
 }

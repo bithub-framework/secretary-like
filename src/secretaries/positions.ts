@@ -1,32 +1,50 @@
-import { HLike } from './h';
-import { Position } from './position';
-import { Closable } from './closable';
+import { HLike, HStatic } from './h';
+import { Position, PositionStatic } from './position';
+import { Closable, ClosableStatic } from './closable';
 
 
-export interface Positions<
-	ConcreteH extends HLike<ConcreteH>,
-	> {
-	readonly position: Position<ConcreteH>;
-	readonly closable: Closable<ConcreteH>;
+export interface Positions<H extends HLike<H>> {
+	readonly position: Position<H>;
+	readonly closable: Closable<H>;
 	readonly time: number;
 }
+
 export namespace Positions {
-	export interface MutablePlain<
-		ConcreteH extends HLike<ConcreteH>,
-		> {
-		position: Position.MutablePlain<ConcreteH>;
-		closable: Closable.MutablePlain<ConcreteH>;
+	export interface MutablePlain<H extends HLike<H>> {
+		position: Position.MutablePlain<H>;
+		closable: Closable.MutablePlain<H>;
 		time: number;
 	}
+
 	export interface Snapshot {
 		readonly position: Position.Snapshot;
 		readonly closable: Closable.Snapshot;
 		readonly time: number;
 	}
 }
-export interface PositionsStatic<
-	ConcreteH extends HLike<ConcreteH>,
-	> {
-	capture(positions: Positions<ConcreteH>): Positions.Snapshot;
-	restore(snapshot: Positions.Snapshot): Positions.MutablePlain<ConcreteH>;
+
+
+export class PositionsStatic<H extends HLike<H>>{
+	private readonly Position = new PositionStatic(this.H);
+	private readonly Closable = new ClosableStatic(this.H);
+
+	public constructor(
+		private readonly H: HStatic<H>,
+	) { }
+
+	public capture(positions: Positions<H>): Positions.Snapshot {
+		return {
+			position: this.Position.capture(positions.position),
+			closable: this.Closable.capture(positions.closable),
+			time: positions.time,
+		};
+	}
+
+	public restore(snapshot: Positions.Snapshot): Positions.MutablePlain<H> {
+		return {
+			position: this.Position.restore(snapshot.position),
+			closable: this.Closable.restore(snapshot.closable),
+			time: snapshot.time,
+		}
+	}
 }

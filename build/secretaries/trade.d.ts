@@ -1,20 +1,20 @@
 import { Side } from './side';
-import { HLike, H } from './h';
-import { TradeId } from './trade-id';
-export interface Trade<ConcreteH extends HLike<ConcreteH>, ConcreteTradeId> {
+import { HLike, H, HStatic } from './h';
+import { TradeId, TradeIdStatic } from './trade-id';
+export interface Trade<H extends HLike<H>, TradeId> {
     readonly side: Side;
-    readonly price: ConcreteH;
-    readonly quantity: ConcreteH;
+    readonly price: H;
+    readonly quantity: H;
     readonly time: number;
-    readonly id: ConcreteTradeId;
+    readonly id: TradeId;
 }
 export declare namespace Trade {
-    interface MutablePlain<ConcreteH extends HLike<ConcreteH>, ConcreteTradeId> {
+    interface MutablePlain<H extends HLike<H>, TradeId> {
         side: Side;
-        price: ConcreteH;
-        quantity: ConcreteH;
+        price: H;
+        quantity: H;
         time: number;
-        id: ConcreteTradeId;
+        id: TradeId;
     }
     interface Snapshot {
         readonly side: Side;
@@ -24,7 +24,10 @@ export declare namespace Trade {
         readonly id: TradeId.Snapshot;
     }
 }
-export interface TradeStatic<ConcreteH extends HLike<ConcreteH>, ConcreteTradeId> {
-    capture(trade: Trade<ConcreteH, ConcreteTradeId>): Trade.Snapshot;
-    restore(snapshot: Trade.Snapshot): Trade.MutablePlain<ConcreteH, ConcreteTradeId>;
+export declare class TradeStatic<H extends HLike<H>, TradeId> {
+    private readonly H;
+    private readonly TradeId;
+    constructor(H: HStatic<H>, TradeId: TradeIdStatic<TradeId>);
+    capture(trade: Trade<H, TradeId>): Trade.Snapshot;
+    restore(snapshot: Trade.Snapshot): Trade.MutablePlain<H, TradeId>;
 }

@@ -1,14 +1,14 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { Side } from './side';
-export interface BookOrder<ConcreteH extends HLike<ConcreteH>> {
-    readonly price: ConcreteH;
-    readonly quantity: ConcreteH;
+export interface BookOrder<H extends HLike<H>> {
+    readonly price: H;
+    readonly quantity: H;
     readonly side: Side;
 }
 export declare namespace BookOrder {
-    interface MutablePlain<ConcreteH extends HLike<ConcreteH>> {
-        price: ConcreteH;
-        quantity: ConcreteH;
+    interface MutablePlain<H extends HLike<H>> {
+        price: H;
+        quantity: H;
         side: Side;
     }
     interface Snapshot {
@@ -17,7 +17,9 @@ export declare namespace BookOrder {
         readonly side: Side;
     }
 }
-export interface BookOrderStatic<ConcreteH extends HLike<ConcreteH>> {
-    capture(order: BookOrder<ConcreteH>): BookOrder.Snapshot;
-    restore(snapshot: BookOrder.Snapshot): BookOrder.MutablePlain<ConcreteH>;
+export declare class BookOrderStatic<H extends HLike<H>> {
+    private readonly H;
+    constructor(H: HStatic<H>);
+    capture(order: BookOrder<H>): BookOrder.Snapshot;
+    restore(snapshot: BookOrder.Snapshot): BookOrder.MutablePlain<H>;
 }

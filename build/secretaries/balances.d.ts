@@ -1,13 +1,13 @@
-import { HLike, H } from './h';
-export interface Balances<ConcreteH extends HLike<ConcreteH>> {
-    readonly balance: ConcreteH;
-    readonly available: ConcreteH;
+import { HLike, H, HStatic } from './h';
+export interface Balances<H extends HLike<H>> {
+    readonly balance: H;
+    readonly available: H;
     readonly time: number;
 }
 export declare namespace Balances {
-    interface MutablePlain<ConcreteH extends HLike<ConcreteH>> {
-        balance: ConcreteH;
-        available: ConcreteH;
+    interface MutablePlain<H extends HLike<H>> {
+        balance: H;
+        available: H;
         time: number;
     }
     interface Snapshot {
@@ -16,7 +16,9 @@ export declare namespace Balances {
         readonly time: number;
     }
 }
-export interface BalancesStatic<ConcreteH extends HLike<ConcreteH>> {
-    capture(balances: Balances<ConcreteH>): Balances.Snapshot;
-    restore(snapshot: Balances.Snapshot): Balances.MutablePlain<ConcreteH>;
+export declare class BalancesStatic<H extends HLike<H>> {
+    private readonly H;
+    constructor(H: HStatic<H>);
+    capture(balances: Balances<H>): Balances.Snapshot;
+    restore(snapshot: Balances.Snapshot): Balances.MutablePlain<H>;
 }

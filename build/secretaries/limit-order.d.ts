@@ -1,18 +1,18 @@
 import { Side } from './side';
 import { Length } from './length';
 import { Operation } from './operation';
-import { HLike, H } from './h';
-export interface LimitOrder<ConcreteH extends HLike<ConcreteH>> {
-    readonly price: ConcreteH;
-    readonly quantity: ConcreteH;
+import { HLike, H, HStatic } from './h';
+export interface LimitOrder<H extends HLike<H>> {
+    readonly price: H;
+    readonly quantity: H;
     readonly side: Side;
     readonly length: Length;
     readonly operation: Operation;
 }
 export declare namespace LimitOrder {
-    interface MutablePlain<ConcreteH extends HLike<ConcreteH>> {
-        price: ConcreteH;
-        quantity: ConcreteH;
+    interface MutablePlain<H extends HLike<H>> {
+        price: H;
+        quantity: H;
         side: Side;
         length: Length;
         operation: Operation;
@@ -25,7 +25,9 @@ export declare namespace LimitOrder {
         readonly operation: Operation;
     }
 }
-export interface LimitOrderStatic<ConcreteH extends HLike<ConcreteH>> {
-    capture(order: LimitOrder<ConcreteH>): LimitOrder.Snapshot;
-    restore(snapshot: LimitOrder.Snapshot): LimitOrder.MutablePlain<ConcreteH>;
+export declare class LimitOrderStatic<H extends HLike<H>> {
+    private readonly H;
+    constructor(H: HStatic<H>);
+    capture(order: LimitOrder<H>): LimitOrder.Snapshot;
+    restore(snapshot: LimitOrder.Snapshot): LimitOrder.MutablePlain<H>;
 }

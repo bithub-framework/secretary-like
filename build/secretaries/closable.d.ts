@@ -1,17 +1,19 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { Length } from './length';
-export interface Closable<ConcreteH extends HLike<ConcreteH>> {
-    readonly [length: Length]: ConcreteH;
+export interface Closable<H extends HLike<H>> {
+    readonly [length: Length]: H;
 }
 export declare namespace Closable {
-    interface MutablePlain<ConcreteH extends HLike<ConcreteH>> {
-        [length: Length]: ConcreteH;
+    interface MutablePlain<H extends HLike<H>> {
+        [length: Length]: H;
     }
     interface Snapshot {
         readonly [length: Length]: H.Snapshot;
     }
 }
-export interface ClosableStatic<ConcreteH extends HLike<ConcreteH>> {
-    capture(closable: Closable<ConcreteH>): Closable.Snapshot;
-    restore(snapshot: Closable.Snapshot): Closable.MutablePlain<ConcreteH>;
+export declare class ClosableStatic<H extends HLike<H>> {
+    private readonly H;
+    constructor(H: HStatic<H>);
+    capture(closable: Closable<H>): Closable.Snapshot;
+    restore(snapshot: Closable.Snapshot): Closable.MutablePlain<H>;
 }

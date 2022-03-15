@@ -1,20 +1,25 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { OpenOrder } from './open-order';
-export interface Amendment<ConcreteH extends HLike<ConcreteH>, ConcreteOrderId> extends OpenOrder<ConcreteH, ConcreteOrderId> {
-    readonly newUnfilled: ConcreteH;
-    readonly newPrice: ConcreteH;
+import { OrderIdStatic } from './order-id';
+export interface Amendment<H extends HLike<H>, OrderId> extends OpenOrder<H, OrderId> {
+    readonly newUnfilled: H;
+    readonly newPrice: H;
 }
 export declare namespace Amendment {
-    interface MutablePlain<ConcreteH extends HLike<ConcreteH>, ConcreteOrderId> extends OpenOrder.MutablePlain<ConcreteH, ConcreteOrderId> {
-        newUnfilled: ConcreteH;
-        newPrice: ConcreteH;
+    interface MutablePlain<H extends HLike<H>, OrderId> extends OpenOrder.MutablePlain<H, OrderId> {
+        newUnfilled: H;
+        newPrice: H;
     }
     interface Snapshot extends OpenOrder.Snapshot {
         readonly newUnfilled: H.Snapshot;
         readonly newPrice: H.Snapshot;
     }
 }
-export interface AmendmentStatic<ConcreteH extends HLike<ConcreteH>, ConcreteOrderId> {
-    capture(amendment: Amendment<ConcreteH, ConcreteOrderId>): Amendment.Snapshot;
-    restore(snapshot: Amendment.Snapshot): Amendment.MutablePlain<ConcreteH, ConcreteOrderId>;
+export declare class AmendmentStatic<H extends HLike<H>, OrderId> {
+    private readonly H;
+    private readonly OrderId;
+    private readonly OpenOrder;
+    constructor(H: HStatic<H>, OrderId: OrderIdStatic<OrderId>);
+    capture(amendment: Amendment<H, OrderId>): Amendment.Snapshot;
+    restore(snapshot: Amendment.Snapshot): Amendment.MutablePlain<H, OrderId>;
 }
