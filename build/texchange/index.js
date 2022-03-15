@@ -16,5 +16,4 @@ __exportStar(require("./open-order"), exports);
 __exportStar(require("./amendment"), exports);
 __exportStar(require("./open-maker"), exports);
 __exportStar(require("./trade"), exports);
-__exportStar(require("./balances"), exports);
 //# sourceMappingURL=index.js.map
