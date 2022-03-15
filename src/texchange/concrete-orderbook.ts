@@ -31,7 +31,7 @@ export class ConcreteOrderbookStatic<
 		this.BookOrder = new ConcreteBookOrderStatic(this.H);
 	}
 
-	capture(orderbook: ConcreteOrderbook<ConcreteH>): Orderbook.Snapshot {
+	public capture(orderbook: ConcreteOrderbook<ConcreteH>): Orderbook.Snapshot {
 		return {
 			[Side.ASK]: orderbook[Side.ASK].map(this.BookOrder.capture),
 			[Side.BID]: orderbook[Side.BID].map(this.BookOrder.capture),
@@ -39,7 +39,7 @@ export class ConcreteOrderbookStatic<
 		};
 	}
 
-	restore(snapshot: Orderbook.Snapshot): ConcreteOrderbook.MutablePlain<ConcreteH> {
+	public restore(snapshot: Orderbook.Snapshot): ConcreteOrderbook.MutablePlain<ConcreteH> {
 		return {
 			[Side.ASK]: snapshot[Side.ASK].map(this.BookOrder.restore),
 			[Side.BID]: snapshot[Side.BID].map(this.BookOrder.restore),

@@ -25,7 +25,7 @@ export class ConcreteLimitOrderStatic<
 		private readonly H: HStatic<ConcreteH>,
 	) { }
 
-	capture(order: ConcreteLimitOrder<ConcreteH>): LimitOrder.Snapshot {
+	public capture(order: ConcreteLimitOrder<ConcreteH>): LimitOrder.Snapshot {
 		return {
 			price: this.H.capture(order.price),
 			quantity: this.H.capture(order.quantity),
@@ -34,7 +34,8 @@ export class ConcreteLimitOrderStatic<
 			operation: order.operation,
 		}
 	}
-	restore(snapshot: LimitOrder.Snapshot): ConcreteLimitOrder.MutablePlain<ConcreteH> {
+
+	public restore(snapshot: LimitOrder.Snapshot): ConcreteLimitOrder.MutablePlain<ConcreteH> {
 		return {
 			price: this.H.restore(snapshot.price),
 			quantity: this.H.restore(snapshot.quantity),

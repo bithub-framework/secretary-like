@@ -57,6 +57,18 @@ export class ConcreteH implements HLike<ConcreteH> {
 		return this.value.gte(x.value);
 	}
 
+	public eq(x: H.Source<ConcreteH>): boolean {
+		if (typeof x === 'number') return this.value.eq(x);
+		if (typeof x === 'string') return this.value.eq(x);
+		return this.value.eq(x.value);
+	}
+
+	public neq(x: H.Source<ConcreteH>): boolean {
+		if (typeof x === 'number') return !this.value.eq(x);
+		if (typeof x === 'string') return !this.value.eq(x);
+		return !this.value.eq(x.value);
+	}
+
 	public round(
 		decimalPoint = 0,
 		roundingMode = H.RoundingMode.HALF_AWAY_FROM_ZERO
@@ -97,6 +109,7 @@ export class ConcreteH implements HLike<ConcreteH> {
 	public static capture(x: ConcreteH): H.Snapshot {
 		return x.capture();
 	}
+
 	public static restore(s: H.Snapshot): ConcreteH {
 		return new ConcreteH(new Big(s));
 	}

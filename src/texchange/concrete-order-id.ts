@@ -4,10 +4,11 @@ import { OrderId, OrderIdStatic } from '../secretaries/order-id';
 export type ConcreteOrderId = number | string;
 
 export class ConcreteOrderIdStatic implements OrderIdStatic<ConcreteOrderId> {
-	capture(id: ConcreteOrderId): OrderId.Snapshot {
+	public capture(id: ConcreteOrderId): OrderId.Snapshot {
 		return id;
 	}
-	restore(snapshot: OrderId.Snapshot): ConcreteOrderId {
+
+	public restore(snapshot: OrderId.Snapshot): ConcreteOrderId {
 		return snapshot;
 	}
 }

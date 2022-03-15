@@ -26,14 +26,15 @@ export class ConcreteBookOrderStatic<
 		private readonly H: HStatic<ConcreteH>,
 	) { }
 
-	capture(order: ConcreteBookOrder<ConcreteH>): BookOrder.Snapshot {
+	public capture(order: ConcreteBookOrder<ConcreteH>): BookOrder.Snapshot {
 		return {
 			price: this.H.capture(order.price),
 			quantity: this.H.capture(order.quantity),
 			side: order.side,
 		}
 	}
-	restore(snapshot: BookOrder.Snapshot): ConcreteBookOrder.MutablePlain<ConcreteH> {
+
+	public restore(snapshot: BookOrder.Snapshot): ConcreteBookOrder.MutablePlain<ConcreteH> {
 		return {
 			price: this.H.restore(snapshot.price),
 			quantity: this.H.restore(snapshot.quantity),

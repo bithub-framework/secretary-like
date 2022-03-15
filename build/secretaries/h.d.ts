@@ -7,6 +7,8 @@ export interface HLike<ConcreteH extends HLike<ConcreteH>> {
     lte(x: H.Source<ConcreteH>): boolean;
     gt(x: H.Source<ConcreteH>): boolean;
     gte(x: H.Source<ConcreteH>): boolean;
+    eq(x: H.Source<ConcreteH>): boolean;
+    neq(x: H.Source<ConcreteH>): boolean;
     round(decimalPoint?: number, roundingMode?: H.RoundingMode): ConcreteH;
     toJSON(): never;
     toString(): string;

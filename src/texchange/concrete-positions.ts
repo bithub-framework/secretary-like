@@ -33,14 +33,15 @@ export class ConcretePositionsStatic<
 		this.Closable = new ConcreteClosableStatic(this.H);
 	}
 
-	capture(positions: ConcretePositions<ConcreteH>): Positions.Snapshot {
+	public capture(positions: ConcretePositions<ConcreteH>): Positions.Snapshot {
 		return {
 			position: this.Position.capture(positions.position),
 			closable: this.Closable.capture(positions.closable),
 			time: positions.time,
 		};
 	}
-	restore(snapshot: Positions.Snapshot): ConcretePositions.MutablePlain<ConcreteH> {
+
+	public restore(snapshot: Positions.Snapshot): ConcretePositions.MutablePlain<ConcreteH> {
 		return {
 			position: this.Position.restore(snapshot.position),
 			closable: this.Closable.restore(snapshot.closable),

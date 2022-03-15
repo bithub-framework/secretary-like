@@ -63,6 +63,20 @@ class ConcreteH {
             return this.value.gte(x);
         return this.value.gte(x.value);
     }
+    eq(x) {
+        if (typeof x === 'number')
+            return this.value.eq(x);
+        if (typeof x === 'string')
+            return this.value.eq(x);
+        return this.value.eq(x.value);
+    }
+    neq(x) {
+        if (typeof x === 'number')
+            return !this.value.eq(x);
+        if (typeof x === 'string')
+            return !this.value.eq(x);
+        return !this.value.eq(x.value);
+    }
     round(decimalPoint = 0, roundingMode = h_1.H.RoundingMode.HALF_AWAY_FROM_ZERO) {
         return new ConcreteH(new big_js_1.Big(this.value).round(decimalPoint, roundingMode === h_1.H.RoundingMode.AWAY_FROM_ZERO
             ? 3 /* RoundUp */

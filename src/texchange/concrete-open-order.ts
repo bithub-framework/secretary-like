@@ -37,7 +37,7 @@ export class ConcreteOpenOrderStatic<
 		this.LimitOrder = new ConcreteLimitOrderStatic(this.H);
 	}
 
-	capture(order: ConcreteOpenOrder<ConcreteH>): OpenOrder.Snapshot {
+	public capture(order: ConcreteOpenOrder<ConcreteH>): OpenOrder.Snapshot {
 		return {
 			...this.LimitOrder.capture(order),
 			filled: this.H.capture(order.filled),
@@ -46,7 +46,7 @@ export class ConcreteOpenOrderStatic<
 		}
 	}
 
-	restore(snapshot: OpenOrder.Snapshot): ConcreteOpenOrder.MutablePlain<ConcreteH> {
+	public restore(snapshot: OpenOrder.Snapshot): ConcreteOpenOrder.MutablePlain<ConcreteH> {
 		return {
 			...this.LimitOrder.restore(snapshot),
 			filled: this.H.restore(snapshot.filled),

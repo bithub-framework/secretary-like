@@ -27,13 +27,14 @@ export class ConcreteClosableStatic<
 		private readonly H: HStatic<ConcreteH>,
 	) { }
 
-	capture(closable: ConcreteClosable<ConcreteH>): Closable.Snapshot {
+	public capture(closable: ConcreteClosable<ConcreteH>): Closable.Snapshot {
 		return {
 			[Length.LONG]: this.H.capture(closable[Length.LONG]),
 			[Length.SHORT]: this.H.capture(closable[Length.SHORT]),
 		};
 	}
-	restore(snapshot: Closable.Snapshot): ConcreteClosable.MutablePlain<ConcreteH> {
+
+	public restore(snapshot: Closable.Snapshot): ConcreteClosable.MutablePlain<ConcreteH> {
 		return {
 			[Length.LONG]: this.H.restore(snapshot[Length.LONG]),
 			[Length.SHORT]: this.H.restore(snapshot[Length.SHORT]),

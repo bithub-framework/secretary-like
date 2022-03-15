@@ -27,7 +27,7 @@ export class ConcreteTradeStatic<
 		private readonly TradeId: ConcreteTradeIdStatic,
 	) { }
 
-	capture(trade: ConcreteTrade<ConcreteH>): Trade.Snapshot {
+	public capture(trade: ConcreteTrade<ConcreteH>): Trade.Snapshot {
 		return {
 			side: trade.side,
 			price: this.H.capture(trade.price),
@@ -37,7 +37,7 @@ export class ConcreteTradeStatic<
 		}
 	}
 
-	restore(snapshot: Trade.Snapshot): ConcreteTrade.MutablePlain<ConcreteH> {
+	public restore(snapshot: Trade.Snapshot): ConcreteTrade.MutablePlain<ConcreteH> {
 		return {
 			side: snapshot.side,
 			price: this.H.restore(snapshot.price),

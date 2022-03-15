@@ -24,14 +24,15 @@ export class ConcreteBalancesStatic<
 		private readonly H: HStatic<ConcreteH>,
 	) { }
 
-	capture(balances: ConcreteBalances<ConcreteH>): Balances.Snapshot {
+	public capture(balances: ConcreteBalances<ConcreteH>): Balances.Snapshot {
 		return {
 			balance: this.H.capture(balances.balance),
 			available: this.H.capture(balances.available),
 			time: balances.time,
 		}
 	}
-	restore(snapshot: Balances.Snapshot): ConcreteBalances.MutablePlain<ConcreteH> {
+
+	public restore(snapshot: Balances.Snapshot): ConcreteBalances.MutablePlain<ConcreteH> {
 		return {
 			balance: this.H.restore(snapshot.balance),
 			available: this.H.restore(snapshot.available),

@@ -39,13 +39,13 @@ export class ConcreteOpenMakerStatic<
 		);
 	}
 
-	capture(order: ConcreteOpenMaker<ConcreteH>): OpenMaker.Snapshot {
+	public capture(order: ConcreteOpenMaker<ConcreteH>): OpenMaker.Snapshot {
 		return {
 			...this.OpenOrder.capture(order),
 			behind: this.H.capture(order.behind),
 		}
 	}
-	restore(snapshot: OpenMaker.Snapshot): ConcreteOpenMaker.MutablePlain<ConcreteH> {
+	public restore(snapshot: OpenMaker.Snapshot): ConcreteOpenMaker.MutablePlain<ConcreteH> {
 		return {
 			...this.OpenOrder.restore(snapshot),
 			behind: this.H.restore(snapshot.behind),

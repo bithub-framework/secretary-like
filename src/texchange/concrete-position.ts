@@ -25,14 +25,14 @@ export class ConcretePositionStatic<
 		private readonly H: HStatic<ConcreteH>,
 	) { }
 
-	capture(position: ConcretePosition<ConcreteH>): Position.Snapshot {
+	public capture(position: ConcretePosition<ConcreteH>): Position.Snapshot {
 		return {
 			[Length.LONG]: this.H.capture(position[Length.LONG]),
 			[Length.SHORT]: this.H.capture(position[Length.SHORT]),
 		};
 	}
 
-	restore(snapshot: Position.Snapshot): ConcretePosition.MutablePlain<ConcreteH> {
+	public restore(snapshot: Position.Snapshot): ConcretePosition.MutablePlain<ConcreteH> {
 		return {
 			[Length.LONG]: this.H.restore(snapshot[Length.LONG]),
 			[Length.SHORT]: this.H.restore(snapshot[Length.SHORT]),

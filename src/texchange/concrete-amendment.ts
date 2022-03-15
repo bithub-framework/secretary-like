@@ -38,7 +38,7 @@ export class ConcreteAmendmentStatic<
 		);
 	}
 
-	capture(amendment: ConcreteAmendment<ConcreteH>): Amendment.Snapshot {
+	public capture(amendment: ConcreteAmendment<ConcreteH>): Amendment.Snapshot {
 		return {
 			...this.OpenOrder.capture(amendment),
 			newUnfilled: this.H.capture(amendment.newUnfilled),
@@ -46,7 +46,7 @@ export class ConcreteAmendmentStatic<
 		}
 	}
 
-	restore(snapshot: Amendment.Snapshot): ConcreteAmendment.MutablePlain<ConcreteH> {
+	public restore(snapshot: Amendment.Snapshot): ConcreteAmendment.MutablePlain<ConcreteH> {
 		return {
 			...this.OpenOrder.restore(snapshot),
 			newUnfilled: this.H.restore(snapshot.newUnfilled),
