@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConcreteOrderbookStatic = void 0;
+exports.OrderbookStatic = void 0;
 const book_order_1 = require("./book-order");
 const side_1 = require("./side");
-class ConcreteOrderbookStatic {
+class OrderbookStatic {
     constructor(H) {
         this.H = H;
         this.BookOrder = new book_order_1.BookOrderStatic(this.H);
@@ -34,5 +34,5 @@ class ConcreteOrderbookStatic {
         };
     }
 }
-exports.ConcreteOrderbookStatic = ConcreteOrderbookStatic;
+exports.OrderbookStatic = OrderbookStatic;
 //# sourceMappingURL=orderbook.js.map

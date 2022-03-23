@@ -15,7 +15,7 @@ export declare namespace Orderbook {
         readonly time: number | null;
     }
 }
-export declare class ConcreteOrderbookStatic<H extends HLike<H>> {
+export declare class OrderbookStatic<H extends HLike<H>> {
     private readonly H;
     private readonly BookOrder;
     constructor(H: HStatic<H>);

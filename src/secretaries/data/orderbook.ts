@@ -22,7 +22,7 @@ export namespace Orderbook {
 }
 
 
-export class ConcreteOrderbookStatic<H extends HLike<H>> {
+export class OrderbookStatic<H extends HLike<H>> {
 	private readonly BookOrder = new BookOrderStatic<H>(this.H);
 
 	public constructor(
