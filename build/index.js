@@ -11,9 +11,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./secretaries"), exports);
-__exportStar(require("./context"), exports);
 __exportStar(require("./texchange"), exports);
-__exportStar(require("./specification"), exports);
-__exportStar(require("./timeline"), exports);
 __exportStar(require("./big-h"), exports);
 //# sourceMappingURL=index.js.map

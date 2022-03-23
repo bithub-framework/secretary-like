@@ -1,6 +1,7 @@
-import { HLike, H, HStatic } from './secretaries/h';
+import { HLike, H, HStatic } from './secretaries/data/h';
 import { Big, RoundingMode } from 'big.js';
 
+// TODO 单独包
 
 export class BigH implements HLike<BigH> {
 	private readonly value: Big;

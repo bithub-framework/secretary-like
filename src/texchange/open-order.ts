@@ -1,5 +1,5 @@
-import { HLike } from '../secretaries/h';
-import { OpenOrder, OpenOrderStatic } from '../secretaries/open-order';
+import { HLike } from '../secretaries/data/h';
+import { OpenOrder, OpenOrderStatic } from '../secretaries/data/open-order';
 import { TexchangeOrderId } from './order-id';
 
 

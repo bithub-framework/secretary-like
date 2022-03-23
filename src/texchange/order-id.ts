@@ -1,4 +1,4 @@
-import { OrderId, OrderIdStatic } from '../secretaries/order-id';
+import { OrderId, OrderIdStatic } from '../secretaries/data/order-id';
 
 
 export type TexchangeOrderId = number | string;

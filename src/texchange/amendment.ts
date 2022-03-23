@@ -1,5 +1,5 @@
-import { HLike } from '../secretaries/h';
-import { Amendment, AmendmentStatic } from '../secretaries/amendment';
+import { HLike } from '../secretaries/data/h';
+import { Amendment, AmendmentStatic } from '../secretaries/data/amendment';
 import { TexchangeOrderId } from './order-id';
 
 

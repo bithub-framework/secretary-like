@@ -1,4 +1,4 @@
-import { HLike, H } from './secretaries/h';
+import { HLike, H } from './secretaries/data/h';
 export declare class BigH implements HLike<BigH> {
     private readonly value;
     private constructor();

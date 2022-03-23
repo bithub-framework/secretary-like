@@ -1,4 +1,4 @@
-import { TradeId, TradeIdStatic } from '../secretaries/trade-id';
+import { TradeId, TradeIdStatic } from '../secretaries/data/trade-id';
 
 
 export type TexchangeTradeId = number | string;

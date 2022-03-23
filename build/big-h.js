@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BigH = void 0;
-const h_1 = require("./secretaries/h");
+const h_1 = require("./secretaries/data/h");
 const big_js_1 = require("big.js");
+// TODO 单独包
 class BigH {
     constructor(big) {
         this.value = big;
