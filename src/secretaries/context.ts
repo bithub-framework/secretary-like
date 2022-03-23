@@ -67,7 +67,7 @@ export interface MarketEventsLike<
     H extends HLike<H>,
     OrderId,
     TradeId,
-    > extends EventEmitter {
+    > extends NodeJS.EventEmitter {
 
     on<Event extends keyof MarketEvents<H, OrderId, TradeId>>(event: Event, listener: (...args: MarketEvents<H, OrderId, TradeId>[Event]) => void): this;
     once<Event extends keyof MarketEvents<H, OrderId, TradeId>>(event: Event, listener: (...args: MarketEvents<H, OrderId, TradeId>[Event]) => void): this;
@@ -102,7 +102,7 @@ export interface AccountEventsLike<
     H extends HLike<H>,
     OrderId,
     TradeId,
-    > extends EventEmitter {
+    > extends NodeJS.EventEmitter {
 
     on<Event extends keyof AccountEvents<H, OrderId, TradeId>>(event: Event, listener: (...args: AccountEvents<H, OrderId, TradeId>[Event]) => void): this;
     once<Event extends keyof AccountEvents<H, OrderId, TradeId>>(event: Event, listener: (...args: AccountEvents<H, OrderId, TradeId>[Event]) => void): this;
