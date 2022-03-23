@@ -24,6 +24,15 @@ class TradeStatic {
             id: this.TradeId.restore(snapshot.id),
         };
     }
+    copy(trade) {
+        return {
+            side: trade.side,
+            price: trade.price,
+            quantity: trade.quantity,
+            time: trade.time,
+            id: trade.id,
+        };
+    }
 }
 exports.TradeStatic = TradeStatic;
 //# sourceMappingURL=trade.js.map

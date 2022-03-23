@@ -47,4 +47,12 @@ export class PositionsStatic<H extends HLike<H>>{
 			time: snapshot.time,
 		}
 	}
+
+	public copy(positions: Positions<H>): Positions.MutablePlain<H> {
+		return {
+			position: this.Position.copy(positions.position),
+			closable: this.Position.copy(positions.closable),
+			time: positions.time,
+		};
+	}
 }

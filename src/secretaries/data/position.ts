@@ -35,4 +35,11 @@ export class PositionStatic<H extends HLike<H>> {
 			[Length.SHORT]: this.H.restore(snapshot[Length.SHORT]),
 		}
 	}
+
+	public copy(position: Position<H>): Position.MutablePlain<H> {
+		return {
+			[Length.LONG]: position[Length.LONG],
+			[Length.SHORT]: position[Length.SHORT],
+		};
+	}
 }

@@ -25,4 +25,5 @@ export declare class PositionsStatic<H extends HLike<H>> {
     constructor(H: HStatic<H>);
     capture(positions: Positions<H>): Positions.Snapshot;
     restore(snapshot: Positions.Snapshot): Positions.MutablePlain<H>;
+    copy(positions: Positions<H>): Positions.MutablePlain<H>;
 }

@@ -54,4 +54,14 @@ export class LimitOrderStatic<H extends HLike<H>> {
 			operation: snapshot.operation,
 		}
 	}
+
+	public copy(order: LimitOrder<H>): LimitOrder.MutablePlain<H> {
+		return {
+			price: order.price,
+			quantity: order.quantity,
+			side: order.side,
+			length: order.length,
+			operation: order.operation,
+		};
+	}
 }

@@ -24,6 +24,14 @@ class OpenOrderStatic {
             id: this.OrderId.restore(snapshot.id),
         };
     }
+    copy(order) {
+        return {
+            ...this.LimitOrder.copy(order),
+            filled: order.filled,
+            unfilled: order.unfilled,
+            id: order.id,
+        };
+    }
 }
 exports.OpenOrderStatic = OpenOrderStatic;
 //# sourceMappingURL=open-order.js.map

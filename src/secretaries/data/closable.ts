@@ -35,4 +35,11 @@ export class ClosableStatic<H extends HLike<H>> {
 			[Length.SHORT]: this.H.restore(snapshot[Length.SHORT]),
 		}
 	}
+
+	public copy(closable: Closable<H>): Closable.MutablePlain<H> {
+		return {
+			[Length.LONG]: closable[Length.LONG],
+			[Length.SHORT]: closable[Length.SHORT],
+		}
+	}
 }

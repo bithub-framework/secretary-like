@@ -34,10 +34,18 @@ export class OpenMakerStatic<H extends HLike<H>, OrderId> {
 			behind: this.H.capture(order.behind),
 		}
 	}
+
 	public restore(snapshot: OpenMaker.Snapshot): OpenMaker.MutablePlain<H, OrderId> {
 		return {
 			...this.OpenOrder.restore(snapshot),
 			behind: this.H.restore(snapshot.behind),
 		}
+	}
+
+	public copy(order: OpenMaker<H, OrderId>): OpenMaker.MutablePlain<H, OrderId> {
+		return {
+			...this.OpenOrder.copy(order),
+			behind: order.behind,
+		};
 	}
 }

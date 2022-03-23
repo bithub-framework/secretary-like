@@ -21,4 +21,5 @@ export declare class BalancesStatic<H extends HLike<H>> {
     constructor(H: HStatic<H>);
     capture(balances: Balances<H>): Balances.Snapshot;
     restore(snapshot: Balances.Snapshot): Balances.MutablePlain<H>;
+    copy(balances: Balances<H>): Balances.MutablePlain<H>;
 }

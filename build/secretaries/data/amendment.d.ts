@@ -22,4 +22,5 @@ export declare class AmendmentStatic<H extends HLike<H>, OrderId> {
     constructor(H: HStatic<H>, OrderId: OrderIdStatic<OrderId>);
     capture(amendment: Amendment<H, OrderId>): Amendment.Snapshot;
     restore(snapshot: Amendment.Snapshot): Amendment.MutablePlain<H, OrderId>;
+    copy(amendment: Amendment<H, OrderId>): Amendment.MutablePlain<H, OrderId>;
 }

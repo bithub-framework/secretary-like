@@ -49,4 +49,12 @@ export class AmendmentStatic<H extends HLike<H>, OrderId> {
 			newPrice: this.H.restore(snapshot.newPrice),
 		};
 	}
+
+	public copy(amendment: Amendment<H, OrderId>): Amendment.MutablePlain<H, OrderId> {
+		return {
+			...this.OpenOrder.copy(amendment),
+			newUnfilled: amendment.newUnfilled,
+			newPrice: amendment.newPrice,
+		};
+	}
 }

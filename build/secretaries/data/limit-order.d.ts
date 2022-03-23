@@ -30,4 +30,5 @@ export declare class LimitOrderStatic<H extends HLike<H>> {
     constructor(H: HStatic<H>);
     capture(order: LimitOrder<H>): LimitOrder.Snapshot;
     restore(snapshot: LimitOrder.Snapshot): LimitOrder.MutablePlain<H>;
+    copy(order: LimitOrder<H>): LimitOrder.MutablePlain<H>;
 }

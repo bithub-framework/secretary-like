@@ -42,4 +42,12 @@ export class BookOrderStatic<H extends HLike<H>> {
 			side: snapshot.side,
 		}
 	}
+
+	public copy(order: BookOrder<H>): BookOrder.MutablePlain<H> {
+		return {
+			price: order.price,
+			quantity: order.quantity,
+			side: order.side,
+		};
+	}
 }

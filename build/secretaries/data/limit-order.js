@@ -23,6 +23,15 @@ class LimitOrderStatic {
             operation: snapshot.operation,
         };
     }
+    copy(order) {
+        return {
+            price: order.price,
+            quantity: order.quantity,
+            side: order.side,
+            length: order.length,
+            operation: order.operation,
+        };
+    }
 }
 exports.LimitOrderStatic = LimitOrderStatic;
 //# sourceMappingURL=limit-order.js.map

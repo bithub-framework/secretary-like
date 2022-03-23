@@ -19,6 +19,13 @@ class BookOrderStatic {
             side: snapshot.side,
         };
     }
+    copy(order) {
+        return {
+            price: order.price,
+            quantity: order.quantity,
+            side: order.side,
+        };
+    }
 }
 exports.BookOrderStatic = BookOrderStatic;
 //# sourceMappingURL=book-order.js.map

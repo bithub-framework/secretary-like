@@ -54,4 +54,13 @@ export class OpenOrderStatic<H extends HLike<H>, OrderId> {
 			id: this.OrderId.restore(snapshot.id),
 		};
 	}
+
+	public copy(order: OpenOrder<H, OrderId>): OpenOrder.MutablePlain<H, OrderId> {
+		return {
+			...this.LimitOrder.copy(order),
+			filled: order.filled,
+			unfilled: order.unfilled,
+			id: order.id,
+		}
+	}
 }

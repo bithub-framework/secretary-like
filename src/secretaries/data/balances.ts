@@ -42,4 +42,12 @@ export class BalancesStatic<H extends HLike<H>> {
 			time: snapshot.time,
 		};
 	}
+
+	public copy(balances: Balances<H>): Balances.MutablePlain<H> {
+		return {
+			balance: balances.balance,
+			available: balances.available,
+			time: balances.time,
+		};
+	}
 }

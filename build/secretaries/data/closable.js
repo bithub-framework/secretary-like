@@ -18,6 +18,12 @@ class ClosableStatic {
             [length_1.Length.SHORT]: this.H.restore(snapshot[length_1.Length.SHORT]),
         };
     }
+    copy(closable) {
+        return {
+            [length_1.Length.LONG]: closable[length_1.Length.LONG],
+            [length_1.Length.SHORT]: closable[length_1.Length.SHORT],
+        };
+    }
 }
 exports.ClosableStatic = ClosableStatic;
 //# sourceMappingURL=closable.js.map

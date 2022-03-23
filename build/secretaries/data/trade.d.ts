@@ -30,4 +30,5 @@ export declare class TradeStatic<H extends HLike<H>, TradeId> {
     constructor(H: HStatic<H>, TradeId: TradeIdStatic<TradeId>);
     capture(trade: Trade<H, TradeId>): Trade.Snapshot;
     restore(snapshot: Trade.Snapshot): Trade.MutablePlain<H, TradeId>;
+    copy(trade: Trade<H, TradeId>): Trade.MutablePlain<H, TradeId>;
 }

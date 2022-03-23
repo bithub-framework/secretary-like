@@ -19,4 +19,5 @@ export declare class OpenMakerStatic<H extends HLike<H>, OrderId> {
     constructor(H: HStatic<H>, OrderId: OrderIdStatic<OrderId>);
     capture(order: OpenMaker<H, OrderId>): OpenMaker.Snapshot;
     restore(snapshot: OpenMaker.Snapshot): OpenMaker.MutablePlain<H, OrderId>;
+    copy(order: OpenMaker<H, OrderId>): OpenMaker.MutablePlain<H, OrderId>;
 }

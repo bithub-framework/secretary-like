@@ -22,6 +22,13 @@ class AmendmentStatic {
             newPrice: this.H.restore(snapshot.newPrice),
         };
     }
+    copy(amendment) {
+        return {
+            ...this.OpenOrder.copy(amendment),
+            newUnfilled: amendment.newUnfilled,
+            newPrice: amendment.newPrice,
+        };
+    }
 }
 exports.AmendmentStatic = AmendmentStatic;
 //# sourceMappingURL=amendment.js.map

@@ -18,6 +18,12 @@ class PositionStatic {
             [length_1.Length.SHORT]: this.H.restore(snapshot[length_1.Length.SHORT]),
         };
     }
+    copy(position) {
+        return {
+            [length_1.Length.LONG]: position[length_1.Length.LONG],
+            [length_1.Length.SHORT]: position[length_1.Length.SHORT],
+        };
+    }
 }
 exports.PositionStatic = PositionStatic;
 //# sourceMappingURL=position.js.map

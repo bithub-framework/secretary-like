@@ -19,6 +19,13 @@ class BalancesStatic {
             time: snapshot.time,
         };
     }
+    copy(balances) {
+        return {
+            balance: balances.balance,
+            available: balances.available,
+            time: balances.time,
+        };
+    }
 }
 exports.BalancesStatic = BalancesStatic;
 //# sourceMappingURL=balances.js.map

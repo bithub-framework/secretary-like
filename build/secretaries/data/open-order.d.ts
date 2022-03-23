@@ -25,4 +25,5 @@ export declare class OpenOrderStatic<H extends HLike<H>, OrderId> {
     constructor(H: HStatic<H>, OrderId: OrderIdStatic<OrderId>);
     capture(order: OpenOrder<H, OrderId>): OpenOrder.Snapshot;
     restore(snapshot: OpenOrder.Snapshot): OpenOrder.MutablePlain<H, OrderId>;
+    copy(order: OpenOrder<H, OrderId>): OpenOrder.MutablePlain<H, OrderId>;
 }

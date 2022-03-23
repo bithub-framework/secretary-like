@@ -26,6 +26,13 @@ class ConcreteOrderbookStatic {
                 : Number.NEGATIVE_INFINITY,
         };
     }
+    copy(orderbook) {
+        return {
+            [side_1.Side.ASK]: orderbook[side_1.Side.ASK].map(order => this.BookOrder.copy(order)),
+            [side_1.Side.BID]: orderbook[side_1.Side.BID].map(order => this.BookOrder.copy(order)),
+            time: orderbook.time,
+        };
+    }
 }
 exports.ConcreteOrderbookStatic = ConcreteOrderbookStatic;
 //# sourceMappingURL=orderbook.js.map

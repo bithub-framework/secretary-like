@@ -21,4 +21,5 @@ export declare class ConcreteOrderbookStatic<H extends HLike<H>> {
     constructor(H: HStatic<H>);
     capture(orderbook: Orderbook<H>): Orderbook.Snapshot;
     restore(snapshot: Orderbook.Snapshot): Orderbook.MutablePlain<H>;
+    copy(orderbook: Orderbook<H>): Orderbook.MutablePlain<H>;
 }

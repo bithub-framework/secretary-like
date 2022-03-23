@@ -22,4 +22,5 @@ export declare class BookOrderStatic<H extends HLike<H>> {
     constructor(H: HStatic<H>);
     capture(order: BookOrder<H>): BookOrder.Snapshot;
     restore(snapshot: BookOrder.Snapshot): BookOrder.MutablePlain<H>;
+    copy(order: BookOrder<H>): BookOrder.MutablePlain<H>;
 }

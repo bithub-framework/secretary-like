@@ -23,6 +23,13 @@ class PositionsStatic {
             time: snapshot.time,
         };
     }
+    copy(positions) {
+        return {
+            position: this.Position.copy(positions.position),
+            closable: this.Position.copy(positions.closable),
+            time: positions.time,
+        };
+    }
 }
 exports.PositionsStatic = PositionsStatic;
 //# sourceMappingURL=positions.js.map

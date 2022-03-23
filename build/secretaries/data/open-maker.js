@@ -20,6 +20,12 @@ class OpenMakerStatic {
             behind: this.H.restore(snapshot.behind),
         };
     }
+    copy(order) {
+        return {
+            ...this.OpenOrder.copy(order),
+            behind: order.behind,
+        };
+    }
 }
 exports.OpenMakerStatic = OpenMakerStatic;
 //# sourceMappingURL=open-maker.js.map

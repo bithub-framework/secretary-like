@@ -55,4 +55,14 @@ export class TradeStatic<H extends HLike<H>, TradeId> {
 			id: this.TradeId.restore(snapshot.id),
 		}
 	}
+
+	public copy(trade: Trade<H, TradeId>): Trade.MutablePlain<H, TradeId> {
+		return {
+			side: trade.side,
+			price: trade.price,
+			quantity: trade.quantity,
+			time: trade.time,
+			id: trade.id,
+		}
+	}
 }

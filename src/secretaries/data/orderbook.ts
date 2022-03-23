@@ -48,4 +48,12 @@ export class ConcreteOrderbookStatic<H extends HLike<H>> {
 				: Number.NEGATIVE_INFINITY,
 		}
 	}
+
+	public copy(orderbook: Orderbook<H>): Orderbook.MutablePlain<H> {
+		return {
+			[Side.ASK]: orderbook[Side.ASK].map(order => this.BookOrder.copy(order)),
+			[Side.BID]: orderbook[Side.BID].map(order => this.BookOrder.copy(order)),
+			time: orderbook.time,
+		};
+	}
 }

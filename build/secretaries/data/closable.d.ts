@@ -16,4 +16,5 @@ export declare class ClosableStatic<H extends HLike<H>> {
     constructor(H: HStatic<H>);
     capture(closable: Closable<H>): Closable.Snapshot;
     restore(snapshot: Closable.Snapshot): Closable.MutablePlain<H>;
+    copy(closable: Closable<H>): Closable.MutablePlain<H>;
 }
