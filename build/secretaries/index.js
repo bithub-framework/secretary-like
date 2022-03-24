@@ -27,6 +27,7 @@ __exportStar(require("./data/closable"), exports);
 __exportStar(require("./data/position"), exports);
 __exportStar(require("./data/positions"), exports);
 __exportStar(require("./data/balances"), exports);
+__exportStar(require("./data/trades"), exports);
 __exportStar(require("./context"), exports);
 __exportStar(require("./specification"), exports);
 __exportStar(require("./timeline"), exports);

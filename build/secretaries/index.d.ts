@@ -15,6 +15,7 @@ export * from './data/closable';
 export * from './data/position';
 export * from './data/positions';
 export * from './data/balances';
+export * from './data/trades';
 export * from './context';
 export * from './specification';
 export * from './timeline';
