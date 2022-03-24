@@ -3,16 +3,16 @@ import { Side } from './side';
 
 
 export interface BookOrder<H extends HLike<H>> {
-	readonly price: H;
-	readonly quantity: H;
-	readonly side: Side,
+	price: H;
+	quantity: H;
+	side: Side,
 }
 
 export namespace BookOrder {
-	export interface MutablePlain<H extends HLike<H>> {
-		price: H;
-		quantity: H;
-		side: Side,
+	export interface Functional<H extends HLike<H>> {
+		readonly price: H;
+		readonly quantity: H;
+		readonly side: Side,
 	}
 
 	export interface Snapshot {
@@ -27,7 +27,9 @@ export class BookOrderStatic<H extends HLike<H>> {
 		private readonly H: HStatic<H>,
 	) { }
 
-	public capture(order: BookOrder<H>): BookOrder.Snapshot {
+	public capture(
+		order: BookOrder<H> | BookOrder.Functional<H>,
+	): BookOrder.Snapshot {
 		return {
 			price: this.H.capture(order.price),
 			quantity: this.H.capture(order.quantity),
@@ -35,7 +37,9 @@ export class BookOrderStatic<H extends HLike<H>> {
 		}
 	}
 
-	public restore(snapshot: BookOrder.Snapshot): BookOrder.MutablePlain<H> {
+	public restore(
+		snapshot: BookOrder.Snapshot,
+	): BookOrder<H> | BookOrder.Functional<H> {
 		return {
 			price: this.H.restore(snapshot.price),
 			quantity: this.H.restore(snapshot.quantity),
@@ -43,7 +47,9 @@ export class BookOrderStatic<H extends HLike<H>> {
 		}
 	}
 
-	public copy(order: BookOrder<H>): BookOrder.MutablePlain<H> {
+	public copy(
+		order: BookOrder<H> | BookOrder.Functional<H>,
+	): BookOrder<H> | BookOrder.Functional<H> {
 		return {
 			price: order.price,
 			quantity: order.quantity,

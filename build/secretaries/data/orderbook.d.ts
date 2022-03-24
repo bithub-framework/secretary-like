@@ -2,13 +2,13 @@ import { BookOrder } from './book-order';
 import { HLike, HStatic } from './h';
 import { Side } from './side';
 export interface Orderbook<H extends HLike<H>> {
-    readonly [side: Side]: readonly BookOrder<H>[];
-    readonly time: number;
+    [side: Side]: BookOrder<H>[];
+    time: number;
 }
 export declare namespace Orderbook {
-    interface MutablePlain<H extends HLike<H>> {
-        [side: Side]: BookOrder.MutablePlain<H>[];
-        time: number;
+    interface Functional<H extends HLike<H>> {
+        readonly [side: Side]: readonly BookOrder.Functional<H>[];
+        readonly time: number;
     }
     interface Snapshot {
         readonly [side: Side]: readonly BookOrder.Snapshot[];
@@ -19,7 +19,7 @@ export declare class OrderbookStatic<H extends HLike<H>> {
     private readonly H;
     private readonly BookOrder;
     constructor(H: HStatic<H>);
-    capture(orderbook: Orderbook<H>): Orderbook.Snapshot;
-    restore(snapshot: Orderbook.Snapshot): Orderbook.MutablePlain<H>;
-    copy(orderbook: Orderbook<H>): Orderbook.MutablePlain<H>;
+    capture(orderbook: Orderbook<H> | Orderbook.Functional<H>): Orderbook.Snapshot;
+    restore(snapshot: Orderbook.Snapshot): Orderbook<H> | Orderbook.Functional<H>;
+    copy(orderbook: Orderbook<H> | Orderbook.Functional<H>): Orderbook<H> | Orderbook.Functional<H>;
 }

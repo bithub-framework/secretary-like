@@ -3,17 +3,18 @@ import { Position, PositionStatic } from './position';
 import { Closable, ClosableStatic } from './closable';
 
 
+
 export interface Positions<H extends HLike<H>> {
-	readonly position: Position<H>;
-	readonly closable: Closable<H>;
-	readonly time: number;
+	position: Position<H>;
+	closable: Closable<H>;
+	time: number;
 }
 
 export namespace Positions {
-	export interface MutablePlain<H extends HLike<H>> {
-		position: Position.MutablePlain<H>;
-		closable: Closable.MutablePlain<H>;
-		time: number;
+	export interface Functional<H extends HLike<H>> {
+		readonly position: Position.Functional<H>;
+		readonly closable: Closable.Functional<H>;
+		readonly time: number;
 	}
 
 	export interface Snapshot {
@@ -32,7 +33,9 @@ export class PositionsStatic<H extends HLike<H>>{
 		private readonly H: HStatic<H>,
 	) { }
 
-	public capture(positions: Positions<H>): Positions.Snapshot {
+	public capture(
+		positions: Positions<H> | Positions.Functional<H>,
+	): Positions.Snapshot {
 		return {
 			position: this.Position.capture(positions.position),
 			closable: this.Closable.capture(positions.closable),
@@ -40,7 +43,9 @@ export class PositionsStatic<H extends HLike<H>>{
 		};
 	}
 
-	public restore(snapshot: Positions.Snapshot): Positions.MutablePlain<H> {
+	public restore(
+		snapshot: Positions.Snapshot,
+	): Positions<H> | Positions.Functional<H> {
 		return {
 			position: this.Position.restore(snapshot.position),
 			closable: this.Closable.restore(snapshot.closable),
@@ -48,7 +53,9 @@ export class PositionsStatic<H extends HLike<H>>{
 		}
 	}
 
-	public copy(positions: Positions<H>): Positions.MutablePlain<H> {
+	public copy(
+		positions: Positions<H> | Positions.Functional<H>,
+	): Positions<H> | Positions.Functional<H> {
 		return {
 			position: this.Position.copy(positions.position),
 			closable: this.Position.copy(positions.closable),

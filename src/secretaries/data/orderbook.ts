@@ -3,16 +3,16 @@ import { HLike, HStatic } from './h';
 import { Side } from './side';
 
 
+
 export interface Orderbook<H extends HLike<H>> {
-	readonly [side: Side]: readonly BookOrder<H>[];
-	readonly time: number;
+	[side: Side]: BookOrder<H>[];
+	time: number;
 }
 
 export namespace Orderbook {
-	export interface MutablePlain<H extends HLike<H>
-		> {
-		[side: Side]: BookOrder.MutablePlain<H>[];
-		time: number;
+	export interface Functional<H extends HLike<H>> {
+		readonly [side: Side]: readonly BookOrder.Functional<H>[];
+		readonly time: number;
 	}
 
 	export interface Snapshot {
@@ -29,7 +29,9 @@ export class OrderbookStatic<H extends HLike<H>> {
 		private readonly H: HStatic<H>,
 	) { }
 
-	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
+	public capture(
+		orderbook: Orderbook<H> | Orderbook.Functional<H>,
+	): Orderbook.Snapshot {
 		return {
 			[Side.ASK]: orderbook[Side.ASK].map(this.BookOrder.capture),
 			[Side.BID]: orderbook[Side.BID].map(this.BookOrder.capture),
@@ -39,7 +41,9 @@ export class OrderbookStatic<H extends HLike<H>> {
 		};
 	}
 
-	public restore(snapshot: Orderbook.Snapshot): Orderbook.MutablePlain<H> {
+	public restore(
+		snapshot: Orderbook.Snapshot,
+	): Orderbook<H> | Orderbook.Functional<H> {
 		return {
 			[Side.ASK]: snapshot[Side.ASK].map(this.BookOrder.restore),
 			[Side.BID]: snapshot[Side.BID].map(this.BookOrder.restore),
@@ -49,7 +53,9 @@ export class OrderbookStatic<H extends HLike<H>> {
 		}
 	}
 
-	public copy(orderbook: Orderbook<H>): Orderbook.MutablePlain<H> {
+	public copy(
+		orderbook: Orderbook<H> | Orderbook.Functional<H>,
+	): Orderbook<H> | Orderbook.Functional<H> {
 		return {
 			[Side.ASK]: orderbook[Side.ASK].map(order => this.BookOrder.copy(order)),
 			[Side.BID]: orderbook[Side.BID].map(order => this.BookOrder.copy(order)),

@@ -3,22 +3,24 @@ import { LimitOrder, LimitOrderStatic } from './limit-order';
 import { OrderId, OrderIdStatic } from './order-id';
 
 
-
 export interface OpenOrder<H extends HLike<H>, OrderId>
 	extends LimitOrder<H> {
 
-	readonly filled: H;
-	readonly unfilled: H;
-	readonly id: OrderId;
+	filled: H;
+	unfilled: H;
+	id: OrderId;
 }
 
 export namespace OpenOrder {
-	export interface MutablePlain<H extends HLike<H>, OrderId>
-		extends LimitOrder.MutablePlain<H> {
-		filled: H;
-		unfilled: H;
-		id: OrderId;
+	export interface Functional<H extends HLike<H>, OrderId>
+		extends LimitOrder.Functional<H> {
+
+		readonly filled: H;
+		readonly unfilled: H;
+		readonly id: OrderId;
 	}
+
+
 
 	export interface Snapshot extends LimitOrder.Snapshot {
 		readonly filled: H.Snapshot;
@@ -35,7 +37,9 @@ export class OpenOrderStatic<H extends HLike<H>, OrderId> {
 		private readonly OrderId: OrderIdStatic<OrderId>,
 	) { }
 
-	public capture(order: OpenOrder<H, OrderId>): OpenOrder.Snapshot {
+	public capture(
+		order: OpenOrder<H, OrderId> | OpenOrder.Functional<H, OrderId>,
+	): OpenOrder.Snapshot {
 		return {
 			...this.LimitOrder.capture(order),
 			filled: this.H.capture(order.filled),
@@ -46,7 +50,7 @@ export class OpenOrderStatic<H extends HLike<H>, OrderId> {
 
 	public restore(
 		snapshot: OpenOrder.Snapshot,
-	): OpenOrder.MutablePlain<H, OrderId> {
+	): OpenOrder<H, OrderId> | OpenOrder.Functional<H, OrderId> {
 		return {
 			...this.LimitOrder.restore(snapshot),
 			filled: this.H.restore(snapshot.filled),
@@ -55,7 +59,9 @@ export class OpenOrderStatic<H extends HLike<H>, OrderId> {
 		};
 	}
 
-	public copy(order: OpenOrder<H, OrderId>): OpenOrder.MutablePlain<H, OrderId> {
+	public copy(
+		order: OpenOrder<H, OrderId> | OpenOrder.Functional<H, OrderId>,
+	): OpenOrder<H, OrderId> | OpenOrder.Functional<H, OrderId> {
 		return {
 			...this.LimitOrder.copy(order),
 			filled: order.filled,

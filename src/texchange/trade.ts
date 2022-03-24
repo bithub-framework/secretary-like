@@ -9,8 +9,8 @@ export interface TexchangeTrade<H extends HLike<H>>
 
 
 export namespace TexchangeTrade {
-	export interface MutablePlain<H extends HLike<H>>
-		extends Trade.MutablePlain<H, TexchangeTradeId> { }
+	export interface Functional<H extends HLike<H>>
+		extends Trade.Functional<H, TexchangeTradeId> { }
 }
 
 export class TexchangeTradeStatic<H extends HLike<H>>

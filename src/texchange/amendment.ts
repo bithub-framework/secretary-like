@@ -8,8 +8,8 @@ export interface TexchangeAmendment<H extends HLike<H>>
 
 
 export namespace TexchangeAmendment {
-	export interface MutablePlain<H extends HLike<H>>
-		extends Amendment.MutablePlain<H, TexchangeOrderId> { }
+	export interface Functional<H extends HLike<H>>
+		extends Amendment.Functional<H, TexchangeOrderId> { }
 }
 
 export class TexchangeAmendmentStatic<H extends HLike<H>>

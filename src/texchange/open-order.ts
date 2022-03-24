@@ -8,8 +8,8 @@ export interface TexchangeOpenOrder<H extends HLike<H>>
 	extends OpenOrder<H, TexchangeOrderId> { }
 
 export namespace TexchangeOpenOrder {
-	export interface MutablePlain<H extends HLike<H>>
-		extends OpenOrder.MutablePlain<H, TexchangeOrderId> { }
+	export interface Functional<H extends HLike<H>>
+		extends OpenOrder.Functional<H, TexchangeOrderId> { }
 }
 
 export class TexchangeOpenOrderStatic<H extends HLike<H>>

@@ -4,20 +4,20 @@ import { TradeId, TradeIdStatic } from './trade-id';
 
 
 export interface Trade<H extends HLike<H>, TradeId> {
-	readonly side: Side;
-	readonly price: H;
-	readonly quantity: H;
-	readonly time: number;
-	readonly id: TradeId;
+	side: Side;
+	price: H;
+	quantity: H;
+	time: number;
+	id: TradeId;
 }
 
 export namespace Trade {
-	export interface MutablePlain<H extends HLike<H>, TradeId> {
-		side: Side;
-		price: H;
-		quantity: H;
-		time: number;
-		id: TradeId;
+	export interface Functional<H extends HLike<H>, TradeId> {
+		readonly side: Side;
+		readonly price: H;
+		readonly quantity: H;
+		readonly time: number;
+		readonly id: TradeId;
 	}
 
 	export interface Snapshot {
@@ -36,7 +36,9 @@ export class TradeStatic<H extends HLike<H>, TradeId> {
 		private readonly TradeId: TradeIdStatic<TradeId>,
 	) { }
 
-	public capture(trade: Trade<H, TradeId>): Trade.Snapshot {
+	public capture(
+		trade: Trade<H, TradeId> | Trade.Functional<H, TradeId>,
+	): Trade.Snapshot {
 		return {
 			side: trade.side,
 			price: this.H.capture(trade.price),
@@ -46,7 +48,9 @@ export class TradeStatic<H extends HLike<H>, TradeId> {
 		}
 	}
 
-	public restore(snapshot: Trade.Snapshot): Trade.MutablePlain<H, TradeId> {
+	public restore(
+		snapshot: Trade.Snapshot,
+	): Trade<H, TradeId> | Trade.Functional<H, TradeId> {
 		return {
 			side: snapshot.side,
 			price: this.H.restore(snapshot.price),
@@ -56,7 +60,9 @@ export class TradeStatic<H extends HLike<H>, TradeId> {
 		}
 	}
 
-	public copy(trade: Trade<H, TradeId>): Trade.MutablePlain<H, TradeId> {
+	public copy(
+		trade: Trade<H, TradeId> | Trade.Functional<H, TradeId>,
+	): Trade<H, TradeId> | Trade.Functional<H, TradeId> {
 		return {
 			side: trade.side,
 			price: trade.price,

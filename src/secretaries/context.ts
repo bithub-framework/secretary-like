@@ -6,13 +6,12 @@ import { Balances } from './data/balances';
 import { Orderbook } from './data/orderbook';
 import { Trade } from './data/trade';
 import { HLike } from './data/h';
+import { Timeline } from './timeline';
 import {
     MarketSpec,
     AccountSpec,
     MarketCalc,
 } from './specification';
-import { Timeline } from './timeline';
-import { EventEmitter } from 'events';
 
 
 
@@ -23,8 +22,7 @@ export interface ContextLike<
     > {
     readonly [marketIndex: number]: MarketLike<H, OrderId, TradeId>;
     readonly timeline: Timeline;
-    /** @param value Serializable into JSON */
-    submit(key: string, value: any): Promise<void>;
+    submit(key: string, json: string): Promise<void>;
 }
 
 export interface MarketLike<
@@ -52,8 +50,8 @@ export interface MarketEvents<
     OrderId,
     TradeId,
     > {
-    orderbook: [Orderbook.MutablePlain<H>];
-    trades: [Trade.MutablePlain<H, TradeId>[]];
+    orderbook: [Orderbook<H>];
+    trades: [Trade<H, TradeId>[]];
     error: [Error];
 }
 
@@ -80,8 +78,8 @@ export interface AccountEvents<
     OrderId,
     TradeId,
     > {
-    positions: [Positions.MutablePlain<H>];
-    balances: [Balances.MutablePlain<H>];
+    positions: [Positions<H>];
+    balances: [Balances<H>];
     error: [Error];
 }
 
@@ -90,12 +88,12 @@ export interface AccountApiLike<
     OrderId,
     TradeId,
     > {
-    makeOrders(orders: readonly LimitOrder<H>[]): Promise<(OpenOrder.MutablePlain<H, OrderId> | Error)[]>;
-    amendOrders(amendments: readonly Amendment<H, OrderId>[]): Promise<(OpenOrder.MutablePlain<H, OrderId> | Error)[]>;
-    getOpenOrders(): Promise<OpenOrder.MutablePlain<H, OrderId>[]>;
-    cancelOrders(orders: readonly OpenOrder<H, OrderId>[]): Promise<OpenOrder.MutablePlain<H, OrderId>[]>;
-    getPositions(): Promise<Positions.MutablePlain<H>>;
-    getBalances(): Promise<Balances.MutablePlain<H>>;
+    makeOrders(orders: readonly LimitOrder<H>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
+    amendOrders(amendments: readonly Amendment<H, OrderId>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
+    getOpenOrders(): Promise<OpenOrder<H, OrderId>[]>;
+    cancelOrders(orders: readonly OpenOrder<H, OrderId>[]): Promise<OpenOrder<H, OrderId>[]>;
+    getPositions(): Promise<Positions<H>>;
+    getBalances(): Promise<Balances<H>>;
 }
 
 export interface AccountEventsLike<

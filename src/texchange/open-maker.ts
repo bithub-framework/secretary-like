@@ -9,8 +9,8 @@ export interface TexchangeOpenMaker<H extends HLike<H>>
 
 
 export namespace TexchangeOpenMaker {
-	export interface MutablePlain<H extends HLike<H>>
-		extends OpenMaker.MutablePlain<H, TexchangeOrderId> { }
+	export interface Functional<H extends HLike<H>>
+		extends OpenMaker.Functional<H, TexchangeOrderId> { }
 }
 
 export class TexchangeOpenMakerStatic<H extends HLike<H>>
