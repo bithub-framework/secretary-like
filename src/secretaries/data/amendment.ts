@@ -12,13 +12,6 @@ export interface Amendment<H extends HLike<H>, OrderId>
 }
 
 export namespace Amendment {
-	export interface Functional<H extends HLike<H>, OrderId>
-		extends OpenOrder.Functional<H, OrderId> {
-
-		readonly newUnfilled: H;
-		readonly newPrice: H;
-	}
-
 	export interface Snapshot extends OpenOrder.Snapshot {
 		readonly newUnfilled: H.Snapshot;
 		readonly newPrice: H.Snapshot;
@@ -35,9 +28,7 @@ export class AmendmentStatic<H extends HLike<H>, OrderId> {
 		private readonly OrderId: OrderIdStatic<OrderId>,
 	) { }
 
-	public capture(
-		amendment: Amendment<H, OrderId> | Amendment.Functional<H, OrderId>,
-	): Amendment.Snapshot {
+	public capture(amendment: Amendment<H, OrderId>): Amendment.Snapshot {
 		return {
 			...this.OpenOrder.capture(amendment),
 			newUnfilled: this.H.capture(amendment.newUnfilled),
@@ -45,9 +36,7 @@ export class AmendmentStatic<H extends HLike<H>, OrderId> {
 		}
 	}
 
-	public restore(
-		snapshot: Amendment.Snapshot,
-	): Amendment<H, OrderId> | Amendment.Functional<H, OrderId> {
+	public restore(snapshot: Amendment.Snapshot): Amendment<H, OrderId> {
 		return {
 			...this.OpenOrder.restore(snapshot),
 			newUnfilled: this.H.restore(snapshot.newUnfilled),
@@ -55,9 +44,7 @@ export class AmendmentStatic<H extends HLike<H>, OrderId> {
 		};
 	}
 
-	public copy(
-		amendment: Amendment<H, OrderId> | Amendment.Functional<H, OrderId>,
-	): Amendment<H, OrderId> | Amendment.Functional<H, OrderId> {
+	public copy(amendment: Amendment<H, OrderId>): Amendment<H, OrderId> {
 		return {
 			...this.OpenOrder.copy(amendment),
 			newUnfilled: amendment.newUnfilled,

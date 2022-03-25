@@ -3,9 +3,5 @@ import { OpenMaker, OpenMakerStatic } from '../secretaries/data/open-maker';
 import { TexchangeOrderId } from './order-id';
 export interface TexchangeOpenMaker<H extends HLike<H>> extends OpenMaker<H, TexchangeOrderId> {
 }
-export declare namespace TexchangeOpenMaker {
-    interface Functional<H extends HLike<H>> extends OpenMaker.Functional<H, TexchangeOrderId> {
-    }
-}
 export declare class TexchangeOpenMakerStatic<H extends HLike<H>> extends OpenMakerStatic<H, TexchangeOrderId> {
 }

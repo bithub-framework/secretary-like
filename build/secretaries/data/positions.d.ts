@@ -7,11 +7,6 @@ export interface Positions<H extends HLike<H>> {
     time: number;
 }
 export declare namespace Positions {
-    interface Functional<H extends HLike<H>> {
-        readonly position: Position.Functional<H>;
-        readonly closable: Closable.Functional<H>;
-        readonly time: number;
-    }
     interface Snapshot {
         readonly position: Position.Snapshot;
         readonly closable: Closable.Snapshot;
@@ -23,7 +18,7 @@ export declare class PositionsStatic<H extends HLike<H>> {
     private readonly Position;
     private readonly Closable;
     constructor(H: HStatic<H>);
-    capture(positions: Positions<H> | Positions.Functional<H>): Positions.Snapshot;
-    restore(snapshot: Positions.Snapshot): Positions<H> | Positions.Functional<H>;
-    copy(positions: Positions<H> | Positions.Functional<H>): Positions<H> | Positions.Functional<H>;
+    capture(positions: Positions<H>): Positions.Snapshot;
+    restore(snapshot: Positions.Snapshot): Positions<H>;
+    copy(positions: Positions<H>): Positions<H>;
 }

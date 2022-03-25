@@ -20,7 +20,7 @@ export declare namespace BookOrder {
 export declare class BookOrderStatic<H extends HLike<H>> {
     private readonly H;
     constructor(H: HStatic<H>);
-    capture(order: BookOrder<H> | BookOrder.Functional<H>): BookOrder.Snapshot;
-    restore(snapshot: BookOrder.Snapshot): BookOrder<H> | BookOrder.Functional<H>;
-    copy(order: BookOrder<H> | BookOrder.Functional<H>): BookOrder<H> | BookOrder.Functional<H>;
+    capture(order: BookOrder<H>): BookOrder.Snapshot;
+    restore(snapshot: BookOrder.Snapshot): BookOrder<H>;
+    copy(order: BookOrder<H>): BookOrder<H>;
 }

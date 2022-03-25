@@ -9,13 +9,6 @@ export interface Trade<H extends HLike<H>, TradeId> {
     id: TradeId;
 }
 export declare namespace Trade {
-    interface Functional<H extends HLike<H>, TradeId> {
-        readonly side: Side;
-        readonly price: H;
-        readonly quantity: H;
-        readonly time: number;
-        readonly id: TradeId;
-    }
     interface Snapshot {
         readonly side: Side;
         readonly price: H.Snapshot;
@@ -28,7 +21,7 @@ export declare class TradeStatic<H extends HLike<H>, TradeId> {
     private readonly H;
     private readonly TradeId;
     constructor(H: HStatic<H>, TradeId: TradeIdStatic<TradeId>);
-    capture(trade: Trade<H, TradeId> | Trade.Functional<H, TradeId>): Trade.Snapshot;
-    restore(snapshot: Trade.Snapshot): Trade<H, TradeId> | Trade.Functional<H, TradeId>;
-    copy(trade: Trade<H, TradeId> | Trade.Functional<H, TradeId>): Trade<H, TradeId> | Trade.Functional<H, TradeId>;
+    capture(trade: Trade<H, TradeId>): Trade.Snapshot;
+    restore(snapshot: Trade.Snapshot): Trade<H, TradeId>;
+    copy(trade: Trade<H, TradeId>): Trade<H, TradeId>;
 }

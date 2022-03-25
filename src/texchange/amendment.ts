@@ -7,10 +7,5 @@ export interface TexchangeAmendment<H extends HLike<H>>
 	extends Amendment<H, TexchangeOrderId> { }
 
 
-export namespace TexchangeAmendment {
-	export interface Functional<H extends HLike<H>>
-		extends Amendment.Functional<H, TexchangeOrderId> { }
-}
-
 export class TexchangeAmendmentStatic<H extends HLike<H>>
 	extends AmendmentStatic<H, TexchangeOrderId>{ }

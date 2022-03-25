@@ -13,14 +13,6 @@ export interface LimitOrder<H extends HLike<H>> {
 }
 
 export namespace LimitOrder {
-	export interface Functional<H extends HLike<H>> {
-		readonly price: H;
-		readonly quantity: H;
-		readonly side: Side;
-		readonly length: Length;
-		readonly operation: Operation;
-	}
-
 	export interface Snapshot {
 		readonly price: H.Snapshot;
 		readonly quantity: H.Snapshot;
@@ -35,9 +27,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 		private readonly H: HStatic<H>,
 	) { }
 
-	public capture(
-		order: LimitOrder<H> | LimitOrder.Functional<H>,
-	): LimitOrder.Snapshot {
+	public capture(order: LimitOrder<H>): LimitOrder.Snapshot {
 		return {
 			price: this.H.capture(order.price),
 			quantity: this.H.capture(order.quantity),
@@ -47,9 +37,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 		}
 	}
 
-	public restore(
-		snapshot: LimitOrder.Snapshot,
-	): LimitOrder<H> | LimitOrder.Functional<H> {
+	public restore(snapshot: LimitOrder.Snapshot): LimitOrder<H> {
 		return {
 			price: this.H.restore(snapshot.price),
 			quantity: this.H.restore(snapshot.quantity),
@@ -59,9 +47,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 		}
 	}
 
-	public copy(
-		order: LimitOrder<H> | LimitOrder.Functional<H>,
-	): LimitOrder<H> | LimitOrder.Functional<H> {
+	public copy(order: LimitOrder<H>): LimitOrder<H> {
 		return {
 			price: order.price,
 			quantity: order.quantity,

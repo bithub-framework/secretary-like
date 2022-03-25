@@ -11,7 +11,7 @@ export declare class TradesStatic<H extends HLike<H>, TradeId> {
     private readonly TradeId;
     private readonly Trade;
     constructor(H: HStatic<H>, TradeId: TradeIdStatic<TradeId>);
-    capture(trades: Trades<H, TradeId> | Trades.Functional<H, TradeId>): Trades.Snapshot;
-    restore(snapshot: Trades.Snapshot): Trades<H, TradeId> | Trades.Functional<H, TradeId>;
-    copy(trades: Trades<H, TradeId> | Trades.Functional<H, TradeId>): Trades<H, TradeId> | Trades.Functional<H, TradeId>;
+    capture(trades: Trades<H, TradeId>): Trades.Snapshot;
+    restore(snapshot: Trades.Snapshot): Trades<H, TradeId>;
+    copy(trades: Trades<H, TradeId>): Trades<H, TradeId>;
 }

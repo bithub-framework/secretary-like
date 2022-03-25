@@ -27,9 +27,7 @@ export class BookOrderStatic<H extends HLike<H>> {
 		private readonly H: HStatic<H>,
 	) { }
 
-	public capture(
-		order: BookOrder<H> | BookOrder.Functional<H>,
-	): BookOrder.Snapshot {
+	public capture(order: BookOrder<H>): BookOrder.Snapshot {
 		return {
 			price: this.H.capture(order.price),
 			quantity: this.H.capture(order.quantity),
@@ -37,9 +35,7 @@ export class BookOrderStatic<H extends HLike<H>> {
 		}
 	}
 
-	public restore(
-		snapshot: BookOrder.Snapshot,
-	): BookOrder<H> | BookOrder.Functional<H> {
+	public restore(snapshot: BookOrder.Snapshot): BookOrder<H> {
 		return {
 			price: this.H.restore(snapshot.price),
 			quantity: this.H.restore(snapshot.quantity),
@@ -47,9 +43,7 @@ export class BookOrderStatic<H extends HLike<H>> {
 		}
 	}
 
-	public copy(
-		order: BookOrder<H> | BookOrder.Functional<H>,
-	): BookOrder<H> | BookOrder.Functional<H> {
+	public copy(order: BookOrder<H>): BookOrder<H> {
 		return {
 			price: order.price,
 			quantity: order.quantity,

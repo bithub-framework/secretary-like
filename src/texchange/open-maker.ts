@@ -8,10 +8,5 @@ export interface TexchangeOpenMaker<H extends HLike<H>>
 	extends OpenMaker<H, TexchangeOrderId> { }
 
 
-export namespace TexchangeOpenMaker {
-	export interface Functional<H extends HLike<H>>
-		extends OpenMaker.Functional<H, TexchangeOrderId> { }
-}
-
 export class TexchangeOpenMakerStatic<H extends HLike<H>>
 	extends OpenMakerStatic<H, TexchangeOrderId>{ }

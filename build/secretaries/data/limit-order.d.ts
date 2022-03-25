@@ -10,13 +10,6 @@ export interface LimitOrder<H extends HLike<H>> {
     operation: Operation;
 }
 export declare namespace LimitOrder {
-    interface Functional<H extends HLike<H>> {
-        readonly price: H;
-        readonly quantity: H;
-        readonly side: Side;
-        readonly length: Length;
-        readonly operation: Operation;
-    }
     interface Snapshot {
         readonly price: H.Snapshot;
         readonly quantity: H.Snapshot;
@@ -28,7 +21,7 @@ export declare namespace LimitOrder {
 export declare class LimitOrderStatic<H extends HLike<H>> {
     private readonly H;
     constructor(H: HStatic<H>);
-    capture(order: LimitOrder<H> | LimitOrder.Functional<H>): LimitOrder.Snapshot;
-    restore(snapshot: LimitOrder.Snapshot): LimitOrder<H> | LimitOrder.Functional<H>;
-    copy(order: LimitOrder<H> | LimitOrder.Functional<H>): LimitOrder<H> | LimitOrder.Functional<H>;
+    capture(order: LimitOrder<H>): LimitOrder.Snapshot;
+    restore(snapshot: LimitOrder.Snapshot): LimitOrder<H>;
+    copy(order: LimitOrder<H>): LimitOrder<H>;
 }

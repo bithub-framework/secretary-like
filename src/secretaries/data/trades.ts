@@ -22,25 +22,19 @@ export class TradesStatic<H extends HLike<H>, TradeId> {
 		private readonly TradeId: TradeIdStatic<TradeId>,
 	) { }
 
-	public capture(
-		trades: Trades<H, TradeId> | Trades.Functional<H, TradeId>,
-	): Trades.Snapshot {
+	public capture(trades: Trades<H, TradeId>): Trades.Snapshot {
 		return trades.map(
 			trade => this.Trade.capture(trade),
 		);
 	}
 
-	public restore(
-		snapshot: Trades.Snapshot,
-	): Trades<H, TradeId> | Trades.Functional<H, TradeId> {
+	public restore(snapshot: Trades.Snapshot): Trades<H, TradeId> {
 		return snapshot.map(
 			tradeSnapshot => this.Trade.restore(tradeSnapshot),
 		);
 	}
 
-	public copy(
-		trades: Trades<H, TradeId> | Trades.Functional<H, TradeId>,
-	): Trades<H, TradeId> | Trades.Functional<H, TradeId> {
+	public copy(trades: Trades<H, TradeId>): Trades<H, TradeId> {
 		return trades.map(
 			trade => this.Trade.copy(trade),
 		);

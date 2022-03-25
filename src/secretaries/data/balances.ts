@@ -9,12 +9,6 @@ export interface Balances<H extends HLike<H>> {
 }
 
 export namespace Balances {
-	export interface Functional<H extends HLike<H>> {
-		readonly balance: H;
-		readonly available: H;
-		readonly time: number;
-	}
-
 	export interface Snapshot {
 		readonly balance: H.Snapshot;
 		readonly available: H.Snapshot;
@@ -28,9 +22,7 @@ export class BalancesStatic<H extends HLike<H>> {
 		private readonly H: HStatic<H>,
 	) { }
 
-	public capture(
-		balances: Balances<H> | Balances.Functional<H>,
-	): Balances.Snapshot {
+	public capture(balances: Balances<H>): Balances.Snapshot {
 		return {
 			balance: this.H.capture(balances.balance),
 			available: this.H.capture(balances.available),
@@ -38,9 +30,7 @@ export class BalancesStatic<H extends HLike<H>> {
 		}
 	}
 
-	public restore(
-		snapshot: Balances.Snapshot,
-	): Balances<H> | Balances.Functional<H> {
+	public restore(snapshot: Balances.Snapshot): Balances<H> {
 		return {
 			balance: this.H.restore(snapshot.balance),
 			available: this.H.restore(snapshot.available),
@@ -48,9 +38,7 @@ export class BalancesStatic<H extends HLike<H>> {
 		};
 	}
 
-	public copy(
-		balances: Balances<H> | Balances.Functional<H>,
-	): Balances<H> | Balances.Functional<H> {
+	public copy(balances: Balances<H>): Balances<H> {
 		return {
 			balance: balances.balance,
 			available: balances.available,
