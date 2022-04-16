@@ -34,4 +34,6 @@ export interface HStatic<H extends HLike<H>> {
 	from(source: H.Source<H>): H;
 	capture(x: H): H.Snapshot;
 	restore(s: H.Snapshot): H;
+	max(x: H, ...rest: H[]): H;
+	min(x: H, ...rest: H[]): H;
 }
