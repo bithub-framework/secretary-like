@@ -12,7 +12,7 @@ export declare namespace Balances {
     }
 }
 export declare class BalancesStatic<H extends HLike<H>> {
-    private readonly H;
+    private H;
     constructor(H: HStatic<H>);
     capture(balances: Balances<H>): Balances.Snapshot;
     restore(snapshot: Balances.Snapshot): Balances<H>;

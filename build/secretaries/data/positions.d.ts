@@ -14,9 +14,9 @@ export declare namespace Positions {
     }
 }
 export declare class PositionsStatic<H extends HLike<H>> {
-    private readonly H;
-    private readonly Position;
-    private readonly Closable;
+    private H;
+    private Position;
+    private Closable;
     constructor(H: HStatic<H>);
     capture(positions: Positions<H>): Positions.Snapshot;
     restore(snapshot: Positions.Snapshot): Positions<H>;

@@ -15,7 +15,7 @@ export namespace Position {
 
 export class PositionStatic<H extends HLike<H>> {
 	public constructor(
-		private readonly H: HStatic<H>,
+		private H: HStatic<H>,
 	) { }
 
 	public capture(position: Position<H>): Position.Snapshot {

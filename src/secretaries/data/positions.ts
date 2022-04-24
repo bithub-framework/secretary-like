@@ -20,11 +20,11 @@ export namespace Positions {
 
 
 export class PositionsStatic<H extends HLike<H>>{
-	private readonly Position = new PositionStatic(this.H);
-	private readonly Closable = new ClosableStatic(this.H);
+	private Position = new PositionStatic(this.H);
+	private Closable = new ClosableStatic(this.H);
 
 	public constructor(
-		private readonly H: HStatic<H>,
+		private H: HStatic<H>,
 	) { }
 
 	public capture(positions: Positions<H>): Positions.Snapshot {

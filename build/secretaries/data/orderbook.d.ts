@@ -12,8 +12,8 @@ export declare namespace Orderbook {
     }
 }
 export declare class OrderbookStatic<H extends HLike<H>> {
-    private readonly H;
-    private readonly BookOrder;
+    private H;
+    private BookOrder;
     constructor(H: HStatic<H>);
     capture(orderbook: Orderbook<H>): Orderbook.Snapshot;
     restore(snapshot: Orderbook.Snapshot): Orderbook<H>;

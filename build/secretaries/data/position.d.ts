@@ -9,7 +9,7 @@ export declare namespace Position {
     }
 }
 export declare class PositionStatic<H extends HLike<H>> {
-    private readonly H;
+    private H;
     constructor(H: HStatic<H>);
     capture(position: Position<H>): Position.Snapshot;
     restore(snapshot: Position.Snapshot): Position<H>;

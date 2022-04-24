@@ -24,7 +24,7 @@ export namespace LimitOrder {
 
 export class LimitOrderStatic<H extends HLike<H>> {
 	public constructor(
-		private readonly H: HStatic<H>,
+		private H: HStatic<H>,
 	) { }
 
 	public capture(order: LimitOrder<H>): LimitOrder.Snapshot {

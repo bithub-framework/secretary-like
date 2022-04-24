@@ -12,9 +12,9 @@ export declare namespace Amendment {
     }
 }
 export declare class AmendmentStatic<H extends HLike<H>, OrderId> {
-    private readonly H;
-    private readonly OrderId;
-    private readonly OpenOrder;
+    private H;
+    private OrderId;
+    private OpenOrder;
     constructor(H: HStatic<H>, OrderId: OrderIdStatic<OrderId>);
     capture(amendment: Amendment<H, OrderId>): Amendment.Snapshot;
     restore(snapshot: Amendment.Snapshot): Amendment<H, OrderId>;

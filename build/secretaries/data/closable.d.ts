@@ -9,7 +9,7 @@ export declare namespace Closable {
     }
 }
 export declare class ClosableStatic<H extends HLike<H>> {
-    private readonly H;
+    private H;
     constructor(H: HStatic<H>);
     capture(closable: Closable<H>): Closable.Snapshot;
     restore(snapshot: Closable.Snapshot): Closable<H>;

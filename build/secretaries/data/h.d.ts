@@ -25,7 +25,7 @@ export declare namespace H {
     }
 }
 export interface HStatic<H extends HLike<H>> {
-    from(source: H.Source<H>): H;
+    new (source: H.Source<H>): H;
     capture(x: H): H.Snapshot;
     restore(s: H.Snapshot): H;
     max(x: H, ...rest: H[]): H;

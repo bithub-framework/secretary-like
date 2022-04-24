@@ -7,7 +7,6 @@ export * from './data/order-id';
 export * from './data/limit-order';
 export * from './data/open-order';
 export * from './data/amendment'
-export * from './data/open-maker';
 export * from './data/trade';
 export * from './data/book-order';
 export * from './data/orderbook';

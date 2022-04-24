@@ -9,12 +9,6 @@ export interface BookOrder<H extends HLike<H>> {
 }
 
 export namespace BookOrder {
-	export interface Functional<H extends HLike<H>> {
-		readonly price: H;
-		readonly quantity: H;
-		readonly side: Side,
-	}
-
 	export interface Snapshot {
 		readonly price: H.Snapshot;
 		readonly quantity: H.Snapshot;
@@ -24,7 +18,7 @@ export namespace BookOrder {
 
 export class BookOrderStatic<H extends HLike<H>> {
 	public constructor(
-		private readonly H: HStatic<H>,
+		private H: HStatic<H>,
 	) { }
 
 	public capture(order: BookOrder<H>): BookOrder.Snapshot {

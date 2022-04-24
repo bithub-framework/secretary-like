@@ -19,7 +19,7 @@ export namespace Balances {
 
 export class BalancesStatic<H extends HLike<H>> {
 	public constructor(
-		private readonly H: HStatic<H>,
+		private H: HStatic<H>,
 	) { }
 
 	public capture(balances: Balances<H>): Balances.Snapshot {

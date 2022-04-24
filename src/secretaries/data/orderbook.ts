@@ -18,10 +18,10 @@ export namespace Orderbook {
 
 
 export class OrderbookStatic<H extends HLike<H>> {
-	private readonly BookOrder = new BookOrderStatic<H>(this.H);
+	private BookOrder = new BookOrderStatic<H>(this.H);
 
 	public constructor(
-		private readonly H: HStatic<H>,
+		private H: HStatic<H>,
 	) { }
 
 	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {

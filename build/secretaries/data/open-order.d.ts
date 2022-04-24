@@ -14,9 +14,9 @@ export declare namespace OpenOrder {
     }
 }
 export declare class OpenOrderStatic<H extends HLike<H>, OrderId> {
-    private readonly H;
-    private readonly OrderId;
-    private readonly LimitOrder;
+    private H;
+    private OrderId;
+    private LimitOrder;
     constructor(H: HStatic<H>, OrderId: OrderIdStatic<OrderId>);
     capture(order: OpenOrder<H, OrderId>): OpenOrder.Snapshot;
     restore(snapshot: OpenOrder.Snapshot): OpenOrder<H, OrderId>;

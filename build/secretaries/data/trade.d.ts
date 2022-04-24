@@ -18,8 +18,8 @@ export declare namespace Trade {
     }
 }
 export declare class TradeStatic<H extends HLike<H>, TradeId> {
-    private readonly H;
-    private readonly TradeId;
+    private H;
+    private TradeId;
     constructor(H: HStatic<H>, TradeId: TradeIdStatic<TradeId>);
     capture(trade: Trade<H, TradeId>): Trade.Snapshot;
     restore(snapshot: Trade.Snapshot): Trade<H, TradeId>;

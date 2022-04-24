@@ -7,19 +7,16 @@ export type Trades<H extends HLike<H>, TradeId>
 	= Trade<H, TradeId>[];
 
 export namespace Trades {
-	export type Functional<H extends HLike<H>, TradeId>
-		= readonly Trade<H, TradeId>[];
-
 	export type Snapshot = readonly Trade.Snapshot[];
 }
 
 
 export class TradesStatic<H extends HLike<H>, TradeId> {
-	private readonly Trade = new TradeStatic(this.H, this.TradeId);
+	private Trade = new TradeStatic(this.H, this.TradeId);
 
 	public constructor(
-		private readonly H: HStatic<H>,
-		private readonly TradeId: TradeIdStatic<TradeId>,
+		private H: HStatic<H>,
+		private TradeId: TradeIdStatic<TradeId>,
 	) { }
 
 	public capture(trades: Trades<H, TradeId>): Trades.Snapshot {

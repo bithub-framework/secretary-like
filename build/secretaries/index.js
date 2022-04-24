@@ -19,7 +19,6 @@ __exportStar(require("./data/order-id"), exports);
 __exportStar(require("./data/limit-order"), exports);
 __exportStar(require("./data/open-order"), exports);
 __exportStar(require("./data/amendment"), exports);
-__exportStar(require("./data/open-maker"), exports);
 __exportStar(require("./data/trade"), exports);
 __exportStar(require("./data/book-order"), exports);
 __exportStar(require("./data/orderbook"), exports);

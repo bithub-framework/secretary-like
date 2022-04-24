@@ -16,7 +16,7 @@ export namespace Closable {
 
 export class ClosableStatic<H extends HLike<H>> {
 	public constructor(
-		private readonly H: HStatic<H>,
+		private H: HStatic<H>,
 	) { }
 
 	public capture(closable: Closable<H>): Closable.Snapshot {

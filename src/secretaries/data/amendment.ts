@@ -19,13 +19,13 @@ export namespace Amendment {
 }
 
 export class AmendmentStatic<H extends HLike<H>, OrderId> {
-	private readonly OpenOrder = new OpenOrderStatic<H, OrderId>(
+	private OpenOrder = new OpenOrderStatic<H, OrderId>(
 		this.H, this.OrderId,
 	);
 
 	public constructor(
-		private readonly H: HStatic<H>,
-		private readonly OrderId: OrderIdStatic<OrderId>,
+		private H: HStatic<H>,
+		private OrderId: OrderIdStatic<OrderId>,
 	) { }
 
 	public capture(amendment: Amendment<H, OrderId>): Amendment.Snapshot {

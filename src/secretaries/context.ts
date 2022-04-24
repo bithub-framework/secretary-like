@@ -88,10 +88,10 @@ export interface AccountApiLike<
     OrderId,
     TradeId,
     > {
-    makeOrders(orders: readonly LimitOrder<H>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
-    amendOrders(amendments: readonly Amendment<H, OrderId>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
+    makeOrders(orders: LimitOrder<H>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
+    amendOrders(amendments: Amendment<H, OrderId>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
     getOpenOrders(): Promise<OpenOrder<H, OrderId>[]>;
-    cancelOrders(orders: readonly OpenOrder<H, OrderId>[]): Promise<OpenOrder<H, OrderId>[]>;
+    cancelOrders(orders: OpenOrder<H, OrderId>[]): Promise<OpenOrder<H, OrderId>[]>;
     getPositions(): Promise<Positions<H>>;
     getBalances(): Promise<Balances<H>>;
 }

@@ -20,11 +20,11 @@ export namespace OpenOrder {
 }
 
 export class OpenOrderStatic<H extends HLike<H>, OrderId> {
-	private readonly LimitOrder = new LimitOrderStatic<H>(this.H);
+	private LimitOrder = new LimitOrderStatic<H>(this.H);
 
 	public constructor(
-		private readonly H: HStatic<H>,
-		private readonly OrderId: OrderIdStatic<OrderId>,
+		private H: HStatic<H>,
+		private OrderId: OrderIdStatic<OrderId>,
 	) { }
 
 	public capture(order: OpenOrder<H, OrderId>): OpenOrder.Snapshot {
