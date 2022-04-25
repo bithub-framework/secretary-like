@@ -13,5 +13,8 @@
     "license": "SEE LICENSE IN ./LICENSE",
     "peerDependencies": {
         "@types/node": "^16.11.27"
+    },
+    "dependencies": {
+        "startable": "github:zimtsui/startable"
     }
 }
