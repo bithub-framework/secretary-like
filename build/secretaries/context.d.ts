@@ -14,21 +14,17 @@ export interface ContextLike<H extends HLike<H>, OrderId, TradeId> {
     readonly timeline: Timeline;
     submit(key: string, json: string): Promise<void>;
 }
-export interface MarketLike<H extends HLike<H>, OrderId, TradeId> extends MarketApiLike<H, OrderId, TradeId> {
+export interface MarketLike<H extends HLike<H>, OrderId, TradeId> extends MarketInstructions<H, OrderId, TradeId> {
     readonly [accountIndex: number]: AccountLike<H, OrderId, TradeId>;
     readonly spec: MarketSpec<H>;
-    readonly calc: MarketCalc<H>;
+    readonly events: MarketEventEmitterLike<H, OrderId, TradeId>;
 }
-export interface AccountLike<H extends HLike<H>, OrderId, TradeId> extends AccountApiLike<H, OrderId, TradeId> {
-    readonly spec: AccountSpec;
-    readonly events: AccountEventEmitterLike<H, OrderId, TradeId>;
+export interface MarketInstructions<H extends HLike<H>, OrderId, TradeId> extends MarketCalc<H> {
 }
 export interface MarketEvents<H extends HLike<H>, OrderId, TradeId> {
     orderbook: [Orderbook<H>];
     trades: [Trade<H, TradeId>[]];
     error: [Error];
-}
-export interface MarketApiLike<H extends HLike<H>, OrderId, TradeId> extends MarketEventEmitterLike<H, OrderId, TradeId> {
 }
 export interface MarketEventEmitterLike<H extends HLike<H>, OrderId, TradeId> extends NodeJS.EventEmitter {
     on<Event extends keyof MarketEvents<H, OrderId, TradeId>>(event: Event, listener: (...args: MarketEvents<H, OrderId, TradeId>[Event]) => void): this;
@@ -36,18 +32,22 @@ export interface MarketEventEmitterLike<H extends HLike<H>, OrderId, TradeId> ex
     off<Event extends keyof MarketEvents<H, OrderId, TradeId>>(event: Event, listener: (...args: MarketEvents<H, OrderId, TradeId>[Event]) => void): this;
     emit<Event extends keyof MarketEvents<H, OrderId, TradeId>>(event: Event, ...args: MarketEvents<H, OrderId, TradeId>[Event]): boolean;
 }
-export interface AccountEvents<H extends HLike<H>, OrderId, TradeId> {
-    positions: [Positions<H>];
-    balances: [Balances<H>];
-    error: [Error];
+export interface AccountLike<H extends HLike<H>, OrderId, TradeId> extends AccountInstructions<H, OrderId, TradeId> {
+    readonly spec: AccountSpec;
+    readonly events: AccountEventEmitterLike<H, OrderId, TradeId>;
 }
-export interface AccountApiLike<H extends HLike<H>, OrderId, TradeId> extends AccountEventEmitterLike<H, OrderId, TradeId> {
+export interface AccountInstructions<H extends HLike<H>, OrderId, TradeId> {
     makeOrders(orders: LimitOrder<H>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
     amendOrders(amendments: Amendment<H, OrderId>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
     getOpenOrders(): Promise<OpenOrder<H, OrderId>[]>;
     cancelOrders(orders: OpenOrder<H, OrderId>[]): Promise<OpenOrder<H, OrderId>[]>;
     getPositions(): Promise<Positions<H>>;
     getBalances(): Promise<Balances<H>>;
+}
+export interface AccountEvents<H extends HLike<H>, OrderId, TradeId> {
+    positions: [Positions<H>];
+    balances: [Balances<H>];
+    error: [Error];
 }
 export interface AccountEventEmitterLike<H extends HLike<H>, OrderId, TradeId> extends NodeJS.EventEmitter {
     on<Event extends keyof AccountEvents<H, OrderId, TradeId>>(event: Event, listener: (...args: AccountEvents<H, OrderId, TradeId>[Event]) => void): this;
