@@ -29,14 +29,22 @@ export interface MarketLike<
     H extends HLike<H>,
     OrderId,
     TradeId,
-    > extends MarketInstructions<H, OrderId, TradeId> {
+    > extends MarketApiLike<H, OrderId, TradeId> {
 
     readonly [accountIndex: number]: AccountLike<H, OrderId, TradeId>;
+}
+
+export interface MarketApiLike<
+    H extends HLike<H>,
+    OrderId,
+    TradeId,
+    > extends MarketMethods<H, OrderId, TradeId> {
+
     readonly spec: MarketSpec<H>;
     readonly events: MarketEventEmitterLike<H, OrderId, TradeId>;
 }
 
-export interface MarketInstructions<
+export interface MarketMethods<
     H extends HLike<H>,
     OrderId,
     TradeId,
@@ -68,12 +76,19 @@ export interface AccountLike<
     H extends HLike<H>,
     OrderId,
     TradeId,
-    > extends AccountInstructions<H, OrderId, TradeId> {
+    > extends AccountApiLike<H, OrderId, TradeId> {
+}
+
+export interface AccountApiLike<
+    H extends HLike<H>,
+    OrderId,
+    TradeId,
+    > extends AccountMethods<H, OrderId, TradeId> {
     readonly spec: AccountSpec;
     readonly events: AccountEventEmitterLike<H, OrderId, TradeId>;
 }
 
-export interface AccountInstructions<
+export interface AccountMethods<
     H extends HLike<H>,
     OrderId,
     TradeId,
