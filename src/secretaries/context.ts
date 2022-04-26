@@ -42,7 +42,7 @@ export interface AccountLike<
     TradeId,
     > extends AccountApiLike<H, OrderId, TradeId> {
     readonly spec: AccountSpec;
-    readonly events: AccountEventsLike<H, OrderId, TradeId>;
+    readonly events: AccountEventEmitterLike<H, OrderId, TradeId>;
 }
 
 export interface MarketEvents<
@@ -59,9 +59,9 @@ export interface MarketApiLike<
     H extends HLike<H>,
     OrderId,
     TradeId,
-    > { }
+    > extends MarketEventEmitterLike<H, OrderId, TradeId> { }
 
-export interface MarketEventsLike<
+export interface MarketEventEmitterLike<
     H extends HLike<H>,
     OrderId,
     TradeId,
@@ -87,7 +87,7 @@ export interface AccountApiLike<
     H extends HLike<H>,
     OrderId,
     TradeId,
-    > {
+    > extends AccountEventEmitterLike<H, OrderId, TradeId> {
     makeOrders(orders: LimitOrder<H>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
     amendOrders(amendments: Amendment<H, OrderId>[]): Promise<(OpenOrder<H, OrderId> | Error)[]>;
     getOpenOrders(): Promise<OpenOrder<H, OrderId>[]>;
@@ -96,7 +96,7 @@ export interface AccountApiLike<
     getBalances(): Promise<Balances<H>>;
 }
 
-export interface AccountEventsLike<
+export interface AccountEventEmitterLike<
     H extends HLike<H>,
     OrderId,
     TradeId,
