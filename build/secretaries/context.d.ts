@@ -7,11 +7,11 @@ import { Balances } from './data/balances';
 import { Orderbook } from './data/orderbook';
 import { Trade } from './data/trade';
 import { HLike } from './data/h';
-import { Timeline } from './timeline';
+import { TimelineLike } from './timeline';
 import { MarketSpec, AccountSpec, MarketCalc } from './specification';
 export interface ContextLike<H extends HLike<H>, OrderId, TradeId> {
     readonly [marketIndex: number]: MarketLike<H, OrderId, TradeId>;
-    readonly timeline: Timeline;
+    readonly timeline: TimelineLike;
     submit(key: string, json: string): Promise<void>;
 }
 export interface MarketLike<H extends HLike<H>, OrderId, TradeId> extends MarketApiLike<H, OrderId, TradeId> {
