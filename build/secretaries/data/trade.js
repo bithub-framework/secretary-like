@@ -2,9 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TradeStatic = void 0;
 class TradeStatic {
-    constructor(H, TradeId) {
+    constructor(H) {
         this.H = H;
-        this.TradeId = TradeId;
     }
     capture(trade) {
         return {
@@ -12,7 +11,7 @@ class TradeStatic {
             price: this.H.capture(trade.price),
             quantity: this.H.capture(trade.quantity),
             time: trade.time,
-            id: this.TradeId.capture(trade.id),
+            id: trade.id,
         };
     }
     restore(snapshot) {
@@ -21,7 +20,7 @@ class TradeStatic {
             price: this.H.restore(snapshot.price),
             quantity: this.H.restore(snapshot.quantity),
             time: snapshot.time,
-            id: this.TradeId.restore(snapshot.id),
+            id: snapshot.id,
         };
     }
     copy(trade) {

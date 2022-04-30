@@ -1,7 +1,7 @@
 import { Side } from './side';
 import { HLike, H, HStatic } from './h';
-import { TradeId, TradeIdStatic } from './trade-id';
-export interface Trade<H extends HLike<H>, TradeId> {
+import { TradeId } from './trade-id';
+export interface Trade<H extends HLike<H>> {
     side: Side;
     price: H;
     quantity: H;
@@ -14,14 +14,13 @@ export declare namespace Trade {
         readonly price: H.Snapshot;
         readonly quantity: H.Snapshot;
         readonly time: number;
-        readonly id: TradeId.Snapshot;
+        readonly id: TradeId;
     }
 }
-export declare class TradeStatic<H extends HLike<H>, TradeId> {
+export declare class TradeStatic<H extends HLike<H>> {
     private H;
-    private TradeId;
-    constructor(H: HStatic<H>, TradeId: TradeIdStatic<TradeId>);
-    capture(trade: Trade<H, TradeId>): Trade.Snapshot;
-    restore(snapshot: Trade.Snapshot): Trade<H, TradeId>;
-    copy(trade: Trade<H, TradeId>): Trade<H, TradeId>;
+    constructor(H: HStatic<H>);
+    capture(trade: Trade<H>): Trade.Snapshot;
+    restore(snapshot: Trade.Snapshot): Trade<H>;
+    copy(trade: Trade<H>): Trade<H>;
 }

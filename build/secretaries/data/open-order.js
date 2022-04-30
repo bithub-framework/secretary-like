@@ -3,9 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpenOrderStatic = void 0;
 const limit_order_1 = require("./limit-order");
 class OpenOrderStatic {
-    constructor(H, OrderId) {
+    constructor(H) {
         this.H = H;
-        this.OrderId = OrderId;
         this.LimitOrder = new limit_order_1.LimitOrderStatic(this.H);
     }
     capture(order) {
@@ -13,7 +12,7 @@ class OpenOrderStatic {
             ...this.LimitOrder.capture(order),
             filled: this.H.capture(order.filled),
             unfilled: this.H.capture(order.unfilled),
-            id: this.OrderId.capture(order.id),
+            id: order.id,
         };
     }
     restore(snapshot) {
@@ -21,7 +20,7 @@ class OpenOrderStatic {
             ...this.LimitOrder.restore(snapshot),
             filled: this.H.restore(snapshot.filled),
             unfilled: this.H.restore(snapshot.unfilled),
-            id: this.OrderId.restore(snapshot.id),
+            id: snapshot.id,
         };
     }
     copy(order) {

@@ -4,6 +4,6 @@ import { Startable } from 'startable';
 export interface StrategyLike {
     startable: Startable;
 }
-export interface StrategyStatic<H extends HLike<H>, OrderId, TradeId> {
-    new (ctx: ContextLike<H, OrderId, TradeId>): StrategyLike;
+export interface StrategyStatic<H extends HLike<H>> {
+    new (ctx: ContextLike<H>): StrategyLike;
 }

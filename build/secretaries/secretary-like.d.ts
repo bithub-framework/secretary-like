@@ -5,5 +5,5 @@ export interface SecretaryLike {
     startable: Startable;
 }
 export interface SecretaryStatic<H extends HLike<H>, OrderId, TradeId> {
-    new (Strategy: StrategyStatic<H, OrderId, TradeId>): SecretaryLike;
+    new (Strategy: StrategyStatic<H>): SecretaryLike;
 }

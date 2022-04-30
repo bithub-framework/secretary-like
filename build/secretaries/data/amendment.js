@@ -3,10 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AmendmentStatic = void 0;
 const open_order_1 = require("./open-order");
 class AmendmentStatic {
-    constructor(H, OrderId) {
+    constructor(H) {
         this.H = H;
-        this.OrderId = OrderId;
-        this.OpenOrder = new open_order_1.OpenOrderStatic(this.H, this.OrderId);
+        this.OpenOrder = new open_order_1.OpenOrderStatic(this.H);
     }
     capture(amendment) {
         return {

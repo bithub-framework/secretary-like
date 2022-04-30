@@ -12,5 +12,5 @@ export interface SecretaryStatic<
 	OrderId,
 	TradeId,
 	> {
-	new(Strategy: StrategyStatic<H, OrderId, TradeId>): SecretaryLike;
+	new(Strategy: StrategyStatic<H>): SecretaryLike;
 }
