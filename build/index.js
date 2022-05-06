@@ -31,4 +31,5 @@ __exportStar(require("./context"), exports);
 __exportStar(require("./specification"), exports);
 __exportStar(require("./secretary-like"), exports);
 __exportStar(require("./strategy-like"), exports);
+__exportStar(require("./timeline-like"), exports);
 //# sourceMappingURL=index.js.map

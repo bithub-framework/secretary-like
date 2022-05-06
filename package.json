@@ -13,7 +13,6 @@
     "license": "SEE LICENSE IN ./LICENSE",
     "peerDependencies": {
         "@types/node": ">=16.0",
-        "startable": "github:zimtsui/startable",
-        "timeline": "github:zimtsui/timeline"
+        "startable": "github:zimtsui/startable"
     }
 }

@@ -19,3 +19,4 @@ export * from './context';
 export * from './specification';
 export * from './secretary-like';
 export * from './strategy-like';
+export * from './timeline-like';

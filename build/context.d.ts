@@ -7,7 +7,7 @@ import { Balances } from './data/balances';
 import { Orderbook } from './data/orderbook';
 import { Trade } from './data/trade';
 import { HLike } from './data/h';
-import { TimelineLike } from 'timeline';
+import { TimelineLike } from './timeline-like';
 import { MarketSpec, AccountSpec, MarketCalc } from './specification';
 export interface ContextLike<H extends HLike<H>> {
     readonly [marketIndex: number]: MarketLike<H>;
