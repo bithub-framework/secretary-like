@@ -15,7 +15,7 @@ export * from './data/position';
 export * from './data/positions';
 export * from './data/balances';
 export * from './data/data';
-export * from './context';
+export * from './context-like';
 export * from './specification';
 export * from './secretary-like';
 export * from './strategy-like';

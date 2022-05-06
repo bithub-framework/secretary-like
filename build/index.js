@@ -27,7 +27,7 @@ __exportStar(require("./data/position"), exports);
 __exportStar(require("./data/positions"), exports);
 __exportStar(require("./data/balances"), exports);
 __exportStar(require("./data/data"), exports);
-__exportStar(require("./context"), exports);
+__exportStar(require("./context-like"), exports);
 __exportStar(require("./specification"), exports);
 __exportStar(require("./secretary-like"), exports);
 __exportStar(require("./strategy-like"), exports);

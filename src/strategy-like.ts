@@ -1,4 +1,4 @@
-import { ContextLike } from './context';
+import { ContextLike } from './context-like';
 import { HLike } from './data/h';
 import { Startable } from 'startable';
 

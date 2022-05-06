@@ -18,7 +18,7 @@ import {
 export interface ContextLike<H extends HLike<H>> {
     readonly [marketIndex: number]: MarketLike<H>;
     readonly timeline: TimelineLike;
-    submit(key: string, json: string): Promise<void>;
+    submit(content: string): void;
 }
 
 export interface MarketLike<H extends HLike<H>> extends MarketApiLike<H> {
