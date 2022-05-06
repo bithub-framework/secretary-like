@@ -1,5 +1,5 @@
 {
-    "name": "interfaces",
+    "name": "secretary-like",
     "version": "0.0.1",
     "description": "",
     "main": "./build/index.js",
@@ -12,9 +12,10 @@
     "author": "Zim",
     "license": "SEE LICENSE IN ./LICENSE",
     "peerDependencies": {
-        "@types/node": "^16.11.27"
+        "@types/node": ">=16.0",
+        "startable": "github:zimtsui/startable"
     },
     "dependencies": {
-        "startable": "github:zimtsui/startable"
+        "timeline": "github:zimtsui/timeline"
     }
 }
