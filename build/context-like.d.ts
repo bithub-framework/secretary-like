@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { LimitOrder } from './data/limit-order';
 import { OpenOrder } from './data/open-order';
 import { Amendment } from './data/amendment';
@@ -8,6 +7,7 @@ import { Orderbook } from './data/orderbook';
 import { Trade } from './data/trade';
 import { HLike } from './data/h';
 import { TimelineLike } from './timeline-like';
+import { EventEmitter } from 'events';
 import { MarketSpec, AccountSpec, MarketCalc } from './specification';
 export interface ContextLike<H extends HLike<H>> {
     readonly [marketIndex: number]: MarketLike<H>;
@@ -28,7 +28,7 @@ export interface MarketEvents<H extends HLike<H>> {
     trades: [Trade<H>[]];
     error: [Error];
 }
-export interface MarketEventEmitterLike<H extends HLike<H>> extends NodeJS.EventEmitter {
+export interface MarketEventEmitterLike<H extends HLike<H>> extends EventEmitter {
     on<Event extends keyof MarketEvents<H>>(event: Event, listener: (...args: MarketEvents<H>[Event]) => void): this;
     once<Event extends keyof MarketEvents<H>>(event: Event, listener: (...args: MarketEvents<H>[Event]) => void): this;
     off<Event extends keyof MarketEvents<H>>(event: Event, listener: (...args: MarketEvents<H>[Event]) => void): this;
@@ -53,7 +53,7 @@ export interface AccountEvents<H extends HLike<H>> {
     balances: [Balances<H>];
     error: [Error];
 }
-export interface AccountEventEmitterLike<H extends HLike<H>> extends NodeJS.EventEmitter {
+export interface AccountEventEmitterLike<H extends HLike<H>> extends EventEmitter {
     on<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;
     once<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;
     off<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;
