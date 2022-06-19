@@ -11,7 +11,6 @@ import { EventEmitter } from 'events';
 import {
     MarketSpec,
     AccountSpec,
-    MarketCalc,
 } from './specification';
 
 
@@ -23,19 +22,15 @@ export interface ContextLike<H extends HLike<H>> {
 }
 
 export interface MarketLike<H extends HLike<H>> extends MarketApiLike<H> {
-
     readonly [accountIndex: number]: AccountLike<H>;
 }
 
-export interface MarketApiLike<H extends HLike<H>>
-    extends MarketMethods<H> {
+export interface MarketApiLike<H extends HLike<H>> extends
+    MarketMethods<H>,
+    MarketEventEmitterLike<H>,
+    MarketSpec<H> { }
 
-    readonly spec: MarketSpec<H>;
-    readonly events: MarketEventEmitterLike<H>;
-}
-
-export interface MarketMethods<H extends HLike<H>>
-    extends MarketCalc<H> { }
+export interface MarketMethods<H extends HLike<H>> { }
 
 export interface MarketEvents<H extends HLike<H>> {
     orderbook: [Orderbook<H>];
@@ -43,9 +38,7 @@ export interface MarketEvents<H extends HLike<H>> {
     error: [Error];
 }
 
-export interface MarketEventEmitterLike<H extends HLike<H>>
-    extends EventEmitter {
-
+export interface MarketEventEmitterLike<H extends HLike<H>> extends EventEmitter {
     on<Event extends keyof MarketEvents<H>>(event: Event, listener: (...args: MarketEvents<H>[Event]) => void): this;
     once<Event extends keyof MarketEvents<H>>(event: Event, listener: (...args: MarketEvents<H>[Event]) => void): this;
     off<Event extends keyof MarketEvents<H>>(event: Event, listener: (...args: MarketEvents<H>[Event]) => void): this;
@@ -56,11 +49,10 @@ export interface AccountLike<H extends HLike<H>>
     extends AccountApiLike<H> {
 }
 
-export interface AccountApiLike<H extends HLike<H>>
-    extends AccountMethods<H> {
-    readonly spec: AccountSpec;
-    readonly events: AccountEventEmitterLike<H>;
-}
+export interface AccountApiLike<H extends HLike<H>> extends
+    AccountMethods<H>,
+    AccountSpec,
+    AccountEventEmitterLike<H> { }
 
 export interface AccountMethods<H extends HLike<H>> {
     makeOrders(orders: LimitOrder<H>[]): Promise<(OpenOrder<H> | Error)[]>;
@@ -78,7 +70,6 @@ export interface AccountEvents<H extends HLike<H>> {
 }
 
 export interface AccountEventEmitterLike<H extends HLike<H>> extends EventEmitter {
-
     on<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;
     once<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;
     off<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;

@@ -12,7 +12,8 @@
     "author": "Zim",
     "license": "SEE LICENSE IN ./LICENSE",
     "peerDependencies": {
-        "@types/events": "^3.0.0"
+        "@types/events": "^3.0.0",
+        "cancellable": "github:zimtsui/cancellable"
     },
     "dependencies": {
         "startable": "github:zimtsui/startable"

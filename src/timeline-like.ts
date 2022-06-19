@@ -1,5 +1,8 @@
+import { Cancellable } from 'cancellable';
+
+
 export interface TimelineLike {
-	sleep(ms: number): Promise<void>;
+	sleep(ms: number): Cancellable;
 	now(): number;
-	escape<T>(p: Promise<T>): Promise<T>;
+	escape<T>(p: PromiseLike<T>): Promise<T>;
 }
