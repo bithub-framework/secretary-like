@@ -7,10 +7,6 @@ CREATE TABLE IF NOT EXISTS `snapshots` (
 	PRIMARY KEY(`project_name`),
 	FOREIGN KEY(`project_name`) REFERENCES `projects`(`name`)
 );
-DROP TABLE IF EXISTS `running`;
-CREATE TABLE IF NOT EXISTS `running` (
-	`name`	TEXT NOT NULL UNIQUE
-);
 DROP TABLE IF EXISTS `projects`;
 CREATE TABLE IF NOT EXISTS `projects` (
 	`name`	TEXT NOT NULL UNIQUE,
