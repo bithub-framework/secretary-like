@@ -10,8 +10,8 @@ class OrderbookStatic {
     }
     capture(orderbook) {
         return {
-            [side_1.Side.ASK]: orderbook[side_1.Side.ASK].map(this.BookOrder.capture),
-            [side_1.Side.BID]: orderbook[side_1.Side.BID].map(this.BookOrder.capture),
+            [side_1.Side.ASK]: orderbook[side_1.Side.ASK].map(order => this.BookOrder.capture(order)),
+            [side_1.Side.BID]: orderbook[side_1.Side.BID].map(order => this.BookOrder.capture(order)),
             time: Number.isFinite(orderbook.time)
                 ? orderbook.time
                 : null,
@@ -19,8 +19,8 @@ class OrderbookStatic {
     }
     restore(snapshot) {
         return {
-            [side_1.Side.ASK]: snapshot[side_1.Side.ASK].map(this.BookOrder.restore),
-            [side_1.Side.BID]: snapshot[side_1.Side.BID].map(this.BookOrder.restore),
+            [side_1.Side.ASK]: snapshot[side_1.Side.ASK].map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
+            [side_1.Side.BID]: snapshot[side_1.Side.BID].map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
             time: snapshot.time !== null
                 ? snapshot.time
                 : Number.NEGATIVE_INFINITY,

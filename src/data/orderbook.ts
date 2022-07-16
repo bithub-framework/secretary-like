@@ -26,8 +26,8 @@ export class OrderbookStatic<H extends HLike<H>> {
 
 	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
 		return {
-			[Side.ASK]: orderbook[Side.ASK].map(this.BookOrder.capture),
-			[Side.BID]: orderbook[Side.BID].map(this.BookOrder.capture),
+			[Side.ASK]: orderbook[Side.ASK].map(order => this.BookOrder.capture(order)),
+			[Side.BID]: orderbook[Side.BID].map(order => this.BookOrder.capture(order)),
 			time: Number.isFinite(orderbook.time)
 				? orderbook.time
 				: null,
@@ -36,8 +36,8 @@ export class OrderbookStatic<H extends HLike<H>> {
 
 	public restore(snapshot: Orderbook.Snapshot): Orderbook<H> {
 		return {
-			[Side.ASK]: snapshot[Side.ASK].map(this.BookOrder.restore),
-			[Side.BID]: snapshot[Side.BID].map(this.BookOrder.restore),
+			[Side.ASK]: snapshot[Side.ASK].map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
+			[Side.BID]: snapshot[Side.BID].map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
 			time: snapshot.time !== null
 				? snapshot.time
 				: Number.NEGATIVE_INFINITY,
