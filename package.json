@@ -13,9 +13,8 @@
     "license": "SEE LICENSE IN ./LICENSE",
     "peerDependencies": {
         "@types/events": "^3.0.0",
-        "cancellable": "github:zimtsui/cancellable"
-    },
-    "dependencies": {
-        "startable": "github:zimtsui/startable"
+        "cancellable": "github:zimtsui/cancellable",
+        "startable": "github:zimtsui/startable",
+        "time-engine-like": "github:zimtsui/time-engine-like"
     }
 }

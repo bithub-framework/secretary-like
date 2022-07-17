@@ -1,5 +1,6 @@
 import { Cancellable } from 'cancellable';
-export interface TimelineLike {
+import { TimeEngineLike } from 'time-engine-like';
+export interface TimelineLike extends TimeEngineLike {
     sleep(ms: number): Cancellable;
     now(): number;
     escape<T>(p: PromiseLike<T>): Promise<T>;
