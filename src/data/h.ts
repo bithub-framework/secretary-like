@@ -14,8 +14,7 @@ export interface HLike<H extends HLike<H>> {
 		decimalPoint?: number,
 		roundingMode?: H.RoundingMode,
 	): H;
-	toJSON(): never;
-	toString(): string;
+	toJSON(): string;
 	toFixed(decimalPoint?: number): string;
 }
 

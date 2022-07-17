@@ -11,8 +11,7 @@ export interface HLike<H extends HLike<H>> {
     eq(x: H.Source<H>): boolean;
     neq(x: H.Source<H>): boolean;
     round(decimalPoint?: number, roundingMode?: H.RoundingMode): H;
-    toJSON(): never;
-    toString(): string;
+    toJSON(): string;
     toFixed(decimalPoint?: number): string;
 }
 export declare namespace H {
