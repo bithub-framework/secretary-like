@@ -46,7 +46,7 @@ export class PositionsStatic<H extends HLike<H>>{
 	public copy(positions: Positions<H>): Positions<H> {
 		return {
 			position: this.Position.copy(positions.position),
-			closable: this.Position.copy(positions.closable),
+			closable: this.Closable.copy(positions.closable),
 			time: positions.time,
 		};
 	}
