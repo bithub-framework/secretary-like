@@ -3,13 +3,23 @@ import { Length } from './length-action-side';
 
 
 
-export interface Closable<H extends HLike<H>> {
-	[length: Length]: H;
+export class Closable<H extends HLike<H>> {
+	public constructor(
+		private long: H,
+		private short: H,
+	) { }
+
+	public byLength(length: Length): H {
+		return length === Length.LONG
+			? this.long
+			: this.short;
+	}
 }
 
 export namespace Closable {
 	export interface Snapshot {
-		readonly [length: Length]: H.Snapshot;
+		readonly long: H.Snapshot;
+		readonly short: H.Snapshot;
 	}
 }
 
@@ -21,22 +31,22 @@ export class ClosableStatic<H extends HLike<H>> {
 
 	public capture(closable: Closable<H>): Closable.Snapshot {
 		return {
-			[Length.LONG]: this.H.capture(closable[Length.LONG]),
-			[Length.SHORT]: this.H.capture(closable[Length.SHORT]),
+			long: this.H.capture(closable.byLength(Length.LONG)),
+			short: this.H.capture(closable.byLength(Length.SHORT)),
 		};
 	}
 
 	public restore(snapshot: Closable.Snapshot): Closable<H> {
-		return {
-			[Length.LONG]: this.H.restore(snapshot[Length.LONG]),
-			[Length.SHORT]: this.H.restore(snapshot[Length.SHORT]),
-		}
+		return new Closable(
+			this.H.restore(snapshot.long),
+			this.H.restore(snapshot.short),
+		);
 	}
 
 	public copy(closable: Closable<H>): Closable<H> {
-		return {
-			[Length.LONG]: closable[Length.LONG],
-			[Length.SHORT]: closable[Length.SHORT],
-		}
+		return new Closable(
+			closable.byLength(Length.LONG),
+			closable.byLength(Length.SHORT),
+		);
 	}
 }

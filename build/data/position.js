@@ -1,28 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PositionStatic = void 0;
+exports.PositionStatic = exports.Position = void 0;
 const length_action_side_1 = require("./length-action-side");
+class Position {
+    constructor(long, short) {
+        this.long = long;
+        this.short = short;
+    }
+    byLength(length) {
+        return length === length_action_side_1.Length.LONG
+            ? this.long
+            : this.short;
+    }
+}
+exports.Position = Position;
 class PositionStatic {
     constructor(H) {
         this.H = H;
     }
     capture(position) {
         return {
-            [length_action_side_1.Length.LONG]: this.H.capture(position[length_action_side_1.Length.LONG]),
-            [length_action_side_1.Length.SHORT]: this.H.capture(position[length_action_side_1.Length.SHORT]),
+            long: this.H.capture(position.byLength(length_action_side_1.Length.LONG)),
+            short: this.H.capture(position.byLength(length_action_side_1.Length.SHORT)),
         };
     }
     restore(snapshot) {
-        return {
-            [length_action_side_1.Length.LONG]: this.H.restore(snapshot[length_action_side_1.Length.LONG]),
-            [length_action_side_1.Length.SHORT]: this.H.restore(snapshot[length_action_side_1.Length.SHORT]),
-        };
+        return new Position(this.H.restore(snapshot.long), this.H.restore(snapshot.short));
     }
     copy(position) {
-        return {
-            [length_action_side_1.Length.LONG]: position[length_action_side_1.Length.LONG],
-            [length_action_side_1.Length.SHORT]: position[length_action_side_1.Length.SHORT],
-        };
+        return new Position(position.byLength(length_action_side_1.Length.LONG), position.byLength(length_action_side_1.Length.SHORT));
     }
 }
 exports.PositionStatic = PositionStatic;

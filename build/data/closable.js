@@ -1,28 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ClosableStatic = void 0;
+exports.ClosableStatic = exports.Closable = void 0;
 const length_action_side_1 = require("./length-action-side");
+class Closable {
+    constructor(long, short) {
+        this.long = long;
+        this.short = short;
+    }
+    byLength(length) {
+        return length === length_action_side_1.Length.LONG
+            ? this.long
+            : this.short;
+    }
+}
+exports.Closable = Closable;
 class ClosableStatic {
     constructor(H) {
         this.H = H;
     }
     capture(closable) {
         return {
-            [length_action_side_1.Length.LONG]: this.H.capture(closable[length_action_side_1.Length.LONG]),
-            [length_action_side_1.Length.SHORT]: this.H.capture(closable[length_action_side_1.Length.SHORT]),
+            long: this.H.capture(closable.byLength(length_action_side_1.Length.LONG)),
+            short: this.H.capture(closable.byLength(length_action_side_1.Length.SHORT)),
         };
     }
     restore(snapshot) {
-        return {
-            [length_action_side_1.Length.LONG]: this.H.restore(snapshot[length_action_side_1.Length.LONG]),
-            [length_action_side_1.Length.SHORT]: this.H.restore(snapshot[length_action_side_1.Length.SHORT]),
-        };
+        return new Closable(this.H.restore(snapshot.long), this.H.restore(snapshot.short));
     }
     copy(closable) {
-        return {
-            [length_action_side_1.Length.LONG]: closable[length_action_side_1.Length.LONG],
-            [length_action_side_1.Length.SHORT]: closable[length_action_side_1.Length.SHORT],
-        };
+        return new Closable(closable.byLength(length_action_side_1.Length.LONG), closable.byLength(length_action_side_1.Length.SHORT));
     }
 }
 exports.ClosableStatic = ClosableStatic;

@@ -3,15 +3,23 @@ import { HLike, HStatic } from './h';
 import { Side } from './length-action-side';
 
 
+export class Orderbook<H extends HLike<H>> {
+	public bySide(side: Side): BookOrder<H>[] {
+		if (side === Side.BID) return this.bids;
+		else return this.asks;
+	}
 
-export interface Orderbook<H extends HLike<H>> {
-	[side: Side]: BookOrder<H>[];
-	time: number;
+	public constructor(
+		private bids: BookOrder<H>[],
+		private asks: BookOrder<H>[],
+		public time: number,
+	) { }
 }
 
 export namespace Orderbook {
 	export interface Snapshot {
-		readonly [side: Side]: readonly BookOrder.Snapshot[];
+		readonly bids: readonly BookOrder.Snapshot[];
+		readonly asks: readonly BookOrder.Snapshot[];
 		readonly time: number | null;
 	}
 }
@@ -26,8 +34,8 @@ export class OrderbookStatic<H extends HLike<H>> {
 
 	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
 		return {
-			[Side.ASK]: orderbook[Side.ASK].map(order => this.BookOrder.capture(order)),
-			[Side.BID]: orderbook[Side.BID].map(order => this.BookOrder.capture(order)),
+			bids: orderbook.bySide(Side.BID).map(order => this.BookOrder.capture(order)),
+			asks: orderbook.bySide(Side.ASK).map(order => this.BookOrder.capture(order)),
 			time: Number.isFinite(orderbook.time)
 				? orderbook.time
 				: null,
@@ -35,20 +43,20 @@ export class OrderbookStatic<H extends HLike<H>> {
 	}
 
 	public restore(snapshot: Orderbook.Snapshot): Orderbook<H> {
-		return {
-			[Side.ASK]: snapshot[Side.ASK].map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
-			[Side.BID]: snapshot[Side.BID].map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
-			time: snapshot.time !== null
+		return new Orderbook(
+			snapshot.bids.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
+			snapshot.asks.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
+			snapshot.time !== null
 				? snapshot.time
 				: Number.NEGATIVE_INFINITY,
-		}
+		);
 	}
 
 	public copy(orderbook: Orderbook<H>): Orderbook<H> {
-		return {
-			[Side.ASK]: orderbook[Side.ASK].map(order => this.BookOrder.copy(order)),
-			[Side.BID]: orderbook[Side.BID].map(order => this.BookOrder.copy(order)),
-			time: orderbook.time,
-		};
+		return new Orderbook(
+			orderbook.bySide(Side.BID).map(order => this.BookOrder.copy(order)),
+			orderbook.bySide(Side.ASK).map(order => this.BookOrder.copy(order)),
+			orderbook.time,
+		);
 	}
 }

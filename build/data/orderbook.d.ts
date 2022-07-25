@@ -1,13 +1,17 @@
 import { BookOrder } from './book-order';
 import { HLike, HStatic } from './h';
 import { Side } from './length-action-side';
-export interface Orderbook<H extends HLike<H>> {
-    [side: Side]: BookOrder<H>[];
+export declare class Orderbook<H extends HLike<H>> {
+    private bids;
+    private asks;
     time: number;
+    bySide(side: Side): BookOrder<H>[];
+    constructor(bids: BookOrder<H>[], asks: BookOrder<H>[], time: number);
 }
 export declare namespace Orderbook {
     interface Snapshot {
-        readonly [side: Side]: readonly BookOrder.Snapshot[];
+        readonly bids: readonly BookOrder.Snapshot[];
+        readonly asks: readonly BookOrder.Snapshot[];
         readonly time: number | null;
     }
 }

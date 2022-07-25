@@ -26,7 +26,7 @@ class PositionsStatic {
     copy(positions) {
         return {
             position: this.Position.copy(positions.position),
-            closable: this.Position.copy(positions.closable),
+            closable: this.Closable.copy(positions.closable),
             time: positions.time,
         };
     }

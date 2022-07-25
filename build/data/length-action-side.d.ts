@@ -1,18 +1,21 @@
-export declare type Length = number;
+export declare enum Length {
+    LONG = 1,
+    SHORT = -1
+}
 export declare namespace Length {
-    const LONG: Length;
-    const SHORT: Length;
     function from(side: Side, action: Action): Length;
 }
-export declare type Side = number;
+export declare enum Side {
+    BID = 1,
+    ASK = -1
+}
 export declare namespace Side {
-    const BID: Side;
-    const ASK: Side;
     function from(length: Length, action: Action): Side;
 }
-export declare type Action = number;
+export declare enum Action {
+    OPEN = 1,
+    CLOSE = -1
+}
 export declare namespace Action {
-    const OPEN: Action;
-    const CLOSE: Action;
     function from(length: Length, side: Side): Action;
 }

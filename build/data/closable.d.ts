@@ -1,11 +1,15 @@
 import { HLike, H, HStatic } from './h';
 import { Length } from './length-action-side';
-export interface Closable<H extends HLike<H>> {
-    [length: Length]: H;
+export declare class Closable<H extends HLike<H>> {
+    private long;
+    private short;
+    constructor(long: H, short: H);
+    byLength(length: Length): H;
 }
 export declare namespace Closable {
     interface Snapshot {
-        readonly [length: Length]: H.Snapshot;
+        readonly long: H.Snapshot;
+        readonly short: H.Snapshot;
     }
 }
 export declare class ClosableStatic<H extends HLike<H>> {
