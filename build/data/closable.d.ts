@@ -1,5 +1,5 @@
 import { HLike, H, HStatic } from './h';
-import { Length } from './length';
+import { Length } from './length-action-side';
 export interface Closable<H extends HLike<H>> {
     [length: Length]: H;
 }

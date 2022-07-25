@@ -1,5 +1,5 @@
 import { HLike, H, HStatic } from './h';
-import { Side } from './side';
+import { Side } from './length-action-side';
 export interface BookOrder<H extends HLike<H>> {
     price: H;
     quantity: H;

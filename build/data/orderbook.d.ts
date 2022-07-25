@@ -1,6 +1,6 @@
 import { BookOrder } from './book-order';
 import { HLike, HStatic } from './h';
-import { Side } from './side';
+import { Side } from './length-action-side';
 export interface Orderbook<H extends HLike<H>> {
     [side: Side]: BookOrder<H>[];
     time: number;

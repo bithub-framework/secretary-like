@@ -1,6 +1,4 @@
-import { Side } from './side';
-import { Length } from './length';
-import { Action } from './action';
+import { Length, Side, Action } from './length-action-side';
 import { HLike, H, HStatic } from './h'
 
 
