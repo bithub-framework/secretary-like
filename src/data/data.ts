@@ -6,7 +6,6 @@ import { OrderbookStatic } from './orderbook';
 import { TradeStatic } from './trade';
 import { PositionStatic } from './position';
 import { PositionsStatic } from './positions';
-import { ClosableStatic } from './closable';
 import { BookOrderStatic } from './book-order';
 import { BalancesStatic } from './balances';
 
@@ -25,5 +24,4 @@ export class DataStatic<H extends HLike<H>> {
 	public Balances = new BalancesStatic(this.H);
 	public Position = new PositionStatic(this.H);
 	public Positions = new PositionsStatic(this.H);
-	public Closable = new ClosableStatic(this.H);
 }

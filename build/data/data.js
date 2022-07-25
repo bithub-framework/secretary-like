@@ -8,7 +8,6 @@ const orderbook_1 = require("./orderbook");
 const trade_1 = require("./trade");
 const position_1 = require("./position");
 const positions_1 = require("./positions");
-const closable_1 = require("./closable");
 const book_order_1 = require("./book-order");
 const balances_1 = require("./balances");
 class DataStatic {
@@ -23,7 +22,6 @@ class DataStatic {
         this.Balances = new balances_1.BalancesStatic(this.H);
         this.Position = new position_1.PositionStatic(this.H);
         this.Positions = new positions_1.PositionsStatic(this.H);
-        this.Closable = new closable_1.ClosableStatic(this.H);
     }
 }
 exports.DataStatic = DataStatic;

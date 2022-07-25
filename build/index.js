@@ -20,7 +20,6 @@ __exportStar(require("./data/amendment"), exports);
 __exportStar(require("./data/trade"), exports);
 __exportStar(require("./data/book-order"), exports);
 __exportStar(require("./data/orderbook"), exports);
-__exportStar(require("./data/closable"), exports);
 __exportStar(require("./data/position"), exports);
 __exportStar(require("./data/positions"), exports);
 __exportStar(require("./data/balances"), exports);

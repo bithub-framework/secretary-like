@@ -7,10 +7,17 @@ class Position {
         this.long = long;
         this.short = short;
     }
-    byLength(length) {
-        return length === length_action_side_1.Length.LONG
-            ? this.long
-            : this.short;
+    get(length) {
+        if (length === length_action_side_1.Length.LONG)
+            return this.long;
+        else
+            return this.short;
+    }
+    set(length, position) {
+        if (length === length_action_side_1.Length.LONG)
+            this.long = position;
+        else
+            this.short = position;
     }
 }
 exports.Position = Position;
@@ -20,15 +27,15 @@ class PositionStatic {
     }
     capture(position) {
         return {
-            long: this.H.capture(position.byLength(length_action_side_1.Length.LONG)),
-            short: this.H.capture(position.byLength(length_action_side_1.Length.SHORT)),
+            long: this.H.capture(position.get(length_action_side_1.Length.LONG)),
+            short: this.H.capture(position.get(length_action_side_1.Length.SHORT)),
         };
     }
     restore(snapshot) {
         return new Position(this.H.restore(snapshot.long), this.H.restore(snapshot.short));
     }
     copy(position) {
-        return new Position(position.byLength(length_action_side_1.Length.LONG), position.byLength(length_action_side_1.Length.SHORT));
+        return new Position(position.get(length_action_side_1.Length.LONG), position.get(length_action_side_1.Length.SHORT));
     }
 }
 exports.PositionStatic = PositionStatic;

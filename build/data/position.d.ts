@@ -4,7 +4,8 @@ export declare class Position<H extends HLike<H>> {
     private long;
     private short;
     constructor(long: H, short: H);
-    byLength(length: Length): H;
+    get(length: Length): H;
+    set(length: Length, position: H): void;
 }
 export declare namespace Position {
     interface Snapshot {

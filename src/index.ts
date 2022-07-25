@@ -8,7 +8,6 @@ export * from './data/amendment'
 export * from './data/trade';
 export * from './data/book-order';
 export * from './data/orderbook';
-export * from './data/closable';
 export * from './data/position';
 export * from './data/positions';
 export * from './data/balances';
