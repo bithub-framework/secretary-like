@@ -1,13 +1,13 @@
 import { Side } from './side';
 import { Length } from './length';
-import { Operation } from './operation';
+import { Action } from './action';
 import { HLike, H, HStatic } from './h';
 export interface LimitOrder<H extends HLike<H>> {
     price: H;
     quantity: H;
     side: Side;
     length: Length;
-    operation: Operation;
+    operation: Action;
 }
 export declare namespace LimitOrder {
     interface Snapshot {
@@ -15,7 +15,7 @@ export declare namespace LimitOrder {
         readonly quantity: H.Snapshot;
         readonly side: Side;
         readonly length: Length;
-        readonly operation: Operation;
+        readonly operation: Action;
     }
 }
 export declare class LimitOrderStatic<H extends HLike<H>> {
