@@ -26,13 +26,12 @@ export namespace H {
 		AWAY_FROM_ZERO,
 		HALF_AWAY_FROM_ZERO,
 	}
-}
 
-
-export interface HStatic<H extends HLike<H>> {
-	new(source: H.Source<H>): H;
-	capture(x: H): H.Snapshot;
-	restore(s: H.Snapshot): H;
-	max(x: H, ...rest: H[]): H;
-	min(x: H, ...rest: H[]): H;
+	export interface Static<H extends HLike<H>> {
+		new(source: H.Source<H>): H;
+		capture(x: H): H.Snapshot;
+		restore(s: H.Snapshot): H;
+		max(x: H, ...rest: H[]): H;
+		min(x: H, ...rest: H[]): H;
+	}
 }

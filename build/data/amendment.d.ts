@@ -1,4 +1,4 @@
-import { HLike, H, HStatic } from './h';
+import { HLike, H } from './h';
 import { OpenOrder } from './open-order';
 export interface Amendment<H extends HLike<H>> extends OpenOrder<H> {
     newUnfilled: H;
@@ -9,12 +9,12 @@ export declare namespace Amendment {
         readonly newUnfilled: H.Snapshot;
         readonly newPrice: H.Snapshot;
     }
-}
-export declare class AmendmentStatic<H extends HLike<H>> {
-    private H;
-    private OpenOrder;
-    constructor(H: HStatic<H>);
-    capture(amendment: Amendment<H>): Amendment.Snapshot;
-    restore(snapshot: Amendment.Snapshot): Amendment<H>;
-    copy(amendment: Amendment<H>): Amendment<H>;
+    class Static<H extends HLike<H>> {
+        private H;
+        private OpenOrder;
+        constructor(H: H.Static<H>);
+        capture(amendment: Amendment<H>): Amendment.Snapshot;
+        restore(snapshot: Amendment.Snapshot): Amendment<H>;
+        copy(amendment: Amendment<H>): Amendment<H>;
+    }
 }

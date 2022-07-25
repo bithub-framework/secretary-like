@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Action = exports.Side = exports.Length = void 0;
 var Length;
 (function (Length) {
-    Length[Length["LONG"] = 0] = "LONG";
-    Length[Length["SHORT"] = 1] = "SHORT";
+    Length["LONG"] = "LONG";
+    Length["SHORT"] = "SHORT";
 })(Length = exports.Length || (exports.Length = {}));
 (function (Length) {
     function from(side, action) {
@@ -18,8 +18,8 @@ var Length;
 })(Length = exports.Length || (exports.Length = {}));
 var Side;
 (function (Side) {
-    Side[Side["BID"] = 0] = "BID";
-    Side[Side["ASK"] = 1] = "ASK";
+    Side["BID"] = "BID";
+    Side["ASK"] = "ASK";
 })(Side = exports.Side || (exports.Side = {}));
 (function (Side) {
     function from(length, action) {
@@ -33,8 +33,8 @@ var Side;
 })(Side = exports.Side || (exports.Side = {}));
 var Action;
 (function (Action) {
-    Action[Action["OPEN"] = 0] = "OPEN";
-    Action[Action["CLOSE"] = 1] = "CLOSE";
+    Action["OPEN"] = "OPEN";
+    Action["CLOSE"] = "CLOSE";
 })(Action = exports.Action || (exports.Action = {}));
 (function (Action) {
     function from(length, side) {

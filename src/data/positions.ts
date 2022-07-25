@@ -1,5 +1,5 @@
-import { HLike, HStatic } from './h';
-import { Position, PositionStatic } from './position';
+import { HLike, H } from './h';
+import { Position } from './position';
 
 
 
@@ -15,37 +15,37 @@ export namespace Positions {
 		readonly closable: Position.Snapshot;
 		readonly time: number;
 	}
-}
 
+	export class Static<H extends HLike<H>>{
+		private Position = new Position.Static(this.H);
 
-export class PositionsStatic<H extends HLike<H>>{
-	private Position = new PositionStatic(this.H);
+		public constructor(
+			private H: H.Static<H>,
+		) { }
 
-	public constructor(
-		private H: HStatic<H>,
-	) { }
+		public capture(positions: Positions<H>): Positions.Snapshot {
+			return {
+				position: this.Position.capture(positions.position),
+				closable: this.Position.capture(positions.closable),
+				time: positions.time,
+			};
+		}
 
-	public capture(positions: Positions<H>): Positions.Snapshot {
-		return {
-			position: this.Position.capture(positions.position),
-			closable: this.Position.capture(positions.closable),
-			time: positions.time,
-		};
-	}
+		public restore(snapshot: Positions.Snapshot): Positions<H> {
+			return {
+				position: this.Position.restore(snapshot.position),
+				closable: this.Position.restore(snapshot.closable),
+				time: snapshot.time,
+			}
+		}
 
-	public restore(snapshot: Positions.Snapshot): Positions<H> {
-		return {
-			position: this.Position.restore(snapshot.position),
-			closable: this.Position.restore(snapshot.closable),
-			time: snapshot.time,
+		public copy(positions: Positions<H>): Positions<H> {
+			return {
+				position: this.Position.copy(positions.position),
+				closable: this.Position.copy(positions.closable),
+				time: positions.time,
+			};
 		}
 	}
 
-	public copy(positions: Positions<H>): Positions<H> {
-		return {
-			position: this.Position.copy(positions.position),
-			closable: this.Position.copy(positions.closable),
-			time: positions.time,
-		};
-	}
 }

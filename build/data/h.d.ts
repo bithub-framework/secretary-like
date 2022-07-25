@@ -22,11 +22,11 @@ export declare namespace H {
         AWAY_FROM_ZERO = 1,
         HALF_AWAY_FROM_ZERO = 2
     }
-}
-export interface HStatic<H extends HLike<H>> {
-    new (source: H.Source<H>): H;
-    capture(x: H): H.Snapshot;
-    restore(s: H.Snapshot): H;
-    max(x: H, ...rest: H[]): H;
-    min(x: H, ...rest: H[]): H;
+    interface Static<H extends HLike<H>> {
+        new (source: H.Source<H>): H;
+        capture(x: H): H.Snapshot;
+        restore(s: H.Snapshot): H;
+        max(x: H, ...rest: H[]): H;
+        min(x: H, ...rest: H[]): H;
+    }
 }

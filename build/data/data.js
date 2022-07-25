@@ -13,15 +13,15 @@ const balances_1 = require("./balances");
 class DataStatic {
     constructor(H) {
         this.H = H;
-        this.LimitOrder = new limit_order_1.LimitOrderStatic(this.H);
-        this.OpenOrder = new open_order_1.OpenOrderStatic(this.H);
-        this.Amendment = new amendment_1.AmendmentStatic(this.H);
-        this.BookOrder = new book_order_1.BookOrderStatic(this.H);
-        this.Orderbook = new orderbook_1.OrderbookStatic(this.H);
-        this.Trade = new trade_1.TradeStatic(this.H);
-        this.Balances = new balances_1.BalancesStatic(this.H);
-        this.Position = new position_1.PositionStatic(this.H);
-        this.Positions = new positions_1.PositionsStatic(this.H);
+        this.LimitOrder = new limit_order_1.LimitOrder.Static(this.H);
+        this.OpenOrder = new open_order_1.OpenOrder.Static(this.H);
+        this.Amendment = new amendment_1.Amendment.Static(this.H);
+        this.BookOrder = new book_order_1.BookOrder.Static(this.H);
+        this.Orderbook = new orderbook_1.Orderbook.Static(this.H);
+        this.Trade = new trade_1.Trade.Static(this.H);
+        this.Balances = new balances_1.Balances.Static(this.H);
+        this.Position = new position_1.Position.Static(this.H);
+        this.Positions = new positions_1.Positions.Static(this.H);
     }
 }
 exports.DataStatic = DataStatic;

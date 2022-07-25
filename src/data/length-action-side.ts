@@ -1,6 +1,6 @@
 export enum Length {
-	LONG,
-	SHORT,
+	LONG = 'LONG',
+	SHORT = 'SHORT',
 }
 export namespace Length {
 	export function from(side: Side, action: Action): Length {
@@ -12,8 +12,8 @@ export namespace Length {
 
 
 export enum Side {
-	BID,
-	ASK,
+	BID = 'BID',
+	ASK = 'ASK',
 }
 export namespace Side {
 	export function from(length: Length, action: Action): Side {
@@ -25,8 +25,8 @@ export namespace Side {
 
 
 export enum Action {
-	OPEN,
-	CLOSE,
+	OPEN = 'OPEN',
+	CLOSE = 'CLOSE',
 }
 export namespace Action {
 	export function from(length: Length, side: Side): Action {

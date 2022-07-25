@@ -1,5 +1,5 @@
 import { Side } from './length-action-side';
-import { HLike, H, HStatic } from './h';
+import { HLike, H } from './h';
 import { TradeId } from './trade-id';
 
 
@@ -19,41 +19,41 @@ export namespace Trade {
 		readonly time: number;
 		readonly id: TradeId;
 	}
-}
 
+	export class Static<H extends HLike<H>> {
+		public constructor(
+			private H: H.Static<H>,
+		) { }
 
-export class TradeStatic<H extends HLike<H>> {
-	public constructor(
-		private H: HStatic<H>,
-	) { }
+		public capture(trade: Trade<H>): Trade.Snapshot {
+			return {
+				side: trade.side,
+				price: this.H.capture(trade.price),
+				quantity: this.H.capture(trade.quantity),
+				time: trade.time,
+				id: trade.id,
+			}
+		}
 
-	public capture(trade: Trade<H>): Trade.Snapshot {
-		return {
-			side: trade.side,
-			price: this.H.capture(trade.price),
-			quantity: this.H.capture(trade.quantity),
-			time: trade.time,
-			id: trade.id,
+		public restore(snapshot: Trade.Snapshot): Trade<H> {
+			return {
+				side: snapshot.side,
+				price: this.H.restore(snapshot.price),
+				quantity: this.H.restore(snapshot.quantity),
+				time: snapshot.time,
+				id: snapshot.id,
+			}
+		}
+
+		public copy(trade: Trade<H>): Trade<H> {
+			return {
+				side: trade.side,
+				price: trade.price,
+				quantity: trade.quantity,
+				time: trade.time,
+				id: trade.id,
+			}
 		}
 	}
 
-	public restore(snapshot: Trade.Snapshot): Trade<H> {
-		return {
-			side: snapshot.side,
-			price: this.H.restore(snapshot.price),
-			quantity: this.H.restore(snapshot.quantity),
-			time: snapshot.time,
-			id: snapshot.id,
-		}
-	}
-
-	public copy(trade: Trade<H>): Trade<H> {
-		return {
-			side: trade.side,
-			price: trade.price,
-			quantity: trade.quantity,
-			time: trade.time,
-			id: trade.id,
-		}
-	}
 }
