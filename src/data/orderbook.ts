@@ -4,9 +4,13 @@ import { Side } from './length-action-side';
 
 
 export class Orderbook<H extends HLike<H>> {
-	public bySide(side: Side): BookOrder<H>[] {
+	public get(side: Side): BookOrder<H>[] {
 		if (side === Side.BID) return this.bids;
 		else return this.asks;
+	}
+	public set(side: Side, orders: BookOrder<H>[]): void {
+		if (side === Side.BID) this.bids = orders;
+		else this.asks = orders;
 	}
 
 	public constructor(
@@ -34,8 +38,8 @@ export class OrderbookStatic<H extends HLike<H>> {
 
 	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
 		return {
-			bids: orderbook.bySide(Side.BID).map(order => this.BookOrder.capture(order)),
-			asks: orderbook.bySide(Side.ASK).map(order => this.BookOrder.capture(order)),
+			bids: orderbook.get(Side.BID).map(order => this.BookOrder.capture(order)),
+			asks: orderbook.get(Side.ASK).map(order => this.BookOrder.capture(order)),
 			time: Number.isFinite(orderbook.time)
 				? orderbook.time
 				: null,
@@ -54,8 +58,8 @@ export class OrderbookStatic<H extends HLike<H>> {
 
 	public copy(orderbook: Orderbook<H>): Orderbook<H> {
 		return new Orderbook(
-			orderbook.bySide(Side.BID).map(order => this.BookOrder.copy(order)),
-			orderbook.bySide(Side.ASK).map(order => this.BookOrder.copy(order)),
+			orderbook.get(Side.BID).map(order => this.BookOrder.copy(order)),
+			orderbook.get(Side.ASK).map(order => this.BookOrder.copy(order)),
 			orderbook.time,
 		);
 	}

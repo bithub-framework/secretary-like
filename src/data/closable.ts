@@ -9,10 +9,13 @@ export class Closable<H extends HLike<H>> {
 		private short: H,
 	) { }
 
-	public byLength(length: Length): H {
-		return length === Length.LONG
-			? this.long
-			: this.short;
+	public get(length: Length): H {
+		if (length === Length.LONG) return this.long;
+		else return this.short;
+	}
+	public set(length: Length, position: H): void {
+		if (length === Length.LONG) this.long = position;
+		else this.short = position;
 	}
 }
 
@@ -31,8 +34,8 @@ export class ClosableStatic<H extends HLike<H>> {
 
 	public capture(closable: Closable<H>): Closable.Snapshot {
 		return {
-			long: this.H.capture(closable.byLength(Length.LONG)),
-			short: this.H.capture(closable.byLength(Length.SHORT)),
+			long: this.H.capture(closable.get(Length.LONG)),
+			short: this.H.capture(closable.get(Length.SHORT)),
 		};
 	}
 
@@ -45,8 +48,8 @@ export class ClosableStatic<H extends HLike<H>> {
 
 	public copy(closable: Closable<H>): Closable<H> {
 		return new Closable(
-			closable.byLength(Length.LONG),
-			closable.byLength(Length.SHORT),
+			closable.get(Length.LONG),
+			closable.get(Length.SHORT),
 		);
 	}
 }

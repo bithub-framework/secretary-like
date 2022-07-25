@@ -5,7 +5,8 @@ export declare class Orderbook<H extends HLike<H>> {
     private bids;
     private asks;
     time: number;
-    bySide(side: Side): BookOrder<H>[];
+    get(side: Side): BookOrder<H>[];
+    set(side: Side, orders: BookOrder<H>[]): void;
     constructor(bids: BookOrder<H>[], asks: BookOrder<H>[], time: number);
 }
 export declare namespace Orderbook {
