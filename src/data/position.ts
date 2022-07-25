@@ -1,4 +1,4 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { Length } from './length-action-side';
 
 
@@ -23,32 +23,31 @@ export namespace Position {
 		readonly long: H.Snapshot;
 		readonly short: H.Snapshot;
 	}
+}
 
-	export class Static<H extends HLike<H>> {
-		public constructor(
-			private H: H.Static<H>,
-		) { }
+export class PositionStatic<H extends HLike<H>> {
+	public constructor(
+		private H: HStatic<H>,
+	) { }
 
-		public capture(position: Position<H>): Position.Snapshot {
-			return {
-				long: this.H.capture(position.get(Length.LONG)),
-				short: this.H.capture(position.get(Length.SHORT)),
-			};
-		}
-
-		public restore(snapshot: Position.Snapshot): Position<H> {
-			return new Position(
-				this.H.restore(snapshot.long),
-				this.H.restore(snapshot.short),
-			);
-		}
-
-		public copy(position: Position<H>): Position<H> {
-			return new Position(
-				position.get(Length.LONG),
-				position.get(Length.SHORT),
-			);
-		}
+	public capture(position: Position<H>): Position.Snapshot {
+		return {
+			long: this.H.capture(position.get(Length.LONG)),
+			short: this.H.capture(position.get(Length.SHORT)),
+		};
 	}
 
+	public restore(snapshot: Position.Snapshot): Position<H> {
+		return new Position(
+			this.H.restore(snapshot.long),
+			this.H.restore(snapshot.short),
+		);
+	}
+
+	public copy(position: Position<H>): Position<H> {
+		return new Position(
+			position.get(Length.LONG),
+			position.get(Length.SHORT),
+		);
+	}
 }

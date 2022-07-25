@@ -1,5 +1,5 @@
 import { Side } from './length-action-side';
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { TradeId } from './trade-id';
 export interface Trade<H extends HLike<H>> {
     side: Side;
@@ -16,11 +16,11 @@ export declare namespace Trade {
         readonly time: number;
         readonly id: TradeId;
     }
-    class Static<H extends HLike<H>> {
-        private H;
-        constructor(H: H.Static<H>);
-        capture(trade: Trade<H>): Trade.Snapshot;
-        restore(snapshot: Trade.Snapshot): Trade<H>;
-        copy(trade: Trade<H>): Trade<H>;
-    }
+}
+export declare class TradeStatic<H extends HLike<H>> {
+    private H;
+    constructor(H: HStatic<H>);
+    capture(trade: Trade<H>): Trade.Snapshot;
+    restore(snapshot: Trade.Snapshot): Trade<H>;
+    copy(trade: Trade<H>): Trade<H>;
 }

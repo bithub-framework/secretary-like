@@ -1,4 +1,4 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { Side } from './length-action-side';
 export interface BookOrder<H extends HLike<H>> {
     price: H;
@@ -11,11 +11,11 @@ export declare namespace BookOrder {
         readonly quantity: H.Snapshot;
         readonly side: Side;
     }
-    class Static<H extends HLike<H>> {
-        private H;
-        constructor(H: H.Static<H>);
-        capture(order: BookOrder<H>): BookOrder.Snapshot;
-        restore(snapshot: BookOrder.Snapshot): BookOrder<H>;
-        copy(order: BookOrder<H>): BookOrder<H>;
-    }
+}
+export declare class BookOrderStatic<H extends HLike<H>> {
+    private H;
+    constructor(H: HStatic<H>);
+    capture(order: BookOrder<H>): BookOrder.Snapshot;
+    restore(snapshot: BookOrder.Snapshot): BookOrder<H>;
+    copy(order: BookOrder<H>): BookOrder<H>;
 }

@@ -1,4 +1,4 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 import { Length } from './length-action-side';
 export declare class Position<H extends HLike<H>> {
     private long;
@@ -12,11 +12,11 @@ export declare namespace Position {
         readonly long: H.Snapshot;
         readonly short: H.Snapshot;
     }
-    class Static<H extends HLike<H>> {
-        private H;
-        constructor(H: H.Static<H>);
-        capture(position: Position<H>): Position.Snapshot;
-        restore(snapshot: Position.Snapshot): Position<H>;
-        copy(position: Position<H>): Position<H>;
-    }
+}
+export declare class PositionStatic<H extends HLike<H>> {
+    private H;
+    constructor(H: HStatic<H>);
+    capture(position: Position<H>): Position.Snapshot;
+    restore(snapshot: Position.Snapshot): Position<H>;
+    copy(position: Position<H>): Position<H>;
 }

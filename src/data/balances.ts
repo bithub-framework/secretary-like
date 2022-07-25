@@ -1,4 +1,4 @@
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 
 
 
@@ -14,34 +14,34 @@ export namespace Balances {
 		readonly available: H.Snapshot;
 		readonly time: number;
 	}
+}
 
-	export class Static<H extends HLike<H>> {
-		public constructor(
-			private H: H.Static<H>,
-		) { }
+export class BalancesStatic<H extends HLike<H>> {
+	public constructor(
+		private H: HStatic<H>,
+	) { }
 
-		public capture(balances: Balances<H>): Balances.Snapshot {
-			return {
-				balance: this.H.capture(balances.balance),
-				available: this.H.capture(balances.available),
-				time: balances.time,
-			}
+	public capture(balances: Balances<H>): Balances.Snapshot {
+		return {
+			balance: this.H.capture(balances.balance),
+			available: this.H.capture(balances.available),
+			time: balances.time,
 		}
+	}
 
-		public restore(snapshot: Balances.Snapshot): Balances<H> {
-			return {
-				balance: this.H.restore(snapshot.balance),
-				available: this.H.restore(snapshot.available),
-				time: snapshot.time,
-			};
-		}
+	public restore(snapshot: Balances.Snapshot): Balances<H> {
+		return {
+			balance: this.H.restore(snapshot.balance),
+			available: this.H.restore(snapshot.available),
+			time: snapshot.time,
+		};
+	}
 
-		public copy(balances: Balances<H>): Balances<H> {
-			return {
-				balance: balances.balance,
-				available: balances.available,
-				time: balances.time,
-			};
-		}
+	public copy(balances: Balances<H>): Balances<H> {
+		return {
+			balance: balances.balance,
+			available: balances.available,
+			time: balances.time,
+		};
 	}
 }

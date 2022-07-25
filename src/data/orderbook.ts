@@ -1,5 +1,5 @@
-import { BookOrder } from './book-order';
-import { HLike, H } from './h';
+import { BookOrder, BookOrderStatic } from './book-order';
+import { HLike, HStatic } from './h';
 import { Side } from './length-action-side';
 
 
@@ -26,41 +26,40 @@ export namespace Orderbook {
 		readonly asks: readonly BookOrder.Snapshot[];
 		readonly time: number | null;
 	}
+}
 
-	export class Static<H extends HLike<H>> {
-		private BookOrder = new BookOrder.Static<H>(this.H);
+export class OrderbookStatic<H extends HLike<H>> {
+	private BookOrder = new BookOrderStatic<H>(this.H);
 
-		public constructor(
-			private H: H.Static<H>,
-		) { }
+	public constructor(
+		private H: HStatic<H>,
+	) { }
 
-		public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
-			return {
-				bids: orderbook.get(Side.BID).map(order => this.BookOrder.capture(order)),
-				asks: orderbook.get(Side.ASK).map(order => this.BookOrder.capture(order)),
-				time: Number.isFinite(orderbook.time)
-					? orderbook.time
-					: null,
-			};
-		}
-
-		public restore(snapshot: Orderbook.Snapshot): Orderbook<H> {
-			return new Orderbook(
-				snapshot.bids.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
-				snapshot.asks.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
-				snapshot.time !== null
-					? snapshot.time
-					: Number.NEGATIVE_INFINITY,
-			);
-		}
-
-		public copy(orderbook: Orderbook<H>): Orderbook<H> {
-			return new Orderbook(
-				orderbook.get(Side.BID).map(order => this.BookOrder.copy(order)),
-				orderbook.get(Side.ASK).map(order => this.BookOrder.copy(order)),
-				orderbook.time,
-			);
-		}
+	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
+		return {
+			bids: orderbook.get(Side.BID).map(order => this.BookOrder.capture(order)),
+			asks: orderbook.get(Side.ASK).map(order => this.BookOrder.capture(order)),
+			time: Number.isFinite(orderbook.time)
+				? orderbook.time
+				: null,
+		};
 	}
 
+	public restore(snapshot: Orderbook.Snapshot): Orderbook<H> {
+		return new Orderbook(
+			snapshot.bids.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
+			snapshot.asks.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
+			snapshot.time !== null
+				? snapshot.time
+				: Number.NEGATIVE_INFINITY,
+		);
+	}
+
+	public copy(orderbook: Orderbook<H>): Orderbook<H> {
+		return new Orderbook(
+			orderbook.get(Side.BID).map(order => this.BookOrder.copy(order)),
+			orderbook.get(Side.ASK).map(order => this.BookOrder.copy(order)),
+			orderbook.time,
+		);
+	}
 }

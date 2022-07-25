@@ -1,5 +1,5 @@
 import { Length, Side, Action } from './length-action-side';
-import { HLike, H } from './h';
+import { HLike, H, HStatic } from './h';
 export interface LimitOrder<H extends HLike<H>> {
     price: H;
     quantity: H;
@@ -15,11 +15,11 @@ export declare namespace LimitOrder {
         readonly length: Length;
         readonly operation: Action;
     }
-    class Static<H extends HLike<H>> {
-        private H;
-        constructor(H: H.Static<H>);
-        capture(order: LimitOrder<H>): LimitOrder.Snapshot;
-        restore(snapshot: LimitOrder.Snapshot): LimitOrder<H>;
-        copy(order: LimitOrder<H>): LimitOrder<H>;
-    }
+}
+export declare class LimitOrderStatic<H extends HLike<H>> {
+    private H;
+    constructor(H: HStatic<H>);
+    capture(order: LimitOrder<H>): LimitOrder.Snapshot;
+    restore(snapshot: LimitOrder.Snapshot): LimitOrder<H>;
+    copy(order: LimitOrder<H>): LimitOrder<H>;
 }
