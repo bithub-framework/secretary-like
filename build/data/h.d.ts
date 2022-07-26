@@ -24,6 +24,7 @@ export declare namespace H {
     }
 }
 export declare abstract class HStatic<H extends HLike<H>> {
+    abstract from(source: H.Source<H>): H;
     capture(x: H): H.Snapshot;
     abstract restore(snapshot: H.Snapshot): H;
     max(x: H, ...rest: H[]): H;

@@ -29,6 +29,8 @@ export namespace H {
 }
 
 export abstract class HStatic<H extends HLike<H>> {
+	public abstract from(source: H.Source<H>): H;
+
 	public capture(x: H): H.Snapshot {
 		return x.toJSON();
 	}
