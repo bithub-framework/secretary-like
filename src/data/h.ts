@@ -28,10 +28,26 @@ export namespace H {
 	}
 }
 
-export interface HStatic<H extends HLike<H>> {
-	new(source: H.Source<H>): H;
-	capture(x: H): H.Snapshot;
-	restore(s: H.Snapshot): H;
-	max(x: H, ...rest: H[]): H;
-	min(x: H, ...rest: H[]): H;
+export abstract class HStatic<H extends HLike<H>> {
+	public abstract create(source: H.Source<H>): H;
+
+	public capture(x: H): H.Snapshot {
+		return x.toJSON();
+	}
+
+	public restore(snapshot: H.Snapshot): H {
+		return this.create(<H.Source<H>>snapshot);
+	}
+
+	public max(x: H, ...rest: H[]): H {
+		return [x, ...rest].reduce(
+			(x, y) => x.gt(y) ? x : y,
+		);
+	}
+
+	public min(x: H, ...rest: H[]): H {
+		return [x, ...rest].reduce(
+			(x, y) => x.lt(y) ? x : y,
+		);
+	}
 }

@@ -23,10 +23,10 @@ export declare namespace H {
         HALF_AWAY_FROM_ZERO = 2
     }
 }
-export interface HStatic<H extends HLike<H>> {
-    new (source: H.Source<H>): H;
+export declare abstract class HStatic<H extends HLike<H>> {
+    abstract create(source: H.Source<H>): H;
     capture(x: H): H.Snapshot;
-    restore(s: H.Snapshot): H;
+    restore(snapshot: H.Snapshot): H;
     max(x: H, ...rest: H[]): H;
     min(x: H, ...rest: H[]): H;
 }
