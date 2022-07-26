@@ -1,5 +1,5 @@
-import { BookOrder, BookOrderStatic } from './book-order';
-import { HLike, HStatic } from './h';
+import { BookOrder, BookOrderFactory } from './book-order';
+import { HLike, HFactory } from './h';
 import { Side } from './length-action-side';
 
 
@@ -28,17 +28,15 @@ export namespace Orderbook {
 	}
 }
 
-export class OrderbookStatic<H extends HLike<H>> {
-	private BookOrder = new BookOrderStatic<H>(this.H);
-
+export class OrderbookFactory<H extends HLike<H>> {
 	public constructor(
-		private H: HStatic<H>,
+		private bookOrderFactory: BookOrderFactory<H>,
 	) { }
 
 	public captureOrderbook(orderbook: Orderbook<H>): Orderbook.Snapshot {
 		return {
-			bids: orderbook.get(Side.BID).map(order => this.BookOrder.capture(order)),
-			asks: orderbook.get(Side.ASK).map(order => this.BookOrder.capture(order)),
+			bids: orderbook.get(Side.BID).map(order => this.bookOrderFactory.capture(order)),
+			asks: orderbook.get(Side.ASK).map(order => this.bookOrderFactory.capture(order)),
 			time: Number.isFinite(orderbook.time)
 				? orderbook.time
 				: null,
@@ -47,8 +45,8 @@ export class OrderbookStatic<H extends HLike<H>> {
 
 	public restoreOrderbook(snapshot: Orderbook.Snapshot): Orderbook<H> {
 		return new Orderbook(
-			snapshot.bids.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
-			snapshot.asks.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
+			snapshot.bids.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
+			snapshot.asks.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
 			snapshot.time !== null
 				? snapshot.time
 				: Number.NEGATIVE_INFINITY,
@@ -57,8 +55,8 @@ export class OrderbookStatic<H extends HLike<H>> {
 
 	public copyOrderbook(orderbook: Orderbook<H>): Orderbook<H> {
 		return new Orderbook(
-			orderbook.get(Side.BID).map(order => this.BookOrder.copy(order)),
-			orderbook.get(Side.ASK).map(order => this.BookOrder.copy(order)),
+			orderbook.get(Side.BID).map(order => this.bookOrderFactory.copy(order)),
+			orderbook.get(Side.ASK).map(order => this.bookOrderFactory.copy(order)),
 			orderbook.time,
 		);
 	}

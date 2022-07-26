@@ -1,5 +1,5 @@
-import { HLike, HStatic } from './h';
-import { Position } from './position';
+import { HLike, HFactory } from './h';
+import { Position, PositionFactory } from './position';
 export interface Positions<H extends HLike<H>> {
     position: Position<H>;
     closable: Position<H>;
@@ -12,10 +12,10 @@ export declare namespace Positions {
         readonly time: number;
     }
 }
-export declare class PositionsStatic<H extends HLike<H>> {
-    private H;
-    private Position;
-    constructor(H: HStatic<H>);
+export declare class PositionsFactory<H extends HLike<H>> {
+    private hFactory;
+    private positionFactory;
+    constructor(hFactory: HFactory<H>, positionFactory: PositionFactory<H>);
     capture(positions: Positions<H>): Positions.Snapshot;
     restore(snapshot: Positions.Snapshot): Positions<H>;
     copy(positions: Positions<H>): Positions<H>;

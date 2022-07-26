@@ -1,32 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OpenOrderStatic = void 0;
-const limit_order_1 = require("./limit-order");
-class OpenOrderStatic extends limit_order_1.LimitOrderStatic {
-    captureOpenOrder(order) {
+exports.OpenOrderFactory = void 0;
+class OpenOrderFactory {
+    constructor(hFactory, limitOrderFactory) {
+        this.hFactory = hFactory;
+        this.limitOrderFactory = limitOrderFactory;
+    }
+    capture(order) {
         return {
-            ...this.captureLimitOrder(order),
-            filled: this.H.capture(order.filled),
-            unfilled: this.H.capture(order.unfilled),
+            ...this.limitOrderFactory.capture(order),
+            filled: this.hFactory.capture(order.filled),
+            unfilled: this.hFactory.capture(order.unfilled),
             id: order.id,
         };
     }
-    restoreOpenOrder(snapshot) {
+    restore(snapshot) {
         return {
-            ...this.restoreLimitOrder(snapshot),
-            filled: this.H.restore(snapshot.filled),
-            unfilled: this.H.restore(snapshot.unfilled),
+            ...this.limitOrderFactory.restore(snapshot),
+            filled: this.hFactory.restore(snapshot.filled),
+            unfilled: this.hFactory.restore(snapshot.unfilled),
             id: snapshot.id,
         };
     }
-    copyOpenOrder(order) {
+    copy(order) {
         return {
-            ...this.copyLimitOrder(order),
+            ...this.limitOrderFactory.copy(order),
             filled: order.filled,
             unfilled: order.unfilled,
             id: order.id,
         };
     }
 }
-exports.OpenOrderStatic = OpenOrderStatic;
+exports.OpenOrderFactory = OpenOrderFactory;
 //# sourceMappingURL=open-order.js.map

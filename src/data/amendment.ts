@@ -1,5 +1,5 @@
-import { HLike, H, HStatic } from './h';
-import { OpenOrder, OpenOrderStatic } from './open-order';
+import { HLike, H, HFactory } from './h';
+import { OpenOrder, OpenOrderFactory } from './open-order';
 
 
 
@@ -15,26 +15,31 @@ export namespace Amendment {
 	}
 }
 
-export class AmendmentStatic<H extends HLike<H>> extends OpenOrderStatic<H>{
-	public captureAmendment(amendment: Amendment<H>): Amendment.Snapshot {
+export class AmendmentFactory<H extends HLike<H>> {
+	public constructor(
+		private hFactory: HFactory<H>,
+		private openOrderFactory: OpenOrderFactory<H>,
+	) { }
+
+	public capture(amendment: Amendment<H>): Amendment.Snapshot {
 		return {
-			...this.captureOpenOrder(amendment),
-			newUnfilled: this.H.capture(amendment.newUnfilled),
-			newPrice: this.H.capture(amendment.newPrice),
+			...this.openOrderFactory.capture(amendment),
+			newUnfilled: this.hFactory.capture(amendment.newUnfilled),
+			newPrice: this.hFactory.capture(amendment.newPrice),
 		}
 	}
 
-	public restoreAmendment(snapshot: Amendment.Snapshot): Amendment<H> {
+	public restore(snapshot: Amendment.Snapshot): Amendment<H> {
 		return {
-			...this.restoreOpenOrder(snapshot),
-			newUnfilled: this.H.restore(snapshot.newUnfilled),
-			newPrice: this.H.restore(snapshot.newPrice),
+			...this.openOrderFactory.restore(snapshot),
+			newUnfilled: this.hFactory.restore(snapshot.newUnfilled),
+			newPrice: this.hFactory.restore(snapshot.newPrice),
 		};
 	}
 
-	public copyAmendment(amendment: Amendment<H>): Amendment<H> {
+	public copy(amendment: Amendment<H>): Amendment<H> {
 		return {
-			...this.copyOpenOrder(amendment),
+			...this.openOrderFactory.copy(amendment),
 			newUnfilled: amendment.newUnfilled,
 			newPrice: amendment.newPrice,
 		};

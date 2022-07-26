@@ -1,5 +1,5 @@
-import { BookOrder } from './book-order';
-import { HLike, HStatic } from './h';
+import { BookOrder, BookOrderFactory } from './book-order';
+import { HLike } from './h';
 import { Side } from './length-action-side';
 export declare class Orderbook<H extends HLike<H>> {
     private bids;
@@ -16,10 +16,9 @@ export declare namespace Orderbook {
         readonly time: number | null;
     }
 }
-export declare class OrderbookStatic<H extends HLike<H>> {
-    private H;
-    private BookOrder;
-    constructor(H: HStatic<H>);
+export declare class OrderbookFactory<H extends HLike<H>> {
+    private bookOrderFactory;
+    constructor(bookOrderFactory: BookOrderFactory<H>);
     captureOrderbook(orderbook: Orderbook<H>): Orderbook.Snapshot;
     restoreOrderbook(snapshot: Orderbook.Snapshot): Orderbook<H>;
     copyOrderbook(orderbook: Orderbook<H>): Orderbook<H>;

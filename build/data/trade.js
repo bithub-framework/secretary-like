@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TradeStatic = void 0;
-class TradeStatic {
-    constructor(H) {
-        this.H = H;
+exports.TradeFactory = void 0;
+class TradeFactory {
+    constructor(hFactory) {
+        this.hFactory = hFactory;
     }
     captureTrade(trade) {
         return {
             side: trade.side,
-            price: this.H.capture(trade.price),
-            quantity: this.H.capture(trade.quantity),
+            price: this.hFactory.capture(trade.price),
+            quantity: this.hFactory.capture(trade.quantity),
             time: trade.time,
             id: trade.id,
         };
@@ -17,8 +17,8 @@ class TradeStatic {
     restoreTrade(snapshot) {
         return {
             side: snapshot.side,
-            price: this.H.restore(snapshot.price),
-            quantity: this.H.restore(snapshot.quantity),
+            price: this.hFactory.restore(snapshot.price),
+            quantity: this.hFactory.restore(snapshot.quantity),
             time: snapshot.time,
             id: snapshot.id,
         };
@@ -33,5 +33,5 @@ class TradeStatic {
         };
     }
 }
-exports.TradeStatic = TradeStatic;
+exports.TradeFactory = TradeFactory;
 //# sourceMappingURL=trade.js.map

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PositionStatic = exports.Position = void 0;
+exports.PositionFactory = exports.Position = void 0;
 const length_action_side_1 = require("./length-action-side");
 class Position {
     constructor(long, short) {
@@ -21,22 +21,22 @@ class Position {
     }
 }
 exports.Position = Position;
-class PositionStatic {
-    constructor(H) {
-        this.H = H;
+class PositionFactory {
+    constructor(hFactory) {
+        this.hFactory = hFactory;
     }
     capture(position) {
         return {
-            long: this.H.capture(position.get(length_action_side_1.Length.LONG)),
-            short: this.H.capture(position.get(length_action_side_1.Length.SHORT)),
+            long: this.hFactory.capture(position.get(length_action_side_1.Length.LONG)),
+            short: this.hFactory.capture(position.get(length_action_side_1.Length.SHORT)),
         };
     }
     restore(snapshot) {
-        return new Position(this.H.restore(snapshot.long), this.H.restore(snapshot.short));
+        return new Position(this.hFactory.restore(snapshot.long), this.hFactory.restore(snapshot.short));
     }
     copy(position) {
         return new Position(position.get(length_action_side_1.Length.LONG), position.get(length_action_side_1.Length.SHORT));
     }
 }
-exports.PositionStatic = PositionStatic;
+exports.PositionFactory = PositionFactory;
 //# sourceMappingURL=position.js.map

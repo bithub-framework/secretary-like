@@ -1,6 +1,7 @@
 export interface HLike<H extends HLike<H>> {
 	plus(x: H.Source<H>): H;
 	minus(x: H.Source<H>): H;
+	neg(): H;
 	times(x: H.Source<H>): H;
 	div(x: H.Source<H>): H;
 	mod(x: H.Source<H>): H;
@@ -28,24 +29,25 @@ export namespace H {
 	}
 }
 
-export abstract class HStatic<H extends HLike<H>> {
-	public abstract from(source: H.Source<H>): H;
+export interface HStatic<H extends HLike<H>> {
+	max(x: H, ...rest: H[]): H;
+	min(x: H, ...rest: H[]): H;
 
-	public capture(x: H): H.Snapshot {
-		return x.toJSON();
-	}
+	// public max(x: H, ...rest: H[]): H {
+	// 	return [x, ...rest].reduce(
+	// 		(x, y) => x.gt(y) ? x : y,
+	// 	);
+	// }
 
-	public abstract restore(snapshot: H.Snapshot): H;
+	// public min(x: H, ...rest: H[]): H {
+	// 	return [x, ...rest].reduce(
+	// 		(x, y) => x.lt(y) ? x : y,
+	// 	);
+	// }
+}
 
-	public max(x: H, ...rest: H[]): H {
-		return [x, ...rest].reduce(
-			(x, y) => x.gt(y) ? x : y,
-		);
-	}
-
-	public min(x: H, ...rest: H[]): H {
-		return [x, ...rest].reduce(
-			(x, y) => x.lt(y) ? x : y,
-		);
-	}
+export interface HFactory<H extends HLike<H>> {
+	from(source: H.Source<H>): H;
+	capture(x: H): H.Snapshot;
+	restore(snapshot: H.Snapshot): H;
 }

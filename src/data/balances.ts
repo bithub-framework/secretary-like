@@ -1,4 +1,4 @@
-import { HLike, H, HStatic } from './h';
+import { HLike, H, HFactory } from './h';
 
 
 
@@ -16,23 +16,23 @@ export namespace Balances {
 	}
 }
 
-export class BalancesStatic<H extends HLike<H>> {
+export class BalancesFactory<H extends HLike<H>> {
 	public constructor(
-		private H: HStatic<H>,
+		private hFactory: HFactory<H>,
 	) { }
 
 	public capture(balances: Balances<H>): Balances.Snapshot {
 		return {
-			balance: this.H.capture(balances.balance),
-			available: this.H.capture(balances.available),
+			balance: this.hFactory.capture(balances.balance),
+			available: this.hFactory.capture(balances.available),
 			time: balances.time,
 		}
 	}
 
 	public restore(snapshot: Balances.Snapshot): Balances<H> {
 		return {
-			balance: this.H.restore(snapshot.balance),
-			available: this.H.restore(snapshot.available),
+			balance: this.hFactory.restore(snapshot.balance),
+			available: this.hFactory.restore(snapshot.available),
 			time: snapshot.time,
 		};
 	}

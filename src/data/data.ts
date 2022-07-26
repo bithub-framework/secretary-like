@@ -1,27 +1,27 @@
-import { HLike, HStatic } from './h';
-import { LimitOrderStatic } from './limit-order';
-import { OpenOrderStatic } from './open-order';
-import { AmendmentStatic } from './amendment';
-import { OrderbookStatic } from './orderbook';
-import { TradeStatic } from './trade';
-import { PositionStatic } from './position';
-import { PositionsStatic } from './positions';
-import { BookOrderStatic } from './book-order';
-import { BalancesStatic } from './balances';
+import { HLike, HFactory } from './h';
+import { LimitOrderFactory } from './limit-order';
+import { OpenOrderFactory } from './open-order';
+import { AmendmentFactory } from './amendment';
+import { OrderbookFactory } from './orderbook';
+import { TradeFactory } from './trade';
+import { PositionFactory } from './position';
+import { PositionsFactory } from './positions';
+import { BookOrderFactory } from './book-order';
+import { BalancesFactory } from './balances';
 
 
-export class DataStatic<H extends HLike<H>> {
+export class DataNamespace<H extends HLike<H>> {
 	public constructor(
-		public H: HStatic<H>,
+		public hFactory: HFactory<H>,
 	) { }
 
-	public LimitOrder = new LimitOrderStatic(this.H);
-	public OpenOrder = new OpenOrderStatic(this.H);
-	public Amendment = new AmendmentStatic(this.H);
-	public BookOrder = new BookOrderStatic(this.H);
-	public Orderbook = new OrderbookStatic(this.H);
-	public Trade = new TradeStatic(this.H);
-	public Balances = new BalancesStatic(this.H);
-	public Position = new PositionStatic(this.H);
-	public Positions = new PositionsStatic(this.H);
+	public limitOrderFactory = new LimitOrderFactory<H>(this.hFactory);
+	public openOrderFactory = new OpenOrderFactory<H>(this.hFactory, this.limitOrderFactory);
+	public amendmentFactory = new AmendmentFactory<H>(this.hFactory, this.openOrderFactory);
+	public bookOrderFactory = new BookOrderFactory<H>(this.hFactory);
+	public orderbookFactory = new OrderbookFactory<H>(this.bookOrderFactory);
+	public tradeFactory = new TradeFactory<H>(this.hFactory);
+	public balancesFactory = new BalancesFactory<H>(this.hFactory);
+	public positionFactory = new PositionFactory<H>(this.hFactory);
+	public positionsFactory = new PositionsFactory<H>(this.hFactory, this.positionFactory);
 }

@@ -1,5 +1,5 @@
 import { Side } from './length-action-side';
-import { HLike, H, HStatic } from './h';
+import { HLike, H, HFactory } from './h';
 import { TradeId } from './trade-id';
 
 
@@ -21,16 +21,16 @@ export namespace Trade {
 	}
 }
 
-export class TradeStatic<H extends HLike<H>> {
+export class TradeFactory<H extends HLike<H>> {
 	public constructor(
-		private H: HStatic<H>,
+		private hFactory: HFactory<H>,
 	) { }
 
 	public captureTrade(trade: Trade<H>): Trade.Snapshot {
 		return {
 			side: trade.side,
-			price: this.H.capture(trade.price),
-			quantity: this.H.capture(trade.quantity),
+			price: this.hFactory.capture(trade.price),
+			quantity: this.hFactory.capture(trade.quantity),
 			time: trade.time,
 			id: trade.id,
 		}
@@ -39,8 +39,8 @@ export class TradeStatic<H extends HLike<H>> {
 	public restoreTrade(snapshot: Trade.Snapshot): Trade<H> {
 		return {
 			side: snapshot.side,
-			price: this.H.restore(snapshot.price),
-			quantity: this.H.restore(snapshot.quantity),
+			price: this.hFactory.restore(snapshot.price),
+			quantity: this.hFactory.restore(snapshot.quantity),
 			time: snapshot.time,
 			id: snapshot.id,
 		}

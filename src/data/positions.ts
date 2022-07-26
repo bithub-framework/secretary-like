@@ -1,5 +1,5 @@
-import { HLike, H, HStatic } from './h';
-import { Position, PositionStatic } from './position';
+import { HLike, HFactory } from './h';
+import { Position, PositionFactory } from './position';
 
 
 
@@ -17,33 +17,32 @@ export namespace Positions {
 	}
 }
 
-export class PositionsStatic<H extends HLike<H>>{
-	private Position = new PositionStatic(this.H);
-
+export class PositionsFactory<H extends HLike<H>>{
 	public constructor(
-		private H: HStatic<H>,
+		private hFactory: HFactory<H>,
+		private positionFactory: PositionFactory<H>,
 	) { }
 
 	public capture(positions: Positions<H>): Positions.Snapshot {
 		return {
-			position: this.Position.capture(positions.position),
-			closable: this.Position.capture(positions.closable),
+			position: this.positionFactory.capture(positions.position),
+			closable: this.positionFactory.capture(positions.closable),
 			time: positions.time,
 		};
 	}
 
 	public restore(snapshot: Positions.Snapshot): Positions<H> {
 		return {
-			position: this.Position.restore(snapshot.position),
-			closable: this.Position.restore(snapshot.closable),
+			position: this.positionFactory.restore(snapshot.position),
+			closable: this.positionFactory.restore(snapshot.closable),
 			time: snapshot.time,
 		}
 	}
 
 	public copy(positions: Positions<H>): Positions<H> {
 		return {
-			position: this.Position.copy(positions.position),
-			closable: this.Position.copy(positions.closable),
+			position: this.positionFactory.copy(positions.position),
+			closable: this.positionFactory.copy(positions.closable),
 			time: positions.time,
 		};
 	}

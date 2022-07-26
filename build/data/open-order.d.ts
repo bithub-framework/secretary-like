@@ -1,5 +1,5 @@
-import { HLike, H } from './h';
-import { LimitOrder, LimitOrderStatic } from './limit-order';
+import { HLike, H, HFactory } from './h';
+import { LimitOrder, LimitOrderFactory } from './limit-order';
 import { OrderId } from './order-id';
 export interface OpenOrder<H extends HLike<H>> extends LimitOrder<H> {
     filled: H;
@@ -13,8 +13,11 @@ export declare namespace OpenOrder {
         readonly id: OrderId;
     }
 }
-export declare class OpenOrderStatic<H extends HLike<H>> extends LimitOrderStatic<H> {
-    captureOpenOrder(order: OpenOrder<H>): OpenOrder.Snapshot;
-    restoreOpenOrder(snapshot: OpenOrder.Snapshot): OpenOrder<H>;
-    copyOpenOrder(order: OpenOrder<H>): OpenOrder<H>;
+export declare class OpenOrderFactory<H extends HLike<H>> {
+    private hFactory;
+    private limitOrderFactory;
+    constructor(hFactory: HFactory<H>, limitOrderFactory: LimitOrderFactory<H>);
+    capture(order: OpenOrder<H>): OpenOrder.Snapshot;
+    restore(snapshot: OpenOrder.Snapshot): OpenOrder<H>;
+    copy(order: OpenOrder<H>): OpenOrder<H>;
 }

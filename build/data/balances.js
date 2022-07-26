@@ -1,21 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BalancesStatic = void 0;
-class BalancesStatic {
-    constructor(H) {
-        this.H = H;
+exports.BalancesFactory = void 0;
+class BalancesFactory {
+    constructor(hFactory) {
+        this.hFactory = hFactory;
     }
     capture(balances) {
         return {
-            balance: this.H.capture(balances.balance),
-            available: this.H.capture(balances.available),
+            balance: this.hFactory.capture(balances.balance),
+            available: this.hFactory.capture(balances.available),
             time: balances.time,
         };
     }
     restore(snapshot) {
         return {
-            balance: this.H.restore(snapshot.balance),
-            available: this.H.restore(snapshot.available),
+            balance: this.hFactory.restore(snapshot.balance),
+            available: this.hFactory.restore(snapshot.available),
             time: snapshot.time,
         };
     }
@@ -27,5 +27,5 @@ class BalancesStatic {
         };
     }
 }
-exports.BalancesStatic = BalancesStatic;
+exports.BalancesFactory = BalancesFactory;
 //# sourceMappingURL=balances.js.map

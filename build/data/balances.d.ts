@@ -1,4 +1,4 @@
-import { HLike, H, HStatic } from './h';
+import { HLike, H, HFactory } from './h';
 export interface Balances<H extends HLike<H>> {
     balance: H;
     available: H;
@@ -11,9 +11,9 @@ export declare namespace Balances {
         readonly time: number;
     }
 }
-export declare class BalancesStatic<H extends HLike<H>> {
-    private H;
-    constructor(H: HStatic<H>);
+export declare class BalancesFactory<H extends HLike<H>> {
+    private hFactory;
+    constructor(hFactory: HFactory<H>);
     capture(balances: Balances<H>): Balances.Snapshot;
     restore(snapshot: Balances.Snapshot): Balances<H>;
     copy(balances: Balances<H>): Balances<H>;

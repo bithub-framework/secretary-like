@@ -1,4 +1,4 @@
-import { HLike, H, HStatic } from './h';
+import { HLike, H, HFactory } from './h';
 import { Length } from './length-action-side';
 
 
@@ -25,22 +25,22 @@ export namespace Position {
 	}
 }
 
-export class PositionStatic<H extends HLike<H>> {
+export class PositionFactory<H extends HLike<H>> {
 	public constructor(
-		private H: HStatic<H>,
+		private hFactory: HFactory<H>,
 	) { }
 
 	public capture(position: Position<H>): Position.Snapshot {
 		return {
-			long: this.H.capture(position.get(Length.LONG)),
-			short: this.H.capture(position.get(Length.SHORT)),
+			long: this.hFactory.capture(position.get(Length.LONG)),
+			short: this.hFactory.capture(position.get(Length.SHORT)),
 		};
 	}
 
 	public restore(snapshot: Position.Snapshot): Position<H> {
 		return new Position(
-			this.H.restore(snapshot.long),
-			this.H.restore(snapshot.short),
+			this.hFactory.restore(snapshot.long),
+			this.hFactory.restore(snapshot.short),
 		);
 	}
 

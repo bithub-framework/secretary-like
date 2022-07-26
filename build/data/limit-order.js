@@ -1,29 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LimitOrderStatic = void 0;
-class LimitOrderStatic {
-    constructor(H) {
-        this.H = H;
+exports.LimitOrderFactory = void 0;
+class LimitOrderFactory {
+    constructor(hFactory) {
+        this.hFactory = hFactory;
     }
-    captureLimitOrder(order) {
+    capture(order) {
         return {
-            price: this.H.capture(order.price),
-            quantity: this.H.capture(order.quantity),
+            price: this.hFactory.capture(order.price),
+            quantity: this.hFactory.capture(order.quantity),
             side: order.side,
             length: order.length,
             action: order.action,
         };
     }
-    restoreLimitOrder(snapshot) {
+    restore(snapshot) {
         return {
-            price: this.H.restore(snapshot.price),
-            quantity: this.H.restore(snapshot.quantity),
+            price: this.hFactory.restore(snapshot.price),
+            quantity: this.hFactory.restore(snapshot.quantity),
             side: snapshot.side,
             length: snapshot.length,
             action: snapshot.action,
         };
     }
-    copyLimitOrder(order) {
+    copy(order) {
         return {
             price: order.price,
             quantity: order.quantity,
@@ -33,5 +33,5 @@ class LimitOrderStatic {
         };
     }
 }
-exports.LimitOrderStatic = LimitOrderStatic;
+exports.LimitOrderFactory = LimitOrderFactory;
 //# sourceMappingURL=limit-order.js.map

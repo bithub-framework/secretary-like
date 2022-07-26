@@ -1,23 +1,23 @@
-import { HLike, HStatic } from './h';
-import { LimitOrderStatic } from './limit-order';
-import { OpenOrderStatic } from './open-order';
-import { AmendmentStatic } from './amendment';
-import { OrderbookStatic } from './orderbook';
-import { TradeStatic } from './trade';
-import { PositionStatic } from './position';
-import { PositionsStatic } from './positions';
-import { BookOrderStatic } from './book-order';
-import { BalancesStatic } from './balances';
-export declare class DataStatic<H extends HLike<H>> {
-    H: HStatic<H>;
-    constructor(H: HStatic<H>);
-    LimitOrder: LimitOrderStatic<H>;
-    OpenOrder: OpenOrderStatic<H>;
-    Amendment: AmendmentStatic<H>;
-    BookOrder: BookOrderStatic<H>;
-    Orderbook: OrderbookStatic<H>;
-    Trade: TradeStatic<H>;
-    Balances: BalancesStatic<H>;
-    Position: PositionStatic<H>;
-    Positions: PositionsStatic<H>;
+import { HLike, HFactory } from './h';
+import { LimitOrderFactory } from './limit-order';
+import { OpenOrderFactory } from './open-order';
+import { AmendmentFactory } from './amendment';
+import { OrderbookFactory } from './orderbook';
+import { TradeFactory } from './trade';
+import { PositionFactory } from './position';
+import { PositionsFactory } from './positions';
+import { BookOrderFactory } from './book-order';
+import { BalancesFactory } from './balances';
+export declare class DataNamespace<H extends HLike<H>> {
+    hFactory: HFactory<H>;
+    constructor(hFactory: HFactory<H>);
+    limitOrderFactory: LimitOrderFactory<H>;
+    openOrderFactory: OpenOrderFactory<H>;
+    amendmentFactory: AmendmentFactory<H>;
+    bookOrderFactory: BookOrderFactory<H>;
+    orderbookFactory: OrderbookFactory<H>;
+    tradeFactory: TradeFactory<H>;
+    balancesFactory: BalancesFactory<H>;
+    positionFactory: PositionFactory<H>;
+    positionsFactory: PositionsFactory<H>;
 }

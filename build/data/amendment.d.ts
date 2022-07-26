@@ -1,5 +1,5 @@
-import { HLike, H } from './h';
-import { OpenOrder, OpenOrderStatic } from './open-order';
+import { HLike, H, HFactory } from './h';
+import { OpenOrder, OpenOrderFactory } from './open-order';
 export interface Amendment<H extends HLike<H>> extends OpenOrder<H> {
     newUnfilled: H;
     newPrice: H;
@@ -10,8 +10,11 @@ export declare namespace Amendment {
         readonly newPrice: H.Snapshot;
     }
 }
-export declare class AmendmentStatic<H extends HLike<H>> extends OpenOrderStatic<H> {
-    captureAmendment(amendment: Amendment<H>): Amendment.Snapshot;
-    restoreAmendment(snapshot: Amendment.Snapshot): Amendment<H>;
-    copyAmendment(amendment: Amendment<H>): Amendment<H>;
+export declare class AmendmentFactory<H extends HLike<H>> {
+    private hFactory;
+    private openOrderFactory;
+    constructor(hFactory: HFactory<H>, openOrderFactory: OpenOrderFactory<H>);
+    capture(amendment: Amendment<H>): Amendment.Snapshot;
+    restore(snapshot: Amendment.Snapshot): Amendment<H>;
+    copy(amendment: Amendment<H>): Amendment<H>;
 }

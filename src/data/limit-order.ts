@@ -1,5 +1,5 @@
 import { Length, Side, Action } from './length-action-side';
-import { HLike, H, HStatic } from './h'
+import { HLike, H, HFactory } from './h'
 
 
 export interface LimitOrder<H extends HLike<H>> {
@@ -20,32 +20,32 @@ export namespace LimitOrder {
 	}
 }
 
-export class LimitOrderStatic<H extends HLike<H>> {
+export class LimitOrderFactory<H extends HLike<H>> {
 	public constructor(
-		protected H: HStatic<H>,
+		private hFactory: HFactory<H>,
 	) { }
 
-	public captureLimitOrder(order: LimitOrder<H>): LimitOrder.Snapshot {
+	public capture(order: LimitOrder<H>): LimitOrder.Snapshot {
 		return {
-			price: this.H.capture(order.price),
-			quantity: this.H.capture(order.quantity),
+			price: this.hFactory.capture(order.price),
+			quantity: this.hFactory.capture(order.quantity),
 			side: order.side,
 			length: order.length,
 			action: order.action,
 		}
 	}
 
-	public restoreLimitOrder(snapshot: LimitOrder.Snapshot): LimitOrder<H> {
+	public restore(snapshot: LimitOrder.Snapshot): LimitOrder<H> {
 		return {
-			price: this.H.restore(snapshot.price),
-			quantity: this.H.restore(snapshot.quantity),
+			price: this.hFactory.restore(snapshot.price),
+			quantity: this.hFactory.restore(snapshot.quantity),
 			side: snapshot.side,
 			length: snapshot.length,
 			action: snapshot.action,
 		}
 	}
 
-	public copyLimitOrder(order: LimitOrder<H>): LimitOrder<H> {
+	public copy(order: LimitOrder<H>): LimitOrder<H> {
 		return {
 			price: order.price,
 			quantity: order.quantity,

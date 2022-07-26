@@ -1,29 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AmendmentStatic = void 0;
-const open_order_1 = require("./open-order");
-class AmendmentStatic extends open_order_1.OpenOrderStatic {
-    captureAmendment(amendment) {
+exports.AmendmentFactory = void 0;
+class AmendmentFactory {
+    constructor(hFactory, openOrderFactory) {
+        this.hFactory = hFactory;
+        this.openOrderFactory = openOrderFactory;
+    }
+    capture(amendment) {
         return {
-            ...this.captureOpenOrder(amendment),
-            newUnfilled: this.H.capture(amendment.newUnfilled),
-            newPrice: this.H.capture(amendment.newPrice),
+            ...this.openOrderFactory.capture(amendment),
+            newUnfilled: this.hFactory.capture(amendment.newUnfilled),
+            newPrice: this.hFactory.capture(amendment.newPrice),
         };
     }
-    restoreAmendment(snapshot) {
+    restore(snapshot) {
         return {
-            ...this.restoreOpenOrder(snapshot),
-            newUnfilled: this.H.restore(snapshot.newUnfilled),
-            newPrice: this.H.restore(snapshot.newPrice),
+            ...this.openOrderFactory.restore(snapshot),
+            newUnfilled: this.hFactory.restore(snapshot.newUnfilled),
+            newPrice: this.hFactory.restore(snapshot.newPrice),
         };
     }
-    copyAmendment(amendment) {
+    copy(amendment) {
         return {
-            ...this.copyOpenOrder(amendment),
+            ...this.openOrderFactory.copy(amendment),
             newUnfilled: amendment.newUnfilled,
             newPrice: amendment.newPrice,
         };
     }
 }
-exports.AmendmentStatic = AmendmentStatic;
+exports.AmendmentFactory = AmendmentFactory;
 //# sourceMappingURL=amendment.js.map

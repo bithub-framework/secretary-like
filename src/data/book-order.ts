@@ -1,4 +1,4 @@
-import { HLike, H, HStatic } from './h';
+import { HLike, H, HFactory } from './h';
 import { Side } from './length-action-side';
 
 
@@ -16,23 +16,23 @@ export namespace BookOrder {
 	}
 }
 
-export class BookOrderStatic<H extends HLike<H>> {
+export class BookOrderFactory<H extends HLike<H>> {
 	public constructor(
-		private H: HStatic<H>,
+		private hFactory: HFactory<H>,
 	) { }
 
 	public capture(order: BookOrder<H>): BookOrder.Snapshot {
 		return {
-			price: this.H.capture(order.price),
-			quantity: this.H.capture(order.quantity),
+			price: this.hFactory.capture(order.price),
+			quantity: this.hFactory.capture(order.quantity),
 			side: order.side,
 		}
 	}
 
 	public restore(snapshot: BookOrder.Snapshot): BookOrder<H> {
 		return {
-			price: this.H.restore(snapshot.price),
-			quantity: this.H.restore(snapshot.quantity),
+			price: this.hFactory.restore(snapshot.price),
+			quantity: this.hFactory.restore(snapshot.quantity),
 			side: snapshot.side,
 		}
 	}

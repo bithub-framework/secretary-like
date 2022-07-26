@@ -1,33 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PositionsStatic = void 0;
-const position_1 = require("./position");
-class PositionsStatic {
-    constructor(H) {
-        this.H = H;
-        this.Position = new position_1.PositionStatic(this.H);
+exports.PositionsFactory = void 0;
+class PositionsFactory {
+    constructor(hFactory, positionFactory) {
+        this.hFactory = hFactory;
+        this.positionFactory = positionFactory;
     }
     capture(positions) {
         return {
-            position: this.Position.capture(positions.position),
-            closable: this.Position.capture(positions.closable),
+            position: this.positionFactory.capture(positions.position),
+            closable: this.positionFactory.capture(positions.closable),
             time: positions.time,
         };
     }
     restore(snapshot) {
         return {
-            position: this.Position.restore(snapshot.position),
-            closable: this.Position.restore(snapshot.closable),
+            position: this.positionFactory.restore(snapshot.position),
+            closable: this.positionFactory.restore(snapshot.closable),
             time: snapshot.time,
         };
     }
     copy(positions) {
         return {
-            position: this.Position.copy(positions.position),
-            closable: this.Position.copy(positions.closable),
+            position: this.positionFactory.copy(positions.position),
+            closable: this.positionFactory.copy(positions.closable),
             time: positions.time,
         };
     }
 }
-exports.PositionsStatic = PositionsStatic;
+exports.PositionsFactory = PositionsFactory;
 //# sourceMappingURL=positions.js.map
