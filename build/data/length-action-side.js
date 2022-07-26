@@ -15,6 +15,13 @@ var Length;
         return Length.SHORT;
     }
     Length.from = from;
+    function invert(length) {
+        if (length === Length.LONG)
+            return Length.SHORT;
+        else
+            return Length.LONG;
+    }
+    Length.invert = invert;
 })(Length = exports.Length || (exports.Length = {}));
 var Side;
 (function (Side) {
@@ -30,6 +37,13 @@ var Side;
         return Side.ASK;
     }
     Side.from = from;
+    function invert(side) {
+        if (side === Side.BID)
+            return Side.ASK;
+        else
+            return Side.BID;
+    }
+    Side.invert = invert;
 })(Side = exports.Side || (exports.Side = {}));
 var Action;
 (function (Action) {
@@ -45,5 +59,12 @@ var Action;
         return Action.CLOSE;
     }
     Action.from = from;
+    function invert(action) {
+        if (action === Action.OPEN)
+            return Action.CLOSE;
+        else
+            return Action.OPEN;
+    }
+    Action.invert = invert;
 })(Action = exports.Action || (exports.Action = {}));
 //# sourceMappingURL=length-action-side.js.map

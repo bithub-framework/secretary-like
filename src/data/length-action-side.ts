@@ -8,6 +8,10 @@ export namespace Length {
 		if (side === Side.ASK && action === Action.CLOSE) return Length.LONG;
 		return Length.SHORT;
 	}
+	export function invert(length: Length): Length {
+		if (length === Length.LONG) return Length.SHORT;
+		else return Length.LONG;
+	}
 }
 
 
@@ -21,6 +25,10 @@ export namespace Side {
 		if (length === Length.SHORT && action === Action.CLOSE) return Side.BID;
 		return Side.ASK;
 	}
+	export function invert(side: Side): Side {
+		if (side === Side.BID) return Side.ASK;
+		else return Side.BID;
+	}
 }
 
 
@@ -33,5 +41,9 @@ export namespace Action {
 		if (length === Length.LONG && side === Side.BID) return Action.OPEN;
 		if (length === Length.SHORT && side === Side.ASK) return Action.OPEN;
 		return Action.CLOSE;
+	}
+	export function invert(action: Action): Action {
+		if (action === Action.OPEN) return Action.CLOSE;
+		else return Action.OPEN;
 	}
 }
