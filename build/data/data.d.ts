@@ -1,4 +1,4 @@
-import { HLike, HFactory } from './h';
+import { HLike, HFactory, HStatic } from './h';
 import { LimitOrderFactory } from './limit-order';
 import { OpenOrderFactory } from './open-order';
 import { AmendmentFactory } from './amendment';
@@ -10,7 +10,8 @@ import { BookOrderFactory } from './book-order';
 import { BalancesFactory } from './balances';
 export declare class DataNamespace<H extends HLike<H>> {
     hFactory: HFactory<H>;
-    constructor(hFactory: HFactory<H>);
+    H: HStatic<H>;
+    constructor(hFactory: HFactory<H>, H: HStatic<H>);
     limitOrderFactory: LimitOrderFactory<H>;
     openOrderFactory: OpenOrderFactory<H>;
     amendmentFactory: AmendmentFactory<H>;

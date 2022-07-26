@@ -11,8 +11,9 @@ const positions_1 = require("./positions");
 const book_order_1 = require("./book-order");
 const balances_1 = require("./balances");
 class DataNamespace {
-    constructor(hFactory) {
+    constructor(hFactory, H) {
         this.hFactory = hFactory;
+        this.H = H;
         this.limitOrderFactory = new limit_order_1.LimitOrderFactory(this.hFactory);
         this.openOrderFactory = new open_order_1.OpenOrderFactory(this.hFactory, this.limitOrderFactory);
         this.amendmentFactory = new amendment_1.AmendmentFactory(this.hFactory, this.openOrderFactory);

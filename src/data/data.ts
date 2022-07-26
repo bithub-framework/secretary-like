@@ -1,4 +1,4 @@
-import { HLike, HFactory } from './h';
+import { HLike, HFactory, HStatic } from './h';
 import { LimitOrderFactory } from './limit-order';
 import { OpenOrderFactory } from './open-order';
 import { AmendmentFactory } from './amendment';
@@ -13,6 +13,7 @@ import { BalancesFactory } from './balances';
 export class DataNamespace<H extends HLike<H>> {
 	public constructor(
 		public hFactory: HFactory<H>,
+		public H: HStatic<H>,
 	) { }
 
 	public limitOrderFactory = new LimitOrderFactory<H>(this.hFactory);
