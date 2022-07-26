@@ -11,7 +11,7 @@ class LimitOrderStatic {
             quantity: this.H.capture(order.quantity),
             side: order.side,
             length: order.length,
-            operation: order.action,
+            action: order.action,
         };
     }
     restoreLimitOrder(snapshot) {
@@ -20,7 +20,7 @@ class LimitOrderStatic {
             quantity: this.H.restore(snapshot.quantity),
             side: snapshot.side,
             length: snapshot.length,
-            action: snapshot.operation,
+            action: snapshot.action,
         };
     }
     copyLimitOrder(order) {

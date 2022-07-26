@@ -13,7 +13,7 @@ export declare namespace LimitOrder {
         readonly quantity: H.Snapshot;
         readonly side: Side;
         readonly length: Length;
-        readonly operation: Action;
+        readonly action: Action;
     }
 }
 export declare class LimitOrderStatic<H extends HLike<H>> {

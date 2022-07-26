@@ -16,7 +16,7 @@ export namespace LimitOrder {
 		readonly quantity: H.Snapshot;
 		readonly side: Side;
 		readonly length: Length;
-		readonly operation: Action;
+		readonly action: Action;
 	}
 }
 
@@ -31,7 +31,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 			quantity: this.H.capture(order.quantity),
 			side: order.side,
 			length: order.length,
-			operation: order.action,
+			action: order.action,
 		}
 	}
 
@@ -41,7 +41,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 			quantity: this.H.restore(snapshot.quantity),
 			side: snapshot.side,
 			length: snapshot.length,
-			action: snapshot.operation,
+			action: snapshot.action,
 		}
 	}
 
