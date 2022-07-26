@@ -20,7 +20,7 @@ export declare class OrderbookStatic<H extends HLike<H>> {
     private H;
     private BookOrder;
     constructor(H: HStatic<H>);
-    capture(orderbook: Orderbook<H>): Orderbook.Snapshot;
-    restore(snapshot: Orderbook.Snapshot): Orderbook<H>;
-    copy(orderbook: Orderbook<H>): Orderbook<H>;
+    captureOrderbook(orderbook: Orderbook<H>): Orderbook.Snapshot;
+    restoreOrderbook(snapshot: Orderbook.Snapshot): Orderbook<H>;
+    copyOrderbook(orderbook: Orderbook<H>): Orderbook<H>;
 }

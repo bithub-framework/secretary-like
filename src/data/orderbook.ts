@@ -35,7 +35,7 @@ export class OrderbookStatic<H extends HLike<H>> {
 		private H: HStatic<H>,
 	) { }
 
-	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
+	public captureOrderbook(orderbook: Orderbook<H>): Orderbook.Snapshot {
 		return {
 			bids: orderbook.get(Side.BID).map(order => this.BookOrder.capture(order)),
 			asks: orderbook.get(Side.ASK).map(order => this.BookOrder.capture(order)),
@@ -45,7 +45,7 @@ export class OrderbookStatic<H extends HLike<H>> {
 		};
 	}
 
-	public restore(snapshot: Orderbook.Snapshot): Orderbook<H> {
+	public restoreOrderbook(snapshot: Orderbook.Snapshot): Orderbook<H> {
 		return new Orderbook(
 			snapshot.bids.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
 			snapshot.asks.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)),
@@ -55,7 +55,7 @@ export class OrderbookStatic<H extends HLike<H>> {
 		);
 	}
 
-	public copy(orderbook: Orderbook<H>): Orderbook<H> {
+	public copyOrderbook(orderbook: Orderbook<H>): Orderbook<H> {
 		return new Orderbook(
 			orderbook.get(Side.BID).map(order => this.BookOrder.copy(order)),
 			orderbook.get(Side.ASK).map(order => this.BookOrder.copy(order)),

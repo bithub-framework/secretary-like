@@ -5,7 +5,7 @@ class TradeStatic {
     constructor(H) {
         this.H = H;
     }
-    capture(trade) {
+    captureTrade(trade) {
         return {
             side: trade.side,
             price: this.H.capture(trade.price),
@@ -14,7 +14,7 @@ class TradeStatic {
             id: trade.id,
         };
     }
-    restore(snapshot) {
+    restoreTrade(snapshot) {
         return {
             side: snapshot.side,
             price: this.H.restore(snapshot.price),
@@ -23,7 +23,7 @@ class TradeStatic {
             id: snapshot.id,
         };
     }
-    copy(trade) {
+    copyTrade(trade) {
         return {
             side: trade.side,
             price: trade.price,

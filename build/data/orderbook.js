@@ -28,7 +28,7 @@ class OrderbookStatic {
         this.H = H;
         this.BookOrder = new book_order_1.BookOrderStatic(this.H);
     }
-    capture(orderbook) {
+    captureOrderbook(orderbook) {
         return {
             bids: orderbook.get(length_action_side_1.Side.BID).map(order => this.BookOrder.capture(order)),
             asks: orderbook.get(length_action_side_1.Side.ASK).map(order => this.BookOrder.capture(order)),
@@ -37,12 +37,12 @@ class OrderbookStatic {
                 : null,
         };
     }
-    restore(snapshot) {
+    restoreOrderbook(snapshot) {
         return new Orderbook(snapshot.bids.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)), snapshot.asks.map(orderSnapshot => this.BookOrder.restore(orderSnapshot)), snapshot.time !== null
             ? snapshot.time
             : Number.NEGATIVE_INFINITY);
     }
-    copy(orderbook) {
+    copyOrderbook(orderbook) {
         return new Orderbook(orderbook.get(length_action_side_1.Side.BID).map(order => this.BookOrder.copy(order)), orderbook.get(length_action_side_1.Side.ASK).map(order => this.BookOrder.copy(order)), orderbook.time);
     }
 }

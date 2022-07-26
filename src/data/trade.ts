@@ -26,7 +26,7 @@ export class TradeStatic<H extends HLike<H>> {
 		private H: HStatic<H>,
 	) { }
 
-	public capture(trade: Trade<H>): Trade.Snapshot {
+	public captureTrade(trade: Trade<H>): Trade.Snapshot {
 		return {
 			side: trade.side,
 			price: this.H.capture(trade.price),
@@ -36,7 +36,7 @@ export class TradeStatic<H extends HLike<H>> {
 		}
 	}
 
-	public restore(snapshot: Trade.Snapshot): Trade<H> {
+	public restoreTrade(snapshot: Trade.Snapshot): Trade<H> {
 		return {
 			side: snapshot.side,
 			price: this.H.restore(snapshot.price),
@@ -46,7 +46,7 @@ export class TradeStatic<H extends HLike<H>> {
 		}
 	}
 
-	public copy(trade: Trade<H>): Trade<H> {
+	public copyTrade(trade: Trade<H>): Trade<H> {
 		return {
 			side: trade.side,
 			price: trade.price,
