@@ -26,7 +26,7 @@ class OrderbookFactory {
     constructor(bookOrderFactory) {
         this.bookOrderFactory = bookOrderFactory;
     }
-    captureOrderbook(orderbook) {
+    capture(orderbook) {
         return {
             bids: orderbook.get(length_action_side_1.Side.BID).map(order => this.bookOrderFactory.capture(order)),
             asks: orderbook.get(length_action_side_1.Side.ASK).map(order => this.bookOrderFactory.capture(order)),
@@ -35,12 +35,12 @@ class OrderbookFactory {
                 : null,
         };
     }
-    restoreOrderbook(snapshot) {
+    restore(snapshot) {
         return new Orderbook(snapshot.bids.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)), snapshot.asks.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)), snapshot.time !== null
             ? snapshot.time
             : Number.NEGATIVE_INFINITY);
     }
-    copyOrderbook(orderbook) {
+    copy(orderbook) {
         return new Orderbook(orderbook.get(length_action_side_1.Side.BID).map(order => this.bookOrderFactory.copy(order)), orderbook.get(length_action_side_1.Side.ASK).map(order => this.bookOrderFactory.copy(order)), orderbook.time);
     }
 }

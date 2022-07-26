@@ -19,7 +19,7 @@ export declare namespace Orderbook {
 export declare class OrderbookFactory<H extends HLike<H>> {
     private bookOrderFactory;
     constructor(bookOrderFactory: BookOrderFactory<H>);
-    captureOrderbook(orderbook: Orderbook<H>): Orderbook.Snapshot;
-    restoreOrderbook(snapshot: Orderbook.Snapshot): Orderbook<H>;
-    copyOrderbook(orderbook: Orderbook<H>): Orderbook<H>;
+    capture(orderbook: Orderbook<H>): Orderbook.Snapshot;
+    restore(snapshot: Orderbook.Snapshot): Orderbook<H>;
+    copy(orderbook: Orderbook<H>): Orderbook<H>;
 }

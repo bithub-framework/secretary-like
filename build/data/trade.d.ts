@@ -20,7 +20,7 @@ export declare namespace Trade {
 export declare class TradeFactory<H extends HLike<H>> {
     private hFactory;
     constructor(hFactory: HFactory<H>);
-    captureTrade(trade: Trade<H>): Trade.Snapshot;
-    restoreTrade(snapshot: Trade.Snapshot): Trade<H>;
-    copyTrade(trade: Trade<H>): Trade<H>;
+    capture(trade: Trade<H>): Trade.Snapshot;
+    restore(snapshot: Trade.Snapshot): Trade<H>;
+    copy(trade: Trade<H>): Trade<H>;
 }

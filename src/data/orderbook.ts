@@ -33,7 +33,7 @@ export class OrderbookFactory<H extends HLike<H>> {
 		private bookOrderFactory: BookOrderFactory<H>,
 	) { }
 
-	public captureOrderbook(orderbook: Orderbook<H>): Orderbook.Snapshot {
+	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
 		return {
 			bids: orderbook.get(Side.BID).map(order => this.bookOrderFactory.capture(order)),
 			asks: orderbook.get(Side.ASK).map(order => this.bookOrderFactory.capture(order)),
@@ -43,7 +43,7 @@ export class OrderbookFactory<H extends HLike<H>> {
 		};
 	}
 
-	public restoreOrderbook(snapshot: Orderbook.Snapshot): Orderbook<H> {
+	public restore(snapshot: Orderbook.Snapshot): Orderbook<H> {
 		return new Orderbook(
 			snapshot.bids.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
 			snapshot.asks.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
@@ -53,7 +53,7 @@ export class OrderbookFactory<H extends HLike<H>> {
 		);
 	}
 
-	public copyOrderbook(orderbook: Orderbook<H>): Orderbook<H> {
+	public copy(orderbook: Orderbook<H>): Orderbook<H> {
 		return new Orderbook(
 			orderbook.get(Side.BID).map(order => this.bookOrderFactory.copy(order)),
 			orderbook.get(Side.ASK).map(order => this.bookOrderFactory.copy(order)),

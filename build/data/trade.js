@@ -5,7 +5,7 @@ class TradeFactory {
     constructor(hFactory) {
         this.hFactory = hFactory;
     }
-    captureTrade(trade) {
+    capture(trade) {
         return {
             side: trade.side,
             price: this.hFactory.capture(trade.price),
@@ -14,7 +14,7 @@ class TradeFactory {
             id: trade.id,
         };
     }
-    restoreTrade(snapshot) {
+    restore(snapshot) {
         return {
             side: snapshot.side,
             price: this.hFactory.restore(snapshot.price),
@@ -23,7 +23,7 @@ class TradeFactory {
             id: snapshot.id,
         };
     }
-    copyTrade(trade) {
+    copy(trade) {
         return {
             side: trade.side,
             price: trade.price,

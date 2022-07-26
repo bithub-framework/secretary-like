@@ -26,7 +26,7 @@ export class TradeFactory<H extends HLike<H>> {
 		private hFactory: HFactory<H>,
 	) { }
 
-	public captureTrade(trade: Trade<H>): Trade.Snapshot {
+	public capture(trade: Trade<H>): Trade.Snapshot {
 		return {
 			side: trade.side,
 			price: this.hFactory.capture(trade.price),
@@ -36,7 +36,7 @@ export class TradeFactory<H extends HLike<H>> {
 		}
 	}
 
-	public restoreTrade(snapshot: Trade.Snapshot): Trade<H> {
+	public restore(snapshot: Trade.Snapshot): Trade<H> {
 		return {
 			side: snapshot.side,
 			price: this.hFactory.restore(snapshot.price),
@@ -46,7 +46,7 @@ export class TradeFactory<H extends HLike<H>> {
 		}
 	}
 
-	public copyTrade(trade: Trade<H>): Trade<H> {
+	public copy(trade: Trade<H>): Trade<H> {
 		return {
 			side: trade.side,
 			price: trade.price,
