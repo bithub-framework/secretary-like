@@ -22,10 +22,10 @@ export namespace LimitOrder {
 
 export class LimitOrderStatic<H extends HLike<H>> {
 	public constructor(
-		private H: HStatic<H>,
+		protected H: HStatic<H>,
 	) { }
 
-	public capture(order: LimitOrder<H>): LimitOrder.Snapshot {
+	public captureLimitOrder(order: LimitOrder<H>): LimitOrder.Snapshot {
 		return {
 			price: this.H.capture(order.price),
 			quantity: this.H.capture(order.quantity),
@@ -35,7 +35,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 		}
 	}
 
-	public restore(snapshot: LimitOrder.Snapshot): LimitOrder<H> {
+	public restoreLimitOrder(snapshot: LimitOrder.Snapshot): LimitOrder<H> {
 		return {
 			price: this.H.restore(snapshot.price),
 			quantity: this.H.restore(snapshot.quantity),
@@ -45,7 +45,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 		}
 	}
 
-	public copy(order: LimitOrder<H>): LimitOrder<H> {
+	public copyLimitOrder(order: LimitOrder<H>): LimitOrder<H> {
 		return {
 			price: order.price,
 			quantity: order.quantity,

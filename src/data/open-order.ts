@@ -1,11 +1,9 @@
-import { HLike, H, HStatic } from './h';
+import { HLike, H } from './h';
 import { LimitOrder, LimitOrderStatic } from './limit-order';
 import { OrderId } from './order-id';
 
 
-export interface OpenOrder<H extends HLike<H>>
-	extends LimitOrder<H> {
-
+export interface OpenOrder<H extends HLike<H>> extends LimitOrder<H> {
 	filled: H;
 	unfilled: H;
 	id: OrderId;
@@ -19,34 +17,28 @@ export namespace OpenOrder {
 	}
 }
 
-export class OpenOrderStatic<H extends HLike<H>> {
-	private LimitOrder = new LimitOrderStatic<H>(this.H);
-
-	public constructor(
-		private H: HStatic<H>,
-	) { }
-
-	public capture(order: OpenOrder<H>): OpenOrder.Snapshot {
+export class OpenOrderStatic<H extends HLike<H>> extends LimitOrderStatic<H>{
+	public captureOpenOrder(order: OpenOrder<H>): OpenOrder.Snapshot {
 		return {
-			...this.LimitOrder.capture(order),
+			...this.captureLimitOrder(order),
 			filled: this.H.capture(order.filled),
 			unfilled: this.H.capture(order.unfilled),
 			id: order.id,
 		}
 	}
 
-	public restore(snapshot: OpenOrder.Snapshot): OpenOrder<H> {
+	public restoreOpenOrder(snapshot: OpenOrder.Snapshot): OpenOrder<H> {
 		return {
-			...this.LimitOrder.restore(snapshot),
+			...this.restoreLimitOrder(snapshot),
 			filled: this.H.restore(snapshot.filled),
 			unfilled: this.H.restore(snapshot.unfilled),
 			id: snapshot.id,
 		};
 	}
 
-	public copy(order: OpenOrder<H>): OpenOrder<H> {
+	public copyOpenOrder(order: OpenOrder<H>): OpenOrder<H> {
 		return {
-			...this.LimitOrder.copy(order),
+			...this.copyLimitOrder(order),
 			filled: order.filled,
 			unfilled: order.unfilled,
 			id: order.id,

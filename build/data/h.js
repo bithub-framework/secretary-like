@@ -14,9 +14,6 @@ class HStatic {
     capture(x) {
         return x.toJSON();
     }
-    restore(snapshot) {
-        return this.create(snapshot);
-    }
     max(x, ...rest) {
         return [x, ...rest].reduce((x, y) => x.gt(y) ? x : y);
     }

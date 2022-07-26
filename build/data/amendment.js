@@ -2,28 +2,24 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AmendmentStatic = void 0;
 const open_order_1 = require("./open-order");
-class AmendmentStatic {
-    constructor(H) {
-        this.H = H;
-        this.OpenOrder = new open_order_1.OpenOrderStatic(this.H);
-    }
-    capture(amendment) {
+class AmendmentStatic extends open_order_1.OpenOrderStatic {
+    captureAmendment(amendment) {
         return {
-            ...this.OpenOrder.capture(amendment),
+            ...this.captureOpenOrder(amendment),
             newUnfilled: this.H.capture(amendment.newUnfilled),
             newPrice: this.H.capture(amendment.newPrice),
         };
     }
-    restore(snapshot) {
+    restoreAmendment(snapshot) {
         return {
-            ...this.OpenOrder.restore(snapshot),
+            ...this.restoreOpenOrder(snapshot),
             newUnfilled: this.H.restore(snapshot.newUnfilled),
             newPrice: this.H.restore(snapshot.newPrice),
         };
     }
-    copy(amendment) {
+    copyAmendment(amendment) {
         return {
-            ...this.OpenOrder.copy(amendment),
+            ...this.copyOpenOrder(amendment),
             newUnfilled: amendment.newUnfilled,
             newPrice: amendment.newPrice,
         };

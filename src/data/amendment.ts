@@ -4,7 +4,6 @@ import { OpenOrder, OpenOrderStatic } from './open-order';
 
 
 export interface Amendment<H extends HLike<H>> extends OpenOrder<H> {
-
 	newUnfilled: H;
 	newPrice: H;
 }
@@ -16,32 +15,26 @@ export namespace Amendment {
 	}
 }
 
-export class AmendmentStatic<H extends HLike<H>> {
-	private OpenOrder = new OpenOrderStatic<H>(this.H);
-
-	public constructor(
-		private H: HStatic<H>,
-	) { }
-
-	public capture(amendment: Amendment<H>): Amendment.Snapshot {
+export class AmendmentStatic<H extends HLike<H>> extends OpenOrderStatic<H>{
+	public captureAmendment(amendment: Amendment<H>): Amendment.Snapshot {
 		return {
-			...this.OpenOrder.capture(amendment),
+			...this.captureOpenOrder(amendment),
 			newUnfilled: this.H.capture(amendment.newUnfilled),
 			newPrice: this.H.capture(amendment.newPrice),
 		}
 	}
 
-	public restore(snapshot: Amendment.Snapshot): Amendment<H> {
+	public restoreAmendment(snapshot: Amendment.Snapshot): Amendment<H> {
 		return {
-			...this.OpenOrder.restore(snapshot),
+			...this.restoreOpenOrder(snapshot),
 			newUnfilled: this.H.restore(snapshot.newUnfilled),
 			newPrice: this.H.restore(snapshot.newPrice),
 		};
 	}
 
-	public copy(amendment: Amendment<H>): Amendment<H> {
+	public copyAmendment(amendment: Amendment<H>): Amendment<H> {
 		return {
-			...this.OpenOrder.copy(amendment),
+			...this.copyOpenOrder(amendment),
 			newUnfilled: amendment.newUnfilled,
 			newPrice: amendment.newPrice,
 		};

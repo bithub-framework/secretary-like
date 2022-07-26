@@ -29,15 +29,11 @@ export namespace H {
 }
 
 export abstract class HStatic<H extends HLike<H>> {
-	public abstract create(source: H.Source<H>): H;
-
 	public capture(x: H): H.Snapshot {
 		return x.toJSON();
 	}
 
-	public restore(snapshot: H.Snapshot): H {
-		return this.create(<H.Source<H>>snapshot);
-	}
+	public abstract restore(snapshot: H.Snapshot): H;
 
 	public max(x: H, ...rest: H[]): H {
 		return [x, ...rest].reduce(

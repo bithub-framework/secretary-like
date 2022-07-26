@@ -17,9 +17,9 @@ export declare namespace LimitOrder {
     }
 }
 export declare class LimitOrderStatic<H extends HLike<H>> {
-    private H;
+    protected H: HStatic<H>;
     constructor(H: HStatic<H>);
-    capture(order: LimitOrder<H>): LimitOrder.Snapshot;
-    restore(snapshot: LimitOrder.Snapshot): LimitOrder<H>;
-    copy(order: LimitOrder<H>): LimitOrder<H>;
+    captureLimitOrder(order: LimitOrder<H>): LimitOrder.Snapshot;
+    restoreLimitOrder(snapshot: LimitOrder.Snapshot): LimitOrder<H>;
+    copyLimitOrder(order: LimitOrder<H>): LimitOrder<H>;
 }
