@@ -7,7 +7,7 @@ export interface LimitOrder<H extends HLike<H>> {
 	quantity: H;
 	side: Side;
 	length: Length;
-	operation: Action;
+	action: Action;
 }
 
 export namespace LimitOrder {
@@ -31,7 +31,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 			quantity: this.H.capture(order.quantity),
 			side: order.side,
 			length: order.length,
-			operation: order.operation,
+			operation: order.action,
 		}
 	}
 
@@ -41,7 +41,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 			quantity: this.H.restore(snapshot.quantity),
 			side: snapshot.side,
 			length: snapshot.length,
-			operation: snapshot.operation,
+			action: snapshot.operation,
 		}
 	}
 
@@ -51,7 +51,7 @@ export class LimitOrderStatic<H extends HLike<H>> {
 			quantity: order.quantity,
 			side: order.side,
 			length: order.length,
-			operation: order.operation,
+			action: order.action,
 		};
 	}
 }

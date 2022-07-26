@@ -5,7 +5,7 @@ export interface LimitOrder<H extends HLike<H>> {
     quantity: H;
     side: Side;
     length: Length;
-    operation: Action;
+    action: Action;
 }
 export declare namespace LimitOrder {
     interface Snapshot {
