@@ -32,18 +32,6 @@ export namespace H {
 export interface HStatic<H extends HLike<H>> {
 	max(x: H, ...rest: H[]): H;
 	min(x: H, ...rest: H[]): H;
-
-	// public max(x: H, ...rest: H[]): H {
-	// 	return [x, ...rest].reduce(
-	// 		(x, y) => x.gt(y) ? x : y,
-	// 	);
-	// }
-
-	// public min(x: H, ...rest: H[]): H {
-	// 	return [x, ...rest].reduce(
-	// 		(x, y) => x.lt(y) ? x : y,
-	// 	);
-	// }
 }
 
 export interface HFactory<H extends HLike<H>> {
