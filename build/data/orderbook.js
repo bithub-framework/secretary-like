@@ -2,23 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderbookFactory = exports.Orderbook = void 0;
 const length_action_side_1 = require("./length-action-side");
-class Orderbook {
+const pair_1 = require("./pair");
+class Orderbook extends pair_1.SidePair {
     constructor(bids, asks, time) {
-        this.bids = bids;
-        this.asks = asks;
+        super(bids, asks);
         this.time = time;
-    }
-    get(side) {
-        if (side === length_action_side_1.Side.BID)
-            return this.bids;
-        else
-            return this.asks;
-    }
-    set(side, orders) {
-        if (side === length_action_side_1.Side.BID)
-            this.bids = orders;
-        else
-            this.asks = orders;
     }
 }
 exports.Orderbook = Orderbook;

@@ -1,11 +1,6 @@
 import { HLike, H, HFactory } from './h';
-import { Length } from './length-action-side';
-export declare class Position<H extends HLike<H>> {
-    private long;
-    private short;
-    constructor(long: H, short: H);
-    get(length: Length): H;
-    set(length: Length, position: H): void;
+import { LengthPair } from './pair';
+export declare class Position<H extends HLike<H>> extends LengthPair<H> {
 }
 export declare namespace Position {
     interface Snapshot {

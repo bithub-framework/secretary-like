@@ -1,23 +1,17 @@
 import { BookOrder, BookOrderFactory } from './book-order';
 import { HLike, HFactory } from './h';
 import { Side } from './length-action-side';
+import { SidePair } from './pair';
 
 
-export class Orderbook<H extends HLike<H>> {
-	public get(side: Side): BookOrder<H>[] {
-		if (side === Side.BID) return this.bids;
-		else return this.asks;
-	}
-	public set(side: Side, orders: BookOrder<H>[]): void {
-		if (side === Side.BID) this.bids = orders;
-		else this.asks = orders;
-	}
-
+export class Orderbook<H extends HLike<H>> extends SidePair<BookOrder<H>[]>{
 	public constructor(
-		private bids: BookOrder<H>[],
-		private asks: BookOrder<H>[],
+		bids: BookOrder<H>[],
+		asks: BookOrder<H>[],
 		public time: number,
-	) { }
+	) {
+		super(bids, asks);
+	}
 }
 
 export namespace Orderbook {

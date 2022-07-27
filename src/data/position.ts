@@ -1,22 +1,9 @@
 import { HLike, H, HFactory } from './h';
 import { Length } from './length-action-side';
+import { LengthPair } from './pair';
 
 
-export class Position<H extends HLike<H>> {
-	public constructor(
-		private long: H,
-		private short: H,
-	) { }
-
-	public get(length: Length): H {
-		if (length === Length.LONG) return this.long;
-		else return this.short;
-	}
-	public set(length: Length, position: H): void {
-		if (length === Length.LONG) this.long = position;
-		else this.short = position;
-	}
-}
+export class Position<H extends HLike<H>> extends LengthPair<H> { }
 
 export namespace Position {
 	export interface Snapshot {

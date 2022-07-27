@@ -2,23 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PositionFactory = exports.Position = void 0;
 const length_action_side_1 = require("./length-action-side");
-class Position {
-    constructor(long, short) {
-        this.long = long;
-        this.short = short;
-    }
-    get(length) {
-        if (length === length_action_side_1.Length.LONG)
-            return this.long;
-        else
-            return this.short;
-    }
-    set(length, position) {
-        if (length === length_action_side_1.Length.LONG)
-            this.long = position;
-        else
-            this.short = position;
-    }
+const pair_1 = require("./pair");
+class Position extends pair_1.LengthPair {
 }
 exports.Position = Position;
 class PositionFactory {
