@@ -13,6 +13,8 @@ export * from './data/positions';
 export * from './data/balances';
 export * from './data/data';
 
+export * from './data/pair';
+
 export * from './context-like';
 export * from './specification';
 export * from './secretary-like';
