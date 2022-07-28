@@ -3,7 +3,7 @@ export interface HLike<H extends HLike<H>> {
 	minus(x: H.Source<H>): H;
 	neg(): H;
 	times(x: H.Source<H>): H;
-	div(x: H.Source<H>): H;
+	div(x: H.Source<H>, scale?: number): H;
 	mod(x: H.Source<H>): H;
 	lt(x: H.Source<H>): boolean;
 	lte(x: H.Source<H>): boolean;
@@ -12,11 +12,11 @@ export interface HLike<H extends HLike<H>> {
 	eq(x: H.Source<H>): boolean;
 	neq(x: H.Source<H>): boolean;
 	round(
-		decimalPoint?: number,
+		scale?: number,
 		roundingMode?: H.RoundingMode,
 	): H;
 	toJSON(): string;
-	toFixed(decimalPoint?: number): string;
+	toFixed(scale?: number): string;
 }
 
 export namespace H {
