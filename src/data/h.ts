@@ -5,7 +5,7 @@ export interface HLike<H extends HLike<H>> {
 	times(x: H.Source<H>): H;
 	div(
 		x: H.Source<H>,
-		scale?: number,
+		scale: number,
 		roundingMode?: H.RoundingMode,
 	): H;
 	mod(x: H.Source<H>): H;
