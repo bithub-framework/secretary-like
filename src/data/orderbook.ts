@@ -1,17 +1,11 @@
 import { BookOrder, BookOrderFactory } from './book-order';
-import { HLike, HFactory } from './h';
+import { HLike } from './h';
 import { Side } from './length-action-side';
-import { SidePair } from './pair';
 
 
-export class Orderbook<H extends HLike<H>> extends SidePair<BookOrder<H>[]>{
-	public constructor(
-		bids: BookOrder<H>[],
-		asks: BookOrder<H>[],
-		public time: number,
-	) {
-		super(bids, asks);
-	}
+export interface Orderbook<H extends HLike<H>> {
+	[side: Side]: BookOrder<H>[];
+	time: number,
 }
 
 export namespace Orderbook {
@@ -29,8 +23,8 @@ export class OrderbookFactory<H extends HLike<H>> {
 
 	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
 		return {
-			bids: orderbook.get(Side.BID).map(order => this.bookOrderFactory.capture(order)),
-			asks: orderbook.get(Side.ASK).map(order => this.bookOrderFactory.capture(order)),
+			bids: orderbook[Side.BID].map(order => this.bookOrderFactory.capture(order)),
+			asks: orderbook[Side.ASK].map(order => this.bookOrderFactory.capture(order)),
 			time: Number.isFinite(orderbook.time)
 				? orderbook.time
 				: null,
@@ -38,20 +32,20 @@ export class OrderbookFactory<H extends HLike<H>> {
 	}
 
 	public restore(snapshot: Orderbook.Snapshot): Orderbook<H> {
-		return new Orderbook(
-			snapshot.bids.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
-			snapshot.asks.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
-			snapshot.time !== null
+		return {
+			[Side.BID]: snapshot.bids.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
+			[Side.ASK]: snapshot.asks.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
+			time: snapshot.time !== null
 				? snapshot.time
 				: Number.NEGATIVE_INFINITY,
-		);
+		};
 	}
 
 	public copy(orderbook: Orderbook<H>): Orderbook<H> {
-		return new Orderbook(
-			orderbook.get(Side.BID).map(order => this.bookOrderFactory.copy(order)),
-			orderbook.get(Side.ASK).map(order => this.bookOrderFactory.copy(order)),
-			orderbook.time,
-		);
+		return {
+			[Side.BID]: orderbook[Side.BID].map(order => this.bookOrderFactory.copy(order)),
+			[Side.ASK]: orderbook[Side.ASK].map(order => this.bookOrderFactory.copy(order)),
+			time: orderbook.time,
+		};
 	}
 }

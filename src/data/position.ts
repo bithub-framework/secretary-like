@@ -1,9 +1,10 @@
 import { HLike, H, HFactory } from './h';
 import { Length } from './length-action-side';
-import { LengthPair } from './pair';
 
 
-export class Position<H extends HLike<H>> extends LengthPair<H> { }
+export class Position<H extends HLike<H>>  {
+	[length: Length]: H;
+}
 
 export namespace Position {
 	export interface Snapshot {
@@ -19,22 +20,22 @@ export class PositionFactory<H extends HLike<H>> {
 
 	public capture(position: Position<H>): Position.Snapshot {
 		return {
-			long: this.hFactory.capture(position.get(Length.LONG)),
-			short: this.hFactory.capture(position.get(Length.SHORT)),
+			long: this.hFactory.capture(position[Length.LONG]),
+			short: this.hFactory.capture(position[Length.SHORT]),
 		};
 	}
 
 	public restore(snapshot: Position.Snapshot): Position<H> {
-		return new Position(
-			this.hFactory.restore(snapshot.long),
-			this.hFactory.restore(snapshot.short),
-		);
+		return {
+			[Length.LONG]: this.hFactory.restore(snapshot.long),
+			[Length.SHORT]: this.hFactory.restore(snapshot.short),
+		};
 	}
 
 	public copy(position: Position<H>): Position<H> {
-		return new Position(
-			position.get(Length.LONG),
-			position.get(Length.SHORT),
-		);
+		return {
+			[Length.LONG]: position[Length.LONG],
+			[Length.SHORT]: position[Length.SHORT],
+		};
 	}
 }

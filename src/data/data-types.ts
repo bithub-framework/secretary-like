@@ -10,7 +10,7 @@ import { BookOrderFactory } from './book-order';
 import { BalancesFactory } from './balances';
 
 
-export class DataNamespace<H extends HLike<H>> {
+export class DataTypesNamespace<H extends HLike<H>> {
 	public constructor(
 		public hFactory: HFactory<H>,
 		public H: HStatic<H>,

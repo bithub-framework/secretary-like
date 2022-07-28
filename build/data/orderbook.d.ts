@@ -1,9 +1,9 @@
 import { BookOrder, BookOrderFactory } from './book-order';
 import { HLike } from './h';
-import { SidePair } from './pair';
-export declare class Orderbook<H extends HLike<H>> extends SidePair<BookOrder<H>[]> {
+import { Side } from './length-action-side';
+export interface Orderbook<H extends HLike<H>> {
+    [side: Side]: BookOrder<H>[];
     time: number;
-    constructor(bids: BookOrder<H>[], asks: BookOrder<H>[], time: number);
 }
 export declare namespace Orderbook {
     interface Snapshot {
