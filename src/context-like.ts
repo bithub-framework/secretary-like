@@ -38,6 +38,8 @@ export interface MarketEvents<H extends HLike<H>> {
     error: [Error];
 }
 
+export class ConnectionClosed extends Error { }
+
 export interface MarketEventEmitterLike<H extends HLike<H>> extends EventEmitter {
     on<Event extends keyof MarketEvents<H>>(event: Event, listener: (...args: MarketEvents<H>[Event]) => void): this;
     once<Event extends keyof MarketEvents<H>>(event: Event, listener: (...args: MarketEvents<H>[Event]) => void): this;
