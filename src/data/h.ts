@@ -3,7 +3,11 @@ export interface HLike<H extends HLike<H>> {
 	minus(x: H.Source<H>): H;
 	neg(): H;
 	times(x: H.Source<H>): H;
-	div(x: H.Source<H>, scale?: number): H;
+	div(
+		x: H.Source<H>,
+		scale?: number,
+		roundingMode?: H.RoundingMode,
+	): H;
 	mod(x: H.Source<H>): H;
 	lt(x: H.Source<H>): boolean;
 	lte(x: H.Source<H>): boolean;
