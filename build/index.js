@@ -23,7 +23,7 @@ __exportStar(require("./data/orderbook"), exports);
 __exportStar(require("./data/position"), exports);
 __exportStar(require("./data/positions"), exports);
 __exportStar(require("./data/balances"), exports);
-__exportStar(require("./data/data-types"), exports);
+__exportStar(require("./data/data-types-namespace"), exports);
 __exportStar(require("./context-like"), exports);
 __exportStar(require("./specification"), exports);
 __exportStar(require("./secretary-like"), exports);

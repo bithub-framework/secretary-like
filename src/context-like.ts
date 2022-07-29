@@ -6,6 +6,7 @@ import { Balances } from './data/balances';
 import { Orderbook } from './data/orderbook';
 import { Trade } from './data/trade';
 import { HLike } from './data/h';
+import { DataTypesNamespace } from './data/data-types-namespace';
 import { TimelineLike } from './timeline-like';
 import { EventEmitter } from 'events';
 import {
@@ -19,6 +20,7 @@ export interface ContextLike<H extends HLike<H>> {
     readonly [marketIndex: number]: MarketLike<H>;
     readonly timeline: TimelineLike;
     submit(content: string): void;
+    DataTypes: DataTypesNamespace<H>;
 }
 
 export interface MarketLike<H extends HLike<H>> extends MarketApiLike<H> {

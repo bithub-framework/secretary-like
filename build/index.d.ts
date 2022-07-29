@@ -11,7 +11,7 @@ export * from './data/orderbook';
 export * from './data/position';
 export * from './data/positions';
 export * from './data/balances';
-export * from './data/data-types';
+export * from './data/data-types-namespace';
 export * from './context-like';
 export * from './specification';
 export * from './secretary-like';
