@@ -5,9 +5,9 @@ export interface AccountSpecLike {
     TAKER_FEE_RATE: number;
 }
 export interface MarketSpecLike<H extends HLike<H>> {
-    PRICE_DP: number;
-    QUANTITY_DP: number;
-    CURRENCY_DP: number;
+    PRICE_SCALE: number;
+    QUANTITY_SCALE: number;
+    CURRENCY_SCALE: number;
     TICK_SIZE: H;
     MARKET_NAME: string;
     dollarVolume(price: H, quantity: H): H;
