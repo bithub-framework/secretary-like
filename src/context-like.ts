@@ -9,8 +9,8 @@ import { HLike } from './data/h';
 import { TimelineLike } from './timeline-like';
 import { EventEmitter } from 'events';
 import {
-    MarketSpec,
-    AccountSpec,
+    MarketSpecLike,
+    AccountSpecLike,
 } from './specification';
 
 
@@ -28,7 +28,7 @@ export interface MarketLike<H extends HLike<H>> extends MarketApiLike<H> {
 export interface MarketApiLike<H extends HLike<H>> extends
     MarketMethods<H>,
     MarketEventEmitterLike<H>,
-    MarketSpec<H> { }
+    MarketSpecLike<H> { }
 
 export interface MarketMethods<H extends HLike<H>> { }
 
@@ -53,7 +53,7 @@ export interface AccountLike<H extends HLike<H>>
 
 export interface AccountApiLike<H extends HLike<H>> extends
     AccountMethods<H>,
-    AccountSpec,
+    AccountSpecLike,
     AccountEventEmitterLike<H> { }
 
 export interface AccountMethods<H extends HLike<H>> {
