@@ -1,25 +1,24 @@
 import { HLike } from './h';
 import {
 	Position,
-	PositionLike,
 	PositionFactory,
 } from './position';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
 
-export interface PositionsLike<H extends HLike<H>>
+export interface Positions<H extends HLike<H>>
 	extends Positions.Source<H>, CompositeDataLike {
-	position: PositionLike<H>;
-	closable: PositionLike<H>;
+	position: Position<H>;
+	closable: Position<H>;
 	time: number;
 	toJSON(): unknown;
 	toString(): string;
 }
 
-class Positions<H extends HLike<H>> implements PositionsLike<H>{
-	public position: PositionLike<H>;
-	public closable: PositionLike<H>;
+class ConcretePositions<H extends HLike<H>> implements Positions<H>{
+	public position: Position<H>;
+	public closable: Position<H>;
 	public time: number;
 
 	public constructor(
@@ -58,22 +57,22 @@ export namespace Positions {
 export class PositionsFactory<H extends HLike<H>> implements
 	CompositeDataFactoryLike<
 	Positions.Source<H>,
-	PositionsLike<H>,
+	Positions<H>,
 	Positions.Snapshot>
 {
 	public constructor(
 		private positionFactory: PositionFactory<H>,
 	) { }
 
-	public new(source: Positions.Source<H>): Positions<H> {
-		return new Positions(
+	public new(source: Positions.Source<H>): ConcretePositions<H> {
+		return new ConcretePositions(
 			source,
 			this,
 			this.positionFactory,
 		);
 	}
 
-	public capture(positions: PositionsLike<H>): Positions.Snapshot {
+	public capture(positions: Positions<H>): Positions.Snapshot {
 		return {
 			position: this.positionFactory.capture(positions.position),
 			closable: this.positionFactory.capture(positions.closable),
@@ -81,7 +80,7 @@ export class PositionsFactory<H extends HLike<H>> implements
 		};
 	}
 
-	public restore(snapshot: Positions.Snapshot): Positions<H> {
+	public restore(snapshot: Positions.Snapshot): ConcretePositions<H> {
 		return this.new({
 			position: this.positionFactory.restore(snapshot.position),
 			closable: this.positionFactory.restore(snapshot.closable),

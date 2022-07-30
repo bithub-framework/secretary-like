@@ -4,7 +4,7 @@ import { TradeId } from './trade-id';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
-export interface TradeLike<H extends HLike<H>>
+export interface Trade<H extends HLike<H>>
 	extends Trade.Source<H>, CompositeDataLike {
 	side: Side;
 	price: H;
@@ -15,7 +15,7 @@ export interface TradeLike<H extends HLike<H>>
 	toString(): string;
 }
 
-class Trade<H extends HLike<H>> implements TradeLike<H> {
+class ConcreteTrade<H extends HLike<H>> implements Trade<H> {
 	public side: Side;
 	public price: H;
 	public quantity: H;
@@ -65,18 +65,18 @@ export namespace Trade {
 export class TradeFactory<H extends HLike<H>> implements
 	CompositeDataFactoryLike<
 	Trade.Source<H>,
-	TradeLike<H>,
+	Trade<H>,
 	Trade.Snapshot>
 {
 	public constructor(
 		private hFactory: HFactory<H>,
 	) { }
 
-	public new(source: Trade.Source<H>): Trade<H> {
-		return new Trade(source, this);
+	public new(source: Trade.Source<H>): ConcreteTrade<H> {
+		return new ConcreteTrade(source, this);
 	}
 
-	public capture(trade: TradeLike<H>): Trade.Snapshot {
+	public capture(trade: Trade<H>): Trade.Snapshot {
 		return {
 			side: trade.side,
 			price: this.hFactory.capture(trade.price),
@@ -86,7 +86,7 @@ export class TradeFactory<H extends HLike<H>> implements
 		}
 	}
 
-	public restore(snapshot: Trade.Snapshot): Trade<H> {
+	public restore(snapshot: Trade.Snapshot): ConcreteTrade<H> {
 		return this.new({
 			side: snapshot.side,
 			price: this.hFactory.restore(snapshot.price),

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookOrderFactory = void 0;
-class BookOrder {
+class ConcreteBookOrder {
     constructor(source, factory) {
         this.factory = factory;
         ({
@@ -22,7 +22,7 @@ class BookOrderFactory {
         this.hFactory = hFactory;
     }
     new(source) {
-        return new BookOrder(source, this);
+        return new ConcreteBookOrder(source, this);
     }
     capture(order) {
         return {

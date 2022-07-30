@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AmendmentFactory = void 0;
-class Amendment {
+class ConcreteAmendment {
     constructor(source, factory) {
         this.factory = factory;
         ({
@@ -30,7 +30,7 @@ class AmendmentFactory {
         this.openOrderFactory = openOrderFactory;
     }
     new(source) {
-        return new Amendment(source, this);
+        return new ConcreteAmendment(source, this);
     }
     capture(amendment) {
         return {

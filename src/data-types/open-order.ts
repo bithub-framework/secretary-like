@@ -1,7 +1,6 @@
 import { HLike, H, HFactory } from './h';
 import {
 	LimitOrder,
-	LimitOrderLike,
 	LimitOrderFactory,
 } from './limit-order';
 import { OrderId } from './order-id';
@@ -10,8 +9,8 @@ import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
 
-export interface OpenOrderLike<H extends HLike<H>> extends
-	LimitOrderLike<H>,
+export interface OpenOrder<H extends HLike<H>> extends
+	LimitOrder<H>,
 	OpenOrder.Source<H>,
 	CompositeDataLike {
 	filled: H;
@@ -19,7 +18,7 @@ export interface OpenOrderLike<H extends HLike<H>> extends
 	id: OrderId;
 }
 
-class OpenOrder<H extends HLike<H>> implements OpenOrderLike<H> {
+class ConcreteOpenOrder<H extends HLike<H>> implements OpenOrder<H> {
 	public price: H;
 	public quantity: H;
 	public side: Side;
@@ -71,7 +70,7 @@ export namespace OpenOrder {
 export class OpenOrderFactory<H extends HLike<H>> implements
 	CompositeDataFactoryLike<
 	OpenOrder.Source<H>,
-	OpenOrderLike<H>,
+	OpenOrder<H>,
 	OpenOrder.Snapshot>
 {
 	public constructor(
@@ -79,11 +78,11 @@ export class OpenOrderFactory<H extends HLike<H>> implements
 		private limitOrderFactory: LimitOrderFactory<H>,
 	) { }
 
-	public new(source: OpenOrder.Source<H>): OpenOrder<H> {
-		return new OpenOrder(source, this);
+	public new(source: OpenOrder.Source<H>): ConcreteOpenOrder<H> {
+		return new ConcreteOpenOrder(source, this);
 	}
 
-	public capture(order: OpenOrderLike<H>): OpenOrder.Snapshot {
+	public capture(order: OpenOrder<H>): OpenOrder.Snapshot {
 		return {
 			...this.limitOrderFactory.capture(order),
 			filled: this.hFactory.capture(order.filled),
@@ -92,7 +91,7 @@ export class OpenOrderFactory<H extends HLike<H>> implements
 		};
 	}
 
-	public restore(snapshot: OpenOrder.Snapshot): OpenOrder<H> {
+	public restore(snapshot: OpenOrder.Snapshot): ConcreteOpenOrder<H> {
 		return this.new({
 			...this.limitOrderFactory.restore(snapshot),
 			filled: this.hFactory.restore(snapshot.filled),

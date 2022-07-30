@@ -3,21 +3,20 @@ import { Length, Side, Action } from './length-action-side';
 import { OrderId } from './order-id';
 import {
 	OpenOrder,
-	OpenOrderLike,
 	OpenOrderFactory,
 } from './open-order';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
-export interface AmendmentLike<H extends HLike<H>> extends
-	OpenOrderLike<H>,
+export interface Amendment<H extends HLike<H>> extends
+	OpenOrder<H>,
 	Amendment.Source<H>,
 	CompositeDataLike {
 	newUnfilled: H;
 	newPrice: H;
 }
 
-class Amendment<H extends HLike<H>> implements AmendmentLike<H> {
+class ConcreteAmendment<H extends HLike<H>> implements Amendment<H> {
 	public price: H;
 	public quantity: H;
 	public side: Side;
@@ -72,7 +71,7 @@ export namespace Amendment {
 export class AmendmentFactory<H extends HLike<H>> implements
 	CompositeDataFactoryLike<
 	Amendment.Source<H>,
-	AmendmentLike<H>,
+	Amendment<H>,
 	Amendment.Snapshot>
 {
 	public constructor(
@@ -80,11 +79,11 @@ export class AmendmentFactory<H extends HLike<H>> implements
 		private openOrderFactory: OpenOrderFactory<H>,
 	) { }
 
-	public new(source: Amendment.Source<H>): Amendment<H> {
-		return new Amendment(source, this);
+	public new(source: Amendment.Source<H>): ConcreteAmendment<H> {
+		return new ConcreteAmendment(source, this);
 	}
 
-	public capture(amendment: AmendmentLike<H>): Amendment.Snapshot {
+	public capture(amendment: Amendment<H>): Amendment.Snapshot {
 		return {
 			...this.openOrderFactory.capture(amendment),
 			newUnfilled: this.hFactory.capture(amendment.newUnfilled),
@@ -92,7 +91,7 @@ export class AmendmentFactory<H extends HLike<H>> implements
 		}
 	}
 
-	public restore(snapshot: Amendment.Snapshot): Amendment<H> {
+	public restore(snapshot: Amendment.Snapshot): ConcreteAmendment<H> {
 		return this.new({
 			...this.openOrderFactory.restore(snapshot),
 			newUnfilled: this.hFactory.restore(snapshot.newUnfilled),

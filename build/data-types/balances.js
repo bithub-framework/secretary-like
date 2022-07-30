@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BalancesFactory = void 0;
-class Balances {
+class ConcreteBalances {
     constructor(source, factory) {
         this.factory = factory;
         ({
@@ -22,7 +22,7 @@ class BalancesFactory {
         this.hFactory = hFactory;
     }
     new(source) {
-        return new Balances(source, this);
+        return new ConcreteBalances(source, this);
     }
     capture(balances) {
         return {

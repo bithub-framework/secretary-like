@@ -1,17 +1,17 @@
 import { HLike } from './h';
-import { Position, PositionLike, PositionFactory } from './position';
+import { Position, PositionFactory } from './position';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface PositionsLike<H extends HLike<H>> extends Positions.Source<H>, CompositeDataLike {
-    position: PositionLike<H>;
-    closable: PositionLike<H>;
+export interface Positions<H extends HLike<H>> extends Positions.Source<H>, CompositeDataLike {
+    position: Position<H>;
+    closable: Position<H>;
     time: number;
     toJSON(): unknown;
     toString(): string;
 }
-declare class Positions<H extends HLike<H>> implements PositionsLike<H> {
+declare class ConcretePositions<H extends HLike<H>> implements Positions<H> {
     private factory;
-    position: PositionLike<H>;
-    closable: PositionLike<H>;
+    position: Position<H>;
+    closable: Position<H>;
     time: number;
     constructor(source: Positions.Source<H>, factory: PositionsFactory<H>, positionFactory: PositionFactory<H>);
     toJSON(): unknown;
@@ -29,11 +29,11 @@ export declare namespace Positions {
         readonly time: number;
     }
 }
-export declare class PositionsFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Positions.Source<H>, PositionsLike<H>, Positions.Snapshot> {
+export declare class PositionsFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Positions.Source<H>, Positions<H>, Positions.Snapshot> {
     private positionFactory;
     constructor(positionFactory: PositionFactory<H>);
-    new(source: Positions.Source<H>): Positions<H>;
-    capture(positions: PositionsLike<H>): Positions.Snapshot;
-    restore(snapshot: Positions.Snapshot): Positions<H>;
+    new(source: Positions.Source<H>): ConcretePositions<H>;
+    capture(positions: Positions<H>): Positions.Snapshot;
+    restore(snapshot: Positions.Snapshot): ConcretePositions<H>;
 }
 export {};

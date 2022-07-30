@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PositionFactory = void 0;
 const length_action_side_1 = require("./length-action-side");
-class Position {
+class ConcretePosition {
     constructor(source, factory) {
         this.factory = factory;
         ({
@@ -22,7 +22,7 @@ class PositionFactory {
         this.hFactory = hFactory;
     }
     new(source) {
-        return new Position(source, this);
+        return new ConcretePosition(source, this);
     }
     capture(position) {
         return {

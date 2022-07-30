@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderbookFactory = void 0;
 const length_action_side_1 = require("./length-action-side");
-class Orderbook {
+class ConcreteOrderbook {
     constructor(source, factory, bookOrderFactory) {
         this.factory = factory;
         for (const side of [length_action_side_1.Side.BID, length_action_side_1.Side.ASK])
@@ -21,7 +21,7 @@ class OrderbookFactory {
         this.bookOrderFactory = bookOrderFactory;
     }
     new(source) {
-        return new Orderbook(source, this, this.bookOrderFactory);
+        return new ConcreteOrderbook(source, this, this.bookOrderFactory);
     }
     capture(orderbook) {
         return {

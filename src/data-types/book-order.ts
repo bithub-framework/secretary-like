@@ -3,7 +3,7 @@ import { Side } from './length-action-side';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
-export interface BookOrderLike<H extends HLike<H>>
+export interface BookOrder<H extends HLike<H>>
 	extends BookOrder.Source<H>, CompositeDataLike {
 	price: H;
 	quantity: H;
@@ -12,7 +12,7 @@ export interface BookOrderLike<H extends HLike<H>>
 	toString(): string;
 }
 
-class BookOrder<H extends HLike<H>> implements BookOrderLike<H> {
+class ConcreteBookOrder<H extends HLike<H>> implements BookOrder<H> {
 	public price: H;
 	public quantity: H;
 	public side: Side;
@@ -54,18 +54,18 @@ export namespace BookOrder {
 export class BookOrderFactory<H extends HLike<H>> implements
 	CompositeDataFactoryLike<
 	BookOrder.Source<H>,
-	BookOrderLike<H>,
+	BookOrder<H>,
 	BookOrder.Snapshot>
 {
 	public constructor(
 		private hFactory: HFactory<H>,
 	) { }
 
-	public new(source: BookOrder.Source<H>): BookOrder<H> {
-		return new BookOrder(source, this);
+	public new(source: BookOrder.Source<H>): ConcreteBookOrder<H> {
+		return new ConcreteBookOrder(source, this);
 	}
 
-	public capture(order: BookOrderLike<H>): BookOrder.Snapshot {
+	public capture(order: BookOrder<H>): BookOrder.Snapshot {
 		return {
 			price: this.hFactory.capture(order.price),
 			quantity: this.hFactory.capture(order.quantity),
@@ -73,7 +73,7 @@ export class BookOrderFactory<H extends HLike<H>> implements
 		}
 	}
 
-	public restore(snapshot: BookOrder.Snapshot): BookOrder<H> {
+	public restore(snapshot: BookOrder.Snapshot): ConcreteBookOrder<H> {
 		return this.new({
 			price: this.hFactory.restore(snapshot.price),
 			quantity: this.hFactory.restore(snapshot.quantity),

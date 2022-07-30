@@ -1,23 +1,22 @@
 import {
-	BookOrder,
 	BookOrderFactory,
-	BookOrderLike,
+	BookOrder,
 } from './book-order';
 import { HLike } from './h';
 import { Side } from './length-action-side';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
-export interface OrderbookLike<H extends HLike<H>>
+export interface Orderbook<H extends HLike<H>>
 	extends Orderbook.Source<H>, CompositeDataLike {
-	[side: Side]: BookOrderLike<H>[];
+	[side: Side]: BookOrder<H>[];
 	time: number;
 	toJSON(): unknown;
 	toString(): string;
 }
 
-class Orderbook<H extends HLike<H>> implements OrderbookLike<H>{
-	[side: Side]: BookOrderLike<H>[];
+class ConcreteOrderbook<H extends HLike<H>> implements Orderbook<H>{
+	[side: Side]: BookOrder<H>[];
 	public time: number;
 
 	public constructor(
@@ -57,22 +56,22 @@ export namespace Orderbook {
 export class OrderbookFactory<H extends HLike<H>> implements
 	CompositeDataFactoryLike<
 	Orderbook.Source<H>,
-	OrderbookLike<H>,
+	Orderbook<H>,
 	Orderbook.Snapshot>
 {
 	public constructor(
 		private bookOrderFactory: BookOrderFactory<H>,
 	) { }
 
-	public new(source: Orderbook.Source<H>): Orderbook<H> {
-		return new Orderbook(
+	public new(source: Orderbook.Source<H>): ConcreteOrderbook<H> {
+		return new ConcreteOrderbook(
 			source,
 			this,
 			this.bookOrderFactory,
 		);
 	}
 
-	public capture(orderbook: OrderbookLike<H>): Orderbook.Snapshot {
+	public capture(orderbook: Orderbook<H>): Orderbook.Snapshot {
 		return {
 			bids: orderbook[Side.BID].map(order => this.bookOrderFactory.capture(order)),
 			asks: orderbook[Side.ASK].map(order => this.bookOrderFactory.capture(order)),
@@ -82,7 +81,7 @@ export class OrderbookFactory<H extends HLike<H>> implements
 		};
 	}
 
-	public restore(snapshot: Orderbook.Snapshot): Orderbook<H> {
+	public restore(snapshot: Orderbook.Snapshot): ConcreteOrderbook<H> {
 		return this.new({
 			[Side.BID]: snapshot.bids.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
 			[Side.ASK]: snapshot.asks.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),

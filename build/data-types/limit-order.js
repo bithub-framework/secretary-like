@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LimitOrderFactory = void 0;
-class LimitOrder {
+class ConcreteLimitOrder {
     constructor(source, factory) {
         this.factory = factory;
         ({
@@ -26,7 +26,7 @@ class LimitOrderFactory {
         this.hFactory = hFactory;
     }
     new(source) {
-        return new LimitOrder(source, this);
+        return new ConcreteLimitOrder(source, this);
     }
     capture(order) {
         return {

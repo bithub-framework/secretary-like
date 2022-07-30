@@ -1,13 +1,13 @@
 import { HLike, H, HFactory } from './h';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface BalancesLike<H extends HLike<H>> extends Balances.Source<H>, CompositeDataLike {
+export interface Balances<H extends HLike<H>> extends Balances.Source<H>, CompositeDataLike {
     balance: H;
     available: H;
     time: number;
     toJSON(): unknown;
     toString(): string;
 }
-declare class Balances<H extends HLike<H>> implements BalancesLike<H> {
+declare class ConcreteBalances<H extends HLike<H>> implements Balances<H> {
     private factory;
     balance: H;
     available: H;
@@ -28,11 +28,11 @@ export declare namespace Balances {
         readonly time: number;
     }
 }
-export declare class BalancesFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Balances.Source<H>, BalancesLike<H>, Balances.Snapshot> {
+export declare class BalancesFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Balances.Source<H>, Balances<H>, Balances.Snapshot> {
     private hFactory;
     constructor(hFactory: HFactory<H>);
-    new(source: Balances.Source<H>): Balances<H>;
-    capture(balances: BalancesLike<H>): Balances.Snapshot;
-    restore(snapshot: Balances.Snapshot): Balances<H>;
+    new(source: Balances.Source<H>): ConcreteBalances<H>;
+    capture(balances: Balances<H>): Balances.Snapshot;
+    restore(snapshot: Balances.Snapshot): ConcreteBalances<H>;
 }
 export {};

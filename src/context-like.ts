@@ -1,10 +1,10 @@
-import { LimitOrderLike } from './data-types/limit-order';
-import { OpenOrderLike } from './data-types/open-order';
-import { AmendmentLike } from './data-types/amendment';
-import { PositionsLike } from './data-types/positions';
-import { BalancesLike } from './data-types/balances';
-import { OrderbookLike } from './data-types/orderbook';
-import { TradeLike } from './data-types/trade';
+import { LimitOrder } from './data-types/limit-order';
+import { OpenOrder } from './data-types/open-order';
+import { Amendment } from './data-types/amendment';
+import { Positions } from './data-types/positions';
+import { Balances } from './data-types/balances';
+import { Orderbook } from './data-types/orderbook';
+import { Trade } from './data-types/trade';
 import { HLike } from './data-types/h';
 import { DataTypesNamespace } from './data-types/data-types-namespace';
 import { TimelineLike } from './timeline-like';
@@ -35,8 +35,8 @@ export interface MarketApiLike<H extends HLike<H>> extends
 export interface MarketMethods<H extends HLike<H>> { }
 
 export interface MarketEvents<H extends HLike<H>> {
-    orderbook: [OrderbookLike<H>];
-    trades: [TradeLike<H>[]];
+    orderbook: [Orderbook<H>];
+    trades: [Trade<H>[]];
     error: [Error];
 }
 
@@ -59,17 +59,17 @@ export interface AccountApiLike<H extends HLike<H>> extends
     AccountEventEmitterLike<H> { }
 
 export interface AccountMethods<H extends HLike<H>> {
-    makeOrders(orders: LimitOrderLike<H>[]): Promise<(OpenOrderLike<H> | Error)[]>;
-    amendOrders(amendments: AmendmentLike<H>[]): Promise<(OpenOrderLike<H> | Error)[]>;
-    getOpenOrders(): Promise<OpenOrderLike<H>[]>;
-    cancelOrders(orders: OpenOrderLike<H>[]): Promise<OpenOrderLike<H>[]>;
-    getPositions(): Promise<PositionsLike<H>>;
-    getBalances(): Promise<BalancesLike<H>>;
+    makeOrders(orders: LimitOrder<H>[]): Promise<(OpenOrder<H> | Error)[]>;
+    amendOrders(amendments: Amendment<H>[]): Promise<(OpenOrder<H> | Error)[]>;
+    getOpenOrders(): Promise<OpenOrder<H>[]>;
+    cancelOrders(orders: OpenOrder<H>[]): Promise<OpenOrder<H>[]>;
+    getPositions(): Promise<Positions<H>>;
+    getBalances(): Promise<Balances<H>>;
 }
 
 export interface AccountEvents<H extends HLike<H>> {
-    positions: [PositionsLike<H>];
-    balances: [BalancesLike<H>];
+    positions: [Positions<H>];
+    balances: [Balances<H>];
     error: [Error];
 }
 

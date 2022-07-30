@@ -1,13 +1,13 @@
 import { HLike, H, HFactory } from './h';
 import { Length, Side, Action } from './length-action-side';
 import { OrderId } from './order-id';
-import { OpenOrder, OpenOrderLike, OpenOrderFactory } from './open-order';
+import { OpenOrder, OpenOrderFactory } from './open-order';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface AmendmentLike<H extends HLike<H>> extends OpenOrderLike<H>, Amendment.Source<H>, CompositeDataLike {
+export interface Amendment<H extends HLike<H>> extends OpenOrder<H>, Amendment.Source<H>, CompositeDataLike {
     newUnfilled: H;
     newPrice: H;
 }
-declare class Amendment<H extends HLike<H>> implements AmendmentLike<H> {
+declare class ConcreteAmendment<H extends HLike<H>> implements Amendment<H> {
     private factory;
     price: H;
     quantity: H;
@@ -33,12 +33,12 @@ export declare namespace Amendment {
         readonly newPrice: H.Snapshot;
     }
 }
-export declare class AmendmentFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Amendment.Source<H>, AmendmentLike<H>, Amendment.Snapshot> {
+export declare class AmendmentFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Amendment.Source<H>, Amendment<H>, Amendment.Snapshot> {
     private hFactory;
     private openOrderFactory;
     constructor(hFactory: HFactory<H>, openOrderFactory: OpenOrderFactory<H>);
-    new(source: Amendment.Source<H>): Amendment<H>;
-    capture(amendment: AmendmentLike<H>): Amendment.Snapshot;
-    restore(snapshot: Amendment.Snapshot): Amendment<H>;
+    new(source: Amendment.Source<H>): ConcreteAmendment<H>;
+    capture(amendment: Amendment<H>): Amendment.Snapshot;
+    restore(snapshot: Amendment.Snapshot): ConcreteAmendment<H>;
 }
 export {};
