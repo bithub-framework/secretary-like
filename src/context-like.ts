@@ -59,10 +59,10 @@ export interface AccountApiLike<H extends HLike<H>> extends
     AccountEventEmitterLike<H> { }
 
 export interface AccountMethods<H extends HLike<H>> {
-    makeOrders(orders: LimitOrder<H>[]): Promise<(OpenOrder<H> | Error)[]>;
-    amendOrders(amendments: Amendment<H>[]): Promise<(OpenOrder<H> | Error)[]>;
+    makeOrders(orders: LimitOrder.Source<H>[]): Promise<(OpenOrder<H> | Error)[]>;
+    amendOrders(amendments: Amendment.Source<H>[]): Promise<(OpenOrder<H> | Error)[]>;
+    cancelOrders(orders: OpenOrder.Source<H>[]): Promise<OpenOrder<H>[]>;
     getOpenOrders(): Promise<OpenOrder<H>[]>;
-    cancelOrders(orders: OpenOrder<H>[]): Promise<OpenOrder<H>[]>;
     getPositions(): Promise<Positions<H>>;
     getBalances(): Promise<Balances<H>>;
 }
