@@ -11,17 +11,6 @@ export interface Trade<H extends HLike<H>> extends Trade.Source<H>, CompositeDat
     toJSON(): unknown;
     toString(): string;
 }
-declare class ConcreteTrade<H extends HLike<H>> implements Trade<H> {
-    private factory;
-    side: Side;
-    price: H;
-    quantity: H;
-    time: number;
-    id: TradeId;
-    constructor(source: Trade.Source<H>, factory: TradeFactory<H>);
-    toJSON(): unknown;
-    toString(): string;
-}
 export declare namespace Trade {
     interface Source<H extends HLike<H>> {
         side: Side;
@@ -41,8 +30,7 @@ export declare namespace Trade {
 export declare class TradeFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Trade.Source<H>, Trade<H>, Trade.Snapshot> {
     private hFactory;
     constructor(hFactory: HFactory<H>);
-    new(source: Trade.Source<H>): ConcreteTrade<H>;
+    new(source: Trade.Source<H>): Trade<H>;
     capture(trade: Trade<H>): Trade.Snapshot;
-    restore(snapshot: Trade.Snapshot): ConcreteTrade<H>;
+    restore(snapshot: Trade.Snapshot): Trade<H>;
 }
-export {};

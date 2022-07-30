@@ -64,7 +64,7 @@ export class PositionsFactory<H extends HLike<H>> implements
 		private positionFactory: PositionFactory<H>,
 	) { }
 
-	public new(source: Positions.Source<H>): ConcretePositions<H> {
+	public new(source: Positions.Source<H>): Positions<H> {
 		return new ConcretePositions(
 			source,
 			this,
@@ -80,7 +80,7 @@ export class PositionsFactory<H extends HLike<H>> implements
 		};
 	}
 
-	public restore(snapshot: Positions.Snapshot): ConcretePositions<H> {
+	public restore(snapshot: Positions.Snapshot): Positions<H> {
 		return this.new({
 			position: this.positionFactory.restore(snapshot.position),
 			closable: this.positionFactory.restore(snapshot.closable),

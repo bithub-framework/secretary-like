@@ -8,14 +8,6 @@ export interface Orderbook<H extends HLike<H>> extends Orderbook.Source<H>, Comp
     toJSON(): unknown;
     toString(): string;
 }
-declare class ConcreteOrderbook<H extends HLike<H>> implements Orderbook<H> {
-    private factory;
-    [side: Side]: BookOrder<H>[];
-    time: number;
-    constructor(source: Orderbook.Source<H>, factory: OrderbookFactory<H>, bookOrderFactory: BookOrderFactory<H>);
-    toJSON(): unknown;
-    toString(): string;
-}
 export declare namespace Orderbook {
     interface Source<H extends HLike<H>> {
         [side: Side]: BookOrder.Source<H>[];
@@ -30,8 +22,7 @@ export declare namespace Orderbook {
 export declare class OrderbookFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Orderbook.Source<H>, Orderbook<H>, Orderbook.Snapshot> {
     private bookOrderFactory;
     constructor(bookOrderFactory: BookOrderFactory<H>);
-    new(source: Orderbook.Source<H>): ConcreteOrderbook<H>;
+    new(source: Orderbook.Source<H>): Orderbook<H>;
     capture(orderbook: Orderbook<H>): Orderbook.Snapshot;
-    restore(snapshot: Orderbook.Snapshot): ConcreteOrderbook<H>;
+    restore(snapshot: Orderbook.Snapshot): Orderbook<H>;
 }
-export {};

@@ -72,7 +72,7 @@ export class TradeFactory<H extends HLike<H>> implements
 		private hFactory: HFactory<H>,
 	) { }
 
-	public new(source: Trade.Source<H>): ConcreteTrade<H> {
+	public new(source: Trade.Source<H>): Trade<H> {
 		return new ConcreteTrade(source, this);
 	}
 
@@ -86,7 +86,7 @@ export class TradeFactory<H extends HLike<H>> implements
 		}
 	}
 
-	public restore(snapshot: Trade.Snapshot): ConcreteTrade<H> {
+	public restore(snapshot: Trade.Snapshot): Trade<H> {
 		return this.new({
 			side: snapshot.side,
 			price: this.hFactory.restore(snapshot.price),

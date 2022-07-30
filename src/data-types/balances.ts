@@ -61,7 +61,7 @@ export class BalancesFactory<H extends HLike<H>> implements
 		private hFactory: HFactory<H>,
 	) { }
 
-	public new(source: Balances.Source<H>): ConcreteBalances<H> {
+	public new(source: Balances.Source<H>): Balances<H> {
 		return new ConcreteBalances(source, this);
 	}
 
@@ -73,7 +73,7 @@ export class BalancesFactory<H extends HLike<H>> implements
 		}
 	}
 
-	public restore(snapshot: Balances.Snapshot): ConcreteBalances<H> {
+	public restore(snapshot: Balances.Snapshot): Balances<H> {
 		return this.new({
 			balance: this.hFactory.restore(snapshot.balance),
 			available: this.hFactory.restore(snapshot.available),

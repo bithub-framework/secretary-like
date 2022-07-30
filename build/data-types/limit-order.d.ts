@@ -10,17 +10,6 @@ export interface LimitOrder<H extends HLike<H>> extends LimitOrder.Source<H>, Co
     toJSON(): unknown;
     toString(): string;
 }
-declare class ConcreteLimitOrder<H extends HLike<H>> implements LimitOrder<H> {
-    private factory;
-    price: H;
-    quantity: H;
-    side: Side;
-    length: Length;
-    action: Action;
-    constructor(source: LimitOrder.Source<H>, factory: LimitOrderFactory<H>);
-    toJSON(): unknown;
-    toString(): string;
-}
 export declare namespace LimitOrder {
     interface Source<H extends HLike<H>> {
         price: H;
@@ -40,8 +29,7 @@ export declare namespace LimitOrder {
 export declare class LimitOrderFactory<H extends HLike<H>> implements CompositeDataFactoryLike<LimitOrder.Source<H>, LimitOrder<H>, LimitOrder.Snapshot> {
     private hFactory;
     constructor(hFactory: HFactory<H>);
-    new(source: LimitOrder.Source<H>): ConcreteLimitOrder<H>;
+    new(source: LimitOrder.Source<H>): LimitOrder<H>;
     capture(order: LimitOrder<H>): LimitOrder.Snapshot;
-    restore(snapshot: LimitOrder.Snapshot): ConcreteLimitOrder<H>;
+    restore(snapshot: LimitOrder.Snapshot): LimitOrder<H>;
 }
-export {};

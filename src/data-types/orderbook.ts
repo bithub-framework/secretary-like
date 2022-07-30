@@ -63,7 +63,7 @@ export class OrderbookFactory<H extends HLike<H>> implements
 		private bookOrderFactory: BookOrderFactory<H>,
 	) { }
 
-	public new(source: Orderbook.Source<H>): ConcreteOrderbook<H> {
+	public new(source: Orderbook.Source<H>): Orderbook<H> {
 		return new ConcreteOrderbook(
 			source,
 			this,
@@ -81,7 +81,7 @@ export class OrderbookFactory<H extends HLike<H>> implements
 		};
 	}
 
-	public restore(snapshot: Orderbook.Snapshot): ConcreteOrderbook<H> {
+	public restore(snapshot: Orderbook.Snapshot): Orderbook<H> {
 		return this.new({
 			[Side.BID]: snapshot.bids.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
 			[Side.ASK]: snapshot.asks.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),

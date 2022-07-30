@@ -61,7 +61,7 @@ export class BookOrderFactory<H extends HLike<H>> implements
 		private hFactory: HFactory<H>,
 	) { }
 
-	public new(source: BookOrder.Source<H>): ConcreteBookOrder<H> {
+	public new(source: BookOrder.Source<H>): BookOrder<H> {
 		return new ConcreteBookOrder(source, this);
 	}
 
@@ -73,7 +73,7 @@ export class BookOrderFactory<H extends HLike<H>> implements
 		}
 	}
 
-	public restore(snapshot: BookOrder.Snapshot): ConcreteBookOrder<H> {
+	public restore(snapshot: BookOrder.Snapshot): BookOrder<H> {
 		return this.new({
 			price: this.hFactory.restore(snapshot.price),
 			quantity: this.hFactory.restore(snapshot.quantity),
