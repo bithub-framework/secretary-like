@@ -10,6 +10,9 @@ const position_1 = require("./position");
 const positions_1 = require("./positions");
 const book_order_1 = require("./book-order");
 const balances_1 = require("./balances");
+/**
+ * All data types support spread operator.
+ */
 class DataTypesNamespace {
     constructor(hFactory, H) {
         this.hFactory = hFactory;

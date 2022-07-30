@@ -24,6 +24,7 @@ __exportStar(require("./data-types/position"), exports);
 __exportStar(require("./data-types/positions"), exports);
 __exportStar(require("./data-types/balances"), exports);
 __exportStar(require("./data-types/data-types-namespace"), exports);
+__exportStar(require("./data-types/composite-data"), exports);
 __exportStar(require("./context-like"), exports);
 __exportStar(require("./specification"), exports);
 __exportStar(require("./secretary-like"), exports);

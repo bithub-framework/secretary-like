@@ -12,6 +12,7 @@ export * from './data-types/position';
 export * from './data-types/positions';
 export * from './data-types/balances';
 export * from './data-types/data-types-namespace';
+export * from './data-types/composite-data';
 export * from './context-like';
 export * from './specification';
 export * from './secretary-like';

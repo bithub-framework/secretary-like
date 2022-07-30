@@ -1,9 +1,11 @@
 import { Side } from './length-action-side';
 import { HLike, H, HFactory } from './h';
 import { TradeId } from './trade-id';
+import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
-export interface TradeLike<H extends HLike<H>> extends Trade.Source<H> {
+export interface TradeLike<H extends HLike<H>>
+	extends Trade.Source<H>, CompositeDataLike {
 	side: Side;
 	price: H;
 	quantity: H;
@@ -60,7 +62,12 @@ export namespace Trade {
 	}
 }
 
-export class TradeFactory<H extends HLike<H>> {
+export class TradeFactory<H extends HLike<H>> implements
+	CompositeDataFactoryLike<
+	Trade.Source<H>,
+	TradeLike<H>,
+	Trade.Snapshot>
+{
 	public constructor(
 		private hFactory: HFactory<H>,
 	) { }

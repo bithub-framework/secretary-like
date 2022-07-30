@@ -6,10 +6,13 @@ import {
 	OpenOrderLike,
 	OpenOrderFactory,
 } from './open-order';
+import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
-export interface AmendmentLike<H extends HLike<H>>
-	extends OpenOrderLike<H>, Amendment.Source<H> {
+export interface AmendmentLike<H extends HLike<H>> extends
+	OpenOrderLike<H>,
+	Amendment.Source<H>,
+	CompositeDataLike {
 	newUnfilled: H;
 	newPrice: H;
 }
@@ -66,7 +69,12 @@ export namespace Amendment {
 	}
 }
 
-export class AmendmentFactory<H extends HLike<H>> {
+export class AmendmentFactory<H extends HLike<H>> implements
+	CompositeDataFactoryLike<
+	Amendment.Source<H>,
+	AmendmentLike<H>,
+	Amendment.Snapshot>
+{
 	public constructor(
 		private hFactory: HFactory<H>,
 		private openOrderFactory: OpenOrderFactory<H>,

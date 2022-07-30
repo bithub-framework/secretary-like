@@ -1,8 +1,10 @@
 import { Length, Side, Action } from './length-action-side';
 import { HLike, H, HFactory } from './h';
+import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
-export interface LimitOrderLike<H extends HLike<H>> extends LimitOrder.Source<H> {
+export interface LimitOrderLike<H extends HLike<H>>
+	extends LimitOrder.Source<H>, CompositeDataLike {
 	price: H;
 	quantity: H;
 	side: Side;
@@ -61,7 +63,13 @@ export namespace LimitOrder {
 	}
 }
 
-export class LimitOrderFactory<H extends HLike<H>> {
+export class LimitOrderFactory<H extends HLike<H>> implements
+	CompositeDataFactoryLike<
+	LimitOrder.Source<H>,
+	LimitOrderLike<H>,
+	LimitOrder.Snapshot
+	>
+{
 	public constructor(
 		private hFactory: HFactory<H>,
 	) { }

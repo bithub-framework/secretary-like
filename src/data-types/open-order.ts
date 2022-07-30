@@ -6,11 +6,14 @@ import {
 } from './limit-order';
 import { OrderId } from './order-id';
 import { Length, Side, Action } from './length-action-side';
+import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
 
-export interface OpenOrderLike<H extends HLike<H>>
-	extends LimitOrderLike<H>, OpenOrder.Source<H> {
+export interface OpenOrderLike<H extends HLike<H>> extends
+	LimitOrderLike<H>,
+	OpenOrder.Source<H>,
+	CompositeDataLike {
 	filled: H;
 	unfilled: H;
 	id: OrderId;
@@ -65,7 +68,12 @@ export namespace OpenOrder {
 	}
 }
 
-export class OpenOrderFactory<H extends HLike<H>> {
+export class OpenOrderFactory<H extends HLike<H>> implements
+	CompositeDataFactoryLike<
+	OpenOrder.Source<H>,
+	OpenOrderLike<H>,
+	OpenOrder.Snapshot>
+{
 	public constructor(
 		private hFactory: HFactory<H>,
 		private limitOrderFactory: LimitOrderFactory<H>,

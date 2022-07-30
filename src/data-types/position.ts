@@ -1,8 +1,10 @@
 import { HLike, H, HFactory } from './h';
 import { Length } from './length-action-side';
+import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
-export interface PositionLike<H extends HLike<H>> extends Position.Source<H> {
+export interface PositionLike<H extends HLike<H>>
+	extends Position.Source<H>, CompositeDataLike {
 	[length: Length]: H;
 	toJSON(): unknown;
 	toString(): string;
@@ -41,7 +43,12 @@ export namespace Position {
 	}
 }
 
-export class PositionFactory<H extends HLike<H>> {
+export class PositionFactory<H extends HLike<H>> implements
+	CompositeDataFactoryLike<
+	Position.Source<H>,
+	PositionLike<H>,
+	Position.Snapshot>
+{
 	public constructor(
 		private hFactory: HFactory<H>,
 	) { }

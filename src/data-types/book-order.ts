@@ -1,8 +1,10 @@
 import { HLike, H, HFactory } from './h';
 import { Side } from './length-action-side';
+import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 
 
-export interface BookOrderLike<H extends HLike<H>> extends BookOrder.Source<H> {
+export interface BookOrderLike<H extends HLike<H>>
+	extends BookOrder.Source<H>, CompositeDataLike {
 	price: H;
 	quantity: H;
 	side: Side;
@@ -49,7 +51,12 @@ export namespace BookOrder {
 	}
 }
 
-export class BookOrderFactory<H extends HLike<H>> {
+export class BookOrderFactory<H extends HLike<H>> implements
+	CompositeDataFactoryLike<
+	BookOrder.Source<H>,
+	BookOrderLike<H>,
+	BookOrder.Snapshot>
+{
 	public constructor(
 		private hFactory: HFactory<H>,
 	) { }

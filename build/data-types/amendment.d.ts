@@ -2,7 +2,8 @@ import { HLike, H, HFactory } from './h';
 import { Length, Side, Action } from './length-action-side';
 import { OrderId } from './order-id';
 import { OpenOrder, OpenOrderLike, OpenOrderFactory } from './open-order';
-export interface AmendmentLike<H extends HLike<H>> extends OpenOrderLike<H>, Amendment.Source<H> {
+import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+export interface AmendmentLike<H extends HLike<H>> extends OpenOrderLike<H>, Amendment.Source<H>, CompositeDataLike {
     newUnfilled: H;
     newPrice: H;
 }
@@ -32,7 +33,7 @@ export declare namespace Amendment {
         readonly newPrice: H.Snapshot;
     }
 }
-export declare class AmendmentFactory<H extends HLike<H>> {
+export declare class AmendmentFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Amendment.Source<H>, AmendmentLike<H>, Amendment.Snapshot> {
     private hFactory;
     private openOrderFactory;
     constructor(hFactory: HFactory<H>, openOrderFactory: OpenOrderFactory<H>);

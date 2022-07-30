@@ -1,6 +1,7 @@
 import { HLike } from './h';
 import { Position, PositionLike, PositionFactory } from './position';
-export interface PositionsLike<H extends HLike<H>> extends Positions.Source<H> {
+import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+export interface PositionsLike<H extends HLike<H>> extends Positions.Source<H>, CompositeDataLike {
     position: PositionLike<H>;
     closable: PositionLike<H>;
     time: number;
@@ -28,7 +29,7 @@ export declare namespace Positions {
         readonly time: number;
     }
 }
-export declare class PositionsFactory<H extends HLike<H>> {
+export declare class PositionsFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Positions.Source<H>, PositionsLike<H>, Positions.Snapshot> {
     private positionFactory;
     constructor(positionFactory: PositionFactory<H>);
     new(source: Positions.Source<H>): Positions<H>;

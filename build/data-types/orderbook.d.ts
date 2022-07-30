@@ -1,7 +1,8 @@
 import { BookOrder, BookOrderFactory, BookOrderLike } from './book-order';
 import { HLike } from './h';
 import { Side } from './length-action-side';
-export interface OrderbookLike<H extends HLike<H>> extends Orderbook.Source<H> {
+import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+export interface OrderbookLike<H extends HLike<H>> extends Orderbook.Source<H>, CompositeDataLike {
     [side: Side]: BookOrderLike<H>[];
     time: number;
     toJSON(): unknown;
@@ -26,7 +27,7 @@ export declare namespace Orderbook {
         readonly time: number | null;
     }
 }
-export declare class OrderbookFactory<H extends HLike<H>> {
+export declare class OrderbookFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Orderbook.Source<H>, OrderbookLike<H>, Orderbook.Snapshot> {
     private bookOrderFactory;
     constructor(bookOrderFactory: BookOrderFactory<H>);
     new(source: Orderbook.Source<H>): Orderbook<H>;

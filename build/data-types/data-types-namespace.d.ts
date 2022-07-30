@@ -8,6 +8,9 @@ import { PositionFactory } from './position';
 import { PositionsFactory } from './positions';
 import { BookOrderFactory } from './book-order';
 import { BalancesFactory } from './balances';
+/**
+ * All data types support spread operator.
+ */
 export declare class DataTypesNamespace<H extends HLike<H>> {
     hFactory: HFactory<H>;
     H: HStatic<H>;
