@@ -41,14 +41,7 @@ class AmendmentFactory {
     }
     restore(snapshot) {
         return this.new({
-            price: this.hFactory.restore(snapshot.price),
-            quantity: this.hFactory.restore(snapshot.quantity),
-            side: snapshot.side,
-            length: snapshot.length,
-            action: snapshot.action,
-            filled: this.hFactory.restore(snapshot.filled),
-            unfilled: this.hFactory.restore(snapshot.unfilled),
-            id: snapshot.id,
+            ...this.openOrderFactory.restore(snapshot),
             newUnfilled: this.hFactory.restore(snapshot.newUnfilled),
             newPrice: this.hFactory.restore(snapshot.newPrice),
         });

@@ -86,11 +86,7 @@ export class OpenOrderFactory<H extends HLike<H>> {
 
 	public restore(snapshot: OpenOrder.Snapshot): OpenOrder<H> {
 		return this.new({
-			price: this.hFactory.restore(snapshot.price),
-			quantity: this.hFactory.restore(snapshot.quantity),
-			side: snapshot.side,
-			length: snapshot.length,
-			action: snapshot.action,
+			...this.limitOrderFactory.restore(snapshot),
 			filled: this.hFactory.restore(snapshot.filled),
 			unfilled: this.hFactory.restore(snapshot.unfilled),
 			id: snapshot.id,
