@@ -10,8 +10,8 @@ import { DataTypesNamespace } from './data-types/data-types-namespace';
 import { TimelineLike } from './timeline-like';
 import { EventEmitter } from 'events';
 import {
-    MarketSpecLike,
-    AccountSpecLike,
+    MarketSpec,
+    AccountSpec,
 } from './specification';
 
 
@@ -30,7 +30,7 @@ export interface MarketLike<H extends HLike<H>> extends MarketApiLike<H> {
 export interface MarketApiLike<H extends HLike<H>> extends
     MarketMethods<H>,
     MarketEventEmitterLike<H>,
-    MarketSpecLike<H> { }
+    MarketSpec<H> { }
 
 export interface MarketMethods<H extends HLike<H>> { }
 
@@ -55,7 +55,7 @@ export interface AccountLike<H extends HLike<H>>
 
 export interface AccountApiLike<H extends HLike<H>> extends
     AccountMethods<H>,
-    AccountSpecLike,
+    AccountSpec,
     AccountEventEmitterLike<H> { }
 
 export interface AccountMethods<H extends HLike<H>> {

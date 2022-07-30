@@ -9,7 +9,7 @@ import { HLike } from './data-types/h';
 import { DataTypesNamespace } from './data-types/data-types-namespace';
 import { TimelineLike } from './timeline-like';
 import { EventEmitter } from 'events';
-import { MarketSpecLike, AccountSpecLike } from './specification';
+import { MarketSpec, AccountSpec } from './specification';
 export interface ContextLike<H extends HLike<H>> {
     readonly [marketIndex: number]: MarketLike<H>;
     readonly timeline: TimelineLike;
@@ -19,7 +19,7 @@ export interface ContextLike<H extends HLike<H>> {
 export interface MarketLike<H extends HLike<H>> extends MarketApiLike<H> {
     readonly [accountIndex: number]: AccountLike<H>;
 }
-export interface MarketApiLike<H extends HLike<H>> extends MarketMethods<H>, MarketEventEmitterLike<H>, MarketSpecLike<H> {
+export interface MarketApiLike<H extends HLike<H>> extends MarketMethods<H>, MarketEventEmitterLike<H>, MarketSpec<H> {
 }
 export interface MarketMethods<H extends HLike<H>> {
 }
@@ -38,7 +38,7 @@ export interface MarketEventEmitterLike<H extends HLike<H>> extends EventEmitter
 }
 export interface AccountLike<H extends HLike<H>> extends AccountApiLike<H> {
 }
-export interface AccountApiLike<H extends HLike<H>> extends AccountMethods<H>, AccountSpecLike, AccountEventEmitterLike<H> {
+export interface AccountApiLike<H extends HLike<H>> extends AccountMethods<H>, AccountSpec, AccountEventEmitterLike<H> {
 }
 export interface AccountMethods<H extends HLike<H>> {
     makeOrders(orders: LimitOrder<H>[]): Promise<(OpenOrder<H> | Error)[]>;

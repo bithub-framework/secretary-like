@@ -1,10 +1,10 @@
 import { HLike } from '.';
-export interface AccountSpecLike {
+export interface AccountSpec {
     LEVERAGE: number;
     MAKER_FEE_RATE: number;
     TAKER_FEE_RATE: number;
 }
-export interface MarketSpecLike<H extends HLike<H>> {
+export interface MarketSpec<H extends HLike<H>> {
     PRICE_SCALE: number;
     QUANTITY_SCALE: number;
     CURRENCY_SCALE: number;
