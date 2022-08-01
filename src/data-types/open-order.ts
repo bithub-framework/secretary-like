@@ -13,6 +13,8 @@ export interface OpenOrder<H extends HLike<H>> extends
 	LimitOrder<H>,
 	OpenOrder.Source<H>,
 	CompositeDataLike {
+	price: H;
+	quantity: H;
 	filled: H;
 	unfilled: H;
 	id: OrderId;
@@ -31,10 +33,9 @@ class ConcreteOpenOrder<H extends HLike<H>> implements OpenOrder<H> {
 	public constructor(
 		source: OpenOrder.Source<H>,
 		private factory: OpenOrderFactory<H>,
+		hFactory: HFactory<H>,
 	) {
 		({
-			price: this.price,
-			quantity: this.quantity,
 			side: this.side,
 			length: this.length,
 			action: this.action,
@@ -42,6 +43,8 @@ class ConcreteOpenOrder<H extends HLike<H>> implements OpenOrder<H> {
 			unfilled: this.unfilled,
 			id: this.id,
 		} = source);
+		this.price = hFactory.from(source.price);
+		this.quantity = hFactory.from(source.quantity);
 	}
 
 	public toJSON(): unknown {
@@ -79,7 +82,11 @@ export class OpenOrderFactory<H extends HLike<H>> implements
 	) { }
 
 	public create(source: OpenOrder.Source<H>): OpenOrder<H> {
-		return new ConcreteOpenOrder(source, this);
+		return new ConcreteOpenOrder(
+			source,
+			this,
+			this.hFactory,
+		);
 	}
 
 	public capture(order: OpenOrder<H>): OpenOrder.Snapshot {

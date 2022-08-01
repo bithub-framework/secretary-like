@@ -12,6 +12,8 @@ export interface Amendment<H extends HLike<H>> extends
 	OpenOrder<H>,
 	Amendment.Source<H>,
 	CompositeDataLike {
+	price: H;
+	quantity: H;
 	newUnfilled: H;
 	newPrice: H;
 }
@@ -31,10 +33,9 @@ class ConcreteAmendment<H extends HLike<H>> implements Amendment<H> {
 	public constructor(
 		source: Amendment.Source<H>,
 		private factory: AmendmentFactory<H>,
+		hFactory: HFactory<H>,
 	) {
 		({
-			price: this.price,
-			quantity: this.quantity,
 			side: this.side,
 			length: this.length,
 			action: this.action,
@@ -44,6 +45,8 @@ class ConcreteAmendment<H extends HLike<H>> implements Amendment<H> {
 			newPrice: this.newPrice,
 			newUnfilled: this.newUnfilled,
 		} = source);
+		this.price = hFactory.from(source.price);
+		this.quantity = hFactory.from(source.quantity);
 	}
 
 	public toJSON(): unknown {
@@ -80,7 +83,11 @@ export class AmendmentFactory<H extends HLike<H>> implements
 	) { }
 
 	public create(source: Amendment.Source<H>): Amendment<H> {
-		return new ConcreteAmendment(source, this);
+		return new ConcreteAmendment(
+			source,
+			this,
+			this.hFactory,
+		);
 	}
 
 	public capture(amendment: Amendment<H>): Amendment.Snapshot {

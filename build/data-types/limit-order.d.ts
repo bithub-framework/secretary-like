@@ -12,8 +12,8 @@ export interface LimitOrder<H extends HLike<H>> extends LimitOrder.Source<H>, Co
 }
 export declare namespace LimitOrder {
     interface Source<H extends HLike<H>> {
-        price: H;
-        quantity: H;
+        price: H.Source<H>;
+        quantity: H.Source<H>;
         side: Side;
         length: Length;
         action: Action;

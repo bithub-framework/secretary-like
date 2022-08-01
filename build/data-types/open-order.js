@@ -2,11 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpenOrderFactory = void 0;
 class ConcreteOpenOrder {
-    constructor(source, factory) {
+    constructor(source, factory, hFactory) {
         this.factory = factory;
         ({
-            price: this.price,
-            quantity: this.quantity,
             side: this.side,
             length: this.length,
             action: this.action,
@@ -14,6 +12,8 @@ class ConcreteOpenOrder {
             unfilled: this.unfilled,
             id: this.id,
         } = source);
+        this.price = hFactory.from(source.price);
+        this.quantity = hFactory.from(source.quantity);
     }
     toJSON() {
         return this.factory.capture(this);
@@ -28,7 +28,7 @@ class OpenOrderFactory {
         this.limitOrderFactory = limitOrderFactory;
     }
     create(source) {
-        return new ConcreteOpenOrder(source, this);
+        return new ConcreteOpenOrder(source, this, this.hFactory);
     }
     capture(order) {
         return {

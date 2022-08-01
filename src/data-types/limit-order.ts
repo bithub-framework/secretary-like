@@ -24,14 +24,15 @@ class ConcreteLimitOrder<H extends HLike<H>> implements LimitOrder<H>{
 	public constructor(
 		source: LimitOrder.Source<H>,
 		private factory: LimitOrderFactory<H>,
+		hFactory: HFactory<H>,
 	) {
 		({
-			price: this.price,
-			quantity: this.quantity,
 			side: this.side,
 			length: this.length,
 			action: this.action,
 		} = source);
+		this.price = hFactory.from(source.price);
+		this.quantity = hFactory.from(source.quantity);
 	}
 
 	public toJSON(): unknown {
@@ -47,8 +48,8 @@ class ConcreteLimitOrder<H extends HLike<H>> implements LimitOrder<H>{
 
 export namespace LimitOrder {
 	export interface Source<H extends HLike<H>> {
-		price: H;
-		quantity: H;
+		price: H.Source<H>;
+		quantity: H.Source<H>;
 		side: Side;
 		length: Length;
 		action: Action;
@@ -75,7 +76,11 @@ export class LimitOrderFactory<H extends HLike<H>> implements
 	) { }
 
 	public create(source: LimitOrder.Source<H>): LimitOrder<H> {
-		return new ConcreteLimitOrder(source, this);
+		return new ConcreteLimitOrder(
+			source,
+			this,
+			this.hFactory,
+		);
 	}
 
 	public capture(order: LimitOrder<H>): LimitOrder.Snapshot {

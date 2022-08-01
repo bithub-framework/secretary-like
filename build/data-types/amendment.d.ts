@@ -2,6 +2,8 @@ import { HLike, H, HFactory } from './h';
 import { OpenOrder, OpenOrderFactory } from './open-order';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 export interface Amendment<H extends HLike<H>> extends OpenOrder<H>, Amendment.Source<H>, CompositeDataLike {
+    price: H;
+    quantity: H;
     newUnfilled: H;
     newPrice: H;
 }

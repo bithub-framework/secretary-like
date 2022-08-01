@@ -3,6 +3,8 @@ import { LimitOrder, LimitOrderFactory } from './limit-order';
 import { OrderId } from './order-id';
 import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
 export interface OpenOrder<H extends HLike<H>> extends LimitOrder<H>, OpenOrder.Source<H>, CompositeDataLike {
+    price: H;
+    quantity: H;
     filled: H;
     unfilled: H;
     id: OrderId;

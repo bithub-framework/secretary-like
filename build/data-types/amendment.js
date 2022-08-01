@@ -2,11 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AmendmentFactory = void 0;
 class ConcreteAmendment {
-    constructor(source, factory) {
+    constructor(source, factory, hFactory) {
         this.factory = factory;
         ({
-            price: this.price,
-            quantity: this.quantity,
             side: this.side,
             length: this.length,
             action: this.action,
@@ -16,6 +14,8 @@ class ConcreteAmendment {
             newPrice: this.newPrice,
             newUnfilled: this.newUnfilled,
         } = source);
+        this.price = hFactory.from(source.price);
+        this.quantity = hFactory.from(source.quantity);
     }
     toJSON() {
         return this.factory.capture(this);
@@ -30,7 +30,7 @@ class AmendmentFactory {
         this.openOrderFactory = openOrderFactory;
     }
     create(source) {
-        return new ConcreteAmendment(source, this);
+        return new ConcreteAmendment(source, this, this.hFactory);
     }
     capture(amendment) {
         return {

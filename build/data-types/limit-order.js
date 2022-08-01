@@ -2,15 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LimitOrderFactory = void 0;
 class ConcreteLimitOrder {
-    constructor(source, factory) {
+    constructor(source, factory, hFactory) {
         this.factory = factory;
         ({
-            price: this.price,
-            quantity: this.quantity,
             side: this.side,
             length: this.length,
             action: this.action,
         } = source);
+        this.price = hFactory.from(source.price);
+        this.quantity = hFactory.from(source.quantity);
     }
     toJSON() {
         return this.factory.capture(this);
@@ -26,7 +26,7 @@ class LimitOrderFactory {
         this.hFactory = hFactory;
     }
     create(source) {
-        return new ConcreteLimitOrder(source, this);
+        return new ConcreteLimitOrder(source, this, this.hFactory);
     }
     capture(order) {
         return {
