@@ -23,7 +23,7 @@ export declare class OpenOrderFactory<H extends HLike<H>> implements CompositeDa
     private hFactory;
     private limitOrderFactory;
     constructor(hFactory: HFactory<H>, limitOrderFactory: LimitOrderFactory<H>);
-    new(source: OpenOrder.Source<H>): OpenOrder<H>;
+    create(source: OpenOrder.Source<H>): OpenOrder<H>;
     capture(order: OpenOrder<H>): OpenOrder.Snapshot;
     restore(snapshot: OpenOrder.Snapshot): OpenOrder<H>;
 }

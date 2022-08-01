@@ -3,7 +3,7 @@ export interface CompositeDataLike {
     toString(): string;
 }
 export interface CompositeDataFactoryLike<Source, DataLike extends Source, Snapshot> {
-    ['new'](source: Source): DataLike;
+    create(source: Source): DataLike;
     capture(data: DataLike): Snapshot;
     restore(snapshot: Snapshot): DataLike;
 }

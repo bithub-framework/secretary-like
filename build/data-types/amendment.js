@@ -29,7 +29,7 @@ class AmendmentFactory {
         this.hFactory = hFactory;
         this.openOrderFactory = openOrderFactory;
     }
-    new(source) {
+    create(source) {
         return new ConcreteAmendment(source, this);
     }
     capture(amendment) {
@@ -40,7 +40,7 @@ class AmendmentFactory {
         };
     }
     restore(snapshot) {
-        return this.new({
+        return this.create({
             ...this.openOrderFactory.restore(snapshot),
             newUnfilled: this.hFactory.restore(snapshot.newUnfilled),
             newPrice: this.hFactory.restore(snapshot.newPrice),

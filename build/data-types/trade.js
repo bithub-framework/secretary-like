@@ -23,7 +23,7 @@ class TradeFactory {
     constructor(hFactory) {
         this.hFactory = hFactory;
     }
-    new(source) {
+    create(source) {
         return new ConcreteTrade(source, this);
     }
     capture(trade) {
@@ -36,7 +36,7 @@ class TradeFactory {
         };
     }
     restore(snapshot) {
-        return this.new({
+        return this.create({
             side: snapshot.side,
             price: this.hFactory.restore(snapshot.price),
             quantity: this.hFactory.restore(snapshot.quantity),

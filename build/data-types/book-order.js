@@ -21,7 +21,7 @@ class BookOrderFactory {
     constructor(hFactory) {
         this.hFactory = hFactory;
     }
-    new(source) {
+    create(source) {
         return new ConcreteBookOrder(source, this);
     }
     capture(order) {
@@ -32,7 +32,7 @@ class BookOrderFactory {
         };
     }
     restore(snapshot) {
-        return this.new({
+        return this.create({
             price: this.hFactory.restore(snapshot.price),
             quantity: this.hFactory.restore(snapshot.quantity),
             side: snapshot.side,

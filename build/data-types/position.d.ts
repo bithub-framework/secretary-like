@@ -18,7 +18,7 @@ export declare namespace Position {
 export declare class PositionFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Position.Source<H>, Position<H>, Position.Snapshot> {
     private hFactory;
     constructor(hFactory: HFactory<H>);
-    new(source: Position.Source<H>): Position<H>;
+    create(source: Position.Source<H>): Position<H>;
     capture(position: Position<H>): Position.Snapshot;
     restore(snapshot: Position.Snapshot): Position<H>;
 }

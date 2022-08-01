@@ -79,7 +79,7 @@ export class AmendmentFactory<H extends HLike<H>> implements
 		private openOrderFactory: OpenOrderFactory<H>,
 	) { }
 
-	public new(source: Amendment.Source<H>): Amendment<H> {
+	public create(source: Amendment.Source<H>): Amendment<H> {
 		return new ConcreteAmendment(source, this);
 	}
 
@@ -92,7 +92,7 @@ export class AmendmentFactory<H extends HLike<H>> implements
 	}
 
 	public restore(snapshot: Amendment.Snapshot): Amendment<H> {
-		return this.new({
+		return this.create({
 			...this.openOrderFactory.restore(snapshot),
 			newUnfilled: this.hFactory.restore(snapshot.newUnfilled),
 			newPrice: this.hFactory.restore(snapshot.newPrice),

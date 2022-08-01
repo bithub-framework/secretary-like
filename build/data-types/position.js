@@ -21,7 +21,7 @@ class PositionFactory {
     constructor(hFactory) {
         this.hFactory = hFactory;
     }
-    new(source) {
+    create(source) {
         return new ConcretePosition(source, this);
     }
     capture(position) {
@@ -31,7 +31,7 @@ class PositionFactory {
         };
     }
     restore(snapshot) {
-        return this.new({
+        return this.create({
             [length_action_side_1.Length.LONG]: this.hFactory.restore(snapshot.long),
             [length_action_side_1.Length.SHORT]: this.hFactory.restore(snapshot.short),
         });

@@ -74,7 +74,7 @@ export class LimitOrderFactory<H extends HLike<H>> implements
 		private hFactory: HFactory<H>,
 	) { }
 
-	public new(source: LimitOrder.Source<H>): LimitOrder<H> {
+	public create(source: LimitOrder.Source<H>): LimitOrder<H> {
 		return new ConcreteLimitOrder(source, this);
 	}
 
@@ -89,7 +89,7 @@ export class LimitOrderFactory<H extends HLike<H>> implements
 	}
 
 	public restore(snapshot: LimitOrder.Snapshot): LimitOrder<H> {
-		return this.new({
+		return this.create({
 			price: this.hFactory.restore(snapshot.price),
 			quantity: this.hFactory.restore(snapshot.quantity),
 			side: snapshot.side,

@@ -4,8 +4,8 @@ exports.PositionsFactory = void 0;
 class ConcretePositions {
     constructor(source, factory, positionFactory) {
         this.factory = factory;
-        this.position = positionFactory.new(source.position);
-        this.closable = positionFactory.new(source.closable);
+        this.position = positionFactory.create(source.position);
+        this.closable = positionFactory.create(source.closable);
         this.time = source.time;
     }
     toJSON() {
@@ -19,7 +19,7 @@ class PositionsFactory {
     constructor(positionFactory) {
         this.positionFactory = positionFactory;
     }
-    new(source) {
+    create(source) {
         return new ConcretePositions(source, this, this.positionFactory);
     }
     capture(positions) {
@@ -30,7 +30,7 @@ class PositionsFactory {
         };
     }
     restore(snapshot) {
-        return this.new({
+        return this.create({
             position: this.positionFactory.restore(snapshot.position),
             closable: this.positionFactory.restore(snapshot.closable),
             time: snapshot.time,

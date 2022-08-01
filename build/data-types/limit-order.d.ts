@@ -29,7 +29,7 @@ export declare namespace LimitOrder {
 export declare class LimitOrderFactory<H extends HLike<H>> implements CompositeDataFactoryLike<LimitOrder.Source<H>, LimitOrder<H>, LimitOrder.Snapshot> {
     private hFactory;
     constructor(hFactory: HFactory<H>);
-    new(source: LimitOrder.Source<H>): LimitOrder<H>;
+    create(source: LimitOrder.Source<H>): LimitOrder<H>;
     capture(order: LimitOrder<H>): LimitOrder.Snapshot;
     restore(snapshot: LimitOrder.Snapshot): LimitOrder<H>;
 }

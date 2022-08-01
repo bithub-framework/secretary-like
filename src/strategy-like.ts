@@ -5,5 +5,5 @@ import { HLike } from './data-types/h';
 
 export interface StrategyLike extends StartableLike { }
 export interface StrategyStaticLike<H extends HLike<H>> {
-	new(ctx: ContextLike<H>): StrategyLike;
+	create(ctx: ContextLike<H>): StrategyLike;
 }

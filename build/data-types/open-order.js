@@ -27,7 +27,7 @@ class OpenOrderFactory {
         this.hFactory = hFactory;
         this.limitOrderFactory = limitOrderFactory;
     }
-    new(source) {
+    create(source) {
         return new ConcreteOpenOrder(source, this);
     }
     capture(order) {
@@ -39,7 +39,7 @@ class OpenOrderFactory {
         };
     }
     restore(snapshot) {
-        return this.new({
+        return this.create({
             ...this.limitOrderFactory.restore(snapshot),
             filled: this.hFactory.restore(snapshot.filled),
             unfilled: this.hFactory.restore(snapshot.unfilled),

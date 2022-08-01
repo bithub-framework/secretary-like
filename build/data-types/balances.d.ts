@@ -22,7 +22,7 @@ export declare namespace Balances {
 export declare class BalancesFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Balances.Source<H>, Balances<H>, Balances.Snapshot> {
     private hFactory;
     constructor(hFactory: HFactory<H>);
-    new(source: Balances.Source<H>): Balances<H>;
+    create(source: Balances.Source<H>): Balances<H>;
     capture(balances: Balances<H>): Balances.Snapshot;
     restore(snapshot: Balances.Snapshot): Balances<H>;
 }

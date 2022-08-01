@@ -25,7 +25,7 @@ class LimitOrderFactory {
     constructor(hFactory) {
         this.hFactory = hFactory;
     }
-    new(source) {
+    create(source) {
         return new ConcreteLimitOrder(source, this);
     }
     capture(order) {
@@ -38,7 +38,7 @@ class LimitOrderFactory {
         };
     }
     restore(snapshot) {
-        return this.new({
+        return this.create({
             price: this.hFactory.restore(snapshot.price),
             quantity: this.hFactory.restore(snapshot.quantity),
             side: snapshot.side,

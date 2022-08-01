@@ -30,7 +30,7 @@ export declare namespace Trade {
 export declare class TradeFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Trade.Source<H>, Trade<H>, Trade.Snapshot> {
     private hFactory;
     constructor(hFactory: HFactory<H>);
-    new(source: Trade.Source<H>): Trade<H>;
+    create(source: Trade.Source<H>): Trade<H>;
     capture(trade: Trade<H>): Trade.Snapshot;
     restore(snapshot: Trade.Snapshot): Trade<H>;
 }

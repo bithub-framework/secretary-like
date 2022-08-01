@@ -21,7 +21,7 @@ class BalancesFactory {
     constructor(hFactory) {
         this.hFactory = hFactory;
     }
-    new(source) {
+    create(source) {
         return new ConcreteBalances(source, this);
     }
     capture(balances) {
@@ -32,7 +32,7 @@ class BalancesFactory {
         };
     }
     restore(snapshot) {
-        return this.new({
+        return this.create({
             balance: this.hFactory.restore(snapshot.balance),
             available: this.hFactory.restore(snapshot.available),
             time: snapshot.time,

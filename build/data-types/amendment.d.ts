@@ -19,7 +19,7 @@ export declare class AmendmentFactory<H extends HLike<H>> implements CompositeDa
     private hFactory;
     private openOrderFactory;
     constructor(hFactory: HFactory<H>, openOrderFactory: OpenOrderFactory<H>);
-    new(source: Amendment.Source<H>): Amendment<H>;
+    create(source: Amendment.Source<H>): Amendment<H>;
     capture(amendment: Amendment<H>): Amendment.Snapshot;
     restore(snapshot: Amendment.Snapshot): Amendment<H>;
 }

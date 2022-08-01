@@ -23,7 +23,7 @@ export declare namespace BookOrder {
 export declare class BookOrderFactory<H extends HLike<H>> implements CompositeDataFactoryLike<BookOrder.Source<H>, BookOrder<H>, BookOrder.Snapshot> {
     private hFactory;
     constructor(hFactory: HFactory<H>);
-    new(source: BookOrder.Source<H>): BookOrder<H>;
+    create(source: BookOrder.Source<H>): BookOrder<H>;
     capture(order: BookOrder<H>): BookOrder.Snapshot;
     restore(snapshot: BookOrder.Snapshot): BookOrder<H>;
 }
