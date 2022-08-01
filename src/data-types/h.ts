@@ -19,6 +19,7 @@ export interface HLike<H extends HLike<H>> {
 		scale?: number,
 		roundingMode?: H.RoundingMode,
 	): H;
+	abs(): H;
 	toJSON(): string;
 	toFixed(scale?: number): string;
 }
