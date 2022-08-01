@@ -1,4 +1,6 @@
 import { StartableLike } from 'startable';
 
 
-export interface SecretaryLike extends StartableLike { }
+export interface SecretaryLike {
+	$s: StartableLike<[]>;
+}
