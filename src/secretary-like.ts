@@ -1,6 +1,6 @@
-import { StartableLike } from 'startable';
+import { Startable } from 'startable';
 
 
 export interface SecretaryLike {
-	$s: StartableLike<[]>;
+	$s: Startable;
 }
