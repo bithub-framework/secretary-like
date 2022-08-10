@@ -28,7 +28,7 @@ export interface MarketEvents<H extends HLike<H>> {
     trades: [Trade<H>[]];
     error: [Error];
 }
-export declare class ConnectionClosed extends Error {
+export declare class ExchangeUnavailable extends Error {
 }
 export interface MarketEventEmitterLike<H extends HLike<H>> extends EventEmitter {
     on<Event extends keyof MarketEvents<H>>(event: Event, listener: (...args: MarketEvents<H>[Event]) => void): this;

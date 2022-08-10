@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConnectionClosed = void 0;
-class ConnectionClosed extends Error {
+exports.ExchangeUnavailable = void 0;
+class ExchangeUnavailable extends Error {
 }
-exports.ConnectionClosed = ConnectionClosed;
+exports.ExchangeUnavailable = ExchangeUnavailable;
 //# sourceMappingURL=context-like.js.map
