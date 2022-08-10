@@ -13,6 +13,7 @@ import {
     MarketSpec,
     AccountSpec,
 } from './specification';
+import { Startable } from 'startable';
 
 
 
@@ -30,7 +31,9 @@ export interface MarketLike<H extends HLike<H>> extends MarketApiLike<H> {
 export interface MarketApiLike<H extends HLike<H>> extends
     MarketMethods<H>,
     MarketEventEmitterLike<H>,
-    MarketSpec<H> { }
+    MarketSpec<H> {
+    $s: Startable;
+}
 
 export interface MarketMethods<H extends HLike<H>> { }
 
@@ -56,7 +59,9 @@ export interface AccountLike<H extends HLike<H>>
 export interface AccountApiLike<H extends HLike<H>> extends
     AccountMethods<H>,
     AccountSpec,
-    AccountEventEmitterLike<H> { }
+    AccountEventEmitterLike<H> {
+    $s: Startable;
+}
 
 export interface AccountMethods<H extends HLike<H>> {
     makeOrders(orders: LimitOrder.Source<H>[]): Promise<(OpenOrder<H> | Error)[]>;
