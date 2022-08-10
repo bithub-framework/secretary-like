@@ -10,7 +10,6 @@ import { DataTypesNamespace } from './data-types/data-types-namespace';
 import { TimelineLike } from './timeline-like';
 import { EventEmitter } from 'events';
 import { MarketSpec, AccountSpec } from './specification';
-import { Startable } from 'startable';
 export interface ContextLike<H extends HLike<H>> {
     readonly [marketIndex: number]: MarketLike<H>;
     readonly timeline: TimelineLike;
@@ -21,7 +20,6 @@ export interface MarketLike<H extends HLike<H>> extends MarketApiLike<H> {
     readonly [accountIndex: number]: AccountLike<H>;
 }
 export interface MarketApiLike<H extends HLike<H>> extends MarketMethods<H>, MarketEventEmitterLike<H>, MarketSpec<H> {
-    $s: Startable;
 }
 export interface MarketMethods<H extends HLike<H>> {
 }
@@ -41,7 +39,6 @@ export interface MarketEventEmitterLike<H extends HLike<H>> extends EventEmitter
 export interface AccountLike<H extends HLike<H>> extends AccountApiLike<H> {
 }
 export interface AccountApiLike<H extends HLike<H>> extends AccountMethods<H>, AccountSpec, AccountEventEmitterLike<H> {
-    $s: Startable;
 }
 export interface AccountMethods<H extends HLike<H>> {
     makeOrders(orders: LimitOrder.Source<H>[]): Promise<(OpenOrder<H> | Error)[]>;
