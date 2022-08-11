@@ -10,7 +10,9 @@ import { DataTypesNamespace } from './data-types/data-types-namespace';
 import { TimelineLike } from './timeline-like';
 import { EventEmitter } from 'events';
 import { MarketSpec, AccountSpec } from './specification';
+import { Startable } from 'startable';
 export interface ContextLike<H extends HLike<H>> {
+    $s: Startable;
     readonly [marketIndex: number]: MarketLike<H>;
     readonly timeline: TimelineLike;
     submit(content: string): void;
