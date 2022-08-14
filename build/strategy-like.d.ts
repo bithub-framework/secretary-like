@@ -1,8 +1,7 @@
-import { Startable } from 'startable';
+import { DaemonLike } from 'startable';
 import { ContextLike } from './context-like';
 import { HLike } from './data-types/h';
-export interface StrategyLike {
-    $s: Startable;
+export interface StrategyLike extends DaemonLike {
 }
 /**
  * `ctx` is startable and is aggregated by strategy via assart().

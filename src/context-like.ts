@@ -13,11 +13,10 @@ import {
     MarketSpec,
     AccountSpec,
 } from './specification';
-import { Startable } from 'startable';
+import { Startable, DaemonLike } from 'startable';
 
 
-export interface ContextLike<H extends HLike<H>> {
-    $s: Startable;
+export interface ContextLike<H extends HLike<H>> extends DaemonLike {
     readonly [marketIndex: number]: MarketLike<H>;
     readonly timeline: TimelineLike;
     submit(content: string): void;
