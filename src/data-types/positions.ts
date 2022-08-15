@@ -4,6 +4,7 @@ import {
 	PositionStatic,
 } from './position';
 import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { boundMethod } from 'autobind-decorator';
 
 
 
@@ -75,6 +76,10 @@ export class PositionsStatic<H extends HLike<H>> implements
 		private Position: PositionStatic<H>,
 	) { }
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public create(source: PositionsLike.Source<H>): PositionsLike<H> {
 		return new Positions(
 			source,
@@ -83,6 +88,10 @@ export class PositionsStatic<H extends HLike<H>> implements
 		);
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public capture(positions: PositionsLike<H>): PositionsLike.Snapshot {
 		return {
 			position: this.Position.capture(positions.position),
@@ -91,6 +100,10 @@ export class PositionsStatic<H extends HLike<H>> implements
 		};
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public restore(snapshot: PositionsLike.Snapshot): PositionsLike<H> {
 		return this.create({
 			position: this.Position.restore(snapshot.position),

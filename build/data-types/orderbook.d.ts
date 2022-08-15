@@ -27,7 +27,16 @@ export declare namespace OrderbookLike {
 export declare class OrderbookStatic<H extends HLike<H>> implements CompositeDataLikeStatic<OrderbookLike.Source<H>, OrderbookLike<H>, OrderbookLike.Snapshot> {
     private BookOrder;
     constructor(BookOrder: BookOrderStatic<H>);
+    /**
+     * @decorator boundMethod
+     */
     create(source: OrderbookLike.Source<H>): OrderbookLike<H>;
+    /**
+     * @decorator boundMethod
+     */
     capture(orderbook: OrderbookLike<H>): OrderbookLike.Snapshot;
+    /**
+     * @decorator boundMethod
+     */
     restore(snapshot: OrderbookLike.Snapshot): OrderbookLike<H>;
 }

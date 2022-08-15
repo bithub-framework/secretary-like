@@ -16,5 +16,8 @@
         "@types/events": "^3.0.0",
         "startable": "github:zimtsui/startable",
         "time-engine-like": "github:zimtsui/time-engine-like"
+    },
+    "dependencies": {
+        "autobind-decorator": "^2.4.0"
     }
 }

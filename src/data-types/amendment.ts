@@ -1,11 +1,11 @@
 import { HLike, HLikeStatic } from './h';
-import { Length, Side, Action } from './length-action-side';
-import { OrderId } from './order-id';
 import {
 	OpenOrderLike,
 	OpenOrderStatic,
 } from './open-order';
 import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { boundMethod } from 'autobind-decorator';
+
 
 
 export abstract class AmendmentLike<H extends HLike<H>>
@@ -75,6 +75,10 @@ export class AmendmentStatic<H extends HLike<H>> implements
 		private OpenOrder: OpenOrderStatic<H>,
 	) { }
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public create(source: AmendmentLike.Source<H>): AmendmentLike<H> {
 		return new ConcreteAmendment(
 			source,
@@ -83,6 +87,10 @@ export class AmendmentStatic<H extends HLike<H>> implements
 		);
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public capture(amendment: AmendmentLike<H>): AmendmentLike.Snapshot {
 		return {
 			...this.OpenOrder.capture(amendment),
@@ -91,6 +99,10 @@ export class AmendmentStatic<H extends HLike<H>> implements
 		}
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public restore(snapshot: AmendmentLike.Snapshot): AmendmentLike<H> {
 		return this.create({
 			...this.OpenOrder.restore(snapshot),

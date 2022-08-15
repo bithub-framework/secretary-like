@@ -24,7 +24,16 @@ export declare namespace BalancesLike {
 export declare class BalancesStatic<H extends HLike<H>> implements CompositeDataLikeStatic<BalancesLike.Source<H>, BalancesLike<H>, BalancesLike.Snapshot> {
     private H;
     constructor(H: HLikeStatic<H>);
+    /**
+     * @decorator boundMethod
+     */
     create(source: BalancesLike.Source<H>): BalancesLike<H>;
+    /**
+     * @decorator boundMethod
+     */
     capture(balances: BalancesLike<H>): BalancesLike.Snapshot;
+    /**
+     * @decorator boundMethod
+     */
     restore(snapshot: BalancesLike.Snapshot): BalancesLike<H>;
 }

@@ -8,6 +8,7 @@ import {
 	CompositeDataLike,
 	CompositeDataLikeStatic,
 } from './composite-data';
+import { boundMethod } from 'autobind-decorator';
 
 
 
@@ -84,6 +85,10 @@ export class OpenOrderStatic<H extends HLike<H>> implements
 		private LimitOrder: LimitOrderStatic<H>,
 	) { }
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public create(source: OpenOrderLike.Source<H>): OpenOrderLike<H> {
 		return new OpenOrder(
 			source,
@@ -92,6 +97,10 @@ export class OpenOrderStatic<H extends HLike<H>> implements
 		);
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public capture(order: OpenOrderLike<H>): OpenOrderLike.Snapshot {
 		return {
 			...this.LimitOrder.capture(order),
@@ -101,6 +110,10 @@ export class OpenOrderStatic<H extends HLike<H>> implements
 		};
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public restore(snapshot: OpenOrderLike.Snapshot): OpenOrderLike<H> {
 		return this.create({
 			...this.LimitOrder.restore(snapshot),

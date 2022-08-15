@@ -1,6 +1,8 @@
 import { HLike, HLikeStatic } from './h';
 import { Side } from './length-action-side';
 import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { boundMethod } from 'autobind-decorator';
+
 
 
 export abstract class BookOrderLike<H extends HLike<H>>
@@ -70,6 +72,10 @@ export class BookOrderStatic<H extends HLike<H>> implements
 		private H: HLikeStatic<H>,
 	) { }
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public create(source: BookOrderLike.Source<H>): BookOrderLike<H> {
 		return new BookOrder(
 			source,
@@ -78,6 +84,10 @@ export class BookOrderStatic<H extends HLike<H>> implements
 		);
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public capture(order: BookOrderLike<H>): BookOrderLike.Snapshot {
 		return {
 			price: this.H.capture(order.price),
@@ -86,6 +96,10 @@ export class BookOrderStatic<H extends HLike<H>> implements
 		}
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public restore(snapshot: BookOrderLike.Snapshot): BookOrderLike<H> {
 		return this.create({
 			price: this.H.restore(snapshot.price),

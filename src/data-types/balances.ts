@@ -1,5 +1,6 @@
 import { HLike, HLikeStatic } from './h';
 import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { boundMethod } from 'autobind-decorator';
 
 
 
@@ -70,6 +71,10 @@ export class BalancesStatic<H extends HLike<H>> implements
 		private H: HLikeStatic<H>,
 	) { }
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public create(source: BalancesLike.Source<H>): BalancesLike<H> {
 		return new Balances(
 			source,
@@ -78,6 +83,10 @@ export class BalancesStatic<H extends HLike<H>> implements
 		);
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public capture(balances: BalancesLike<H>): BalancesLike.Snapshot {
 		return {
 			balance: this.H.capture(balances.balance),
@@ -86,6 +95,10 @@ export class BalancesStatic<H extends HLike<H>> implements
 		}
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public restore(snapshot: BalancesLike.Snapshot): BalancesLike<H> {
 		return this.create({
 			balance: this.H.restore(snapshot.balance),

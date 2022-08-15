@@ -2,6 +2,8 @@ import { Side } from './length-action-side';
 import { HLike, HLikeStatic } from './h';
 import { TradeId } from './trade-id';
 import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { boundMethod } from 'autobind-decorator';
+
 
 
 export abstract class TradeLike<H extends HLike<H>>
@@ -81,6 +83,10 @@ export class TradeStatic<H extends HLike<H>> implements
 		private H: HLikeStatic<H>,
 	) { }
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public create(source: TradeLike.Source<H>): TradeLike<H> {
 		return new Trade(
 			source,
@@ -89,6 +95,10 @@ export class TradeStatic<H extends HLike<H>> implements
 		);
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public capture(trade: TradeLike<H>): TradeLike.Snapshot {
 		return {
 			side: trade.side,
@@ -99,6 +109,10 @@ export class TradeStatic<H extends HLike<H>> implements
 		}
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public restore(snapshot: TradeLike.Snapshot): TradeLike<H> {
 		return this.create({
 			side: snapshot.side,

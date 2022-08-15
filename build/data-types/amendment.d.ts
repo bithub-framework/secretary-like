@@ -21,7 +21,16 @@ export declare class AmendmentStatic<H extends HLike<H>> implements CompositeDat
     private H;
     private OpenOrder;
     constructor(H: HLikeStatic<H>, OpenOrder: OpenOrderStatic<H>);
+    /**
+     * @decorator boundMethod
+     */
     create(source: AmendmentLike.Source<H>): AmendmentLike<H>;
+    /**
+     * @decorator boundMethod
+     */
     capture(amendment: AmendmentLike<H>): AmendmentLike.Snapshot;
+    /**
+     * @decorator boundMethod
+     */
     restore(snapshot: AmendmentLike.Snapshot): AmendmentLike<H>;
 }

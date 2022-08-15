@@ -5,6 +5,7 @@ import {
 import { HLike } from './h';
 import { Side, BID, ASK, } from './length-action-side';
 import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { boundMethod } from 'autobind-decorator';
 
 
 
@@ -24,7 +25,6 @@ export abstract class OrderbookLike<H extends HLike<H>>
 			this.bids = source.side(BID);
 			this.asks = source.side(ASK);
 		} else {
-			// TODO bind
 			this.bids = source.bids.map(BookOrder.create);
 			this.asks = source.asks.map(BookOrder.create);
 		}
@@ -85,6 +85,10 @@ export class OrderbookStatic<H extends HLike<H>> implements
 		private BookOrder: BookOrderStatic<H>,
 	) { }
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public create(source: OrderbookLike.Source<H>): OrderbookLike<H> {
 		return new Orderbook(
 			source,
@@ -93,6 +97,10 @@ export class OrderbookStatic<H extends HLike<H>> implements
 		);
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public capture(orderbook: OrderbookLike<H>): OrderbookLike.Snapshot {
 		return {
 			bids: orderbook.side(BID).map(this.BookOrder.capture),
@@ -103,6 +111,10 @@ export class OrderbookStatic<H extends HLike<H>> implements
 		};
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public restore(snapshot: OrderbookLike.Snapshot): OrderbookLike<H> {
 		return this.create({
 			bids: snapshot.bids.map(this.BookOrder.restore),

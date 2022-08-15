@@ -31,8 +31,17 @@ export declare class OpenOrderStatic<H extends HLike<H>> implements CompositeDat
     private H;
     private LimitOrder;
     constructor(H: HLikeStatic<H>, LimitOrder: LimitOrderStatic<H>);
+    /**
+     * @decorator boundMethod
+     */
     create(source: OpenOrderLike.Source<H>): OpenOrderLike<H>;
+    /**
+     * @decorator boundMethod
+     */
     capture(order: OpenOrderLike<H>): OpenOrderLike.Snapshot;
+    /**
+     * @decorator boundMethod
+     */
     restore(snapshot: OpenOrderLike.Snapshot): OpenOrderLike<H>;
 }
 export {};

@@ -1,7 +1,14 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderbookStatic = exports.OrderbookLike = void 0;
 const length_action_side_1 = require("./length-action-side");
+const autobind_decorator_1 = require("autobind-decorator");
 class OrderbookLike {
     constructor(source, BookOrder) {
         if (source instanceof OrderbookLike) {
@@ -9,7 +16,6 @@ class OrderbookLike {
             this.asks = source.side(length_action_side_1.ASK);
         }
         else {
-            // TODO bind
             this.bids = source.bids.map(BookOrder.create);
             this.asks = source.asks.map(BookOrder.create);
         }
@@ -36,9 +42,15 @@ class OrderbookStatic {
     constructor(BookOrder) {
         this.BookOrder = BookOrder;
     }
+    /**
+     * @decorator boundMethod
+     */
     create(source) {
         return new Orderbook(source, this, this.BookOrder);
     }
+    /**
+     * @decorator boundMethod
+     */
     capture(orderbook) {
         return {
             bids: orderbook.side(length_action_side_1.BID).map(this.BookOrder.capture),
@@ -48,6 +60,9 @@ class OrderbookStatic {
                 : null,
         };
     }
+    /**
+     * @decorator boundMethod
+     */
     restore(snapshot) {
         return this.create({
             bids: snapshot.bids.map(this.BookOrder.restore),
@@ -58,5 +73,14 @@ class OrderbookStatic {
         });
     }
 }
+__decorate([
+    autobind_decorator_1.boundMethod
+], OrderbookStatic.prototype, "create", null);
+__decorate([
+    autobind_decorator_1.boundMethod
+], OrderbookStatic.prototype, "capture", null);
+__decorate([
+    autobind_decorator_1.boundMethod
+], OrderbookStatic.prototype, "restore", null);
 exports.OrderbookStatic = OrderbookStatic;
 //# sourceMappingURL=orderbook.js.map

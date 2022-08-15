@@ -25,7 +25,16 @@ export declare namespace PositionsLike {
 export declare class PositionsStatic<H extends HLike<H>> implements CompositeDataLikeStatic<PositionsLike.Source<H>, PositionsLike<H>, PositionsLike.Snapshot> {
     private Position;
     constructor(Position: PositionStatic<H>);
+    /**
+     * @decorator boundMethod
+     */
     create(source: PositionsLike.Source<H>): PositionsLike<H>;
+    /**
+     * @decorator boundMethod
+     */
     capture(positions: PositionsLike<H>): PositionsLike.Snapshot;
+    /**
+     * @decorator boundMethod
+     */
     restore(snapshot: PositionsLike.Snapshot): PositionsLike<H>;
 }

@@ -40,7 +40,16 @@ export declare namespace LimitOrderLike {
 export declare class LimitOrderStatic<H extends HLike<H>> implements CompositeDataLikeStatic<LimitOrderLike.Source<H>, LimitOrderLike<H>, LimitOrderLike.Snapshot> {
     private H;
     constructor(H: HLikeStatic<H>);
+    /**
+     * @decorator boundMethod
+     */
     create(source: LimitOrderLike.Source<H>): LimitOrderLike<H>;
+    /**
+     * @decorator boundMethod
+     */
     capture(order: LimitOrderLike<H>): LimitOrderLike.Snapshot;
+    /**
+     * @decorator boundMethod
+     */
     restore(snapshot: LimitOrderLike.Snapshot): LimitOrderLike<H>;
 }

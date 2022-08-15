@@ -32,7 +32,16 @@ export declare namespace TradeLike {
 export declare class TradeStatic<H extends HLike<H>> implements CompositeDataLikeStatic<TradeLike.Source<H>, TradeLike<H>, TradeLike.Snapshot> {
     private H;
     constructor(H: HLikeStatic<H>);
+    /**
+     * @decorator boundMethod
+     */
     create(source: TradeLike.Source<H>): TradeLike<H>;
+    /**
+     * @decorator boundMethod
+     */
     capture(trade: TradeLike<H>): TradeLike.Snapshot;
+    /**
+     * @decorator boundMethod
+     */
     restore(snapshot: TradeLike.Snapshot): TradeLike<H>;
 }

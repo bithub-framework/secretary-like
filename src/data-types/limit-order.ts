@@ -1,6 +1,7 @@
 import { Length, Side, Action } from './length-action-side';
 import { HLike, HLikeStatic } from './h';
 import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { boundMethod } from 'autobind-decorator';
 
 
 /**
@@ -94,6 +95,10 @@ export class LimitOrderStatic<H extends HLike<H>> implements
 		private H: HLikeStatic<H>,
 	) { }
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public create(source: LimitOrderLike.Source<H>): LimitOrderLike<H> {
 		return new LimitOrder(
 			source,
@@ -102,6 +107,10 @@ export class LimitOrderStatic<H extends HLike<H>> implements
 		);
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public capture(order: LimitOrderLike<H>): LimitOrderLike.Snapshot {
 		return {
 			price: this.H.capture(order.price),
@@ -112,6 +121,10 @@ export class LimitOrderStatic<H extends HLike<H>> implements
 		}
 	}
 
+	/**
+	 * @decorator boundMethod
+	 */
+	@boundMethod
 	public restore(snapshot: LimitOrderLike.Snapshot): LimitOrderLike<H> {
 		return this.create({
 			price: this.H.restore(snapshot.price),
