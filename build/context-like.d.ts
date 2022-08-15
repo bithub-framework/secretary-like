@@ -27,6 +27,7 @@ export interface MarketMethods<H extends HLike<H>> {
 export interface MarketEvents<H extends HLike<H>> {
     orderbook: [Orderbook<H>];
     trades: [Trade<H>[]];
+    error: [Error];
 }
 export declare class ExchangeUnavailable extends Error {
 }
@@ -51,6 +52,7 @@ export interface AccountMethods<H extends HLike<H>> {
 export interface AccountEvents<H extends HLike<H>> {
     positions: [Positions<H>];
     balances: [Balances<H>];
+    error: [Error];
 }
 export interface AccountEventEmitterLike<H extends HLike<H>> extends EventEmitter {
     on<Event extends keyof AccountEvents<H>>(event: Event, listener: (...args: AccountEvents<H>[Event]) => void): this;
