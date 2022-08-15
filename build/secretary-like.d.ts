@@ -1,4 +1,3 @@
-import { Startable } from 'startable';
-export interface SecretaryLike {
-    $s: Startable;
+import { DaemonLike } from 'startable';
+export interface SecretaryLike extends DaemonLike {
 }
