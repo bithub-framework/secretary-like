@@ -9,7 +9,7 @@ export interface CompositeDataLikeStatic
 	Data extends CompositeDataLike,
 	Snapshot
 	> {
-	create(source: Source): Data;
-	capture(data: Data): Snapshot;
-	restore(snapshot: Snapshot): Data;
+	create: (source: Source) => Data;
+	capture: (data: Data) => Snapshot;
+	restore: (snapshot: Snapshot) => Data;
 }
