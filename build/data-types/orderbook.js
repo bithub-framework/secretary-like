@@ -1,32 +1,48 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderbookFactory = void 0;
+exports.OrderbookStatic = exports.OrderbookLike = void 0;
 const length_action_side_1 = require("./length-action-side");
-class ConcreteOrderbook {
-    constructor(source, factory, bookOrderFactory) {
-        this.factory = factory;
-        for (const side of [length_action_side_1.Side.BID, length_action_side_1.Side.ASK])
-            this[side] = source[side].map(order => bookOrderFactory.create(order));
+class OrderbookLike {
+    constructor(source, BookOrder) {
+        if (source instanceof OrderbookLike) {
+            this.bids = source.side(length_action_side_1.BID);
+            this.asks = source.side(length_action_side_1.ASK);
+        }
+        else {
+            // TODO bind
+            this.bids = source.bids.map(BookOrder.create);
+            this.asks = source.asks.map(BookOrder.create);
+        }
         this.time = source.time;
     }
+    side(side) {
+        return side === length_action_side_1.BID ? this.bids : this.asks;
+    }
+}
+exports.OrderbookLike = OrderbookLike;
+class Orderbook extends OrderbookLike {
+    constructor(source, Orderbook, BookOrder) {
+        super(source, BookOrder);
+        this.Orderbook = Orderbook;
+    }
     toJSON() {
-        return this.factory.capture(this);
+        return this.Orderbook.capture(this);
     }
     toString() {
         return JSON.stringify(this.toJSON());
     }
 }
-class OrderbookFactory {
-    constructor(bookOrderFactory) {
-        this.bookOrderFactory = bookOrderFactory;
+class OrderbookStatic {
+    constructor(BookOrder) {
+        this.BookOrder = BookOrder;
     }
     create(source) {
-        return new ConcreteOrderbook(source, this, this.bookOrderFactory);
+        return new Orderbook(source, this, this.BookOrder);
     }
     capture(orderbook) {
         return {
-            bids: orderbook[length_action_side_1.Side.BID].map(order => this.bookOrderFactory.capture(order)),
-            asks: orderbook[length_action_side_1.Side.ASK].map(order => this.bookOrderFactory.capture(order)),
+            bids: orderbook.side(length_action_side_1.BID).map(this.BookOrder.capture),
+            asks: orderbook.side(length_action_side_1.ASK).map(this.BookOrder.capture),
             time: Number.isFinite(orderbook.time)
                 ? orderbook.time
                 : null,
@@ -34,13 +50,13 @@ class OrderbookFactory {
     }
     restore(snapshot) {
         return this.create({
-            [length_action_side_1.Side.BID]: snapshot.bids.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
-            [length_action_side_1.Side.ASK]: snapshot.asks.map(orderSnapshot => this.bookOrderFactory.restore(orderSnapshot)),
+            bids: snapshot.bids.map(this.BookOrder.restore),
+            asks: snapshot.asks.map(this.BookOrder.restore),
             time: snapshot.time !== null
                 ? snapshot.time
                 : Number.NEGATIVE_INFINITY,
         });
     }
 }
-exports.OrderbookFactory = OrderbookFactory;
+exports.OrderbookStatic = OrderbookStatic;
 //# sourceMappingURL=orderbook.js.map

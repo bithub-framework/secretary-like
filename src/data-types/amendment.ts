@@ -1,56 +1,61 @@
-import { HLike, H, HFactory } from './h';
+import { HLike, HLikeStatic } from './h';
 import { Length, Side, Action } from './length-action-side';
 import { OrderId } from './order-id';
 import {
-	OpenOrder,
-	OpenOrderFactory,
+	OpenOrderLike,
+	OpenOrderStatic,
 } from './open-order';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
 
 
-export interface Amendment<H extends HLike<H>> extends
-	OpenOrder<H>,
-	Amendment.Source<H>,
-	CompositeDataLike {
-	price: H;
-	quantity: H;
-	newUnfilled: H;
-	newPrice: H;
-}
-
-class ConcreteAmendment<H extends HLike<H>> implements Amendment<H> {
-	public price: H;
-	public quantity: H;
-	public side: Side;
-	public length: Length;
-	public action: Action;
-	public filled: H;
-	public unfilled: H;
-	public id: OrderId;
+export abstract class AmendmentLike<H extends HLike<H>>
+	extends OpenOrderLike<H>
+	implements CompositeDataLike {
 	public newUnfilled: H;
 	public newPrice: H;
 
 	public constructor(
-		source: Amendment.Source<H>,
-		private factory: AmendmentFactory<H>,
-		hFactory: HFactory<H>,
+		source: AmendmentLike.Source<H>,
+		H: HLikeStatic<H>,
 	) {
-		({
-			side: this.side,
-			length: this.length,
-			action: this.action,
-			filled: this.filled,
-			unfilled: this.unfilled,
-			id: this.id,
-			newPrice: this.newPrice,
-			newUnfilled: this.newUnfilled,
-		} = source);
-		this.price = hFactory.from(source.price);
-		this.quantity = hFactory.from(source.quantity);
+		super(
+			source,
+			H,
+		);
+		this.newPrice = H.create(source.newPrice);
+		this.newUnfilled = H.create(source.newUnfilled);
+	}
+}
+
+
+export namespace AmendmentLike {
+	export interface Literal<H extends HLike<H>> extends OpenOrderLike.Literal<H> {
+		newUnfilled: HLike.Source<H>;
+		newPrice: HLike.Source<H>;
+	}
+	export type Source<H extends HLike<H>> = AmendmentLike<H> | Literal<H>;
+
+	export interface Snapshot extends OpenOrderLike.Snapshot {
+		readonly newUnfilled: HLike.Snapshot;
+		readonly newPrice: HLike.Snapshot;
+	}
+}
+
+
+class ConcreteAmendment<H extends HLike<H>> extends AmendmentLike<H> {
+	public constructor(
+		source: AmendmentLike.Source<H>,
+		private Amendment: AmendmentStatic<H>,
+		H: HLikeStatic<H>,
+	) {
+		super(
+			source,
+			H,
+		);
 	}
 
 	public toJSON(): unknown {
-		return this.factory.capture(this);
+		return this.Amendment.capture(this);
 	}
 
 	public toString(): string {
@@ -59,50 +64,38 @@ class ConcreteAmendment<H extends HLike<H>> implements Amendment<H> {
 }
 
 
-export namespace Amendment {
-	export interface Source<H extends HLike<H>> extends OpenOrder.Source<H> {
-		newUnfilled: H;
-		newPrice: H;
-	}
-
-	export interface Snapshot extends OpenOrder.Snapshot {
-		readonly newUnfilled: H.Snapshot;
-		readonly newPrice: H.Snapshot;
-	}
-}
-
-export class AmendmentFactory<H extends HLike<H>> implements
-	CompositeDataFactoryLike<
-	Amendment.Source<H>,
-	Amendment<H>,
-	Amendment.Snapshot>
+export class AmendmentStatic<H extends HLike<H>> implements
+	CompositeDataLikeStatic<
+	AmendmentLike.Source<H>,
+	AmendmentLike<H>,
+	AmendmentLike.Snapshot>
 {
 	public constructor(
-		private hFactory: HFactory<H>,
-		private openOrderFactory: OpenOrderFactory<H>,
+		private H: HLikeStatic<H>,
+		private OpenOrder: OpenOrderStatic<H>,
 	) { }
 
-	public create(source: Amendment.Source<H>): Amendment<H> {
+	public create(source: AmendmentLike.Source<H>): AmendmentLike<H> {
 		return new ConcreteAmendment(
 			source,
 			this,
-			this.hFactory,
+			this.H,
 		);
 	}
 
-	public capture(amendment: Amendment<H>): Amendment.Snapshot {
+	public capture(amendment: AmendmentLike<H>): AmendmentLike.Snapshot {
 		return {
-			...this.openOrderFactory.capture(amendment),
-			newUnfilled: this.hFactory.capture(amendment.newUnfilled),
-			newPrice: this.hFactory.capture(amendment.newPrice),
+			...this.OpenOrder.capture(amendment),
+			newUnfilled: this.H.capture(amendment.newUnfilled),
+			newPrice: this.H.capture(amendment.newPrice),
 		}
 	}
 
-	public restore(snapshot: Amendment.Snapshot): Amendment<H> {
+	public restore(snapshot: AmendmentLike.Snapshot): AmendmentLike<H> {
 		return this.create({
-			...this.openOrderFactory.restore(snapshot),
-			newUnfilled: this.hFactory.restore(snapshot.newUnfilled),
-			newPrice: this.hFactory.restore(snapshot.newPrice),
+			...this.OpenOrder.restore(snapshot),
+			newUnfilled: this.H.restore(snapshot.newUnfilled),
+			newPrice: this.H.restore(snapshot.newPrice),
 		});
 	}
 }

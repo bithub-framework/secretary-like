@@ -1,35 +1,46 @@
 import { Length, Side, Action } from './length-action-side';
-import { HLike, H, HFactory } from './h';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface LimitOrder<H extends HLike<H>> extends LimitOrder.Source<H>, CompositeDataLike {
+import { HLike, HLikeStatic } from './h';
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+/**
+ * typeclass
+ */
+export declare abstract class LimitOrderLike<H extends HLike<H>> implements CompositeDataLike {
     price: H;
     quantity: H;
     side: Side;
     length: Length;
     action: Action;
-    toJSON(): unknown;
-    toString(): string;
+    abstract toJSON(): unknown;
+    abstract toString(): string;
+    constructor(source: LimitOrderLike.Source<H>, H: HLikeStatic<H>);
 }
-export declare namespace LimitOrder {
-    interface Source<H extends HLike<H>> {
-        price: H.Source<H>;
-        quantity: H.Source<H>;
+/**
+ * namespace about typeclass {@link LimitOrderLike}
+ */
+export declare namespace LimitOrderLike {
+    interface Literal<H extends HLike<H>> {
+        price: HLike.Source<H>;
+        quantity: HLike.Source<H>;
         side: Side;
         length: Length;
         action: Action;
     }
+    type Source<H extends HLike<H>> = LimitOrderLike<H> | Literal<H>;
     interface Snapshot {
-        readonly price: H.Snapshot;
-        readonly quantity: H.Snapshot;
+        readonly price: HLike.Snapshot;
+        readonly quantity: HLike.Snapshot;
         readonly side: Side;
         readonly length: Length;
         readonly action: Action;
     }
 }
-export declare class LimitOrderFactory<H extends HLike<H>> implements CompositeDataFactoryLike<LimitOrder.Source<H>, LimitOrder<H>, LimitOrder.Snapshot> {
-    private hFactory;
-    constructor(hFactory: HFactory<H>);
-    create(source: LimitOrder.Source<H>): LimitOrder<H>;
-    capture(order: LimitOrder<H>): LimitOrder.Snapshot;
-    restore(snapshot: LimitOrder.Snapshot): LimitOrder<H>;
+/**
+ * static part of type {@link LimitOrder}
+ */
+export declare class LimitOrderStatic<H extends HLike<H>> implements CompositeDataLikeStatic<LimitOrderLike.Source<H>, LimitOrderLike<H>, LimitOrderLike.Snapshot> {
+    private H;
+    constructor(H: HLikeStatic<H>);
+    create(source: LimitOrderLike.Source<H>): LimitOrderLike<H>;
+    capture(order: LimitOrderLike<H>): LimitOrderLike.Snapshot;
+    restore(snapshot: LimitOrderLike.Snapshot): LimitOrderLike<H>;
 }

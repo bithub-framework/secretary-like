@@ -3,11 +3,13 @@ export interface CompositeDataLike {
 	toString(): string;
 }
 
-export interface CompositeDataFactoryLike<
+export interface CompositeDataLikeStatic
+	<
 	Source,
-	DataLike extends Source,
-	Snapshot> {
-	create(source: Source): DataLike;
-	capture(data: DataLike): Snapshot;
-	restore(snapshot: Snapshot): DataLike;
+	Data extends CompositeDataLike,
+	Snapshot
+	> {
+	create(source: Source): Data;
+	capture(data: Data): Snapshot;
+	restore(snapshot: Snapshot): Data;
 }

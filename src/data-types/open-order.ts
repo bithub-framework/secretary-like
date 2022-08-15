@@ -1,54 +1,69 @@
-import { HLike, H, HFactory } from './h';
+import { HLike, HLikeStatic } from './h';
 import {
-	LimitOrder,
-	LimitOrderFactory,
+	LimitOrderLike,
+	LimitOrderStatic,
 } from './limit-order';
 import { OrderId } from './order-id';
-import { Length, Side, Action } from './length-action-side';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+import {
+	CompositeDataLike,
+	CompositeDataLikeStatic,
+} from './composite-data';
 
 
 
-export interface OpenOrder<H extends HLike<H>> extends
-	LimitOrder<H>,
-	OpenOrder.Source<H>,
-	CompositeDataLike {
-	price: H;
-	quantity: H;
-	filled: H;
-	unfilled: H;
-	id: OrderId;
-}
-
-class ConcreteOpenOrder<H extends HLike<H>> implements OpenOrder<H> {
-	public price: H;
-	public quantity: H;
-	public side: Side;
-	public length: Length;
-	public action: Action;
+export abstract class OpenOrderLike<H extends HLike<H>>
+	extends LimitOrderLike<H>
+	implements CompositeDataLike {
 	public filled: H;
 	public unfilled: H;
 	public id: OrderId;
 
 	public constructor(
-		source: OpenOrder.Source<H>,
-		private factory: OpenOrderFactory<H>,
-		hFactory: HFactory<H>,
+		source: OpenOrderLike.Source<H>,
+		H: HLikeStatic<H>,
 	) {
-		({
-			side: this.side,
-			length: this.length,
-			action: this.action,
-			filled: this.filled,
-			unfilled: this.unfilled,
-			id: this.id,
-		} = source);
-		this.price = hFactory.from(source.price);
-		this.quantity = hFactory.from(source.quantity);
+		super(
+			source,
+			H,
+		);
+		this.filled = H.create(source.filled);
+		this.unfilled = H.create(source.unfilled);
+		this.id = source.id;
+	}
+}
+
+
+export namespace OpenOrderLike {
+	export interface Literal<H extends HLike<H>> extends LimitOrderLike.Literal<H> {
+		filled: HLike.Source<H>;
+		unfilled: HLike.Source<H>;
+		id: OrderId;
+	}
+	export type Source<H extends HLike<H>> = OpenOrder<H> | Literal<H>;
+
+	export interface Snapshot extends LimitOrderLike.Snapshot {
+		readonly filled: HLike.Snapshot;
+		readonly unfilled: HLike.Snapshot;
+		readonly id: OrderId;
+	}
+}
+
+
+
+class OpenOrder<H extends HLike<H>> extends OpenOrderLike<H> {
+	public constructor(
+		source: OpenOrderLike.Source<H>,
+		private OpenOrder: OpenOrderStatic<H>,
+		H: HLikeStatic<H>,
+	) {
+		super(
+			source,
+			H,
+		);
 	}
 
 	public toJSON(): unknown {
-		return this.factory.capture(this);
+		return this.OpenOrder.capture(this);
 	}
 
 	public toString(): string {
@@ -56,53 +71,41 @@ class ConcreteOpenOrder<H extends HLike<H>> implements OpenOrder<H> {
 	}
 }
 
-export namespace OpenOrder {
-	export interface Source<H extends HLike<H>> extends LimitOrder.Source<H> {
-		filled: H;
-		unfilled: H;
-		id: OrderId;
-	}
 
-	export interface Snapshot extends LimitOrder.Snapshot {
-		readonly filled: H.Snapshot;
-		readonly unfilled: H.Snapshot;
-		readonly id: OrderId;
-	}
-}
 
-export class OpenOrderFactory<H extends HLike<H>> implements
-	CompositeDataFactoryLike<
-	OpenOrder.Source<H>,
-	OpenOrder<H>,
-	OpenOrder.Snapshot>
+export class OpenOrderStatic<H extends HLike<H>> implements
+	CompositeDataLikeStatic<
+	OpenOrderLike.Source<H>,
+	OpenOrderLike<H>,
+	OpenOrderLike.Snapshot>
 {
 	public constructor(
-		private hFactory: HFactory<H>,
-		private limitOrderFactory: LimitOrderFactory<H>,
+		private H: HLikeStatic<H>,
+		private LimitOrder: LimitOrderStatic<H>,
 	) { }
 
-	public create(source: OpenOrder.Source<H>): OpenOrder<H> {
-		return new ConcreteOpenOrder(
+	public create(source: OpenOrderLike.Source<H>): OpenOrderLike<H> {
+		return new OpenOrder(
 			source,
 			this,
-			this.hFactory,
+			this.H,
 		);
 	}
 
-	public capture(order: OpenOrder<H>): OpenOrder.Snapshot {
+	public capture(order: OpenOrderLike<H>): OpenOrderLike.Snapshot {
 		return {
-			...this.limitOrderFactory.capture(order),
-			filled: this.hFactory.capture(order.filled),
-			unfilled: this.hFactory.capture(order.unfilled),
+			...this.LimitOrder.capture(order),
+			filled: this.H.capture(order.filled),
+			unfilled: this.H.capture(order.unfilled),
 			id: order.id,
 		};
 	}
 
-	public restore(snapshot: OpenOrder.Snapshot): OpenOrder<H> {
+	public restore(snapshot: OpenOrderLike.Snapshot): OpenOrderLike<H> {
 		return this.create({
-			...this.limitOrderFactory.restore(snapshot),
-			filled: this.hFactory.restore(snapshot.filled),
-			unfilled: this.hFactory.restore(snapshot.unfilled),
+			...this.LimitOrder.restore(snapshot),
+			filled: this.H.restore(snapshot.filled),
+			unfilled: this.H.restore(snapshot.unfilled),
 			id: snapshot.id,
 		});
 	}

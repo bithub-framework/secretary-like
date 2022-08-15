@@ -1,35 +1,57 @@
-import { HLike, H, HFactory } from './h';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+import { HLike, HLikeStatic } from './h';
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
 
 
 
-export interface Balances<H extends HLike<H>>
-	extends Balances.Source<H>, CompositeDataLike {
-	balance: H;
-	available: H;
-	time: number;
-	toJSON(): unknown;
-	toString(): string;
-}
-
-class ConcreteBalances<H extends HLike<H>> implements Balances<H>{
+export abstract class BalancesLike<H extends HLike<H>>
+	implements CompositeDataLike {
 	public balance: H;
 	public available: H;
 	public time: number;
+	public abstract toJSON(): unknown;
+	public abstract toString(): string;
 
 	public constructor(
-		source: Balances.Source<H>,
-		private factory: BalancesFactory<H>,
+		source: BalancesLike.Source<H>,
+		H: HLikeStatic<H>,
 	) {
-		({
-			balance: this.balance,
-			available: this.available,
-			time: this.time,
-		} = source);
+		this.balance = H.create(source.balance);
+		this.available = H.create(source.available);
+		this.time = source.time;
+	}
+}
+
+
+export namespace BalancesLike {
+	export interface Literal<H extends HLike<H>> {
+		balance: HLike.Source<H>;
+		available: HLike.Source<H>;
+		time: number;
+	}
+	export type Source<H extends HLike<H>> = BalancesLike<H> | Literal<H>;
+
+	export interface Snapshot {
+		readonly balance: HLike.Snapshot;
+		readonly available: HLike.Snapshot;
+		readonly time: number;
+	}
+}
+
+
+class Balances<H extends HLike<H>> extends BalancesLike<H>{
+	public constructor(
+		source: BalancesLike.Source<H>,
+		private Balances: BalancesStatic<H>,
+		H: HLikeStatic<H>,
+	) {
+		super(
+			source,
+			H,
+		);
 	}
 
 	public toJSON(): unknown {
-		return this.factory.capture(this);
+		return this.Balances.capture(this);
 	}
 
 	public toString(): string {
@@ -37,46 +59,37 @@ class ConcreteBalances<H extends HLike<H>> implements Balances<H>{
 	}
 }
 
-export namespace Balances {
-	export interface Source<H extends HLike<H>> {
-		balance: H;
-		available: H;
-		time: number;
-	}
 
-	export interface Snapshot {
-		readonly balance: H.Snapshot;
-		readonly available: H.Snapshot;
-		readonly time: number;
-	}
-}
-
-export class BalancesFactory<H extends HLike<H>> implements
-	CompositeDataFactoryLike<
-	Balances.Source<H>,
-	Balances<H>,
-	Balances.Snapshot>
+export class BalancesStatic<H extends HLike<H>> implements
+	CompositeDataLikeStatic<
+	BalancesLike.Source<H>,
+	BalancesLike<H>,
+	BalancesLike.Snapshot>
 {
 	public constructor(
-		private hFactory: HFactory<H>,
+		private H: HLikeStatic<H>,
 	) { }
 
-	public create(source: Balances.Source<H>): Balances<H> {
-		return new ConcreteBalances(source, this);
+	public create(source: BalancesLike.Source<H>): BalancesLike<H> {
+		return new Balances(
+			source,
+			this,
+			this.H,
+		);
 	}
 
-	public capture(balances: Balances<H>): Balances.Snapshot {
+	public capture(balances: BalancesLike<H>): BalancesLike.Snapshot {
 		return {
-			balance: this.hFactory.capture(balances.balance),
-			available: this.hFactory.capture(balances.available),
+			balance: this.H.capture(balances.balance),
+			available: this.H.capture(balances.available),
 			time: balances.time,
 		}
 	}
 
-	public restore(snapshot: Balances.Snapshot): Balances<H> {
+	public restore(snapshot: BalancesLike.Snapshot): BalancesLike<H> {
 		return this.create({
-			balance: this.hFactory.restore(snapshot.balance),
-			available: this.hFactory.restore(snapshot.available),
+			balance: this.H.restore(snapshot.balance),
+			available: this.H.restore(snapshot.available),
 			time: snapshot.time,
 		});
 	}

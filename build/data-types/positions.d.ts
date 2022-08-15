@@ -1,29 +1,31 @@
 import { HLike } from './h';
-import { Position, PositionFactory } from './position';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface Positions<H extends HLike<H>> extends Positions.Source<H>, CompositeDataLike {
-    position: Position<H>;
-    closable: Position<H>;
+import { PositionLike, PositionStatic } from './position';
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+export declare abstract class PositionsLike<H extends HLike<H>> implements CompositeDataLike {
+    position: PositionLike<H>;
+    closable: PositionLike<H>;
     time: number;
-    toJSON(): unknown;
-    toString(): string;
+    constructor(source: PositionsLike.Source<H>, Position: PositionStatic<H>);
+    abstract toJSON(): unknown;
+    abstract toString(): string;
 }
-export declare namespace Positions {
-    interface Source<H extends HLike<H>> {
-        position: Position.Source<H>;
-        closable: Position.Source<H>;
+export declare namespace PositionsLike {
+    interface Literal<H extends HLike<H>> {
+        position: PositionLike.Source<H>;
+        closable: PositionLike.Source<H>;
         time: number;
     }
+    type Source<H extends HLike<H>> = PositionsLike<H> | Literal<H>;
     interface Snapshot {
-        readonly position: Position.Snapshot;
-        readonly closable: Position.Snapshot;
+        readonly position: PositionLike.Snapshot;
+        readonly closable: PositionLike.Snapshot;
         readonly time: number;
     }
 }
-export declare class PositionsFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Positions.Source<H>, Positions<H>, Positions.Snapshot> {
-    private positionFactory;
-    constructor(positionFactory: PositionFactory<H>);
-    create(source: Positions.Source<H>): Positions<H>;
-    capture(positions: Positions<H>): Positions.Snapshot;
-    restore(snapshot: Positions.Snapshot): Positions<H>;
+export declare class PositionsStatic<H extends HLike<H>> implements CompositeDataLikeStatic<PositionsLike.Source<H>, PositionsLike<H>, PositionsLike.Snapshot> {
+    private Position;
+    constructor(Position: PositionStatic<H>);
+    create(source: PositionsLike.Source<H>): PositionsLike<H>;
+    capture(positions: PositionsLike<H>): PositionsLike.Snapshot;
+    restore(snapshot: PositionsLike.Snapshot): PositionsLike<H>;
 }

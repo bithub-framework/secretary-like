@@ -1,29 +1,31 @@
-import { HLike, H, HFactory } from './h';
+import { HLike, HLikeStatic } from './h';
 import { Side } from './length-action-side';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface BookOrder<H extends HLike<H>> extends BookOrder.Source<H>, CompositeDataLike {
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+export declare abstract class BookOrderLike<H extends HLike<H>> implements CompositeDataLike {
     price: H;
     quantity: H;
     side: Side;
-    toJSON(): unknown;
-    toString(): string;
+    abstract toJSON(): unknown;
+    abstract toString(): string;
+    constructor(source: BookOrderLike.Source<H>, H: HLikeStatic<H>);
 }
-export declare namespace BookOrder {
-    interface Source<H extends HLike<H>> {
-        price: H;
-        quantity: H;
+export declare namespace BookOrderLike {
+    interface Literal<H extends HLike<H>> {
+        price: HLike.Source<H>;
+        quantity: HLike.Source<H>;
         side: Side;
     }
+    type Source<H extends HLike<H>> = BookOrderLike<H> | Literal<H>;
     interface Snapshot {
-        readonly price: H.Snapshot;
-        readonly quantity: H.Snapshot;
+        readonly price: HLike.Snapshot;
+        readonly quantity: HLike.Snapshot;
         readonly side: Side;
     }
 }
-export declare class BookOrderFactory<H extends HLike<H>> implements CompositeDataFactoryLike<BookOrder.Source<H>, BookOrder<H>, BookOrder.Snapshot> {
-    private hFactory;
-    constructor(hFactory: HFactory<H>);
-    create(source: BookOrder.Source<H>): BookOrder<H>;
-    capture(order: BookOrder<H>): BookOrder.Snapshot;
-    restore(snapshot: BookOrder.Snapshot): BookOrder<H>;
+export declare class BookOrderStatic<H extends HLike<H>> implements CompositeDataLikeStatic<BookOrderLike.Source<H>, BookOrderLike<H>, BookOrderLike.Snapshot> {
+    private H;
+    constructor(H: HLikeStatic<H>);
+    create(source: BookOrderLike.Source<H>): BookOrderLike<H>;
+    capture(order: BookOrderLike<H>): BookOrderLike.Snapshot;
+    restore(snapshot: BookOrderLike.Snapshot): BookOrderLike<H>;
 }

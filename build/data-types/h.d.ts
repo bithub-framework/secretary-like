@@ -1,36 +1,44 @@
-export interface HLike<H extends HLike<H>> {
-    plus(x: H.Source<H>): H;
-    minus(x: H.Source<H>): H;
-    neg(): H;
-    times(x: H.Source<H>): H;
-    div(x: H.Source<H>, scale: number, roundingMode?: H.RoundingMode): H;
-    mod(x: H.Source<H>): H;
-    lt(x: H.Source<H>): boolean;
-    lte(x: H.Source<H>): boolean;
-    gt(x: H.Source<H>): boolean;
-    gte(x: H.Source<H>): boolean;
-    eq(x: H.Source<H>): boolean;
-    neq(x: H.Source<H>): boolean;
-    round(scale?: number, roundingMode?: H.RoundingMode): H;
-    abs(): H;
-    toJSON(): string;
-    toFixed(scale?: number): string;
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+/**
+ * typeclass
+ * @typeParam H - type
+ */
+export declare abstract class HLike<H extends HLike<H>> implements CompositeDataLike {
+    abstract plus(x: HLike.Source<H>): H;
+    abstract minus(x: HLike.Source<H>): H;
+    abstract neg(): H;
+    abstract times(x: HLike.Source<H>): H;
+    abstract div(x: HLike.Source<H>, scale: number, roundingMode?: HLike.RoundingMode): H;
+    abstract mod(x: HLike.Source<H>): H;
+    abstract lt(x: HLike.Source<H>): boolean;
+    abstract lte(x: HLike.Source<H>): boolean;
+    abstract gt(x: HLike.Source<H>): boolean;
+    abstract gte(x: HLike.Source<H>): boolean;
+    abstract eq(x: HLike.Source<H>): boolean;
+    abstract neq(x: HLike.Source<H>): boolean;
+    abstract round(scale?: number, roundingMode?: HLike.RoundingMode): H;
+    abstract abs(): H;
+    abstract toJSON(): string;
+    abstract toFixed(scale?: number): string;
 }
-export declare namespace H {
+/**
+ * namespace about {@link HLike}
+ */
+export declare namespace HLike {
     type Snapshot = string;
-    type Source<H extends HLike<H>> = H | number | string;
+    type Literal = number | string;
+    type Source<H extends HLike<H>> = H | Literal;
     enum RoundingMode {
         TOWARDS_ZERO = 0,
         AWAY_FROM_ZERO = 1,
         HALF_AWAY_FROM_ZERO = 2
     }
 }
-export interface HStatic<H extends HLike<H>> {
-    max(x: H.Source<H>, ...rest: H.Source<H>[]): H;
-    min(x: H.Source<H>, ...rest: H.Source<H>[]): H;
-}
-export interface HFactory<H extends HLike<H>> {
-    from(source: H.Source<H>): H;
-    capture(x: H): H.Snapshot;
-    restore(snapshot: H.Snapshot): H;
+/**
+ * static part of typeclass HLike
+ * @typeParam H - type
+ */
+export interface HLikeStatic<H extends HLike<H>> extends CompositeDataLikeStatic<HLike.Source<H>, H, HLike.Snapshot> {
+    max(x: HLike.Source<H>, ...rest: HLike.Source<H>[]): H;
+    min(x: HLike.Source<H>, ...rest: HLike.Source<H>[]): H;
 }

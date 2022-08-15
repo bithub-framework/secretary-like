@@ -1,28 +1,30 @@
-import { HLike, H, HFactory } from './h';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface Balances<H extends HLike<H>> extends Balances.Source<H>, CompositeDataLike {
+import { HLike, HLikeStatic } from './h';
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+export declare abstract class BalancesLike<H extends HLike<H>> implements CompositeDataLike {
     balance: H;
     available: H;
     time: number;
-    toJSON(): unknown;
-    toString(): string;
+    abstract toJSON(): unknown;
+    abstract toString(): string;
+    constructor(source: BalancesLike.Source<H>, H: HLikeStatic<H>);
 }
-export declare namespace Balances {
-    interface Source<H extends HLike<H>> {
-        balance: H;
-        available: H;
+export declare namespace BalancesLike {
+    interface Literal<H extends HLike<H>> {
+        balance: HLike.Source<H>;
+        available: HLike.Source<H>;
         time: number;
     }
+    type Source<H extends HLike<H>> = BalancesLike<H> | Literal<H>;
     interface Snapshot {
-        readonly balance: H.Snapshot;
-        readonly available: H.Snapshot;
+        readonly balance: HLike.Snapshot;
+        readonly available: HLike.Snapshot;
         readonly time: number;
     }
 }
-export declare class BalancesFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Balances.Source<H>, Balances<H>, Balances.Snapshot> {
-    private hFactory;
-    constructor(hFactory: HFactory<H>);
-    create(source: Balances.Source<H>): Balances<H>;
-    capture(balances: Balances<H>): Balances.Snapshot;
-    restore(snapshot: Balances.Snapshot): Balances<H>;
+export declare class BalancesStatic<H extends HLike<H>> implements CompositeDataLikeStatic<BalancesLike.Source<H>, BalancesLike<H>, BalancesLike.Snapshot> {
+    private H;
+    constructor(H: HLikeStatic<H>);
+    create(source: BalancesLike.Source<H>): BalancesLike<H>;
+    capture(balances: BalancesLike<H>): BalancesLike.Snapshot;
+    restore(snapshot: BalancesLike.Snapshot): BalancesLike<H>;
 }

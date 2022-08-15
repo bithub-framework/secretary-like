@@ -1,43 +1,47 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookOrderFactory = void 0;
-class ConcreteBookOrder {
-    constructor(source, factory) {
-        this.factory = factory;
-        ({
-            price: this.price,
-            quantity: this.quantity,
-            side: this.side,
-        } = source);
+exports.BookOrderStatic = exports.BookOrderLike = void 0;
+class BookOrderLike {
+    constructor(source, H) {
+        this.price = H.create(source.price);
+        this.quantity = H.create(source.quantity);
+        this.side = source.side;
+    }
+}
+exports.BookOrderLike = BookOrderLike;
+class BookOrder extends BookOrderLike {
+    constructor(source, BookOrder, H) {
+        super(source, H);
+        this.BookOrder = BookOrder;
     }
     toJSON() {
-        return this.factory.capture(this);
+        return this.BookOrder.capture(this);
     }
     toString() {
         return JSON.stringify(this.toJSON());
     }
 }
-class BookOrderFactory {
-    constructor(hFactory) {
-        this.hFactory = hFactory;
+class BookOrderStatic {
+    constructor(H) {
+        this.H = H;
     }
     create(source) {
-        return new ConcreteBookOrder(source, this);
+        return new BookOrder(source, this, this.H);
     }
     capture(order) {
         return {
-            price: this.hFactory.capture(order.price),
-            quantity: this.hFactory.capture(order.quantity),
+            price: this.H.capture(order.price),
+            quantity: this.H.capture(order.quantity),
             side: order.side,
         };
     }
     restore(snapshot) {
         return this.create({
-            price: this.hFactory.restore(snapshot.price),
-            quantity: this.hFactory.restore(snapshot.quantity),
+            price: this.H.restore(snapshot.price),
+            quantity: this.H.restore(snapshot.quantity),
             side: snapshot.side,
         });
     }
 }
-exports.BookOrderFactory = BookOrderFactory;
+exports.BookOrderStatic = BookOrderStatic;
 //# sourceMappingURL=book-order.js.map

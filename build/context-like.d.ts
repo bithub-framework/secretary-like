@@ -1,12 +1,4 @@
-import { LimitOrder } from './data-types/limit-order';
-import { OpenOrder } from './data-types/open-order';
-import { Amendment } from './data-types/amendment';
-import { Positions } from './data-types/positions';
-import { Balances } from './data-types/balances';
-import { Orderbook } from './data-types/orderbook';
-import { Trade } from './data-types/trade';
-import { HLike } from './data-types/h';
-import { DataTypesNamespace } from './data-types/data-types-namespace';
+import { LimitOrder, OpenOrder, Amendment, Positions, Balances, Orderbook, Trade, HLike, DataStaticNamespace } from './data-types';
 import { TimelineLike } from './timeline-like';
 import { EventEmitter } from 'events';
 import { MarketSpec, AccountSpec } from './specification';
@@ -15,7 +7,7 @@ export interface ContextLike<H extends HLike<H>> extends DaemonLike {
     readonly [marketIndex: number]: MarketLike<H>;
     readonly timeline: TimelineLike;
     submit(content: string): void;
-    DataTypes: DataTypesNamespace<H>;
+    DataTypes: DataStaticNamespace<H>;
 }
 export interface MarketLike<H extends HLike<H>> extends MarketApiLike<H> {
     readonly [accountIndex: number]: AccountLike<H>;

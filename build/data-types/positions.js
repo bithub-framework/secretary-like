@@ -1,41 +1,47 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PositionsFactory = void 0;
-class ConcretePositions {
-    constructor(source, factory, positionFactory) {
-        this.factory = factory;
-        this.position = positionFactory.create(source.position);
-        this.closable = positionFactory.create(source.closable);
+exports.PositionsStatic = exports.PositionsLike = void 0;
+class PositionsLike {
+    constructor(source, Position) {
+        this.position = Position.create(source.position);
+        this.closable = Position.create(source.closable);
         this.time = source.time;
     }
+}
+exports.PositionsLike = PositionsLike;
+class Positions extends PositionsLike {
+    constructor(source, Positions, Position) {
+        super(source, Position);
+        this.Positions = Positions;
+    }
     toJSON() {
-        return this.factory.capture(this);
+        return this.Positions.capture(this);
     }
     toString() {
         return JSON.stringify(this.toJSON());
     }
 }
-class PositionsFactory {
-    constructor(positionFactory) {
-        this.positionFactory = positionFactory;
+class PositionsStatic {
+    constructor(Position) {
+        this.Position = Position;
     }
     create(source) {
-        return new ConcretePositions(source, this, this.positionFactory);
+        return new Positions(source, this, this.Position);
     }
     capture(positions) {
         return {
-            position: this.positionFactory.capture(positions.position),
-            closable: this.positionFactory.capture(positions.closable),
+            position: this.Position.capture(positions.position),
+            closable: this.Position.capture(positions.closable),
             time: positions.time,
         };
     }
     restore(snapshot) {
         return this.create({
-            position: this.positionFactory.restore(snapshot.position),
-            closable: this.positionFactory.restore(snapshot.closable),
+            position: this.Position.restore(snapshot.position),
+            closable: this.Position.restore(snapshot.closable),
             time: snapshot.time,
         });
     }
 }
-exports.PositionsFactory = PositionsFactory;
+exports.PositionsStatic = PositionsStatic;
 //# sourceMappingURL=positions.js.map

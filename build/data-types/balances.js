@@ -1,43 +1,47 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BalancesFactory = void 0;
-class ConcreteBalances {
-    constructor(source, factory) {
-        this.factory = factory;
-        ({
-            balance: this.balance,
-            available: this.available,
-            time: this.time,
-        } = source);
+exports.BalancesStatic = exports.BalancesLike = void 0;
+class BalancesLike {
+    constructor(source, H) {
+        this.balance = H.create(source.balance);
+        this.available = H.create(source.available);
+        this.time = source.time;
+    }
+}
+exports.BalancesLike = BalancesLike;
+class Balances extends BalancesLike {
+    constructor(source, Balances, H) {
+        super(source, H);
+        this.Balances = Balances;
     }
     toJSON() {
-        return this.factory.capture(this);
+        return this.Balances.capture(this);
     }
     toString() {
         return JSON.stringify(this.toJSON());
     }
 }
-class BalancesFactory {
-    constructor(hFactory) {
-        this.hFactory = hFactory;
+class BalancesStatic {
+    constructor(H) {
+        this.H = H;
     }
     create(source) {
-        return new ConcreteBalances(source, this);
+        return new Balances(source, this, this.H);
     }
     capture(balances) {
         return {
-            balance: this.hFactory.capture(balances.balance),
-            available: this.hFactory.capture(balances.available),
+            balance: this.H.capture(balances.balance),
+            available: this.H.capture(balances.available),
             time: balances.time,
         };
     }
     restore(snapshot) {
         return this.create({
-            balance: this.hFactory.restore(snapshot.balance),
-            available: this.hFactory.restore(snapshot.available),
+            balance: this.H.restore(snapshot.balance),
+            available: this.H.restore(snapshot.available),
             time: snapshot.time,
         });
     }
 }
-exports.BalancesFactory = BalancesFactory;
+exports.BalancesStatic = BalancesStatic;
 //# sourceMappingURL=balances.js.map

@@ -1,30 +1,65 @@
-import { HLike, H, HFactory } from './h';
-import { Length } from './length-action-side';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+import { HLike, HLikeStatic } from './h';
+import { Length, LONG, SHORT } from './length-action-side';
+import {
+	CompositeDataLike,
+	CompositeDataLikeStatic,
+} from './composite-data';
 
 
-export interface Position<H extends HLike<H>>
-	extends Position.Source<H>, CompositeDataLike {
-	[length: Length]: H;
-	toJSON(): unknown;
-	toString(): string;
-}
-
-class ConcretePosition<H extends HLike<H>> implements Position<H> {
-	[length: Length]: H;
+export abstract class PositionLike<H extends HLike<H>>
+	implements CompositeDataLike {
+	protected long: H;
+	protected short: H;
+	public abstract toJSON(): unknown;
+	public abstract toString(): string;
 
 	public constructor(
-		source: Position.Source<H>,
-		private factory: PositionFactory<H>,
+		source: PositionLike.Source<H>,
+		H: HLikeStatic<H>,
 	) {
-		({
-			[Length.LONG]: this[Length.LONG],
-			[Length.SHORT]: this[Length.SHORT],
-		} = source);
+		if (source instanceof PositionLike) {
+			this.long = source.length(LONG);
+			this.short = source.length(SHORT);
+		} else {
+			this.long = H.create(source.long);
+			this.short = H.create(source.short);
+		}
+	}
+
+	public length(length: Length): H {
+		return length === LONG ? this.long : this.short;
+	}
+}
+
+
+export namespace PositionLike {
+	export interface Literal<H extends HLike<H>> {
+		long: HLike.Source<H>;
+		short: HLike.Source<H>;
+	}
+	export type Source<H extends HLike<H>> = PositionLike<H> | Literal<H>;
+
+	export interface Snapshot {
+		readonly long: HLike.Snapshot;
+		readonly short: HLike.Snapshot;
+	}
+}
+
+
+class Position<H extends HLike<H>> extends PositionLike<H> {
+	public constructor(
+		source: PositionLike.Source<H>,
+		private Position: PositionStatic<H>,
+		H: HLikeStatic<H>,
+	) {
+		super(
+			source,
+			H,
+		);
 	}
 
 	public toJSON(): unknown {
-		return this.factory.capture(this);
+		return this.Position.capture(this);
 	}
 
 	public toString(): string {
@@ -32,42 +67,35 @@ class ConcretePosition<H extends HLike<H>> implements Position<H> {
 	}
 }
 
-export namespace Position {
-	export interface Source<H extends HLike<H>> {
-		[length: Length]: H;
-	}
-
-	export interface Snapshot {
-		readonly long: H.Snapshot;
-		readonly short: H.Snapshot;
-	}
-}
-
-export class PositionFactory<H extends HLike<H>> implements
-	CompositeDataFactoryLike<
-	Position.Source<H>,
-	Position<H>,
-	Position.Snapshot>
+export class PositionStatic<H extends HLike<H>> implements
+	CompositeDataLikeStatic<
+	PositionLike.Source<H>,
+	PositionLike<H>,
+	PositionLike.Snapshot>
 {
 	public constructor(
-		private hFactory: HFactory<H>,
+		private H: HLikeStatic<H>,
 	) { }
 
-	public create(source: Position.Source<H>): Position<H> {
-		return new ConcretePosition(source, this);
+	public create(source: PositionLike.Source<H>): PositionLike<H> {
+		return new Position(
+			source,
+			this,
+			this.H,
+		);
 	}
 
-	public capture(position: Position<H>): Position.Snapshot {
+	public capture(position: PositionLike<H>): PositionLike.Snapshot {
 		return {
-			long: this.hFactory.capture(position[Length.LONG]),
-			short: this.hFactory.capture(position[Length.SHORT]),
+			long: this.H.capture(position.length(LONG)),
+			short: this.H.capture(position.length(SHORT)),
 		};
 	}
 
-	public restore(snapshot: Position.Snapshot): Position<H> {
+	public restore(snapshot: PositionLike.Snapshot): PositionLike<H> {
 		return this.create({
-			[Length.LONG]: this.hFactory.restore(snapshot.long),
-			[Length.SHORT]: this.hFactory.restore(snapshot.short),
+			long: this.H.restore(snapshot.long),
+			short: this.H.restore(snapshot.short),
 		});
 	}
 }

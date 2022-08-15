@@ -1,6 +1,6 @@
-import { Startable, DaemonLike } from 'startable';
+import { DaemonLike } from 'startable';
 import { ContextLike } from './context-like';
-import { HLike } from './data-types/h';
+import { HLike } from './data-types';
 
 
 

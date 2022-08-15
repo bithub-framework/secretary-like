@@ -1,42 +1,76 @@
 import { Length, Side, Action } from './length-action-side';
-import { HLike, H, HFactory } from './h';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+import { HLike, HLikeStatic } from './h';
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
 
 
-export interface LimitOrder<H extends HLike<H>>
-	extends LimitOrder.Source<H>, CompositeDataLike {
-	price: H;
-	quantity: H;
-	side: Side;
-	length: Length;
-	action: Action;
-	toJSON(): unknown;
-	toString(): string;
-}
-
-class ConcreteLimitOrder<H extends HLike<H>> implements LimitOrder<H>{
+/**
+ * typeclass
+ */
+export abstract class LimitOrderLike<H extends HLike<H>>
+	implements CompositeDataLike {
 	public price: H;
 	public quantity: H;
 	public side: Side;
 	public length: Length;
 	public action: Action;
+	public abstract toJSON(): unknown;
+	public abstract toString(): string;
 
 	public constructor(
-		source: LimitOrder.Source<H>,
-		private factory: LimitOrderFactory<H>,
-		hFactory: HFactory<H>,
+		source: LimitOrderLike.Source<H>,
+		H: HLikeStatic<H>,
 	) {
 		({
 			side: this.side,
 			length: this.length,
 			action: this.action,
 		} = source);
-		this.price = hFactory.from(source.price);
-		this.quantity = hFactory.from(source.quantity);
+		this.price = H.create(source.price);
+		this.quantity = H.create(source.quantity);
+	}
+}
+
+/**
+ * namespace about typeclass {@link LimitOrderLike}
+ */
+export namespace LimitOrderLike {
+	export interface Literal<H extends HLike<H>> {
+		price: HLike.Source<H>;
+		quantity: HLike.Source<H>;
+		side: Side;
+		length: Length;
+		action: Action;
+	}
+
+	export type Source<H extends HLike<H>> = LimitOrderLike<H> | Literal<H>;
+
+	export interface Snapshot {
+		readonly price: HLike.Snapshot;
+		readonly quantity: HLike.Snapshot;
+		readonly side: Side;
+		readonly length: Length;
+		readonly action: Action;
+	}
+}
+
+/**
+ * type
+ * @sealed
+ */
+class LimitOrder<H extends HLike<H>> extends LimitOrderLike<H>{
+	public constructor(
+		source: LimitOrderLike.Source<H>,
+		private LimitOrder: LimitOrderStatic<H>,
+		H: HLikeStatic<H>,
+	) {
+		super(
+			source,
+			H,
+		);
 	}
 
 	public toJSON(): unknown {
-		return this.factory.capture(this);
+		return this.LimitOrder.capture(this);
 	}
 
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/toString
@@ -46,57 +80,42 @@ class ConcreteLimitOrder<H extends HLike<H>> implements LimitOrder<H>{
 	}
 }
 
-export namespace LimitOrder {
-	export interface Source<H extends HLike<H>> {
-		price: H.Source<H>;
-		quantity: H.Source<H>;
-		side: Side;
-		length: Length;
-		action: Action;
-	}
-
-	export interface Snapshot {
-		readonly price: H.Snapshot;
-		readonly quantity: H.Snapshot;
-		readonly side: Side;
-		readonly length: Length;
-		readonly action: Action;
-	}
-}
-
-export class LimitOrderFactory<H extends HLike<H>> implements
-	CompositeDataFactoryLike<
-	LimitOrder.Source<H>,
-	LimitOrder<H>,
-	LimitOrder.Snapshot
+/**
+ * static part of type {@link LimitOrder}
+ */
+export class LimitOrderStatic<H extends HLike<H>> implements
+	CompositeDataLikeStatic<
+	LimitOrderLike.Source<H>,
+	LimitOrderLike<H>,
+	LimitOrderLike.Snapshot
 	>
 {
 	public constructor(
-		private hFactory: HFactory<H>,
+		private H: HLikeStatic<H>,
 	) { }
 
-	public create(source: LimitOrder.Source<H>): LimitOrder<H> {
-		return new ConcreteLimitOrder(
+	public create(source: LimitOrderLike.Source<H>): LimitOrderLike<H> {
+		return new LimitOrder(
 			source,
 			this,
-			this.hFactory,
+			this.H,
 		);
 	}
 
-	public capture(order: LimitOrder<H>): LimitOrder.Snapshot {
+	public capture(order: LimitOrderLike<H>): LimitOrderLike.Snapshot {
 		return {
-			price: this.hFactory.capture(order.price),
-			quantity: this.hFactory.capture(order.quantity),
+			price: this.H.capture(order.price),
+			quantity: this.H.capture(order.quantity),
 			side: order.side,
 			length: order.length,
 			action: order.action,
 		}
 	}
 
-	public restore(snapshot: LimitOrder.Snapshot): LimitOrder<H> {
+	public restore(snapshot: LimitOrderLike.Snapshot): LimitOrderLike<H> {
 		return this.create({
-			price: this.hFactory.restore(snapshot.price),
-			quantity: this.hFactory.restore(snapshot.quantity),
+			price: this.H.restore(snapshot.price),
+			quantity: this.H.restore(snapshot.quantity),
 			side: snapshot.side,
 			length: snapshot.length,
 			action: snapshot.action,

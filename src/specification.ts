@@ -1,4 +1,4 @@
-import { HLike } from '.';
+import { HLike } from './data-types';
 
 
 export interface AccountSpec {

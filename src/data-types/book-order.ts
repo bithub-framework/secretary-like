@@ -1,35 +1,57 @@
-import { HLike, H, HFactory } from './h';
+import { HLike, HLikeStatic } from './h';
 import { Side } from './length-action-side';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
 
 
-export interface BookOrder<H extends HLike<H>>
-	extends BookOrder.Source<H>, CompositeDataLike {
-	price: H;
-	quantity: H;
-	side: Side;
-	toJSON(): unknown;
-	toString(): string;
-}
-
-class ConcreteBookOrder<H extends HLike<H>> implements BookOrder<H> {
+export abstract class BookOrderLike<H extends HLike<H>>
+	implements CompositeDataLike {
 	public price: H;
 	public quantity: H;
 	public side: Side;
+	public abstract toJSON(): unknown;
+	public abstract toString(): string;
 
 	public constructor(
-		source: BookOrder.Source<H>,
-		private factory: BookOrderFactory<H>,
+		source: BookOrderLike.Source<H>,
+		H: HLikeStatic<H>,
 	) {
-		({
-			price: this.price,
-			quantity: this.quantity,
-			side: this.side,
-		} = source);
+		this.price = H.create(source.price);
+		this.quantity = H.create(source.quantity);
+		this.side = source.side;
+	}
+}
+
+
+export namespace BookOrderLike {
+	export interface Literal<H extends HLike<H>> {
+		price: HLike.Source<H>;
+		quantity: HLike.Source<H>;
+		side: Side;
+	}
+	export type Source<H extends HLike<H>> = BookOrderLike<H> | Literal<H>;
+
+	export interface Snapshot {
+		readonly price: HLike.Snapshot;
+		readonly quantity: HLike.Snapshot;
+		readonly side: Side;
+	}
+}
+
+
+class BookOrder<H extends HLike<H>> extends BookOrderLike<H> {
+	public constructor(
+		source: BookOrderLike.Source<H>,
+		private BookOrder: BookOrderStatic<H>,
+		H: HLikeStatic<H>,
+	) {
+		super(
+			source,
+			H,
+		);
 	}
 
 	public toJSON(): unknown {
-		return this.factory.capture(this);
+		return this.BookOrder.capture(this);
 	}
 
 	public toString(): string {
@@ -37,46 +59,37 @@ class ConcreteBookOrder<H extends HLike<H>> implements BookOrder<H> {
 	}
 }
 
-export namespace BookOrder {
-	export interface Source<H extends HLike<H>> {
-		price: H;
-		quantity: H;
-		side: Side;
-	}
 
-	export interface Snapshot {
-		readonly price: H.Snapshot;
-		readonly quantity: H.Snapshot;
-		readonly side: Side;
-	}
-}
-
-export class BookOrderFactory<H extends HLike<H>> implements
-	CompositeDataFactoryLike<
-	BookOrder.Source<H>,
-	BookOrder<H>,
-	BookOrder.Snapshot>
+export class BookOrderStatic<H extends HLike<H>> implements
+	CompositeDataLikeStatic<
+	BookOrderLike.Source<H>,
+	BookOrderLike<H>,
+	BookOrderLike.Snapshot>
 {
 	public constructor(
-		private hFactory: HFactory<H>,
+		private H: HLikeStatic<H>,
 	) { }
 
-	public create(source: BookOrder.Source<H>): BookOrder<H> {
-		return new ConcreteBookOrder(source, this);
+	public create(source: BookOrderLike.Source<H>): BookOrderLike<H> {
+		return new BookOrder(
+			source,
+			this,
+			this.H,
+		);
 	}
 
-	public capture(order: BookOrder<H>): BookOrder.Snapshot {
+	public capture(order: BookOrderLike<H>): BookOrderLike.Snapshot {
 		return {
-			price: this.hFactory.capture(order.price),
-			quantity: this.hFactory.capture(order.quantity),
+			price: this.H.capture(order.price),
+			quantity: this.H.capture(order.quantity),
 			side: order.side,
 		}
 	}
 
-	public restore(snapshot: BookOrder.Snapshot): BookOrder<H> {
+	public restore(snapshot: BookOrderLike.Snapshot): BookOrderLike<H> {
 		return this.create({
-			price: this.hFactory.restore(snapshot.price),
-			quantity: this.hFactory.restore(snapshot.quantity),
+			price: this.H.restore(snapshot.price),
+			quantity: this.H.restore(snapshot.quantity),
 			side: snapshot.side,
 		});
 	}

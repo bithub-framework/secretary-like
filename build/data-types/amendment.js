@@ -1,51 +1,49 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AmendmentFactory = void 0;
-class ConcreteAmendment {
-    constructor(source, factory, hFactory) {
-        this.factory = factory;
-        ({
-            side: this.side,
-            length: this.length,
-            action: this.action,
-            filled: this.filled,
-            unfilled: this.unfilled,
-            id: this.id,
-            newPrice: this.newPrice,
-            newUnfilled: this.newUnfilled,
-        } = source);
-        this.price = hFactory.from(source.price);
-        this.quantity = hFactory.from(source.quantity);
+exports.AmendmentStatic = exports.AmendmentLike = void 0;
+const open_order_1 = require("./open-order");
+class AmendmentLike extends open_order_1.OpenOrderLike {
+    constructor(source, H) {
+        super(source, H);
+        this.newPrice = H.create(source.newPrice);
+        this.newUnfilled = H.create(source.newUnfilled);
+    }
+}
+exports.AmendmentLike = AmendmentLike;
+class ConcreteAmendment extends AmendmentLike {
+    constructor(source, Amendment, H) {
+        super(source, H);
+        this.Amendment = Amendment;
     }
     toJSON() {
-        return this.factory.capture(this);
+        return this.Amendment.capture(this);
     }
     toString() {
         return JSON.stringify(this.toJSON());
     }
 }
-class AmendmentFactory {
-    constructor(hFactory, openOrderFactory) {
-        this.hFactory = hFactory;
-        this.openOrderFactory = openOrderFactory;
+class AmendmentStatic {
+    constructor(H, OpenOrder) {
+        this.H = H;
+        this.OpenOrder = OpenOrder;
     }
     create(source) {
-        return new ConcreteAmendment(source, this, this.hFactory);
+        return new ConcreteAmendment(source, this, this.H);
     }
     capture(amendment) {
         return {
-            ...this.openOrderFactory.capture(amendment),
-            newUnfilled: this.hFactory.capture(amendment.newUnfilled),
-            newPrice: this.hFactory.capture(amendment.newPrice),
+            ...this.OpenOrder.capture(amendment),
+            newUnfilled: this.H.capture(amendment.newUnfilled),
+            newPrice: this.H.capture(amendment.newPrice),
         };
     }
     restore(snapshot) {
         return this.create({
-            ...this.openOrderFactory.restore(snapshot),
-            newUnfilled: this.hFactory.restore(snapshot.newUnfilled),
-            newPrice: this.hFactory.restore(snapshot.newPrice),
+            ...this.OpenOrder.restore(snapshot),
+            newUnfilled: this.H.restore(snapshot.newUnfilled),
+            newPrice: this.H.restore(snapshot.newPrice),
         });
     }
 }
-exports.AmendmentFactory = AmendmentFactory;
+exports.AmendmentStatic = AmendmentStatic;
 //# sourceMappingURL=amendment.js.map

@@ -1,28 +1,33 @@
-import { BookOrderFactory, BookOrder } from './book-order';
+import { BookOrderStatic, BookOrderLike } from './book-order';
 import { HLike } from './h';
 import { Side } from './length-action-side';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface Orderbook<H extends HLike<H>> extends Orderbook.Source<H>, CompositeDataLike {
-    [side: Side]: BookOrder<H>[];
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+export declare abstract class OrderbookLike<H extends HLike<H>> implements CompositeDataLike {
+    protected bids: BookOrderLike<H>[];
+    protected asks: BookOrderLike<H>[];
     time: number;
-    toJSON(): unknown;
-    toString(): string;
+    abstract toJSON(): unknown;
+    abstract toString(): string;
+    constructor(source: OrderbookLike.Source<H>, BookOrder: BookOrderStatic<H>);
+    side(side: Side): BookOrderLike<H>[];
 }
-export declare namespace Orderbook {
-    interface Source<H extends HLike<H>> {
-        [side: Side]: BookOrder.Source<H>[];
+export declare namespace OrderbookLike {
+    interface Literal<H extends HLike<H>> {
+        bids: BookOrderLike.Source<H>[];
+        asks: BookOrderLike.Source<H>[];
         time: number;
     }
+    type Source<H extends HLike<H>> = OrderbookLike<H> | Literal<H>;
     interface Snapshot {
-        readonly bids: readonly BookOrder.Snapshot[];
-        readonly asks: readonly BookOrder.Snapshot[];
+        readonly bids: readonly BookOrderLike.Snapshot[];
+        readonly asks: readonly BookOrderLike.Snapshot[];
         readonly time: number | null;
     }
 }
-export declare class OrderbookFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Orderbook.Source<H>, Orderbook<H>, Orderbook.Snapshot> {
-    private bookOrderFactory;
-    constructor(bookOrderFactory: BookOrderFactory<H>);
-    create(source: Orderbook.Source<H>): Orderbook<H>;
-    capture(orderbook: Orderbook<H>): Orderbook.Snapshot;
-    restore(snapshot: Orderbook.Snapshot): Orderbook<H>;
+export declare class OrderbookStatic<H extends HLike<H>> implements CompositeDataLikeStatic<OrderbookLike.Source<H>, OrderbookLike<H>, OrderbookLike.Snapshot> {
+    private BookOrder;
+    constructor(BookOrder: BookOrderStatic<H>);
+    create(source: OrderbookLike.Source<H>): OrderbookLike<H>;
+    capture(orderbook: OrderbookLike<H>): OrderbookLike.Snapshot;
+    restore(snapshot: OrderbookLike.Snapshot): OrderbookLike<H>;
 }

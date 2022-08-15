@@ -1,24 +1,29 @@
-import { HLike, H, HFactory } from './h';
+import { HLike, HLikeStatic } from './h';
 import { Length } from './length-action-side';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface Position<H extends HLike<H>> extends Position.Source<H>, CompositeDataLike {
-    [length: Length]: H;
-    toJSON(): unknown;
-    toString(): string;
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+export declare abstract class PositionLike<H extends HLike<H>> implements CompositeDataLike {
+    protected long: H;
+    protected short: H;
+    abstract toJSON(): unknown;
+    abstract toString(): string;
+    constructor(source: PositionLike.Source<H>, H: HLikeStatic<H>);
+    length(length: Length): H;
 }
-export declare namespace Position {
-    interface Source<H extends HLike<H>> {
-        [length: Length]: H;
+export declare namespace PositionLike {
+    interface Literal<H extends HLike<H>> {
+        long: HLike.Source<H>;
+        short: HLike.Source<H>;
     }
+    type Source<H extends HLike<H>> = PositionLike<H> | Literal<H>;
     interface Snapshot {
-        readonly long: H.Snapshot;
-        readonly short: H.Snapshot;
+        readonly long: HLike.Snapshot;
+        readonly short: HLike.Snapshot;
     }
 }
-export declare class PositionFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Position.Source<H>, Position<H>, Position.Snapshot> {
-    private hFactory;
-    constructor(hFactory: HFactory<H>);
-    create(source: Position.Source<H>): Position<H>;
-    capture(position: Position<H>): Position.Snapshot;
-    restore(snapshot: Position.Snapshot): Position<H>;
+export declare class PositionStatic<H extends HLike<H>> implements CompositeDataLikeStatic<PositionLike.Source<H>, PositionLike<H>, PositionLike.Snapshot> {
+    private H;
+    constructor(H: HLikeStatic<H>);
+    create(source: PositionLike.Source<H>): PositionLike<H>;
+    capture(position: PositionLike<H>): PositionLike.Snapshot;
+    restore(snapshot: PositionLike.Snapshot): PositionLike<H>;
 }

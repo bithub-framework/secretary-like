@@ -1,27 +1,27 @@
-import { HLike, H, HFactory } from './h';
-import { OpenOrder, OpenOrderFactory } from './open-order';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
-export interface Amendment<H extends HLike<H>> extends OpenOrder<H>, Amendment.Source<H>, CompositeDataLike {
-    price: H;
-    quantity: H;
+import { HLike, HLikeStatic } from './h';
+import { OpenOrderLike, OpenOrderStatic } from './open-order';
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+export declare abstract class AmendmentLike<H extends HLike<H>> extends OpenOrderLike<H> implements CompositeDataLike {
     newUnfilled: H;
     newPrice: H;
+    constructor(source: AmendmentLike.Source<H>, H: HLikeStatic<H>);
 }
-export declare namespace Amendment {
-    interface Source<H extends HLike<H>> extends OpenOrder.Source<H> {
-        newUnfilled: H;
-        newPrice: H;
+export declare namespace AmendmentLike {
+    interface Literal<H extends HLike<H>> extends OpenOrderLike.Literal<H> {
+        newUnfilled: HLike.Source<H>;
+        newPrice: HLike.Source<H>;
     }
-    interface Snapshot extends OpenOrder.Snapshot {
-        readonly newUnfilled: H.Snapshot;
-        readonly newPrice: H.Snapshot;
+    type Source<H extends HLike<H>> = AmendmentLike<H> | Literal<H>;
+    interface Snapshot extends OpenOrderLike.Snapshot {
+        readonly newUnfilled: HLike.Snapshot;
+        readonly newPrice: HLike.Snapshot;
     }
 }
-export declare class AmendmentFactory<H extends HLike<H>> implements CompositeDataFactoryLike<Amendment.Source<H>, Amendment<H>, Amendment.Snapshot> {
-    private hFactory;
-    private openOrderFactory;
-    constructor(hFactory: HFactory<H>, openOrderFactory: OpenOrderFactory<H>);
-    create(source: Amendment.Source<H>): Amendment<H>;
-    capture(amendment: Amendment<H>): Amendment.Snapshot;
-    restore(snapshot: Amendment.Snapshot): Amendment<H>;
+export declare class AmendmentStatic<H extends HLike<H>> implements CompositeDataLikeStatic<AmendmentLike.Source<H>, AmendmentLike<H>, AmendmentLike.Snapshot> {
+    private H;
+    private OpenOrder;
+    constructor(H: HLikeStatic<H>, OpenOrder: OpenOrderStatic<H>);
+    create(source: AmendmentLike.Source<H>): AmendmentLike<H>;
+    capture(amendment: AmendmentLike<H>): AmendmentLike.Snapshot;
+    restore(snapshot: AmendmentLike.Snapshot): AmendmentLike<H>;
 }

@@ -1,37 +1,48 @@
-export type Length = number;
+export enum Length {
+	LONG,
+	SHORT,
+}
+export const LONG = Length.LONG;
+export const SHORT = Length.SHORT;
 export namespace Length {
-	export const LONG: Length = 0;
-	export const SHORT: Length = 1;
 	export function from(side: Side, action: Action): Length {
-		return side ^ action;
+		if (side === BID && action === OPEN) return LONG;
+		if (side === ASK && action === CLOSE) return LONG;
+		return SHORT;
 	}
 	export function invert(length: Length): Length {
-		return length ^ 1;
+		return length === LONG ? SHORT : LONG;
 	}
 }
 
 
-export type Side = number;
+export enum Side {
+	BID,
+	ASK,
+}
+export const BID = Side.BID;
+export const ASK = Side.ASK;
 export namespace Side {
-	export const BID: Side = 0;
-	export const ASK: Side = 1;
 	export function from(length: Length, action: Action): Side {
-		return length ^ action;
+		return Length.from(BID, action) === length ? BID : ASK;
 	}
 	export function invert(side: Side): Side {
-		return side ^ 1;
+		return side === BID ? ASK : BID;
 	}
 }
 
 
-export type Action = number;
+export enum Action {
+	OPEN,
+	CLOSE,
+}
+export const OPEN = Action.OPEN;
+export const CLOSE = Action.CLOSE;
 export namespace Action {
-	export const OPEN: Action = 0;
-	export const CLOSE: Action = 1;
 	export function from(length: Length, side: Side): Action {
-		return length ^ side;
+		return Length.from(side, OPEN) === length ? OPEN : CLOSE;
 	}
 	export function invert(action: Action): Action {
-		return action ^ 1;
+		return action === OPEN ? CLOSE : OPEN;
 	}
 }

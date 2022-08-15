@@ -1,38 +1,62 @@
 import { HLike } from './h';
 import {
-	Position,
-	PositionFactory,
+	PositionLike,
+	PositionStatic,
 } from './position';
-import { CompositeDataLike, CompositeDataFactoryLike } from './composite-data';
+import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
 
 
 
-export interface Positions<H extends HLike<H>>
-	extends Positions.Source<H>, CompositeDataLike {
-	position: Position<H>;
-	closable: Position<H>;
-	time: number;
-	toJSON(): unknown;
-	toString(): string;
-}
-
-class ConcretePositions<H extends HLike<H>> implements Positions<H>{
-	public position: Position<H>;
-	public closable: Position<H>;
+export abstract class PositionsLike<H extends HLike<H>>
+	implements CompositeDataLike {
+	public position: PositionLike<H>;
+	public closable: PositionLike<H>;
 	public time: number;
 
 	public constructor(
-		source: Positions.Source<H>,
-		private factory: PositionsFactory<H>,
-		positionFactory: PositionFactory<H>,
+		source: PositionsLike.Source<H>,
+		Position: PositionStatic<H>,
 	) {
-		this.position = positionFactory.create(source.position);
-		this.closable = positionFactory.create(source.closable);
+		this.position = Position.create(source.position);
+		this.closable = Position.create(source.closable);
 		this.time = source.time;
 	}
 
+	public abstract toJSON(): unknown;
+	public abstract toString(): string;
+}
+
+
+export namespace PositionsLike {
+	export interface Literal<H extends HLike<H>> {
+		position: PositionLike.Source<H>;
+		closable: PositionLike.Source<H>;
+		time: number;
+	}
+	export type Source<H extends HLike<H>> = PositionsLike<H> | Literal<H>;
+
+	export interface Snapshot {
+		readonly position: PositionLike.Snapshot;
+		readonly closable: PositionLike.Snapshot;
+		readonly time: number;
+	}
+}
+
+
+class Positions<H extends HLike<H>> extends PositionsLike<H>{
+	public constructor(
+		source: PositionsLike.Source<H>,
+		private Positions: PositionsStatic<H>,
+		Position: PositionStatic<H>,
+	) {
+		super(
+			source,
+			Position,
+		);
+	}
+
 	public toJSON(): unknown {
-		return this.factory.capture(this);
+		return this.Positions.capture(this);
 	}
 
 	public toString(): string {
@@ -40,50 +64,37 @@ class ConcretePositions<H extends HLike<H>> implements Positions<H>{
 	}
 }
 
-export namespace Positions {
-	export interface Source<H extends HLike<H>> {
-		position: Position.Source<H>;
-		closable: Position.Source<H>;
-		time: number;
-	}
 
-	export interface Snapshot {
-		readonly position: Position.Snapshot;
-		readonly closable: Position.Snapshot;
-		readonly time: number;
-	}
-}
-
-export class PositionsFactory<H extends HLike<H>> implements
-	CompositeDataFactoryLike<
-	Positions.Source<H>,
-	Positions<H>,
-	Positions.Snapshot>
+export class PositionsStatic<H extends HLike<H>> implements
+	CompositeDataLikeStatic<
+	PositionsLike.Source<H>,
+	PositionsLike<H>,
+	PositionsLike.Snapshot>
 {
 	public constructor(
-		private positionFactory: PositionFactory<H>,
+		private Position: PositionStatic<H>,
 	) { }
 
-	public create(source: Positions.Source<H>): Positions<H> {
-		return new ConcretePositions(
+	public create(source: PositionsLike.Source<H>): PositionsLike<H> {
+		return new Positions(
 			source,
 			this,
-			this.positionFactory,
+			this.Position,
 		);
 	}
 
-	public capture(positions: Positions<H>): Positions.Snapshot {
+	public capture(positions: PositionsLike<H>): PositionsLike.Snapshot {
 		return {
-			position: this.positionFactory.capture(positions.position),
-			closable: this.positionFactory.capture(positions.closable),
+			position: this.Position.capture(positions.position),
+			closable: this.Position.capture(positions.closable),
 			time: positions.time,
 		};
 	}
 
-	public restore(snapshot: Positions.Snapshot): Positions<H> {
+	public restore(snapshot: PositionsLike.Snapshot): PositionsLike<H> {
 		return this.create({
-			position: this.positionFactory.restore(snapshot.position),
-			closable: this.positionFactory.restore(snapshot.closable),
+			position: this.Position.restore(snapshot.position),
+			closable: this.Position.restore(snapshot.closable),
 			time: snapshot.time,
 		});
 	}

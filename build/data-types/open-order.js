@@ -1,51 +1,52 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OpenOrderFactory = void 0;
-class ConcreteOpenOrder {
-    constructor(source, factory, hFactory) {
-        this.factory = factory;
-        ({
-            side: this.side,
-            length: this.length,
-            action: this.action,
-            filled: this.filled,
-            unfilled: this.unfilled,
-            id: this.id,
-        } = source);
-        this.price = hFactory.from(source.price);
-        this.quantity = hFactory.from(source.quantity);
+exports.OpenOrderStatic = exports.OpenOrderLike = void 0;
+const limit_order_1 = require("./limit-order");
+class OpenOrderLike extends limit_order_1.LimitOrderLike {
+    constructor(source, H) {
+        super(source, H);
+        this.filled = H.create(source.filled);
+        this.unfilled = H.create(source.unfilled);
+        this.id = source.id;
+    }
+}
+exports.OpenOrderLike = OpenOrderLike;
+class OpenOrder extends OpenOrderLike {
+    constructor(source, OpenOrder, H) {
+        super(source, H);
+        this.OpenOrder = OpenOrder;
     }
     toJSON() {
-        return this.factory.capture(this);
+        return this.OpenOrder.capture(this);
     }
     toString() {
         return JSON.stringify(this.toJSON());
     }
 }
-class OpenOrderFactory {
-    constructor(hFactory, limitOrderFactory) {
-        this.hFactory = hFactory;
-        this.limitOrderFactory = limitOrderFactory;
+class OpenOrderStatic {
+    constructor(H, LimitOrder) {
+        this.H = H;
+        this.LimitOrder = LimitOrder;
     }
     create(source) {
-        return new ConcreteOpenOrder(source, this, this.hFactory);
+        return new OpenOrder(source, this, this.H);
     }
     capture(order) {
         return {
-            ...this.limitOrderFactory.capture(order),
-            filled: this.hFactory.capture(order.filled),
-            unfilled: this.hFactory.capture(order.unfilled),
+            ...this.LimitOrder.capture(order),
+            filled: this.H.capture(order.filled),
+            unfilled: this.H.capture(order.unfilled),
             id: order.id,
         };
     }
     restore(snapshot) {
         return this.create({
-            ...this.limitOrderFactory.restore(snapshot),
-            filled: this.hFactory.restore(snapshot.filled),
-            unfilled: this.hFactory.restore(snapshot.unfilled),
+            ...this.LimitOrder.restore(snapshot),
+            filled: this.H.restore(snapshot.filled),
+            unfilled: this.H.restore(snapshot.unfilled),
             id: snapshot.id,
         });
     }
 }
-exports.OpenOrderFactory = OpenOrderFactory;
+exports.OpenOrderStatic = OpenOrderStatic;
 //# sourceMappingURL=open-order.js.map
