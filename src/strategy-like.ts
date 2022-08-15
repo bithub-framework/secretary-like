@@ -6,6 +6,6 @@ import { HLike } from './data-types';
 
 export interface StrategyLike extends DaemonLike { }
 
-export interface StrategyStaticLike<H extends HLike<H>> {
+export interface StrategyLikeStatic<H extends HLike<H>> {
 	new(ctx: ContextLike<H>): StrategyLike;
 }
