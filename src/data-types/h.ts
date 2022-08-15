@@ -35,8 +35,8 @@ export namespace H {
 }
 
 export interface HStatic<H extends HLike<H>> {
-	max(x: H, ...rest: H[]): H;
-	min(x: H, ...rest: H[]): H;
+	max(x: H.Source<H>, ...rest: H.Source<H>[]): H;
+	min(x: H.Source<H>, ...rest: H.Source<H>[]): H;
 }
 
 export interface HFactory<H extends HLike<H>> {
