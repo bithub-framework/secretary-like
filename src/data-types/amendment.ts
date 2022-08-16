@@ -42,7 +42,7 @@ export namespace AmendmentLike {
 }
 
 
-class ConcreteAmendment<H extends HLike<H>> extends AmendmentLike<H> {
+class Amendment<H extends HLike<H>> extends AmendmentLike<H> {
 	public constructor(
 		source: AmendmentLike.Source<H>,
 		private Amendment: AmendmentStatic<H>,
@@ -79,7 +79,7 @@ export class AmendmentStatic<H extends HLike<H>> implements
 	 */
 	@boundMethod
 	public create(source: AmendmentLike.Source<H>): AmendmentLike<H> {
-		return new ConcreteAmendment(
+		return new Amendment(
 			source,
 			this,
 			this.H,
