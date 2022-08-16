@@ -2,15 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HLike = void 0;
 /**
- * typeclass
- * @typeParam H - type
- */
-class HLike {
-}
-exports.HLike = HLike;
-/**
  * namespace about {@link HLike}
  */
+var HLike;
 (function (HLike) {
     let RoundingMode;
     (function (RoundingMode) {

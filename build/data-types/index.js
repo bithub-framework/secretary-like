@@ -40,6 +40,9 @@ Object.defineProperty(exports, "BookOrderStatic", { enumerable: true, get: funct
 var balances_1 = require("./balances");
 Object.defineProperty(exports, "Balances", { enumerable: true, get: function () { return balances_1.BalancesLike; } });
 Object.defineProperty(exports, "BalancesStatic", { enumerable: true, get: function () { return balances_1.BalancesStatic; } });
+__exportStar(require("./length-action-side"), exports);
+__exportStar(require("./trade-id"), exports);
+__exportStar(require("./order-id"), exports);
 __exportStar(require("./data-static-namespace"), exports);
 __exportStar(require("./composite-data"), exports);
 //# sourceMappingURL=index.js.map

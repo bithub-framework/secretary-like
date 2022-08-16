@@ -3,23 +3,23 @@ import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
  * typeclass
  * @typeParam H - type
  */
-export declare abstract class HLike<H extends HLike<H>> implements CompositeDataLike {
-    abstract plus(x: HLike.Source<H>): H;
-    abstract minus(x: HLike.Source<H>): H;
-    abstract neg(): H;
-    abstract times(x: HLike.Source<H>): H;
-    abstract div(x: HLike.Source<H>, scale: number, roundingMode?: HLike.RoundingMode): H;
-    abstract mod(x: HLike.Source<H>): H;
-    abstract lt(x: HLike.Source<H>): boolean;
-    abstract lte(x: HLike.Source<H>): boolean;
-    abstract gt(x: HLike.Source<H>): boolean;
-    abstract gte(x: HLike.Source<H>): boolean;
-    abstract eq(x: HLike.Source<H>): boolean;
-    abstract neq(x: HLike.Source<H>): boolean;
-    abstract round(scale?: number, roundingMode?: HLike.RoundingMode): H;
-    abstract abs(): H;
-    abstract toJSON(): string;
-    abstract toFixed(scale?: number): string;
+export interface HLike<H extends HLike<H>> extends CompositeDataLike {
+    plus(x: HLike.Source<H>): H;
+    minus(x: HLike.Source<H>): H;
+    neg(): H;
+    times(x: HLike.Source<H>): H;
+    div(x: HLike.Source<H>, scale: number, roundingMode?: HLike.RoundingMode): H;
+    mod(x: HLike.Source<H>): H;
+    lt(x: HLike.Source<H>): boolean;
+    lte(x: HLike.Source<H>): boolean;
+    gt(x: HLike.Source<H>): boolean;
+    gte(x: HLike.Source<H>): boolean;
+    eq(x: HLike.Source<H>): boolean;
+    neq(x: HLike.Source<H>): boolean;
+    round(scale?: number, roundingMode?: HLike.RoundingMode): H;
+    abs(): H;
+    toJSON(): string;
+    toFixed(scale?: number): string;
 }
 /**
  * namespace about {@link HLike}

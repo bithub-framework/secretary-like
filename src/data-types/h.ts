@@ -8,31 +8,31 @@ import {
  * typeclass
  * @typeParam H - type
  */
-export abstract class HLike<H extends HLike<H>>
-	implements CompositeDataLike {
-	public abstract plus(x: HLike.Source<H>): H;
-	public abstract minus(x: HLike.Source<H>): H;
-	public abstract neg(): H;
-	public abstract times(x: HLike.Source<H>): H;
-	public abstract div(
+export interface HLike<H extends HLike<H>>
+	extends CompositeDataLike {
+	plus(x: HLike.Source<H>): H;
+	minus(x: HLike.Source<H>): H;
+	neg(): H;
+	times(x: HLike.Source<H>): H;
+	div(
 		x: HLike.Source<H>,
 		scale: number,
 		roundingMode?: HLike.RoundingMode,
 	): H;
-	public abstract mod(x: HLike.Source<H>): H;
-	public abstract lt(x: HLike.Source<H>): boolean;
-	public abstract lte(x: HLike.Source<H>): boolean;
-	public abstract gt(x: HLike.Source<H>): boolean;
-	public abstract gte(x: HLike.Source<H>): boolean;
-	public abstract eq(x: HLike.Source<H>): boolean;
-	public abstract neq(x: HLike.Source<H>): boolean;
-	public abstract round(
+	mod(x: HLike.Source<H>): H;
+	lt(x: HLike.Source<H>): boolean;
+	lte(x: HLike.Source<H>): boolean;
+	gt(x: HLike.Source<H>): boolean;
+	gte(x: HLike.Source<H>): boolean;
+	eq(x: HLike.Source<H>): boolean;
+	neq(x: HLike.Source<H>): boolean;
+	round(
 		scale?: number,
 		roundingMode?: HLike.RoundingMode,
 	): H;
-	public abstract abs(): H;
-	public abstract toJSON(): string;
-	public abstract toFixed(scale?: number): string;
+	abs(): H;
+	toJSON(): string;
+	toFixed(scale?: number): string;
 }
 
 /**
