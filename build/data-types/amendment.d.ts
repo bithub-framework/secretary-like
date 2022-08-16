@@ -1,10 +1,10 @@
-import { HLike, HLikeStatic } from './h';
+import { HLike, SerializableHStatic } from './h';
 import { OpenOrderLike } from './open-order';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 export declare abstract class AmendmentLike<H extends HLike<H>> extends OpenOrderLike<H> implements CompositeDataLike {
     newUnfilled: H;
     newPrice: H;
-    constructor(source: AmendmentLike.Source<H>, H: HLikeStatic<H>);
+    constructor(source: AmendmentLike.Source<H>, H: SerializableHStatic<H>);
 }
 export declare namespace AmendmentLike {
     interface Literal<H extends HLike<H>> extends OpenOrderLike.Literal<H> {
@@ -17,9 +17,11 @@ export declare namespace AmendmentLike {
         readonly newPrice: HLike.Snapshot;
     }
 }
-export declare class AmendmentStatic<H extends HLike<H>> implements CompositeDataLikeStatic<AmendmentLike.Source<H>, AmendmentLike<H>, AmendmentLike.Snapshot> {
+export interface SerializableAmendmentStatic<H extends HLike<H>> extends SerializableStatic<AmendmentLike.Source<H>, AmendmentLike<H>, AmendmentLike.Snapshot> {
+}
+export declare class AmendmentStatic<H extends HLike<H>> implements SerializableAmendmentStatic<H> {
     private H;
-    constructor(H: HLikeStatic<H>);
+    constructor(H: SerializableHStatic<H>);
     /**
      * @decorator boundMethod
      */

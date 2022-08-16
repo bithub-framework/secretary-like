@@ -1,12 +1,12 @@
-import { HLike, HLikeStatic } from './h';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { HLike, SerializableHStatic } from './h';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 export declare abstract class BalancesLike<H extends HLike<H>> implements CompositeDataLike {
     balance: H;
     available: H;
     time: number;
     abstract toJSON(): unknown;
     abstract toString(): string;
-    constructor(source: BalancesLike.Source<H>, H: HLikeStatic<H>);
+    constructor(source: BalancesLike.Source<H>, H: SerializableHStatic<H>);
 }
 export declare namespace BalancesLike {
     interface Literal<H extends HLike<H>> {
@@ -21,9 +21,11 @@ export declare namespace BalancesLike {
         readonly time: number;
     }
 }
-export declare class BalancesStatic<H extends HLike<H>> implements CompositeDataLikeStatic<BalancesLike.Source<H>, BalancesLike<H>, BalancesLike.Snapshot> {
+export interface SerializableBalancesStatic<H extends HLike<H>> extends SerializableStatic<BalancesLike.Source<H>, BalancesLike<H>, BalancesLike.Snapshot> {
+}
+export declare class BalancesStatic<H extends HLike<H>> implements SerializableBalancesStatic<H> {
     private H;
-    constructor(H: HLikeStatic<H>);
+    constructor(H: SerializableHStatic<H>);
     /**
      * @decorator boundMethod
      */

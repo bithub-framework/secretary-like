@@ -1,4 +1,4 @@
-import { HLike, HLikeStatic } from './h';
+import { HLike, SerializableHStatic } from './h';
 import { LimitOrderStatic } from './limit-order';
 import { OpenOrderStatic } from './open-order';
 import { AmendmentStatic } from './amendment';
@@ -9,8 +9,8 @@ import { PositionsStatic } from './positions';
 import { BookOrderStatic } from './book-order';
 import { BalancesStatic } from './balances';
 export declare class DataStaticNamespace<H extends HLike<H>> {
-    H: HLikeStatic<H>;
-    constructor(H: HLikeStatic<H>);
+    H: SerializableHStatic<H>;
+    constructor(H: SerializableHStatic<H>);
     LimitOrder: LimitOrderStatic<H>;
     OpenOrder: OpenOrderStatic<H>;
     Amendment: AmendmentStatic<H>;

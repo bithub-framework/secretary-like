@@ -1,4 +1,4 @@
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 /**
  * typeclass
  * @typeParam H - type
@@ -22,6 +22,14 @@ export interface HLike<H extends HLike<H>> extends CompositeDataLike {
     toFixed(scale?: number): string;
 }
 /**
+ * static part of typeclass {@link HLike}
+ * @typeParam H - type
+ */
+export interface HLikeStatic<H extends HLike<H>> {
+    max(x: HLike.Source<H>, ...rest: HLike.Source<H>[]): H;
+    min(x: HLike.Source<H>, ...rest: HLike.Source<H>[]): H;
+}
+/**
  * namespace about {@link HLike}
  */
 export declare namespace HLike {
@@ -35,10 +43,12 @@ export declare namespace HLike {
     }
 }
 /**
- * static part of typeclass HLike
- * @typeParam H - type
+ * typeclass
  */
-export interface HLikeStatic<H extends HLike<H>> extends CompositeDataLikeStatic<HLike.Source<H>, H, HLike.Snapshot> {
-    max(x: HLike.Source<H>, ...rest: HLike.Source<H>[]): H;
-    min(x: HLike.Source<H>, ...rest: HLike.Source<H>[]): H;
+export interface SerializableH<H extends HLike<H>> extends HLike<H> {
+}
+/**
+ * static part of typeclass {@link SerializableH}
+ */
+export interface SerializableHStatic<H extends HLike<H>> extends HLikeStatic<H>, SerializableStatic<HLike.Source<H>, H, HLike.Snapshot> {
 }

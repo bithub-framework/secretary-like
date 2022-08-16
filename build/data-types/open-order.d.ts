@@ -1,12 +1,12 @@
-import { HLike, HLikeStatic } from './h';
+import { HLike, SerializableHStatic } from './h';
 import { LimitOrderLike } from './limit-order';
 import { OrderId } from './order-id';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 export declare abstract class OpenOrderLike<H extends HLike<H>> extends LimitOrderLike<H> implements CompositeDataLike {
     filled: H;
     unfilled: H;
     id: OrderId;
-    constructor(source: OpenOrderLike.Source<H>, H: HLikeStatic<H>);
+    constructor(source: OpenOrderLike.Source<H>, H: SerializableHStatic<H>);
 }
 export declare namespace OpenOrderLike {
     interface Literal<H extends HLike<H>> extends LimitOrderLike.Literal<H> {
@@ -21,15 +21,17 @@ export declare namespace OpenOrderLike {
         readonly id: OrderId;
     }
 }
+export interface SerializableOpenOrderStatic<H extends HLike<H>> extends SerializableStatic<OpenOrderLike.Source<H>, OpenOrderLike<H>, OpenOrderLike.Snapshot> {
+}
 declare class OpenOrder<H extends HLike<H>> extends OpenOrderLike<H> {
     private OpenOrder;
-    constructor(source: OpenOrderLike.Source<H>, OpenOrder: OpenOrderStatic<H>, H: HLikeStatic<H>);
+    constructor(source: OpenOrderLike.Source<H>, OpenOrder: OpenOrderStatic<H>, H: SerializableHStatic<H>);
     toJSON(): unknown;
     toString(): string;
 }
-export declare class OpenOrderStatic<H extends HLike<H>> implements CompositeDataLikeStatic<OpenOrderLike.Source<H>, OpenOrderLike<H>, OpenOrderLike.Snapshot> {
+export declare class OpenOrderStatic<H extends HLike<H>> implements SerializableOpenOrderStatic<H> {
     private H;
-    constructor(H: HLikeStatic<H>);
+    constructor(H: SerializableHStatic<H>);
     /**
      * @decorator boundMethod
      */

@@ -1,6 +1,6 @@
-import { HLike, HLikeStatic } from './h';
+import { HLike, SerializableHStatic } from './h';
 import { Side } from './length-action-side';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 import { boundMethod } from 'autobind-decorator';
 
 
@@ -15,7 +15,7 @@ export abstract class BookOrderLike<H extends HLike<H>>
 
 	public constructor(
 		source: BookOrderLike.Source<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		this.price = H.create(source.price);
 		this.quantity = H.create(source.quantity);
@@ -40,11 +40,20 @@ export namespace BookOrderLike {
 }
 
 
+export interface SerializableBookOrderStatic<H extends HLike<H>>
+	extends SerializableStatic
+	<
+	BookOrderLike.Source<H>,
+	BookOrderLike<H>,
+	BookOrderLike.Snapshot
+	> { }
+
+
 class BookOrder<H extends HLike<H>> extends BookOrderLike<H> {
 	public constructor(
 		source: BookOrderLike.Source<H>,
 		private BookOrder: BookOrderStatic<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		super(
 			source,
@@ -62,14 +71,11 @@ class BookOrder<H extends HLike<H>> extends BookOrderLike<H> {
 }
 
 
-export class BookOrderStatic<H extends HLike<H>> implements
-	CompositeDataLikeStatic<
-	BookOrderLike.Source<H>,
-	BookOrderLike<H>,
-	BookOrderLike.Snapshot>
+export class BookOrderStatic<H extends HLike<H>>
+	implements SerializableBookOrderStatic<H>
 {
 	public constructor(
-		private H: HLikeStatic<H>,
+		private H: SerializableHStatic<H>,
 	) { }
 
 	/**

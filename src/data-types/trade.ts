@@ -1,7 +1,7 @@
 import { Side } from './length-action-side';
-import { HLike, HLikeStatic } from './h';
+import { HLike, SerializableHStatic } from './h';
 import { TradeId } from './trade-id';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 import { boundMethod } from 'autobind-decorator';
 
 
@@ -18,7 +18,7 @@ export abstract class TradeLike<H extends HLike<H>>
 
 	public constructor(
 		source: TradeLike.Source<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		({
 			side: this.side,
@@ -51,11 +51,19 @@ export namespace TradeLike {
 }
 
 
+export interface SerializableTradeStatic<H extends HLike<H>>
+	extends SerializableStatic<
+	TradeLike.Source<H>,
+	TradeLike<H>,
+	TradeLike.Snapshot
+	> { }
+
+
 class Trade<H extends HLike<H>> extends TradeLike<H> {
 	public constructor(
 		source: TradeLike.Source<H>,
 		private Trade: TradeStatic<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		super(
 			source,
@@ -73,14 +81,11 @@ class Trade<H extends HLike<H>> extends TradeLike<H> {
 }
 
 
-export class TradeStatic<H extends HLike<H>> implements
-	CompositeDataLikeStatic<
-	TradeLike.Source<H>,
-	TradeLike<H>,
-	TradeLike.Snapshot>
+export class TradeStatic<H extends HLike<H>>
+	implements SerializableTradeStatic<H>
 {
 	public constructor(
-		private H: HLikeStatic<H>,
+		private H: SerializableHStatic<H>,
 	) { }
 
 	/**

@@ -1,7 +1,7 @@
 import { Side } from './length-action-side';
-import { HLike, HLikeStatic } from './h';
+import { HLike, SerializableHStatic } from './h';
 import { TradeId } from './trade-id';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 export declare abstract class TradeLike<H extends HLike<H>> implements CompositeDataLike {
     side: Side;
     price: H;
@@ -10,7 +10,7 @@ export declare abstract class TradeLike<H extends HLike<H>> implements Composite
     id: TradeId;
     abstract toJSON(): unknown;
     abstract toString(): string;
-    constructor(source: TradeLike.Source<H>, H: HLikeStatic<H>);
+    constructor(source: TradeLike.Source<H>, H: SerializableHStatic<H>);
 }
 export declare namespace TradeLike {
     interface Literal<H extends HLike<H>> {
@@ -29,9 +29,11 @@ export declare namespace TradeLike {
         readonly id: TradeId;
     }
 }
-export declare class TradeStatic<H extends HLike<H>> implements CompositeDataLikeStatic<TradeLike.Source<H>, TradeLike<H>, TradeLike.Snapshot> {
+export interface SerializableTradeStatic<H extends HLike<H>> extends SerializableStatic<TradeLike.Source<H>, TradeLike<H>, TradeLike.Snapshot> {
+}
+export declare class TradeStatic<H extends HLike<H>> implements SerializableTradeStatic<H> {
     private H;
-    constructor(H: HLikeStatic<H>);
+    constructor(H: SerializableHStatic<H>);
     /**
      * @decorator boundMethod
      */

@@ -1,14 +1,14 @@
-import { BookOrderStatic, BookOrderLike } from './book-order';
+import { SerializableBookOrderStatic, BookOrderStatic, BookOrderLike } from './book-order';
 import { HLike } from './h';
 import { Side } from './length-action-side';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 export declare abstract class OrderbookLike<H extends HLike<H>> implements CompositeDataLike {
     protected bids: BookOrderLike<H>[];
     protected asks: BookOrderLike<H>[];
     time: number;
     abstract toJSON(): unknown;
     abstract toString(): string;
-    constructor(source: OrderbookLike.Source<H>, BookOrder: BookOrderStatic<H>);
+    constructor(source: OrderbookLike.Source<H>, BookOrder: SerializableBookOrderStatic<H>);
     side(side: Side): BookOrderLike<H>[];
 }
 export declare namespace OrderbookLike {
@@ -24,7 +24,9 @@ export declare namespace OrderbookLike {
         readonly time: number | null;
     }
 }
-export declare class OrderbookStatic<H extends HLike<H>> implements CompositeDataLikeStatic<OrderbookLike.Source<H>, OrderbookLike<H>, OrderbookLike.Snapshot> {
+export interface SerializableOrderbookStatic<H extends HLike<H>> extends SerializableStatic<OrderbookLike.Source<H>, OrderbookLike<H>, OrderbookLike.Snapshot> {
+}
+export declare class OrderbookStatic<H extends HLike<H>> implements SerializableOrderbookStatic<H> {
     private BookOrder;
     constructor(BookOrder: BookOrderStatic<H>);
     /**

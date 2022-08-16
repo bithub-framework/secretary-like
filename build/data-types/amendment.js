@@ -17,7 +17,7 @@ class AmendmentLike extends open_order_1.OpenOrderLike {
     }
 }
 exports.AmendmentLike = AmendmentLike;
-class ConcreteAmendment extends AmendmentLike {
+class Amendment extends AmendmentLike {
     constructor(source, Amendment, H) {
         super(source, H);
         this.Amendment = Amendment;
@@ -37,7 +37,7 @@ class AmendmentStatic {
      * @decorator boundMethod
      */
     create(source) {
-        return new ConcreteAmendment(source, this, this.H);
+        return new Amendment(source, this, this.H);
     }
     /**
      * @decorator boundMethod

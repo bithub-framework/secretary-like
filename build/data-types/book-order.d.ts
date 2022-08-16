@@ -1,13 +1,13 @@
-import { HLike, HLikeStatic } from './h';
+import { HLike, SerializableHStatic } from './h';
 import { Side } from './length-action-side';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 export declare abstract class BookOrderLike<H extends HLike<H>> implements CompositeDataLike {
     price: H;
     quantity: H;
     side: Side;
     abstract toJSON(): unknown;
     abstract toString(): string;
-    constructor(source: BookOrderLike.Source<H>, H: HLikeStatic<H>);
+    constructor(source: BookOrderLike.Source<H>, H: SerializableHStatic<H>);
 }
 export declare namespace BookOrderLike {
     interface Literal<H extends HLike<H>> {
@@ -22,9 +22,11 @@ export declare namespace BookOrderLike {
         readonly side: Side;
     }
 }
-export declare class BookOrderStatic<H extends HLike<H>> implements CompositeDataLikeStatic<BookOrderLike.Source<H>, BookOrderLike<H>, BookOrderLike.Snapshot> {
+export interface SerializableBookOrderStatic<H extends HLike<H>> extends SerializableStatic<BookOrderLike.Source<H>, BookOrderLike<H>, BookOrderLike.Snapshot> {
+}
+export declare class BookOrderStatic<H extends HLike<H>> implements SerializableBookOrderStatic<H> {
     private H;
-    constructor(H: HLikeStatic<H>);
+    constructor(H: SerializableHStatic<H>);
     /**
      * @decorator boundMethod
      */

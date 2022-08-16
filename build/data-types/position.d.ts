@@ -1,12 +1,12 @@
-import { HLike, HLikeStatic } from './h';
+import { HLike, SerializableHStatic } from './h';
 import { Length } from './length-action-side';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 export declare abstract class PositionLike<H extends HLike<H>> implements CompositeDataLike {
     protected long: H;
     protected short: H;
     abstract toJSON(): unknown;
     abstract toString(): string;
-    constructor(source: PositionLike.Source<H>, H: HLikeStatic<H>);
+    constructor(source: PositionLike.Source<H>, H: SerializableHStatic<H>);
     length(length: Length): H;
 }
 export declare namespace PositionLike {
@@ -20,9 +20,11 @@ export declare namespace PositionLike {
         readonly short: HLike.Snapshot;
     }
 }
-export declare class PositionStatic<H extends HLike<H>> implements CompositeDataLikeStatic<PositionLike.Source<H>, PositionLike<H>, PositionLike.Snapshot> {
+export interface SerializablePositionStatic<H extends HLike<H>> extends SerializableStatic<PositionLike.Source<H>, PositionLike<H>, PositionLike.Snapshot> {
+}
+export declare class PositionStatic<H extends HLike<H>> implements SerializablePositionStatic<H> {
     private H;
-    constructor(H: HLikeStatic<H>);
+    constructor(H: SerializableHStatic<H>);
     /**
      * @decorator boundMethod
      */

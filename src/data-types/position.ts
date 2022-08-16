@@ -1,8 +1,8 @@
-import { HLike, HLikeStatic } from './h';
+import { HLike, SerializableHStatic } from './h';
 import { Length, LONG, SHORT } from './length-action-side';
 import {
 	CompositeDataLike,
-	CompositeDataLikeStatic,
+	SerializableStatic,
 } from './composite-data';
 import { boundMethod } from 'autobind-decorator';
 
@@ -17,7 +17,7 @@ export abstract class PositionLike<H extends HLike<H>>
 
 	public constructor(
 		source: PositionLike.Source<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		if (source instanceof PositionLike) {
 			this.long = source.length(LONG);
@@ -48,11 +48,20 @@ export namespace PositionLike {
 }
 
 
+export interface SerializablePositionStatic<H extends HLike<H>>
+	extends SerializableStatic
+	<
+	PositionLike.Source<H>,
+	PositionLike<H>,
+	PositionLike.Snapshot
+	> { }
+
+
 class Position<H extends HLike<H>> extends PositionLike<H> {
 	public constructor(
 		source: PositionLike.Source<H>,
 		private Position: PositionStatic<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		super(
 			source,
@@ -69,14 +78,11 @@ class Position<H extends HLike<H>> extends PositionLike<H> {
 	}
 }
 
-export class PositionStatic<H extends HLike<H>> implements
-	CompositeDataLikeStatic<
-	PositionLike.Source<H>,
-	PositionLike<H>,
-	PositionLike.Snapshot>
+export class PositionStatic<H extends HLike<H>>
+	implements SerializablePositionStatic<H>
 {
 	public constructor(
-		private H: HLikeStatic<H>,
+		private H: SerializableHStatic<H>,
 	) { }
 
 	/**

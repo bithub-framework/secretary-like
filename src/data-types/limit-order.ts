@@ -1,6 +1,6 @@
 import { Length, Side, Action } from './length-action-side';
-import { HLike, HLikeStatic } from './h';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { HLike, SerializableHStatic } from './h';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 import { boundMethod } from 'autobind-decorator';
 
 
@@ -19,7 +19,7 @@ export abstract class LimitOrderLike<H extends HLike<H>>
 
 	public constructor(
 		source: LimitOrderLike.Source<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		({
 			side: this.side,
@@ -54,6 +54,17 @@ export namespace LimitOrderLike {
 	}
 }
 
+
+/**
+ * static part of typeclass `SerializableLimitOrder`
+ */
+export interface SerializableLimitOrderStatic<H extends HLike<H>> extends
+	SerializableStatic<
+	LimitOrderLike.Source<H>,
+	LimitOrderLike<H>,
+	LimitOrderLike.Snapshot
+	> { }
+
 /**
  * type
  * @sealed
@@ -62,7 +73,7 @@ class LimitOrder<H extends HLike<H>> extends LimitOrderLike<H>{
 	public constructor(
 		source: LimitOrderLike.Source<H>,
 		private LimitOrder: LimitOrderStatic<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		super(
 			source,
@@ -84,15 +95,11 @@ class LimitOrder<H extends HLike<H>> extends LimitOrderLike<H>{
 /**
  * static part of type {@link LimitOrder}
  */
-export class LimitOrderStatic<H extends HLike<H>> implements
-	CompositeDataLikeStatic<
-	LimitOrderLike.Source<H>,
-	LimitOrderLike<H>,
-	LimitOrderLike.Snapshot
-	>
+export class LimitOrderStatic<H extends HLike<H>>
+	implements SerializableLimitOrderStatic<H>
 {
 	public constructor(
-		private H: HLikeStatic<H>,
+		private H: SerializableHStatic<H>
 	) { }
 
 	/**

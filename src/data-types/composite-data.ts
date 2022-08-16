@@ -1,9 +1,12 @@
+/**
+ * typeclass
+ */
 export interface CompositeDataLike {
 	toJSON(): unknown;
 	toString(): string;
 }
 
-export interface CompositeDataLikeStatic
+export interface SerializableStatic
 	<
 	Source,
 	Data extends CompositeDataLike,

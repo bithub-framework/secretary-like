@@ -1,5 +1,5 @@
-import { HLike, HLikeStatic } from './h';
-import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
+import { HLike, SerializableHStatic } from './h';
+import { CompositeDataLike, SerializableStatic } from './composite-data';
 import { boundMethod } from 'autobind-decorator';
 
 
@@ -14,7 +14,7 @@ export abstract class BalancesLike<H extends HLike<H>>
 
 	public constructor(
 		source: BalancesLike.Source<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		this.balance = H.create(source.balance);
 		this.available = H.create(source.available);
@@ -39,11 +39,20 @@ export namespace BalancesLike {
 }
 
 
+export interface SerializableBalancesStatic<H extends HLike<H>>
+	extends SerializableStatic
+	<
+	BalancesLike.Source<H>,
+	BalancesLike<H>,
+	BalancesLike.Snapshot
+	> { }
+
+
 class Balances<H extends HLike<H>> extends BalancesLike<H>{
 	public constructor(
 		source: BalancesLike.Source<H>,
 		private Balances: BalancesStatic<H>,
-		H: HLikeStatic<H>,
+		H: SerializableHStatic<H>,
 	) {
 		super(
 			source,
@@ -61,14 +70,11 @@ class Balances<H extends HLike<H>> extends BalancesLike<H>{
 }
 
 
-export class BalancesStatic<H extends HLike<H>> implements
-	CompositeDataLikeStatic<
-	BalancesLike.Source<H>,
-	BalancesLike<H>,
-	BalancesLike.Snapshot>
+export class BalancesStatic<H extends HLike<H>>
+	implements SerializableBalancesStatic<H>
 {
 	public constructor(
-		private H: HLikeStatic<H>,
+		private H: SerializableHStatic<H>,
 	) { }
 
 	/**
