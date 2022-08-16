@@ -1,15 +1,14 @@
 import {
-	CompositeDataLike,
+
 	SerializableStatic,
-} from './composite-data';
+} from './serializable';
 
 
 /**
  * typeclass
  * @typeParam H - type
  */
-export interface HLike<H extends HLike<H>>
-	extends CompositeDataLike {
+export interface HLike<H extends HLike<H>> {
 	plus(x: HLike.Source<H>): H;
 	minus(x: HLike.Source<H>): H;
 	neg(): H;

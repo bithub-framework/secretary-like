@@ -1,8 +1,8 @@
 import { SerializableBookOrderStatic, BookOrderLike } from './book-order';
 import { HLike } from './h';
 import { Side } from './length-action-side';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
-export declare abstract class OrderbookLike<H extends HLike<H>> implements CompositeDataLike {
+import { SerializableStatic } from './serializable';
+export declare abstract class OrderbookLike<H extends HLike<H>> {
     protected bids: BookOrderLike<H>[];
     protected asks: BookOrderLike<H>[];
     time: number;

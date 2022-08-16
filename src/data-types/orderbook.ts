@@ -4,13 +4,13 @@ import {
 } from './book-order';
 import { HLike } from './h';
 import { Side, BID, ASK, } from './length-action-side';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
+import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
 
 export abstract class OrderbookLike<H extends HLike<H>>
-	implements CompositeDataLike {
+{
 	protected bids: BookOrderLike<H>[];
 	protected asks: BookOrderLike<H>[];
 	public time: number;

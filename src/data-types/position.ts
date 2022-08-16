@@ -1,15 +1,15 @@
 import { HLike, SerializableHStatic } from './h';
 import { Length, LONG, SHORT } from './length-action-side';
 import {
-	CompositeDataLike,
+
 	SerializableStatic,
-} from './composite-data';
+} from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
 
 export abstract class PositionLike<H extends HLike<H>>
-	implements CompositeDataLike {
+{
 	protected long: H;
 	protected short: H;
 	public abstract toJSON(): unknown;

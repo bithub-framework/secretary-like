@@ -1,10 +1,10 @@
 import { Length, Side, Action } from './length-action-side';
 import { HLike, SerializableHStatic } from './h';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
+import { SerializableStatic } from './serializable';
 /**
  * typeclass
  */
-export declare abstract class LimitOrderLike<H extends HLike<H>> implements CompositeDataLike {
+export declare abstract class LimitOrderLike<H extends HLike<H>> {
     price: H;
     quantity: H;
     side: Side;

@@ -2,14 +2,14 @@ import { HLike, SerializableHStatic } from './h';
 import {
 	OpenOrderLike,
 } from './open-order';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
+import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
 
 export abstract class AmendmentLike<H extends HLike<H>>
 	extends OpenOrderLike<H>
-	implements CompositeDataLike {
+{
 	public newUnfilled: H;
 	public newPrice: H;
 

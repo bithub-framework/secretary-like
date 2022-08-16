@@ -1,12 +1,12 @@
 import { HLike, SerializableHStatic } from './h';
 import { Side } from './length-action-side';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
+import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
 
 export abstract class BookOrderLike<H extends HLike<H>>
-	implements CompositeDataLike {
+{
 	public price: H;
 	public quantity: H;
 	public side: Side;

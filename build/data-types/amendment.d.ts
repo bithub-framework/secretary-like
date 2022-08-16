@@ -1,7 +1,7 @@
 import { HLike, SerializableHStatic } from './h';
 import { OpenOrderLike } from './open-order';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
-export declare abstract class AmendmentLike<H extends HLike<H>> extends OpenOrderLike<H> implements CompositeDataLike {
+import { SerializableStatic } from './serializable';
+export declare abstract class AmendmentLike<H extends HLike<H>> extends OpenOrderLike<H> {
     newUnfilled: H;
     newPrice: H;
     constructor(source: AmendmentLike.Source<H>, H: SerializableHStatic<H>);

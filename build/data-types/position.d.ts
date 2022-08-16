@@ -1,7 +1,7 @@
 import { HLike, SerializableHStatic } from './h';
 import { Length } from './length-action-side';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
-export declare abstract class PositionLike<H extends HLike<H>> implements CompositeDataLike {
+import { SerializableStatic } from './serializable';
+export declare abstract class PositionLike<H extends HLike<H>> {
     protected long: H;
     protected short: H;
     abstract toJSON(): unknown;

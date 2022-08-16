@@ -12,7 +12,7 @@ export * from './data-types/length-action-side';
 export * from './data-types/trade-id';
 export * from './data-types/order-id';
 export * from './data-types/data-static-namespace';
-export * from './data-types/composite-data';
+export * from './data-types/serializable';
 export * from './secontext/context-like';
 export * from './secontext/market-api';
 export * from './secontext/account-api';

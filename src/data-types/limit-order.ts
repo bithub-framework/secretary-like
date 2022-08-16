@@ -1,6 +1,6 @@
 import { Length, Side, Action } from './length-action-side';
 import { HLike, SerializableHStatic } from './h';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
+import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
@@ -8,7 +8,7 @@ import { boundMethod } from 'autobind-decorator';
  * typeclass
  */
 export abstract class LimitOrderLike<H extends HLike<H>>
-	implements CompositeDataLike {
+{
 	public price: H;
 	public quantity: H;
 	public side: Side;

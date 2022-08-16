@@ -1,7 +1,7 @@
 import { HLike } from './h';
 import { PositionLike, SerializablePositionStatic } from './position';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
-export declare abstract class PositionsLike<H extends HLike<H>> implements CompositeDataLike {
+import { SerializableStatic } from './serializable';
+export declare abstract class PositionsLike<H extends HLike<H>> {
     position: PositionLike<H>;
     closable: PositionLike<H>;
     time: number;

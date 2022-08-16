@@ -5,16 +5,16 @@ import {
 } from './limit-order';
 import { OrderId } from './order-id';
 import {
-	CompositeDataLike,
+
 	SerializableStatic,
-} from './composite-data';
+} from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
 
 export abstract class OpenOrderLike<H extends HLike<H>>
 	extends LimitOrderLike<H>
-	implements CompositeDataLike {
+{
 	public filled: H;
 	public unfilled: H;
 	public id: OrderId;

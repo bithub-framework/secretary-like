@@ -1,8 +1,8 @@
 import { Side } from './length-action-side';
 import { HLike, SerializableHStatic } from './h';
 import { TradeId } from './trade-id';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
-export declare abstract class TradeLike<H extends HLike<H>> implements CompositeDataLike {
+import { SerializableStatic } from './serializable';
+export declare abstract class TradeLike<H extends HLike<H>> {
     side: Side;
     price: H;
     quantity: H;

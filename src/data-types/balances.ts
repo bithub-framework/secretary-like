@@ -1,11 +1,11 @@
 import { HLike, SerializableHStatic } from './h';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
+import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
 
 export abstract class BalancesLike<H extends HLike<H>>
-	implements CompositeDataLike {
+{
 	public balance: H;
 	public available: H;
 	public time: number;

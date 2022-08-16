@@ -1,13 +1,13 @@
 import { Side } from './length-action-side';
 import { HLike, SerializableHStatic } from './h';
 import { TradeId } from './trade-id';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
+import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
 
 export abstract class TradeLike<H extends HLike<H>>
-	implements CompositeDataLike {
+{
 	public side: Side;
 	public price: H;
 	public quantity: H;

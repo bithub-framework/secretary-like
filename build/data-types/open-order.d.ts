@@ -1,8 +1,8 @@
 import { HLike, SerializableHStatic } from './h';
 import { LimitOrderLike } from './limit-order';
 import { OrderId } from './order-id';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
-export declare abstract class OpenOrderLike<H extends HLike<H>> extends LimitOrderLike<H> implements CompositeDataLike {
+import { SerializableStatic } from './serializable';
+export declare abstract class OpenOrderLike<H extends HLike<H>> extends LimitOrderLike<H> {
     filled: H;
     unfilled: H;
     id: OrderId;

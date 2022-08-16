@@ -3,13 +3,13 @@ import {
 	PositionLike,
 	SerializablePositionStatic,
 } from './position';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
+import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
 
 export abstract class PositionsLike<H extends HLike<H>>
-	implements CompositeDataLike {
+{
 	public position: PositionLike<H>;
 	public closable: PositionLike<H>;
 	public time: number;

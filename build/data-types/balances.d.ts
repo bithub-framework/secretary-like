@@ -1,6 +1,6 @@
 import { HLike, SerializableHStatic } from './h';
-import { CompositeDataLike, SerializableStatic } from './composite-data';
-export declare abstract class BalancesLike<H extends HLike<H>> implements CompositeDataLike {
+import { SerializableStatic } from './serializable';
+export declare abstract class BalancesLike<H extends HLike<H>> {
     balance: H;
     available: H;
     time: number;

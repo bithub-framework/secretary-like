@@ -44,5 +44,5 @@ __exportStar(require("./data-types/length-action-side"), exports);
 __exportStar(require("./data-types/trade-id"), exports);
 __exportStar(require("./data-types/order-id"), exports);
 __exportStar(require("./data-types/data-static-namespace"), exports);
-__exportStar(require("./data-types/composite-data"), exports);
+__exportStar(require("./data-types/serializable"), exports);
 //# sourceMappingURL=imported-data-types.js.map

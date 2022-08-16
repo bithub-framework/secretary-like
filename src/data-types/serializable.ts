@@ -1,15 +1,7 @@
-/**
- * typeclass
- */
-export interface CompositeDataLike {
-	toJSON(): unknown;
-	toString(): string;
-}
-
 export interface SerializableStatic
 	<
 	Source,
-	Data extends CompositeDataLike,
+	Data,
 	Snapshot
 	> {
 	create: (source: Source) => Data;
