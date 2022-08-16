@@ -1,7 +1,7 @@
 import {
     HLike,
     DataStaticNamespace,
-} from '../data-types';
+} from '../imported-data-types';
 import { TimelineLike } from '../timeline-like';
 import { DaemonLike } from 'startable';
 import { MarketApiLike } from './market-api';

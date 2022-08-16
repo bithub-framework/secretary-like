@@ -1,4 +1,4 @@
-import { HLike } from './data-types';
+import { HLike } from './imported-data-types';
 export interface AccountSpec {
     LEVERAGE: number;
     MAKER_FEE_RATE: number;

@@ -1,5 +1,5 @@
 import { MarketSpec } from '../specification';
-import { HLike, Trade, Orderbook } from '../data-types';
+import { HLike, Trade, Orderbook } from '../imported-data-types';
 import { EventEmitter } from 'events';
 import { StateError } from 'startable';
 export interface MarketApiLike<H extends HLike<H>> extends MarketMethods<H>, MarketEventEmitterLike<H>, MarketSpec<H> {

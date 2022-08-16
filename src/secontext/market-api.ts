@@ -3,7 +3,7 @@ import {
 	HLike,
 	Trade,
 	Orderbook,
-} from '../data-types';
+} from '../imported-data-types';
 import { EventEmitter } from 'events';
 import { StateError } from 'startable';
 

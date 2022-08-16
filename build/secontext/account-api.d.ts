@@ -1,4 +1,4 @@
-import { LimitOrder, OpenOrder, Amendment, Positions, Balances, HLike } from '../data-types';
+import { LimitOrder, OpenOrder, Amendment, Positions, Balances, HLike } from '../imported-data-types';
 import { EventEmitter } from 'events';
 import { AccountSpec } from '../specification';
 import { StateError } from 'startable';
