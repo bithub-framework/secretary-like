@@ -8,9 +8,6 @@ import { PositionStatic } from './position';
 import { PositionsStatic } from './positions';
 import { BookOrderStatic } from './book-order';
 import { BalancesStatic } from './balances';
-/**
- * All data types support spread operator.
- */
 export declare class DataStaticNamespace<H extends HLike<H>> {
     H: HLikeStatic<H>;
     constructor(H: HLikeStatic<H>);

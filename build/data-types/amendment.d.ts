@@ -1,5 +1,5 @@
 import { HLike, HLikeStatic } from './h';
-import { OpenOrderLike, OpenOrderStatic } from './open-order';
+import { OpenOrderLike } from './open-order';
 import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
 export declare abstract class AmendmentLike<H extends HLike<H>> extends OpenOrderLike<H> implements CompositeDataLike {
     newUnfilled: H;
@@ -19,8 +19,7 @@ export declare namespace AmendmentLike {
 }
 export declare class AmendmentStatic<H extends HLike<H>> implements CompositeDataLikeStatic<AmendmentLike.Source<H>, AmendmentLike<H>, AmendmentLike.Snapshot> {
     private H;
-    private OpenOrder;
-    constructor(H: HLikeStatic<H>, OpenOrder: OpenOrderStatic<H>);
+    constructor(H: HLikeStatic<H>);
     /**
      * @decorator boundMethod
      */

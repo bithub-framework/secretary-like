@@ -1,5 +1,5 @@
 import { HLike, HLikeStatic } from './h';
-import { LimitOrderLike, LimitOrderStatic } from './limit-order';
+import { LimitOrderLike } from './limit-order';
 import { OrderId } from './order-id';
 import { CompositeDataLike, CompositeDataLikeStatic } from './composite-data';
 export declare abstract class OpenOrderLike<H extends HLike<H>> extends LimitOrderLike<H> implements CompositeDataLike {
@@ -29,8 +29,7 @@ declare class OpenOrder<H extends HLike<H>> extends OpenOrderLike<H> {
 }
 export declare class OpenOrderStatic<H extends HLike<H>> implements CompositeDataLikeStatic<OpenOrderLike.Source<H>, OpenOrderLike<H>, OpenOrderLike.Snapshot> {
     private H;
-    private LimitOrder;
-    constructor(H: HLikeStatic<H>, LimitOrder: LimitOrderStatic<H>);
+    constructor(H: HLikeStatic<H>);
     /**
      * @decorator boundMethod
      */

@@ -30,10 +30,10 @@ export abstract class OrderbookLike<H extends HLike<H>>
 		}
 		this.time = source.time;
 	}
+
 	public side(side: Side): BookOrderLike<H>[] {
 		return side === BID ? this.bids : this.asks;
 	}
-
 }
 
 

@@ -10,17 +10,14 @@ import { BookOrderStatic } from './book-order';
 import { BalancesStatic } from './balances';
 
 
-/**
- * All data types support spread operator.
- */
 export class DataStaticNamespace<H extends HLike<H>> {
 	public constructor(
 		public H: HLikeStatic<H>,
 	) { }
 
 	public LimitOrder = new LimitOrderStatic<H>(this.H);
-	public OpenOrder = new OpenOrderStatic<H>(this.H, this.LimitOrder);
-	public Amendment = new AmendmentStatic<H>(this.H, this.OpenOrder);
+	public OpenOrder = new OpenOrderStatic<H>(this.H);
+	public Amendment = new AmendmentStatic<H>(this.H);
 	public BookOrder = new BookOrderStatic<H>(this.H);
 	public Orderbook = new OrderbookStatic<H>(this.BookOrder);
 	public Trade = new TradeStatic<H>(this.H);

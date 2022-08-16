@@ -82,7 +82,6 @@ export class OpenOrderStatic<H extends HLike<H>> implements
 {
 	public constructor(
 		private H: HLikeStatic<H>,
-		private LimitOrder: LimitOrderStatic<H>,
 	) { }
 
 	/**
@@ -103,7 +102,11 @@ export class OpenOrderStatic<H extends HLike<H>> implements
 	@boundMethod
 	public capture(order: OpenOrderLike<H>): OpenOrderLike.Snapshot {
 		return {
-			...this.LimitOrder.capture(order),
+			price: this.H.capture(order.price),
+			quantity: this.H.capture(order.quantity),
+			side: order.side,
+			length: order.length,
+			action: order.action,
 			filled: this.H.capture(order.filled),
 			unfilled: this.H.capture(order.unfilled),
 			id: order.id,
@@ -116,7 +119,11 @@ export class OpenOrderStatic<H extends HLike<H>> implements
 	@boundMethod
 	public restore(snapshot: OpenOrderLike.Snapshot): OpenOrderLike<H> {
 		return this.create({
-			...this.LimitOrder.restore(snapshot),
+			price: this.H.restore(snapshot.price),
+			quantity: this.H.restore(snapshot.quantity),
+			side: snapshot.side,
+			length: snapshot.length,
+			action: snapshot.action,
 			filled: this.H.restore(snapshot.filled),
 			unfilled: this.H.restore(snapshot.unfilled),
 			id: snapshot.id,

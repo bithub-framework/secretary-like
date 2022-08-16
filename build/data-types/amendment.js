@@ -30,9 +30,8 @@ class ConcreteAmendment extends AmendmentLike {
     }
 }
 class AmendmentStatic {
-    constructor(H, OpenOrder) {
+    constructor(H) {
         this.H = H;
-        this.OpenOrder = OpenOrder;
     }
     /**
      * @decorator boundMethod
@@ -45,7 +44,14 @@ class AmendmentStatic {
      */
     capture(amendment) {
         return {
-            ...this.OpenOrder.capture(amendment),
+            price: this.H.capture(amendment.price),
+            quantity: this.H.capture(amendment.quantity),
+            side: amendment.side,
+            length: amendment.length,
+            action: amendment.action,
+            filled: this.H.capture(amendment.filled),
+            unfilled: this.H.capture(amendment.unfilled),
+            id: amendment.id,
             newUnfilled: this.H.capture(amendment.newUnfilled),
             newPrice: this.H.capture(amendment.newPrice),
         };
@@ -55,7 +61,14 @@ class AmendmentStatic {
      */
     restore(snapshot) {
         return this.create({
-            ...this.OpenOrder.restore(snapshot),
+            price: this.H.restore(snapshot.price),
+            quantity: this.H.restore(snapshot.quantity),
+            side: snapshot.side,
+            length: snapshot.length,
+            action: snapshot.action,
+            filled: this.H.restore(snapshot.filled),
+            unfilled: this.H.restore(snapshot.unfilled),
+            id: snapshot.id,
             newUnfilled: this.H.restore(snapshot.newUnfilled),
             newPrice: this.H.restore(snapshot.newPrice),
         });
