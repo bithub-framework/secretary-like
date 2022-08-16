@@ -1,7 +1,7 @@
 import { HLike } from './h';
 import {
 	PositionLike,
-	PositionStatic,
+	SerializablePositionStatic,
 } from './position';
 import { CompositeDataLike, SerializableStatic } from './composite-data';
 import { boundMethod } from 'autobind-decorator';
@@ -16,11 +16,7 @@ export abstract class PositionsLike<H extends HLike<H>>
 
 	public constructor(
 		source: PositionsLike.Source<H>,
-		Position: SerializableStatic<
-			PositionLike.Source<H>,
-			PositionLike<H>,
-			PositionLike.Snapshot
-		>,
+		Position: SerializablePositionStatic<H>,
 	) {
 		this.position = Position.create(source.position);
 		this.closable = Position.create(source.closable);
@@ -60,7 +56,7 @@ class Positions<H extends HLike<H>> extends PositionsLike<H>{
 	public constructor(
 		source: PositionsLike.Source<H>,
 		private Positions: PositionsStatic<H>,
-		Position: PositionStatic<H>,
+		Position: SerializablePositionStatic<H>,
 	) {
 		super(
 			source,
@@ -82,7 +78,7 @@ export class PositionsStatic<H extends HLike<H>>
 	implements SerializablePositionsStatic<H>
 {
 	public constructor(
-		private Position: PositionStatic<H>,
+		private Position: SerializablePositionStatic<H>,
 	) { }
 
 	/**

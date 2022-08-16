@@ -1,4 +1,4 @@
-import { SerializableBookOrderStatic, BookOrderStatic, BookOrderLike } from './book-order';
+import { SerializableBookOrderStatic, BookOrderLike } from './book-order';
 import { HLike } from './h';
 import { Side } from './length-action-side';
 import { CompositeDataLike, SerializableStatic } from './composite-data';
@@ -28,7 +28,7 @@ export interface SerializableOrderbookStatic<H extends HLike<H>> extends Seriali
 }
 export declare class OrderbookStatic<H extends HLike<H>> implements SerializableOrderbookStatic<H> {
     private BookOrder;
-    constructor(BookOrder: BookOrderStatic<H>);
+    constructor(BookOrder: SerializableBookOrderStatic<H>);
     /**
      * @decorator boundMethod
      */

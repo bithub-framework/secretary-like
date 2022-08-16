@@ -43,12 +43,7 @@ export declare namespace HLike {
     }
 }
 /**
- * typeclass
+ * static part of typeclass `SerializableH`
  */
-export interface SerializableH<H extends HLike<H>> extends HLike<H> {
-}
-/**
- * static part of typeclass {@link SerializableH}
- */
-export interface SerializableHStatic<H extends HLike<H>> extends HLikeStatic<H>, SerializableStatic<HLike.Source<H>, H, HLike.Snapshot> {
+export interface SerializableHStatic<H extends HLike<H>> extends SerializableStatic<HLike.Source<H>, H, HLike.Snapshot> {
 }

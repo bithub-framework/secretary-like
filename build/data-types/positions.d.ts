@@ -1,11 +1,11 @@
 import { HLike } from './h';
-import { PositionLike, PositionStatic } from './position';
+import { PositionLike, SerializablePositionStatic } from './position';
 import { CompositeDataLike, SerializableStatic } from './composite-data';
 export declare abstract class PositionsLike<H extends HLike<H>> implements CompositeDataLike {
     position: PositionLike<H>;
     closable: PositionLike<H>;
     time: number;
-    constructor(source: PositionsLike.Source<H>, Position: SerializableStatic<PositionLike.Source<H>, PositionLike<H>, PositionLike.Snapshot>);
+    constructor(source: PositionsLike.Source<H>, Position: SerializablePositionStatic<H>);
     abstract toJSON(): unknown;
     abstract toString(): string;
 }
@@ -26,7 +26,7 @@ export interface SerializablePositionsStatic<H extends HLike<H>> extends Seriali
 }
 export declare class PositionsStatic<H extends HLike<H>> implements SerializablePositionsStatic<H> {
     private Position;
-    constructor(Position: PositionStatic<H>);
+    constructor(Position: SerializablePositionStatic<H>);
     /**
      * @decorator boundMethod
      */

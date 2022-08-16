@@ -60,16 +60,9 @@ export namespace HLike {
 
 
 /**
- * typeclass
- */
-export interface SerializableH<H extends HLike<H>>
-	extends HLike<H> { }
-
-/**
- * static part of typeclass {@link SerializableH}
+ * static part of typeclass `SerializableH`
  */
 export interface SerializableHStatic<H extends HLike<H>> extends
-	HLikeStatic<H>,
 	SerializableStatic<
 	HLike.Source<H>,
 	H,

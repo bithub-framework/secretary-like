@@ -1,6 +1,5 @@
 import {
 	SerializableBookOrderStatic,
-	BookOrderStatic,
 	BookOrderLike,
 } from './book-order';
 import { HLike } from './h';
@@ -67,7 +66,7 @@ class Orderbook<H extends HLike<H>> extends OrderbookLike<H> {
 	public constructor(
 		source: OrderbookLike.Source<H>,
 		private Orderbook: OrderbookStatic<H>,
-		BookOrder: BookOrderStatic<H>,
+		BookOrder: SerializableBookOrderStatic<H>,
 	) {
 		super(
 			source,
@@ -89,7 +88,7 @@ export class OrderbookStatic<H extends HLike<H>>
 	implements SerializableOrderbookStatic<H>
 {
 	public constructor(
-		private BookOrder: BookOrderStatic<H>,
+		private BookOrder: SerializableBookOrderStatic<H>,
 	) { }
 
 	/**
