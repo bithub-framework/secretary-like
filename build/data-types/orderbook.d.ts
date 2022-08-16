@@ -1,6 +1,6 @@
 import { SerializableBookOrderStatic, BookOrderLike } from './book-order';
 import { HLike } from './h';
-import { Side } from './length-action-side';
+import { Side } from './pairs';
 import { SerializableStatic } from './serializable';
 export declare abstract class OrderbookLike<H extends HLike<H>> {
     protected bids: BookOrderLike<H>[];

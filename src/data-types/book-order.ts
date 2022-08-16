@@ -1,5 +1,5 @@
 import { HLike, SerializableHStatic } from './h';
-import { Side } from './length-action-side';
+import { Side } from './pairs';
 import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 

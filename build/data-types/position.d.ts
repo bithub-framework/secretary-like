@@ -1,5 +1,5 @@
 import { HLike, SerializableHStatic } from './h';
-import { Length } from './length-action-side';
+import { Length } from './pairs';
 import { SerializableStatic } from './serializable';
 export declare abstract class PositionLike<H extends HLike<H>> {
     protected long: H;

@@ -1,5 +1,5 @@
 import { HLike, SerializableHStatic } from './h';
-import { Side } from './length-action-side';
+import { Side } from './pairs';
 import { SerializableStatic } from './serializable';
 export declare abstract class BookOrderLike<H extends HLike<H>> {
     price: H;

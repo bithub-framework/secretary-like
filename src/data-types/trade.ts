@@ -1,4 +1,4 @@
-import { Side } from './length-action-side';
+import { Side } from './pairs';
 import { HLike, SerializableHStatic } from './h';
 import { TradeId } from './trade-id';
 import { SerializableStatic } from './serializable';

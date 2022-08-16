@@ -9,7 +9,7 @@ export { PositionsLike as Positions } from './data-types/positions';
 export { BookOrderLike as BookOrder } from './data-types/book-order';
 export { BalancesLike as Balances } from './data-types/balances';
 
-export * from './data-types/length-action-side';
+export * from './data-types/pairs';
 export * from './data-types/trade-id';
 export * from './data-types/order-id';
 

@@ -3,7 +3,7 @@ import {
 	BookOrderLike,
 } from './book-order';
 import { HLike } from './h';
-import { Side, BID, ASK } from './length-action-side';
+import { Side, BID, ASK } from './pairs';
 import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 import assert = require('assert');

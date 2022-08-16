@@ -7,18 +7,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PositionStatic = exports.PositionLike = void 0;
-const length_action_side_1 = require("./length-action-side");
+const pairs_1 = require("./pairs");
 const autobind_decorator_1 = require("autobind-decorator");
 const assert = require("assert");
 class PositionLike {
     constructor(source, H) {
         if (source instanceof PositionLike) {
-            this.long = source.length(length_action_side_1.LONG);
-            this.short = source.length(length_action_side_1.SHORT);
+            this.long = source.length(pairs_1.LONG);
+            this.short = source.length(pairs_1.SHORT);
         }
         else {
             assert(source[0][0] !== source[1][0]);
-            if (source[0][0] === length_action_side_1.LONG) {
+            if (source[0][0] === pairs_1.LONG) {
                 this.long = H.create(source[0][1]);
                 this.short = H.create(source[1][1]);
             }
@@ -29,7 +29,7 @@ class PositionLike {
         }
     }
     length(length) {
-        return length === length_action_side_1.LONG ? this.long : this.short;
+        return length === pairs_1.LONG ? this.long : this.short;
     }
 }
 exports.PositionLike = PositionLike;
@@ -60,8 +60,8 @@ class PositionStatic {
      */
     capture(position) {
         return {
-            long: this.H.capture(position.length(length_action_side_1.LONG)),
-            short: this.H.capture(position.length(length_action_side_1.SHORT)),
+            long: this.H.capture(position.length(pairs_1.LONG)),
+            short: this.H.capture(position.length(pairs_1.SHORT)),
         };
     }
     /**
@@ -69,8 +69,8 @@ class PositionStatic {
      */
     restore(snapshot) {
         return this.create([
-            [length_action_side_1.LONG, snapshot.long],
-            [length_action_side_1.SHORT, snapshot.short],
+            [pairs_1.LONG, snapshot.long],
+            [pairs_1.SHORT, snapshot.short],
         ]);
     }
 }

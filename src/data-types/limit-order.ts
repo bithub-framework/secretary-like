@@ -1,4 +1,4 @@
-import { Length, Side, Action } from './length-action-side';
+import { Length, Side, Action } from './pairs';
 import { HLike, SerializableHStatic } from './h';
 import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';

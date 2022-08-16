@@ -20,7 +20,7 @@ __exportStar(require("./data-types/position"), exports);
 __exportStar(require("./data-types/positions"), exports);
 __exportStar(require("./data-types/book-order"), exports);
 __exportStar(require("./data-types/balances"), exports);
-__exportStar(require("./data-types/length-action-side"), exports);
+__exportStar(require("./data-types/pairs"), exports);
 __exportStar(require("./data-types/trade-id"), exports);
 __exportStar(require("./data-types/order-id"), exports);
 __exportStar(require("./data-types/data-static-namespace"), exports);

@@ -1,5 +1,5 @@
 import { HLike, SerializableHStatic } from './h';
-import { Length, LONG, SHORT } from './length-action-side';
+import { Length, LONG, SHORT } from './pairs';
 import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 import assert = require('assert');

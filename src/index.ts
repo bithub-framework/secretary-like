@@ -8,7 +8,7 @@ export * from './data-types/position';
 export * from './data-types/positions';
 export * from './data-types/book-order';
 export * from './data-types/balances';
-export * from './data-types/length-action-side';
+export * from './data-types/pairs';
 export * from './data-types/trade-id';
 export * from './data-types/order-id';
 export * from './data-types/data-static-namespace';

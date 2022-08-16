@@ -31,7 +31,7 @@ var book_order_1 = require("./data-types/book-order");
 Object.defineProperty(exports, "BookOrder", { enumerable: true, get: function () { return book_order_1.BookOrderLike; } });
 var balances_1 = require("./data-types/balances");
 Object.defineProperty(exports, "Balances", { enumerable: true, get: function () { return balances_1.BalancesLike; } });
-__exportStar(require("./data-types/length-action-side"), exports);
+__exportStar(require("./data-types/pairs"), exports);
 __exportStar(require("./data-types/trade-id"), exports);
 __exportStar(require("./data-types/order-id"), exports);
 __exportStar(require("./data-types/data-static-namespace"), exports);
