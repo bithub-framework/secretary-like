@@ -14,4 +14,3 @@ export * from './data-types/trade-id';
 export * from './data-types/order-id';
 
 export * from './data-types/data-static-namespace';
-export * from './data-types/serializable';
