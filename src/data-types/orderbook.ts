@@ -3,9 +3,10 @@ import {
 	BookOrderLike,
 } from './book-order';
 import { HLike } from './h';
-import { Side, BID, ASK, } from './length-action-side';
+import { Side, BID, ASK } from './length-action-side';
 import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
+import assert = require('assert');
 
 
 
@@ -25,8 +26,14 @@ export abstract class OrderbookLike<H extends HLike<H>>
 			this.bids = source.side(BID);
 			this.asks = source.side(ASK);
 		} else {
-			this.bids = source.bids.map(BookOrder.create);
-			this.asks = source.asks.map(BookOrder.create);
+			assert(source.sides[0][0] !== source.sides[1][0]);
+			if (source.sides[0][0] === BID) {
+				this.bids = source.sides[0][1].map(BookOrder.create);
+				this.asks = source.sides[1][1].map(BookOrder.create);
+			} else {
+				this.bids = source.sides[1][1].map(BookOrder.create);
+				this.asks = source.sides[0][1].map(BookOrder.create);
+			}
 		}
 		this.time = source.time;
 	}
@@ -39,8 +46,10 @@ export abstract class OrderbookLike<H extends HLike<H>>
 
 export namespace OrderbookLike {
 	export interface Literal<H extends HLike<H>> {
-		bids: BookOrderLike.Source<H>[];
-		asks: BookOrderLike.Source<H>[];
+		sides: [
+			[Side, BookOrderLike.Source<H>[]],
+			[Side, BookOrderLike.Source<H>[]],
+		];
 		time: number;
 	}
 	export type Source<H extends HLike<H>> = OrderbookLike<H> | Literal<H>;
@@ -123,8 +132,10 @@ export class OrderbookStatic<H extends HLike<H>>
 	@boundMethod
 	public restore(snapshot: OrderbookLike.Snapshot): OrderbookLike<H> {
 		return this.create({
-			bids: snapshot.bids.map(this.BookOrder.restore),
-			asks: snapshot.asks.map(this.BookOrder.restore),
+			sides: [
+				[BID, snapshot.bids.map(this.BookOrder.restore)],
+				[ASK, snapshot.asks.map(this.BookOrder.restore)],
+			],
 			time: snapshot.time !== null
 				? snapshot.time
 				: Number.NEGATIVE_INFINITY,

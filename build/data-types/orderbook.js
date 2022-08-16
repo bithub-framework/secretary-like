@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderbookStatic = exports.OrderbookLike = void 0;
 const length_action_side_1 = require("./length-action-side");
 const autobind_decorator_1 = require("autobind-decorator");
+const assert = require("assert");
 class OrderbookLike {
     constructor(source, BookOrder) {
         if (source instanceof OrderbookLike) {
@@ -16,8 +17,15 @@ class OrderbookLike {
             this.asks = source.side(length_action_side_1.ASK);
         }
         else {
-            this.bids = source.bids.map(BookOrder.create);
-            this.asks = source.asks.map(BookOrder.create);
+            assert(source.sides[0][0] !== source.sides[1][0]);
+            if (source.sides[0][0] === length_action_side_1.BID) {
+                this.bids = source.sides[0][1].map(BookOrder.create);
+                this.asks = source.sides[1][1].map(BookOrder.create);
+            }
+            else {
+                this.bids = source.sides[1][1].map(BookOrder.create);
+                this.asks = source.sides[0][1].map(BookOrder.create);
+            }
         }
         this.time = source.time;
     }
@@ -65,8 +73,10 @@ class OrderbookStatic {
      */
     restore(snapshot) {
         return this.create({
-            bids: snapshot.bids.map(this.BookOrder.restore),
-            asks: snapshot.asks.map(this.BookOrder.restore),
+            sides: [
+                [length_action_side_1.BID, snapshot.bids.map(this.BookOrder.restore)],
+                [length_action_side_1.ASK, snapshot.asks.map(this.BookOrder.restore)],
+            ],
             time: snapshot.time !== null
                 ? snapshot.time
                 : Number.NEGATIVE_INFINITY,

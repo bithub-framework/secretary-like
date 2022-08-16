@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PositionStatic = exports.PositionLike = void 0;
 const length_action_side_1 = require("./length-action-side");
 const autobind_decorator_1 = require("autobind-decorator");
+const assert = require("assert");
 class PositionLike {
     constructor(source, H) {
         if (source instanceof PositionLike) {
@@ -16,8 +17,15 @@ class PositionLike {
             this.short = source.length(length_action_side_1.SHORT);
         }
         else {
-            this.long = H.create(source.long);
-            this.short = H.create(source.short);
+            assert(source[0][0] !== source[1][0]);
+            if (source[0][0] === length_action_side_1.LONG) {
+                this.long = H.create(source[0][1]);
+                this.short = H.create(source[1][1]);
+            }
+            else {
+                this.long = H.create(source[1][1]);
+                this.short = H.create(source[0][1]);
+            }
         }
     }
     length(length) {
@@ -60,10 +68,10 @@ class PositionStatic {
      * @decorator boundMethod
      */
     restore(snapshot) {
-        return this.create({
-            long: this.H.restore(snapshot.long),
-            short: this.H.restore(snapshot.short),
-        });
+        return this.create([
+            [length_action_side_1.LONG, snapshot.long],
+            [length_action_side_1.SHORT, snapshot.short],
+        ]);
     }
 }
 __decorate([

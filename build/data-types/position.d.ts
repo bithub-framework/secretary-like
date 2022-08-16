@@ -10,10 +10,16 @@ export declare abstract class PositionLike<H extends HLike<H>> {
     length(length: Length): H;
 }
 export declare namespace PositionLike {
-    interface Literal<H extends HLike<H>> {
-        long: HLike.Source<H>;
-        short: HLike.Source<H>;
-    }
+    type Literal<H extends HLike<H>> = [
+        [
+            Length,
+            HLike.Source<H>
+        ],
+        [
+            Length,
+            HLike.Source<H>
+        ]
+    ];
     type Source<H extends HLike<H>> = PositionLike<H> | Literal<H>;
     interface Snapshot {
         readonly long: HLike.Snapshot;

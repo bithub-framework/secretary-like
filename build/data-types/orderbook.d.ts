@@ -13,8 +13,16 @@ export declare abstract class OrderbookLike<H extends HLike<H>> {
 }
 export declare namespace OrderbookLike {
     interface Literal<H extends HLike<H>> {
-        bids: BookOrderLike.Source<H>[];
-        asks: BookOrderLike.Source<H>[];
+        sides: [
+            [
+                Side,
+                BookOrderLike.Source<H>[]
+            ],
+            [
+                Side,
+                BookOrderLike.Source<H>[]
+            ]
+        ];
         time: number;
     }
     type Source<H extends HLike<H>> = OrderbookLike<H> | Literal<H>;

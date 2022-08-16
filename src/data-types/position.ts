@@ -1,10 +1,8 @@
 import { HLike, SerializableHStatic } from './h';
 import { Length, LONG, SHORT } from './length-action-side';
-import {
-
-	SerializableStatic,
-} from './serializable';
+import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
+import assert = require('assert');
 
 
 
@@ -23,8 +21,14 @@ export abstract class PositionLike<H extends HLike<H>>
 			this.long = source.length(LONG);
 			this.short = source.length(SHORT);
 		} else {
-			this.long = H.create(source.long);
-			this.short = H.create(source.short);
+			assert(source[0][0] !== source[1][0]);
+			if (source[0][0] === LONG) {
+				this.long = H.create(source[0][1]);
+				this.short = H.create(source[1][1]);
+			} else {
+				this.long = H.create(source[1][1]);
+				this.short = H.create(source[0][1]);
+			}
 		}
 	}
 
@@ -35,10 +39,10 @@ export abstract class PositionLike<H extends HLike<H>>
 
 
 export namespace PositionLike {
-	export interface Literal<H extends HLike<H>> {
-		long: HLike.Source<H>;
-		short: HLike.Source<H>;
-	}
+	export type Literal<H extends HLike<H>> = [
+		[Length, HLike.Source<H>],
+		[Length, HLike.Source<H>],
+	];
 	export type Source<H extends HLike<H>> = PositionLike<H> | Literal<H>;
 
 	export interface Snapshot {
@@ -113,9 +117,9 @@ export class PositionStatic<H extends HLike<H>>
 	 */
 	@boundMethod
 	public restore(snapshot: PositionLike.Snapshot): PositionLike<H> {
-		return this.create({
-			long: this.H.restore(snapshot.long),
-			short: this.H.restore(snapshot.short),
-		});
+		return this.create([
+			[LONG, snapshot.long],
+			[SHORT, snapshot.short],
+		]);
 	}
 }
