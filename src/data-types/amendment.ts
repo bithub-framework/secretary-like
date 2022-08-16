@@ -1,7 +1,7 @@
 import { HLike, SerializableHStatic } from './h';
-import {
-	OpenOrderLike,
-} from './open-order';
+import { OpenOrderLike } from './open-order';
+import { Length, Side, Action } from './pairs';
+import { OrderId } from './order-id';
 import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
@@ -23,6 +23,17 @@ export abstract class AmendmentLike<H extends HLike<H>>
 		);
 		this.newPrice = H.create(source.newPrice);
 		this.newUnfilled = H.create(source.newUnfilled);
+	}
+
+	public abstract setNewPrice(newPrice: HLike.Source<H>): AmendmentLike<H>;
+	public abstract setNewUnfilled(newUnfilled: HLike.Source<H>): AmendmentLike<H>;
+
+	public toLiteral(): AmendmentLike.Literal<H> {
+		return {
+			...super.toLiteral(),
+			newPrice: this.newPrice,
+			newUnfilled: this.newUnfilled,
+		}
 	}
 }
 
@@ -62,6 +73,76 @@ class Amendment<H extends HLike<H>> extends AmendmentLike<H> {
 		);
 	}
 
+	public setPrice(price: HLike.Source<H>): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			price,
+		});
+	}
+
+	public setQuantity(quantity: HLike.Source<H>): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			quantity,
+		});
+	}
+
+	public setLength(length: Length): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			length,
+		});
+	}
+
+	public setSide(side: Side): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			side,
+		});
+	}
+
+	public setAction(action: Action): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			action,
+		});
+	}
+
+	public setFilled(filled: HLike.Source<H>): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			filled,
+		});
+	}
+
+	public setUnfilled(unfilled: HLike.Source<H>): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			unfilled,
+		});
+	}
+
+	public setId(id: OrderId): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			id,
+		});
+	}
+
+	public setNewPrice(newPrice: HLike.Source<H>): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			newPrice,
+		});
+	}
+
+	public setNewUnfilled(newUnfilled: HLike.Source<H>): AmendmentLike<H> {
+		return this.Amendment.create({
+			...this.toLiteral(),
+			newUnfilled,
+		});
+	}
+
 	public toJSON(): unknown {
 		return this.Amendment.capture(this);
 	}
@@ -79,9 +160,6 @@ export class AmendmentStatic<H extends HLike<H>>
 		private H: SerializableHStatic<H>,
 	) { }
 
-	/**
-	 * @decorator boundMethod
-	 */
 	@boundMethod
 	public create(source: AmendmentLike.Source<H>): AmendmentLike<H> {
 		return new Amendment(
@@ -91,9 +169,6 @@ export class AmendmentStatic<H extends HLike<H>>
 		);
 	}
 
-	/**
-	 * @decorator boundMethod
-	 */
 	@boundMethod
 	public capture(amendment: AmendmentLike<H>): AmendmentLike.Snapshot {
 		return {
@@ -110,9 +185,6 @@ export class AmendmentStatic<H extends HLike<H>>
 		}
 	}
 
-	/**
-	 * @decorator boundMethod
-	 */
 	@boundMethod
 	public restore(snapshot: AmendmentLike.Snapshot): AmendmentLike<H> {
 		return this.create({

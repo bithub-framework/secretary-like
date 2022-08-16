@@ -21,6 +21,18 @@ export abstract class BookOrderLike<H extends HLike<H>>
 		this.quantity = H.create(source.quantity);
 		this.side = source.side;
 	}
+
+	public abstract setPrice(price: HLike.Source<H>): BookOrderLike<H>;
+	public abstract setQuantity(quantity: HLike.Source<H>): BookOrderLike<H>;
+	public abstract setSide(side: Side): BookOrderLike<H>;
+
+	public toLiteral(): BookOrderLike.Literal<H> {
+		return {
+			price: this.price,
+			quantity: this.quantity,
+			side: this.side,
+		}
+	}
 }
 
 
@@ -61,6 +73,27 @@ class BookOrder<H extends HLike<H>> extends BookOrderLike<H> {
 		);
 	}
 
+	public setPrice(price: HLike.Source<H>): BookOrderLike<H> {
+		return this.BookOrder.create({
+			...this.toLiteral(),
+			price,
+		});
+	}
+
+	public setQuantity(quantity: HLike.Source<H>): BookOrderLike<H> {
+		return this.BookOrder.create({
+			...this.toLiteral(),
+			quantity,
+		});
+	}
+
+	public setSide(side: Side): BookOrderLike<H> {
+		return this.BookOrder.create({
+			...this.toLiteral(),
+			side,
+		});
+	}
+
 	public toJSON(): unknown {
 		return this.BookOrder.capture(this);
 	}
@@ -78,9 +111,6 @@ export class BookOrderStatic<H extends HLike<H>>
 		private H: SerializableHStatic<H>,
 	) { }
 
-	/**
-	 * @decorator boundMethod
-	 */
 	@boundMethod
 	public create(source: BookOrderLike.Source<H>): BookOrderLike<H> {
 		return new BookOrder(
@@ -90,9 +120,6 @@ export class BookOrderStatic<H extends HLike<H>>
 		);
 	}
 
-	/**
-	 * @decorator boundMethod
-	 */
 	@boundMethod
 	public capture(order: BookOrderLike<H>): BookOrderLike.Snapshot {
 		return {
@@ -102,9 +129,6 @@ export class BookOrderStatic<H extends HLike<H>>
 		}
 	}
 
-	/**
-	 * @decorator boundMethod
-	 */
 	@boundMethod
 	public restore(snapshot: BookOrderLike.Snapshot): BookOrderLike<H> {
 		return this.create({

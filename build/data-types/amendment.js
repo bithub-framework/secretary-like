@@ -15,12 +15,79 @@ class AmendmentLike extends open_order_1.OpenOrderLike {
         this.newPrice = H.create(source.newPrice);
         this.newUnfilled = H.create(source.newUnfilled);
     }
+    toLiteral() {
+        return {
+            ...super.toLiteral(),
+            newPrice: this.newPrice,
+            newUnfilled: this.newUnfilled,
+        };
+    }
 }
 exports.AmendmentLike = AmendmentLike;
 class Amendment extends AmendmentLike {
     constructor(source, Amendment, H) {
         super(source, H);
         this.Amendment = Amendment;
+    }
+    setPrice(price) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            price,
+        });
+    }
+    setQuantity(quantity) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            quantity,
+        });
+    }
+    setLength(length) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            length,
+        });
+    }
+    setSide(side) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            side,
+        });
+    }
+    setAction(action) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            action,
+        });
+    }
+    setFilled(filled) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            filled,
+        });
+    }
+    setUnfilled(unfilled) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            unfilled,
+        });
+    }
+    setId(id) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            id,
+        });
+    }
+    setNewPrice(newPrice) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            newPrice,
+        });
+    }
+    setNewUnfilled(newUnfilled) {
+        return this.Amendment.create({
+            ...this.toLiteral(),
+            newUnfilled,
+        });
     }
     toJSON() {
         return this.Amendment.capture(this);
@@ -33,15 +100,9 @@ class AmendmentStatic {
     constructor(H) {
         this.H = H;
     }
-    /**
-     * @decorator boundMethod
-     */
     create(source) {
         return new Amendment(source, this, this.H);
     }
-    /**
-     * @decorator boundMethod
-     */
     capture(amendment) {
         return {
             price: this.H.capture(amendment.price),
@@ -56,9 +117,6 @@ class AmendmentStatic {
             newPrice: this.H.capture(amendment.newPrice),
         };
     }
-    /**
-     * @decorator boundMethod
-     */
     restore(snapshot) {
         return this.create({
             price: this.H.restore(snapshot.price),

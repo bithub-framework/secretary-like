@@ -11,6 +11,12 @@ export declare abstract class TradeLike<H extends HLike<H>> {
     abstract toJSON(): unknown;
     abstract toString(): string;
     constructor(source: TradeLike.Source<H>, H: SerializableHStatic<H>);
+    abstract setPrice(price: HLike.Source<H>): TradeLike<H>;
+    abstract setQuantity(quantity: HLike.Source<H>): TradeLike<H>;
+    abstract setSide(side: Side): TradeLike<H>;
+    abstract setTime(time: number): TradeLike<H>;
+    abstract setId(id: TradeId): TradeLike<H>;
+    toLiteral(): TradeLike.Literal<H>;
 }
 export declare namespace TradeLike {
     interface Literal<H extends HLike<H>> {

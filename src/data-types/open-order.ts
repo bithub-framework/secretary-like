@@ -1,13 +1,8 @@
 import { HLike, SerializableHStatic } from './h';
-import {
-	LimitOrderLike,
-	LimitOrderStatic,
-} from './limit-order';
+import { LimitOrderLike } from './limit-order';
 import { OrderId } from './order-id';
-import {
-
-	SerializableStatic,
-} from './serializable';
+import { Length, Side, Action } from './pairs';
+import { SerializableStatic } from './serializable';
 import { boundMethod } from 'autobind-decorator';
 
 
@@ -30,6 +25,19 @@ export abstract class OpenOrderLike<H extends HLike<H>>
 		this.filled = H.create(source.filled);
 		this.unfilled = H.create(source.unfilled);
 		this.id = source.id;
+	}
+
+	public abstract setFilled(filled: HLike.Source<H>): OpenOrderLike<H>;
+	public abstract setUnfilled(unfilled: HLike.Source<H>): OpenOrderLike<H>;
+	public abstract setId(id: OrderId): OpenOrderLike<H>;
+
+	public toLiteral(): OpenOrderLike.Literal<H> {
+		return {
+			...super.toLiteral(),
+			filled: this.filled,
+			unfilled: this.unfilled,
+			id: this.id,
+		}
 	}
 }
 
@@ -70,6 +78,62 @@ class OpenOrder<H extends HLike<H>> extends OpenOrderLike<H> {
 		);
 	}
 
+	public setPrice(price: HLike.Source<H>): OpenOrderLike<H> {
+		return this.OpenOrder.create({
+			...this.toLiteral(),
+			price,
+		});
+	}
+
+	public setQuantity(quantity: HLike.Source<H>): OpenOrderLike<H> {
+		return this.OpenOrder.create({
+			...this.toLiteral(),
+			quantity,
+		});
+	}
+
+	public setLength(length: Length): OpenOrderLike<H> {
+		return this.OpenOrder.create({
+			...this.toLiteral(),
+			length,
+		});
+	}
+
+	public setSide(side: Side): OpenOrderLike<H> {
+		return this.OpenOrder.create({
+			...this.toLiteral(),
+			side,
+		});
+	}
+
+	public setAction(action: Action): OpenOrderLike<H> {
+		return this.OpenOrder.create({
+			...this.toLiteral(),
+			action,
+		});
+	}
+
+	public setFilled(filled: HLike.Source<H>): OpenOrderLike<H> {
+		return this.OpenOrder.create({
+			...this.toLiteral(),
+			filled,
+		});
+	}
+
+	public setUnfilled(unfilled: HLike.Source<H>): OpenOrderLike<H> {
+		return this.OpenOrder.create({
+			...this.toLiteral(),
+			unfilled,
+		});
+	}
+
+	public setId(id: OrderId): OpenOrderLike<H> {
+		return this.OpenOrder.create({
+			...this.toLiteral(),
+			id,
+		});
+	}
+
 	public toJSON(): unknown {
 		return this.OpenOrder.capture(this);
 	}
@@ -88,9 +152,6 @@ export class OpenOrderStatic<H extends HLike<H>>
 		private H: SerializableHStatic<H>,
 	) { }
 
-	/**
-	 * @decorator boundMethod
-	 */
 	@boundMethod
 	public create(source: OpenOrderLike.Source<H>): OpenOrderLike<H> {
 		return new OpenOrder(
@@ -100,9 +161,6 @@ export class OpenOrderStatic<H extends HLike<H>>
 		);
 	}
 
-	/**
-	 * @decorator boundMethod
-	 */
 	@boundMethod
 	public capture(order: OpenOrderLike<H>): OpenOrderLike.Snapshot {
 		return {
@@ -117,9 +175,6 @@ export class OpenOrderStatic<H extends HLike<H>>
 		};
 	}
 
-	/**
-	 * @decorator boundMethod
-	 */
 	@boundMethod
 	public restore(snapshot: OpenOrderLike.Snapshot): OpenOrderLike<H> {
 		return this.create({

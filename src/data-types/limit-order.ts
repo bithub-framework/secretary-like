@@ -29,6 +29,22 @@ export abstract class LimitOrderLike<H extends HLike<H>>
 		this.price = H.create(source.price);
 		this.quantity = H.create(source.quantity);
 	}
+
+	public toLiteral(): LimitOrderLike.Literal<H> {
+		return {
+			price: this.price,
+			quantity: this.quantity,
+			side: this.side,
+			length: this.length,
+			action: this.action,
+		}
+	}
+
+	public abstract setPrice(price: HLike.Source<H>): LimitOrderLike<H>;
+	public abstract setQuantity(quantity: HLike.Source<H>): LimitOrderLike<H>;
+	public abstract setSide(side: Side): LimitOrderLike<H>;
+	public abstract setLength(length: Length): LimitOrderLike<H>;
+	public abstract setAction(action: Action): LimitOrderLike<H>;
 }
 
 /**
@@ -79,6 +95,41 @@ class LimitOrder<H extends HLike<H>> extends LimitOrderLike<H>{
 			source,
 			H,
 		);
+	}
+
+	public setPrice(price: HLike.Source<H>): LimitOrderLike<H> {
+		return this.LimitOrder.create({
+			...this.toLiteral(),
+			price,
+		});
+	}
+
+	public setQuantity(quantity: HLike.Source<H>): LimitOrderLike<H> {
+		return this.LimitOrder.create({
+			...this.toLiteral(),
+			quantity,
+		});
+	}
+
+	public setLength(length: Length): LimitOrderLike<H> {
+		return this.LimitOrder.create({
+			...this.toLiteral(),
+			length,
+		});
+	}
+
+	public setSide(side: Side): LimitOrderLike<H> {
+		return this.LimitOrder.create({
+			...this.toLiteral(),
+			side,
+		});
+	}
+
+	public setAction(action: Action): LimitOrderLike<H> {
+		return this.LimitOrder.create({
+			...this.toLiteral(),
+			action,
+		});
 	}
 
 	public toJSON(): unknown {

@@ -14,12 +14,37 @@ class BookOrderLike {
         this.quantity = H.create(source.quantity);
         this.side = source.side;
     }
+    toLiteral() {
+        return {
+            price: this.price,
+            quantity: this.quantity,
+            side: this.side,
+        };
+    }
 }
 exports.BookOrderLike = BookOrderLike;
 class BookOrder extends BookOrderLike {
     constructor(source, BookOrder, H) {
         super(source, H);
         this.BookOrder = BookOrder;
+    }
+    setPrice(price) {
+        return this.BookOrder.create({
+            ...this.toLiteral(),
+            price,
+        });
+    }
+    setQuantity(quantity) {
+        return this.BookOrder.create({
+            ...this.toLiteral(),
+            quantity,
+        });
+    }
+    setSide(side) {
+        return this.BookOrder.create({
+            ...this.toLiteral(),
+            side,
+        });
     }
     toJSON() {
         return this.BookOrder.capture(this);
@@ -32,15 +57,9 @@ class BookOrderStatic {
     constructor(H) {
         this.H = H;
     }
-    /**
-     * @decorator boundMethod
-     */
     create(source) {
         return new BookOrder(source, this, this.H);
     }
-    /**
-     * @decorator boundMethod
-     */
     capture(order) {
         return {
             price: this.H.capture(order.price),
@@ -48,9 +67,6 @@ class BookOrderStatic {
             side: order.side,
         };
     }
-    /**
-     * @decorator boundMethod
-     */
     restore(snapshot) {
         return this.create({
             price: this.H.restore(snapshot.price),

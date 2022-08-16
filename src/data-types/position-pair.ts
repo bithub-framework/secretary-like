@@ -6,7 +6,7 @@ import assert = require('assert');
 
 
 
-export abstract class PositionLike<H extends HLike<H>>
+export abstract class PositionPairLike<H extends HLike<H>>
 {
 	protected long: H;
 	protected short: H;
@@ -14,10 +14,10 @@ export abstract class PositionLike<H extends HLike<H>>
 	public abstract toString(): string;
 
 	public constructor(
-		source: PositionLike.Source<H>,
+		source: PositionPairLike.Source<H>,
 		H: SerializableHStatic<H>,
 	) {
-		if (source instanceof PositionLike) {
+		if (source instanceof PositionPairLike) {
 			this.long = source.length(LONG);
 			this.short = source.length(SHORT);
 		} else {
@@ -32,18 +32,27 @@ export abstract class PositionLike<H extends HLike<H>>
 		}
 	}
 
+	public abstract set(length: Length, position: H): PositionPairLike<H>;
+
+	public toLiteral(): PositionPairLike.Literal<H> {
+		return [
+			[LONG, this.long],
+			[SHORT, this.short],
+		];
+	}
+
 	public length(length: Length): H {
 		return length === LONG ? this.long : this.short;
 	}
 }
 
 
-export namespace PositionLike {
+export namespace PositionPairLike {
 	export type Literal<H extends HLike<H>> = [
 		[Length, HLike.Source<H>],
 		[Length, HLike.Source<H>],
 	];
-	export type Source<H extends HLike<H>> = PositionLike<H> | Literal<H>;
+	export type Source<H extends HLike<H>> = PositionPairLike<H> | Literal<H>;
 
 	export interface Snapshot {
 		readonly long: HLike.Snapshot;
@@ -52,25 +61,32 @@ export namespace PositionLike {
 }
 
 
-export interface SerializablePositionStatic<H extends HLike<H>>
+export interface SerializablePositionPairStatic<H extends HLike<H>>
 	extends SerializableStatic
 	<
-	PositionLike.Source<H>,
-	PositionLike<H>,
-	PositionLike.Snapshot
+	PositionPairLike.Source<H>,
+	PositionPairLike<H>,
+	PositionPairLike.Snapshot
 	> { }
 
 
-class Position<H extends HLike<H>> extends PositionLike<H> {
+class PositionPair<H extends HLike<H>> extends PositionPairLike<H> {
 	public constructor(
-		source: PositionLike.Source<H>,
-		private Position: PositionStatic<H>,
+		source: PositionPairLike.Source<H>,
+		private Position: PositionPairStatic<H>,
 		H: SerializableHStatic<H>,
 	) {
 		super(
 			source,
 			H,
 		);
+	}
+
+	public set(length: Length, position: H): PositionPairLike<H> {
+		return this.Position.create([
+			[length, position],
+			[length.i(), this.length(length.i())],
+		]);
 	}
 
 	public toJSON(): unknown {
@@ -82,8 +98,8 @@ class Position<H extends HLike<H>> extends PositionLike<H> {
 	}
 }
 
-export class PositionStatic<H extends HLike<H>>
-	implements SerializablePositionStatic<H>
+export class PositionPairStatic<H extends HLike<H>>
+	implements SerializablePositionPairStatic<H>
 {
 	public constructor(
 		private H: SerializableHStatic<H>,
@@ -93,8 +109,8 @@ export class PositionStatic<H extends HLike<H>>
 	 * @decorator boundMethod
 	 */
 	@boundMethod
-	public create(source: PositionLike.Source<H>): PositionLike<H> {
-		return new Position(
+	public create(source: PositionPairLike.Source<H>): PositionPairLike<H> {
+		return new PositionPair(
 			source,
 			this,
 			this.H,
@@ -105,10 +121,10 @@ export class PositionStatic<H extends HLike<H>>
 	 * @decorator boundMethod
 	 */
 	@boundMethod
-	public capture(position: PositionLike<H>): PositionLike.Snapshot {
+	public capture(positionPair: PositionPairLike<H>): PositionPairLike.Snapshot {
 		return {
-			long: this.H.capture(position.length(LONG)),
-			short: this.H.capture(position.length(SHORT)),
+			long: this.H.capture(positionPair.length(LONG)),
+			short: this.H.capture(positionPair.length(SHORT)),
 		};
 	}
 
@@ -116,7 +132,7 @@ export class PositionStatic<H extends HLike<H>>
 	 * @decorator boundMethod
 	 */
 	@boundMethod
-	public restore(snapshot: PositionLike.Snapshot): PositionLike<H> {
+	public restore(snapshot: PositionPairLike.Snapshot): PositionPairLike<H> {
 		return this.create([
 			[LONG, snapshot.long],
 			[SHORT, snapshot.short],

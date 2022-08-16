@@ -29,6 +29,15 @@ class OrderbookLike {
         }
         this.time = source.time;
     }
+    toLiteral() {
+        return {
+            sides: [
+                [pairs_1.BID, this.bids],
+                [pairs_1.ASK, this.asks],
+            ],
+            time: this.time,
+        };
+    }
     side(side) {
         return side === pairs_1.BID ? this.bids : this.asks;
     }
@@ -38,6 +47,21 @@ class Orderbook extends OrderbookLike {
     constructor(source, Orderbook, BookOrder) {
         super(source, BookOrder);
         this.Orderbook = Orderbook;
+    }
+    set(side, orders) {
+        return this.Orderbook.create({
+            sides: [
+                [side, orders],
+                [side.i(), this.side(side)],
+            ],
+            time: this.time,
+        });
+    }
+    setTime(time) {
+        return this.Orderbook.create({
+            ...this.toLiteral(),
+            time,
+        });
     }
     toJSON() {
         return this.Orderbook.capture(this);

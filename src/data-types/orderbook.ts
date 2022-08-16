@@ -38,6 +38,22 @@ export abstract class OrderbookLike<H extends HLike<H>>
 		this.time = source.time;
 	}
 
+	public abstract set(
+		side: Side,
+		orders: BookOrderLike.Source<H>[],
+	): OrderbookLike<H>;
+	public abstract setTime(time: number): OrderbookLike<H>;
+
+	public toLiteral(): OrderbookLike.Literal<H> {
+		return {
+			sides: [
+				[BID, this.bids],
+				[ASK, this.asks],
+			],
+			time: this.time,
+		}
+	}
+
 	public side(side: Side): BookOrderLike<H>[] {
 		return side === BID ? this.bids : this.asks;
 	}
@@ -81,6 +97,26 @@ class Orderbook<H extends HLike<H>> extends OrderbookLike<H> {
 			source,
 			BookOrder,
 		);
+	}
+
+	public set(
+		side: Side,
+		orders: BookOrderLike.Source<H>[],
+	): OrderbookLike<H> {
+		return this.Orderbook.create({
+			sides: [
+				[side, orders],
+				[side.i(), this.side(side)],
+			],
+			time: this.time,
+		});
+	}
+
+	public setTime(time: number): OrderbookLike<H> {
+		return this.Orderbook.create({
+			...this.toLiteral(),
+			time,
+		});
 	}
 
 	public toJSON(): unknown {

@@ -6,10 +6,8 @@ const open_order_1 = require("./open-order");
 const amendment_1 = require("./amendment");
 const orderbook_1 = require("./orderbook");
 const trade_1 = require("./trade");
-const position_1 = require("./position");
-const positions_1 = require("./positions");
+const position_pair_1 = require("./position-pair");
 const book_order_1 = require("./book-order");
-const balances_1 = require("./balances");
 class DataStaticNamespace {
     constructor(H) {
         this.H = H;
@@ -19,9 +17,7 @@ class DataStaticNamespace {
         this.BookOrder = new book_order_1.BookOrderStatic(this.H);
         this.Orderbook = new orderbook_1.OrderbookStatic(this.BookOrder);
         this.Trade = new trade_1.TradeStatic(this.H);
-        this.Balances = new balances_1.BalancesStatic(this.H);
-        this.Position = new position_1.PositionStatic(this.H);
-        this.Positions = new positions_1.PositionsStatic(this.Position);
+        this.PositionPair = new position_pair_1.PositionPairStatic(this.H);
     }
 }
 exports.DataStaticNamespace = DataStaticNamespace;

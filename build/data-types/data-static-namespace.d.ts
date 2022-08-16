@@ -4,10 +4,8 @@ import { OpenOrderStatic } from './open-order';
 import { AmendmentStatic } from './amendment';
 import { OrderbookStatic } from './orderbook';
 import { TradeStatic } from './trade';
-import { PositionStatic } from './position';
-import { PositionsStatic } from './positions';
+import { PositionPairStatic } from './position-pair';
 import { BookOrderStatic } from './book-order';
-import { BalancesStatic } from './balances';
 export declare class DataStaticNamespace<H extends HLike<H>> {
     H: SerializableHStatic<H>;
     constructor(H: SerializableHStatic<H>);
@@ -17,7 +15,5 @@ export declare class DataStaticNamespace<H extends HLike<H>> {
     BookOrder: BookOrderStatic<H>;
     Orderbook: OrderbookStatic<H>;
     Trade: TradeStatic<H>;
-    Balances: BalancesStatic<H>;
-    Position: PositionStatic<H>;
-    Positions: PositionsStatic<H>;
+    PositionPair: PositionPairStatic<H>;
 }

@@ -13,6 +13,12 @@ export declare abstract class LimitOrderLike<H extends HLike<H>> {
     abstract toJSON(): unknown;
     abstract toString(): string;
     constructor(source: LimitOrderLike.Source<H>, H: SerializableHStatic<H>);
+    toLiteral(): LimitOrderLike.Literal<H>;
+    abstract setPrice(price: HLike.Source<H>): LimitOrderLike<H>;
+    abstract setQuantity(quantity: HLike.Source<H>): LimitOrderLike<H>;
+    abstract setSide(side: Side): LimitOrderLike<H>;
+    abstract setLength(length: Length): LimitOrderLike<H>;
+    abstract setAction(action: Action): LimitOrderLike<H>;
 }
 /**
  * namespace about typeclass {@link LimitOrderLike}

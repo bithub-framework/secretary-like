@@ -21,6 +21,15 @@ class LimitOrderLike {
         this.price = H.create(source.price);
         this.quantity = H.create(source.quantity);
     }
+    toLiteral() {
+        return {
+            price: this.price,
+            quantity: this.quantity,
+            side: this.side,
+            length: this.length,
+            action: this.action,
+        };
+    }
 }
 exports.LimitOrderLike = LimitOrderLike;
 /**
@@ -31,6 +40,36 @@ class LimitOrder extends LimitOrderLike {
     constructor(source, LimitOrder, H) {
         super(source, H);
         this.LimitOrder = LimitOrder;
+    }
+    setPrice(price) {
+        return this.LimitOrder.create({
+            ...this.toLiteral(),
+            price,
+        });
+    }
+    setQuantity(quantity) {
+        return this.LimitOrder.create({
+            ...this.toLiteral(),
+            quantity,
+        });
+    }
+    setLength(length) {
+        return this.LimitOrder.create({
+            ...this.toLiteral(),
+            length,
+        });
+    }
+    setSide(side) {
+        return this.LimitOrder.create({
+            ...this.toLiteral(),
+            side,
+        });
+    }
+    setAction(action) {
+        return this.LimitOrder.create({
+            ...this.toLiteral(),
+            action,
+        });
     }
     toJSON() {
         return this.LimitOrder.capture(this);

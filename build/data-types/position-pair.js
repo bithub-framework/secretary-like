@@ -6,13 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PositionStatic = exports.PositionLike = void 0;
+exports.PositionPairStatic = exports.PositionPairLike = void 0;
 const pairs_1 = require("./pairs");
 const autobind_decorator_1 = require("autobind-decorator");
 const assert = require("assert");
-class PositionLike {
+class PositionPairLike {
     constructor(source, H) {
-        if (source instanceof PositionLike) {
+        if (source instanceof PositionPairLike) {
             this.long = source.length(pairs_1.LONG);
             this.short = source.length(pairs_1.SHORT);
         }
@@ -28,15 +28,27 @@ class PositionLike {
             }
         }
     }
+    toLiteral() {
+        return [
+            [pairs_1.LONG, this.long],
+            [pairs_1.SHORT, this.short],
+        ];
+    }
     length(length) {
         return length === pairs_1.LONG ? this.long : this.short;
     }
 }
-exports.PositionLike = PositionLike;
-class Position extends PositionLike {
+exports.PositionPairLike = PositionPairLike;
+class PositionPair extends PositionPairLike {
     constructor(source, Position, H) {
         super(source, H);
         this.Position = Position;
+    }
+    set(length, position) {
+        return this.Position.create([
+            [length, position],
+            [length.i(), this.length(length.i())],
+        ]);
     }
     toJSON() {
         return this.Position.capture(this);
@@ -45,7 +57,7 @@ class Position extends PositionLike {
         return JSON.stringify(this.toJSON());
     }
 }
-class PositionStatic {
+class PositionPairStatic {
     constructor(H) {
         this.H = H;
     }
@@ -53,15 +65,15 @@ class PositionStatic {
      * @decorator boundMethod
      */
     create(source) {
-        return new Position(source, this, this.H);
+        return new PositionPair(source, this, this.H);
     }
     /**
      * @decorator boundMethod
      */
-    capture(position) {
+    capture(positionPair) {
         return {
-            long: this.H.capture(position.length(pairs_1.LONG)),
-            short: this.H.capture(position.length(pairs_1.SHORT)),
+            long: this.H.capture(positionPair.length(pairs_1.LONG)),
+            short: this.H.capture(positionPair.length(pairs_1.SHORT)),
         };
     }
     /**
@@ -76,12 +88,12 @@ class PositionStatic {
 }
 __decorate([
     autobind_decorator_1.boundMethod
-], PositionStatic.prototype, "create", null);
+], PositionPairStatic.prototype, "create", null);
 __decorate([
     autobind_decorator_1.boundMethod
-], PositionStatic.prototype, "capture", null);
+], PositionPairStatic.prototype, "capture", null);
 __decorate([
     autobind_decorator_1.boundMethod
-], PositionStatic.prototype, "restore", null);
-exports.PositionStatic = PositionStatic;
-//# sourceMappingURL=position.js.map
+], PositionPairStatic.prototype, "restore", null);
+exports.PositionPairStatic = PositionPairStatic;
+//# sourceMappingURL=position-pair.js.map

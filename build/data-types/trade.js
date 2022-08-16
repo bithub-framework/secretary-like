@@ -18,12 +18,51 @@ class TradeLike {
         this.price = H.create(source.price);
         this.quantity = H.create(source.quantity);
     }
+    toLiteral() {
+        return {
+            price: this.price,
+            quantity: this.quantity,
+            side: this.side,
+            time: this.time,
+            id: this.id,
+        };
+    }
 }
 exports.TradeLike = TradeLike;
 class Trade extends TradeLike {
     constructor(source, Trade, H) {
         super(source, H);
         this.Trade = Trade;
+    }
+    setPrice(price) {
+        return this.Trade.create({
+            ...this.toLiteral(),
+            price,
+        });
+    }
+    setQuantity(quantity) {
+        return this.Trade.create({
+            ...this.toLiteral(),
+            quantity,
+        });
+    }
+    setSide(side) {
+        return this.Trade.create({
+            ...this.toLiteral(),
+            side,
+        });
+    }
+    setTime(time) {
+        return this.Trade.create({
+            ...this.toLiteral(),
+            time,
+        });
+    }
+    setId(id) {
+        return this.Trade.create({
+            ...this.toLiteral(),
+            id,
+        });
     }
     toJSON() {
         return this.Trade.capture(this);

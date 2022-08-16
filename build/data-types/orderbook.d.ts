@@ -9,6 +9,9 @@ export declare abstract class OrderbookLike<H extends HLike<H>> {
     abstract toJSON(): unknown;
     abstract toString(): string;
     constructor(source: OrderbookLike.Source<H>, BookOrder: SerializableBookOrderStatic<H>);
+    abstract set(side: Side, orders: BookOrderLike.Source<H>[]): OrderbookLike<H>;
+    abstract setTime(time: number): OrderbookLike<H>;
+    toLiteral(): OrderbookLike.Literal<H>;
     side(side: Side): BookOrderLike<H>[];
 }
 export declare namespace OrderbookLike {

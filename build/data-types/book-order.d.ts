@@ -8,6 +8,10 @@ export declare abstract class BookOrderLike<H extends HLike<H>> {
     abstract toJSON(): unknown;
     abstract toString(): string;
     constructor(source: BookOrderLike.Source<H>, H: SerializableHStatic<H>);
+    abstract setPrice(price: HLike.Source<H>): BookOrderLike<H>;
+    abstract setQuantity(quantity: HLike.Source<H>): BookOrderLike<H>;
+    abstract setSide(side: Side): BookOrderLike<H>;
+    toLiteral(): BookOrderLike.Literal<H>;
 }
 export declare namespace BookOrderLike {
     interface Literal<H extends HLike<H>> {
@@ -27,16 +31,7 @@ export interface SerializableBookOrderStatic<H extends HLike<H>> extends Seriali
 export declare class BookOrderStatic<H extends HLike<H>> implements SerializableBookOrderStatic<H> {
     private H;
     constructor(H: SerializableHStatic<H>);
-    /**
-     * @decorator boundMethod
-     */
     create(source: BookOrderLike.Source<H>): BookOrderLike<H>;
-    /**
-     * @decorator boundMethod
-     */
     capture(order: BookOrderLike<H>): BookOrderLike.Snapshot;
-    /**
-     * @decorator boundMethod
-     */
     restore(snapshot: BookOrderLike.Snapshot): BookOrderLike<H>;
 }

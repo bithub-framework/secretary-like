@@ -2,9 +2,8 @@ import {
 	LimitOrder,
 	OpenOrder,
 	Amendment,
-	Positions,
-	Balances,
 	HLike,
+	PositionPair,
 } from '../imported-data-types';
 import { EventEmitter } from 'events';
 import { AccountSpec } from '../specification';
@@ -22,8 +21,10 @@ export interface AccountMethods<H extends HLike<H>> {
 	amendOrders(amendments: Amendment.Source<H>[]): Promise<(OpenOrder<H> | Error)[]>;
 	cancelOrders(orders: OpenOrder.Source<H>[]): Promise<OpenOrder<H>[]>;
 	getOpenOrders(): Promise<OpenOrder<H>[]>;
-	getPositions(): Promise<Positions<H>>;
-	getBalances(): Promise<Balances<H>>;
+	getBalance(): Promise<H>;
+	getAvailable(): Promise<H>;
+	getPositionPair(): Promise<PositionPair<H>>;
+	getClosablePair(): Promise<PositionPair<H>>;
 }
 
 export interface AccountEventEmitterLike<H extends HLike<H>> extends EventEmitter {
@@ -34,7 +35,9 @@ export interface AccountEventEmitterLike<H extends HLike<H>> extends EventEmitte
 }
 
 export interface AccountEvents<H extends HLike<H>> {
-	positions: [Positions<H>];
-	balances: [Balances<H>];
+	positionPair: [PositionPair<H>];
+	closablePair: [PositionPair<H>];
+	balance: [H];
+	avaiable: [H];
 	error: [StateError];
 }

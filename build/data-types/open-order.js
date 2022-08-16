@@ -16,12 +16,68 @@ class OpenOrderLike extends limit_order_1.LimitOrderLike {
         this.unfilled = H.create(source.unfilled);
         this.id = source.id;
     }
+    toLiteral() {
+        return {
+            ...super.toLiteral(),
+            filled: this.filled,
+            unfilled: this.unfilled,
+            id: this.id,
+        };
+    }
 }
 exports.OpenOrderLike = OpenOrderLike;
 class OpenOrder extends OpenOrderLike {
     constructor(source, OpenOrder, H) {
         super(source, H);
         this.OpenOrder = OpenOrder;
+    }
+    setPrice(price) {
+        return this.OpenOrder.create({
+            ...this.toLiteral(),
+            price,
+        });
+    }
+    setQuantity(quantity) {
+        return this.OpenOrder.create({
+            ...this.toLiteral(),
+            quantity,
+        });
+    }
+    setLength(length) {
+        return this.OpenOrder.create({
+            ...this.toLiteral(),
+            length,
+        });
+    }
+    setSide(side) {
+        return this.OpenOrder.create({
+            ...this.toLiteral(),
+            side,
+        });
+    }
+    setAction(action) {
+        return this.OpenOrder.create({
+            ...this.toLiteral(),
+            action,
+        });
+    }
+    setFilled(filled) {
+        return this.OpenOrder.create({
+            ...this.toLiteral(),
+            filled,
+        });
+    }
+    setUnfilled(unfilled) {
+        return this.OpenOrder.create({
+            ...this.toLiteral(),
+            unfilled,
+        });
+    }
+    setId(id) {
+        return this.OpenOrder.create({
+            ...this.toLiteral(),
+            id,
+        });
     }
     toJSON() {
         return this.OpenOrder.capture(this);
@@ -34,15 +90,9 @@ class OpenOrderStatic {
     constructor(H) {
         this.H = H;
     }
-    /**
-     * @decorator boundMethod
-     */
     create(source) {
         return new OpenOrder(source, this, this.H);
     }
-    /**
-     * @decorator boundMethod
-     */
     capture(order) {
         return {
             price: this.H.capture(order.price),
@@ -55,9 +105,6 @@ class OpenOrderStatic {
             id: order.id,
         };
     }
-    /**
-     * @decorator boundMethod
-     */
     restore(snapshot) {
         return this.create({
             price: this.H.restore(snapshot.price),

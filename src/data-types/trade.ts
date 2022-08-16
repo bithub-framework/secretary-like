@@ -28,6 +28,22 @@ export abstract class TradeLike<H extends HLike<H>>
 		this.price = H.create(source.price);
 		this.quantity = H.create(source.quantity);
 	}
+
+	public abstract setPrice(price: HLike.Source<H>): TradeLike<H>;
+	public abstract setQuantity(quantity: HLike.Source<H>): TradeLike<H>;
+	public abstract setSide(side: Side): TradeLike<H>;
+	public abstract setTime(time: number): TradeLike<H>;
+	public abstract setId(id: TradeId): TradeLike<H>;
+
+	public toLiteral(): TradeLike.Literal<H> {
+		return {
+			price: this.price,
+			quantity: this.quantity,
+			side: this.side,
+			time: this.time,
+			id: this.id,
+		};
+	}
 }
 
 
@@ -69,6 +85,41 @@ class Trade<H extends HLike<H>> extends TradeLike<H> {
 			source,
 			H,
 		);
+	}
+
+	public setPrice(price: HLike.Source<H>): TradeLike<H> {
+		return this.Trade.create({
+			...this.toLiteral(),
+			price,
+		});
+	}
+
+	public setQuantity(quantity: HLike.Source<H>): TradeLike<H> {
+		return this.Trade.create({
+			...this.toLiteral(),
+			quantity,
+		});
+	}
+
+	public setSide(side: Side): TradeLike<H> {
+		return this.Trade.create({
+			...this.toLiteral(),
+			side,
+		});
+	}
+
+	public setTime(time: number): TradeLike<H> {
+		return this.Trade.create({
+			...this.toLiteral(),
+			time,
+		});
+	}
+
+	public setId(id: TradeId): TradeLike<H> {
+		return this.Trade.create({
+			...this.toLiteral(),
+			id,
+		});
 	}
 
 	public toJSON(): unknown {
